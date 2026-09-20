@@ -13,3 +13,6 @@ dist
 /dev-images/
 # Original image files. The optimised copies in public/images are what ships.
 /images/
+
+# Generated PDFs keep their source markdown in docs/; the print HTML is temporary.
+docs/*.print.html

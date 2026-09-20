@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "node --test",
     "check:content": "node scripts/check-content.js",
-    "images": "node scripts/optimize-images.js"
+    "images": "node scripts/optimize-images.js",
+    "pdf": "node scripts/md-to-pdf.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
