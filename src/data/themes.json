@@ -1,0 +1,12 @@
+{
+  "themes": [
+    { "id": "everyday", "label": "Everyday things" },
+    { "id": "furniture", "label": "Chairs and furniture" },
+    { "id": "screens", "label": "Screens and apps" },
+    { "id": "keys", "label": "Keys and buttons" },
+    { "id": "travel", "label": "Getting around" },
+    { "id": "safety", "label": "Safety" },
+    { "id": "india", "label": "Made in India" },
+    { "id": "symbols", "label": "Symbols and colour" }
+  ]
+}

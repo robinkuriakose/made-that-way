@@ -1,0 +1,168 @@
+{
+  "batch": "2026-09-19: Indian and everyday objects",
+  "questions": [
+    {
+      "id": "rupee-tactile-marks",
+      "topic": "everyday-object",
+      "stem": "Why do most Indian banknotes have a small raised shape printed near one edge?",
+      "options": [
+        "It proves the note is real when held up against a light",
+        "It marks the corner where machines start counting the stack",
+        "It lets people who can't see well tell the notes apart by touch",
+        "It stops the notes sliding apart when they're bundled together"
+      ],
+      "correctIndex": 2,
+      "hint": "Run a fingertip over a ₹100 note, then a ₹500 note.",
+      "explanationRight": "The Reserve Bank of India prints a small shape in raised ink, called intaglio, beside the watermark window on most notes, and each denomination gets a different shape: a triangle on the ₹100 and a circle on the ₹500, for example. Someone who is blind or has low vision can feel the shape and know the value without seeing the note. Other parts of the note, like Gandhi's portrait, are printed raised too, so they can be felt.",
+      "explanationWrong": [
+        "Checking a note against the light is what the watermark and security thread are for. The small raised shape is there to be felt: each denomination has its own, such as a triangle on the ₹100 and a circle on the ₹500, so people who can't see well can tell notes apart.",
+        "Counting machines don't need it. The raised shape is printed so it can be felt: each denomination has its own, such as a triangle on the ₹100 and a circle on the ₹500, so people who are blind or have low vision can tell notes apart by touch.",
+        null,
+        "The shape is far too small to hold notes together. It's printed in raised ink so it can be felt: each denomination has its own, such as a triangle on the ₹100 and a circle on the ₹500, so people who can't see well can tell notes apart by touch."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Reserve Bank of India: Bank note security features",
+      "sourceUrl": "https://www.rbi.org.in/Scripts/ic_banknotessecurity.aspx",
+      "tags": [
+        "money",
+        "touch",
+        "accessibility",
+        "india"
+      ],
+      "themes": [
+        "everyday",
+        "india",
+        "symbols"
+      ]
+    },
+    {
+      "id": "pressure-cooker-whistle",
+      "topic": "everyday-object",
+      "stem": "Why does an Indian pressure cooker let out a loud whistle every so often?",
+      "options": [
+        "The weight on the lid lifts when pressure gets high, letting out steam",
+        "Food inside has boiled dry, so the cooker warns you to add water",
+        "Air trapped under the lid escapes each time the food shifts",
+        "The rubber ring loosens briefly as the metal lid heats up"
+      ],
+      "correctIndex": 0,
+      "hint": "Look at the heavy little weight sitting on top of the lid.",
+      "explanationRight": "The whistle is the pressure regulator doing its job. Steam builds up inside until its pressure lifts the weight sitting on the vent pipe, and a burst of steam escapes with a whistle before the weight drops back. That holds the pressure, and so the cooking temperature, at a steady level, around 15 pounds per square inch above normal in many cookers. Because the whistles come at fairly regular intervals, cooks count them as a timer.",
+      "explanationWrong": [
+        null,
+        "A cooker that's boiling dry often stops whistling. The whistle means pressure has reached its set level: steam lifts the weight on the vent, escapes with a whistle, and the weight drops back, keeping the pressure steady. Cooks count whistles as a timer.",
+        "There's no trapped air being let out. The whistle comes from steam pressure lifting the weight on the vent pipe, escaping, and letting the weight drop back, which keeps the pressure at a steady level. Cooks count the whistles as a timer.",
+        "The rubber ring stays sealed. The whistle is the pressure regulator: steam lifts the weight on the vent pipe, escapes, and the weight drops back, keeping the pressure steady. Cooks use the number of whistles as a timer."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Hawkins Cookers: Your first use of a Hawkins pressure cooker",
+      "sourceUrl": "https://www.hawkinscookers.co.uk/blogs/how-tos/getting-started-your-first-use-of-a-hawkins-pressure-cooker",
+      "tags": [
+        "india",
+        "kitchen",
+        "safety",
+        "pressure"
+      ],
+      "themes": [
+        "everyday",
+        "india",
+        "safety"
+      ]
+    },
+    {
+      "id": "safety-match",
+      "topic": "everyday-object",
+      "stem": "Why does a safety match only light when it's struck on the side of its box?",
+      "options": [
+        "The match head is too soft to make a spark on smoother surfaces",
+        "The strip is coated in wax that heats the head faster than wood",
+        "The box's strip is rougher than anything else in a normal home",
+        "Half of what starts the flame is on the box's strip, not the match"
+      ],
+      "correctIndex": 3,
+      "hint": "It's called a safety match. What would make a match safe to carry around?",
+      "explanationRight": "A safety match splits its chemistry in two. The head holds an oxidiser, potassium chlorate, while the red phosphorus needed to set it off is in the rough strip on the box. Striking the head across the strip rubs a tiny amount of phosphorus onto it, and the friction ignites it. On other surfaces there's no phosphorus, so it's hard to light by accident. The Lundström brothers in Sweden made them in bulk from the 1850s, which also got rid of the poisonous white phosphorus used in earlier matches.",
+      "explanationWrong": [
+        "Softness isn't the reason. The red phosphorus needed to start the flame is in the strip on the box, not on the match head, so the match only ignites when the two meet. That split is what makes it a safety match.",
+        "There's no wax doing that job. The strip holds red phosphorus, the ingredient the match head is missing. Rubbing the head across it transfers a little phosphorus and the friction ignites it, so the match only lights on the box.",
+        "Roughness alone won't do it. The strip holds red phosphorus, which the match head lacks. Striking rubs a little phosphorus onto the head and the friction ignites it, so the match only lights against the box.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Britannica: Match",
+      "sourceUrl": "https://www.britannica.com/science/match-tinder",
+      "tags": [
+        "safety",
+        "fire",
+        "chemistry",
+        "accidents"
+      ],
+      "themes": [
+        "everyday",
+        "safety"
+      ]
+    },
+    {
+      "id": "plane-window-hole",
+      "topic": "industrial",
+      "stem": "Why is there a tiny hole in the middle pane of a plane's window?",
+      "options": [
+        "It lets fresh air circulate slowly into the cabin during the flight",
+        "It lets the outer pane take the pressure and stops the window misting",
+        "It lets the crew check the air pressure in each row of seats",
+        "It's where the pane was held by a pin while it was being moulded"
+      ],
+      "correctIndex": 1,
+      "hint": "A plane's window has three layers. Which one should take the strain?",
+      "explanationRight": "A plane window has three panes. The outer one is built to hold back the pressure difference between the cabin and the thin air outside, and the middle one is a backup in case it fails. The small breather hole lets air through the middle pane, so the space between the panes stays at cabin pressure and the full load falls on the outer pane, keeping the middle one in reserve. The same airflow stops moisture being trapped between the panes, so the window doesn't fog or frost over.",
+      "explanationWrong": [
+        "It's not a vent for the cabin. The hole balances the pressure on either side of the middle pane, so the outer pane takes the load and the middle one stays in reserve as a backup. It also stops moisture being trapped between the panes, so the window doesn't fog.",
+        null,
+        "Nobody checks pressure there. The hole balances the pressure on either side of the middle pane, so the strong outer pane takes the load and the middle pane stays a backup. It also stops the window fogging up.",
+        "It's drilled on purpose, not left over from making it. The hole balances the pressure on either side of the middle pane, so the outer pane takes the load and the middle one is kept in reserve, and it stops moisture fogging the window."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Mental Floss: Why do airplane windows have tiny holes?",
+      "sourceUrl": "https://www.mentalfloss.com/transportation/planes-airports/why-airplane-windows-have-tiny-holes",
+      "tags": [
+        "aviation",
+        "pressure"
+      ],
+      "themes": [
+        "travel"
+      ]
+    },
+    {
+      "id": "toothpaste-marks",
+      "topic": "myth-buster",
+      "stem": "What do the coloured squares at the bottom end of a toothpaste tube mean?",
+      "options": [
+        "Green means natural ingredients and black means mostly chemicals",
+        "They show which factory and production line made the tube",
+        "They show how much fluoride the toothpaste contains inside",
+        "They tell the machine where to cut and seal each tube"
+      ],
+      "correctIndex": 3,
+      "hint": "Tubes are printed on a long, fast-moving strip before they're cut apart.",
+      "explanationRight": "They're called eye marks. Tubes are printed on a long continuous strip, and a light sensor on the machine watches for the coloured square to know exactly where to cut and seal each one. The colour only needs to stand out from the tube's design. The popular claim that green means natural and black means chemical is false: Colgate says no such colour code exists, and the ingredients are listed on the box and the tube.",
+      "explanationWrong": [
+        "This is the popular claim, and it's false. The squares are eye marks: a light sensor on the production line reads them to know where to cut and seal each tube. The colour just has to stand out. Colgate says no ingredient colour code exists.",
+        "The squares don't identify a factory. They're eye marks: a light sensor on the production line reads them to know where to cut and seal each tube, and the colour only has to stand out from the design.",
+        "Fluoride content is in the ingredients list, not the squares. The squares are eye marks: a light sensor on the production line reads them to know where to cut and seal each tube.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Colgate: What is a toothpaste color code?",
+      "sourceUrl": "https://www.colgate.com/en-us/oral-health/selecting-dental-products/what-is-a-toothpaste-color-code",
+      "tags": [
+        "packaging",
+        "factories",
+        "symbols"
+      ],
+      "themes": [
+        "everyday",
+        "symbols"
+      ]
+    }
+  ]
+}

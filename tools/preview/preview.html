@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Made That Way</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2316150f'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23cfe957'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.development.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.26.4/babel.min.js"></script>
+</head>
+<body>
+<div id="root"></div>
+<script>
+// Preview without Node. Stands in for Vite: fetches each source file,
+// compiles JSX with Babel, rewrites imports to blob URLs and loads the module
+// graph natively. /__test runs the unit tests and content checks instead.
+(async () => {
+  const blob = (code) => URL.createObjectURL(new Blob([code], { type: 'text/javascript' }));
+  const R = window.React;
+  const reactNames = Object.keys(R).filter((k) => /^[A-Za-z_$][\w$]*$/.test(k) && k !== 'default');
+
+  const bare = {
+    react: blob(`const R = window.React; export default R;\n${reactNames.map((k) => `export const ${k} = R.${k};`).join('\n')}`),
+    'react-dom/client': blob(`export const createRoot = window.ReactDOM.createRoot; export default window.ReactDOM;`),
+    'react/jsx-runtime': blob(`
+      const R = window.React;
+      export const Fragment = R.Fragment;
+      function build(type, props, key, spread) {
+        const { children, ...rest } = props || {};
+        if (key !== undefined) rest.key = key;
+        if (children === undefined) return R.createElement(type, rest);
+        return spread && Array.isArray(children) ? R.createElement(type, rest, ...children) : R.createElement(type, rest, children);
+      }
+      export const jsx = (t, p, k) => build(t, p, k, false);
+      export const jsxs = (t, p, k) => build(t, p, k, true);
+    `),
+    'node:test': blob(`
+      const results = (window.__testResults = window.__testResults || []);
+      export function test(name, fn) {
+        try { fn(); results.push({ name, ok: true }); }
+        catch (e) { results.push({ name, ok: false, error: String((e && e.message) || e) }); }
+      }
+      export default test;
+    `),
+    'node:assert/strict': blob(`
+      const show = (v) => JSON.stringify(v);
+      const fail = (m) => { throw new Error(m); };
+      const assert = {
+        equal: (a, b, m) => { if (a !== b) fail((m ? m + ': ' : '') + 'expected ' + show(b) + ', got ' + show(a)); },
+        notEqual: (a, b, m) => { if (a === b) fail((m ? m + ': ' : '') + 'did not expect ' + show(a)); },
+        ok: (v, m) => { if (!v) fail(m || 'expected truthy'); },
+        deepEqual: (a, b, m) => { if (show(a) !== show(b)) fail((m ? m + ': ' : '') + 'expected ' + show(b) + ', got ' + show(a)); },
+      };
+      export default assert;
+    `),
+  };
+
+  const cache = new Map();
+  const specifierPattern = /(?:\bfrom\s*|\bimport\s*\(\s*|\bimport\s+)(['"])([^'"]+)\1/g;
+
+  function load(url) {
+    if (cache.has(url)) return cache.get(url);
+    const promise = (async () => {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`${res.status} loading ${url}`);
+      const text = await res.text();
+      if (url.endsWith('.css')) {
+        const style = document.createElement('style');
+        style.textContent = text;
+        document.head.appendChild(style);
+        return blob('export default null;');
+      }
+      if (url.endsWith('.json')) return blob(`export default ${text};`);
+
+      let code = Babel.transform(text, {
+        presets: [['react', { runtime: 'automatic' }]],
+        sourceType: 'module',
+        filename: url,
+      }).code;
+
+      const specs = [...new Set([...code.matchAll(specifierPattern)].map((m) => m[2]))];
+      for (const spec of specs) {
+        const target = bare[spec] ?? (await load(new URL(spec, url).href));
+        code = code.split(`'${spec}'`).join(`'${target}'`).split(`"${spec}"`).join(`"${target}"`);
+      }
+      return blob(code);
+    })();
+    cache.set(url, promise);
+    return promise;
+  }
+
+  const showError = (e) => {
+    console.error(e);
+    const pre = document.createElement('pre');
+    pre.style.cssText = 'color:#b00020;white-space:pre-wrap;padding:16px;font:13px monospace';
+    pre.textContent = String((e && e.stack) || e);
+    document.body.prepend(pre);
+  };
+
+  try {
+    if (location.pathname === '/__test') {
+      const testsUrl = await load(new URL('/src/lib/lib.test.js', location.href).href);
+      await import(testsUrl);
+      const rulesUrl = await load(new URL('/scripts/content-rules.js', location.href).href);
+      const { checkContent } = await import(rulesUrl);
+      const data = await (await fetch('/src/data/questions.json', { cache: 'no-store' })).json();
+      const report = checkContent(data);
+      const results = window.__testResults || [];
+      const lines = [
+        ...results.map((r) => `${r.ok ? 'PASS' : 'FAIL'}  ${r.name}${r.ok ? '' : '\n      ' + r.error}`),
+        '',
+        `content: ${data.questions.length} questions, ${data.tidbits.length} tidbits`,
+        ...report.errors.map((e) => `ERROR ${e}`),
+        ...report.warnings.map((w) => `WARN  ${w}`),
+      ];
+      document.body.innerHTML = `<pre style="padding:16px;font:13px/1.5 monospace;white-space:pre-wrap">${lines.join('\n').replace(/</g, '&lt;')}</pre>`;
+      return;
+    }
+    const entry = await load(new URL('/src/main.jsx', location.href).href);
+    await import(entry);
+  } catch (e) {
+    showError(e);
+  }
+})();
+</script>
+</body>
+</html>

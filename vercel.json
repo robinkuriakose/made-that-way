@@ -1,0 +1,13 @@
+{
+  "buildCommand": "vite build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/**/*.js": {
+      "includeFiles": "src/data/**"
+    }
+  },
+  "rewrites": [
+    { "source": "/api/builder/:route", "destination": "/api/builder?route=:route" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}

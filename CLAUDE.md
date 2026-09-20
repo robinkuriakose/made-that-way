@@ -1,0 +1,18 @@
+# Made That Way
+
+Before reading source files, open `docs/code-map.md` (where each piece of code lives, with `file:line`) and `docs/brief-map.md` (each instruction from the owner, its status and the code that carries it out). Read only the files those maps point to. `docs/later.md` holds what's agreed but not built, and `docs/owner-checklist.md` what's waiting on the owner.
+
+When a change moves, adds or renames something listed in either map, update the map in the same change.
+
+- Git and Node are installed (as of 19 September 2026). Use `npm run dev` (the "dev" entry in `.claude/launch.json`): it runs the `api/` routes inside Vite (`tools/local-api.js`) against a local PGlite database in `.localdb/`, so the builder, leaderboard, daily question and flags all work locally with no account. Editing anything under `api/` or `server/` takes effect on the next request; no restart. Delete `.localdb` to reset, and do that after testing, so the owner never finds test data. A fresh PowerShell call doesn't see Node on PATH; refresh it from the Machine and User PATH first.
+- The owner answers in chat and wants structured replies: what I did, what I propose, pushbacks, questions. Talk before building anything with more than one reasonable shape, and say when there's a better alternative to what they asked for, even a small one.
+- Build as groundwork for a much bigger app: content and settings as data (topics, the daily queue), work done in the database rather than by loading everything into memory, a test flag on every table, and routes that don't multiply Vercel functions. Absorb complexity instead of explaining it to players.
+- Content changes must pass `npm run check:content` (rules in `src/lib/questionRules.js`, shared with the builder form and the API; it also checks on-screen copy for banned words and dashes), and every fact needs two sources logged in `SOURCES.md`.
+- Copy style: plain words, no em or en dashes, no "cognitive load" or "wayfinding".
+- Layout: `api/` holds one thin file per Vercel function; the routes themselves live in `server/routes`, shared server code in `server/`. `/api/builder/<route>` is rewritten to the single `api/builder.js` function by `vercel.json`, and mirrored locally by `tools/local-api.js`.
+- Once deployed, the `questions` table is the source of truth, not `questions.json`. New run questions I write go in `src/data/pending-questions.json` (reviewed at `/builder`); daily questions go in `src/data/daily-questions.json` and join the end of the daily queue. Owner feedback is stored on that question's row: read open notes through `GET /api/builder/questions`, revise, then `PATCH` with `action: 'resolveFeedback'` and a short reply.
+- Answers are always stored in a question's own option order. The screen shuffles options per run (`src/lib/shuffle.js`), so never compare a stored `chosenIndex` with a position on screen.
+- A leaderboard entry can't be faked cheaply: a run registers with the server when it starts, saving and signing need that registration and plausible timing, and the score is recomputed from the saved answers. Don't add a client-sent score.
+- The database client is `@neondatabase/serverless` (`server/db.js`), not the deprecated `@vercel/postgres`. Files in `api/` are functions; keep them thin.
+- The builder password lives only in the `BUILDER_PASSWORD` env var (gitignored `.env.local`, Vercel settings). Never write it into code, docs or commits; grep for it before committing.
+- This machine still has no GitHub or Vercel login, and no git identity. Code changes are mine to make; anything account-level (pushing to GitHub, Vercel settings, connecting Postgres or Blob) needs the owner.

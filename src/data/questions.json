@@ -1,0 +1,2277 @@
+{
+  "questions": [
+    {
+      "id": "keyboard-bumps",
+      "topic": "everyday-object",
+      "stem": "Why do the F and J keys have small raised bumps?",
+      "options": [
+        "They mark the keys that wear out first, so the plastic there is thicker",
+        "They're left over from typewriters, where those keys needed a firmer press",
+        "They let your index fingers find their resting place without looking down",
+        "They help people with low vision tell which way up the keyboard is"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about where your hands sit when you type properly.",
+      "explanationRight": "Touch typists rest their left index finger on F and their right index finger on J, with the other fingers along the same row. The bumps let you feel that spot as soon as your hands land, so you can settle back into position without glancing down. That is the whole trick of typing by touch.",
+      "explanationWrong": [
+        "Worn keys aren't the reason, and the bumps don't make the plastic any stronger. F and J are where your index fingers rest when you touch type. The bumps let you feel that spot as your hands land, so you can find your position without looking down.",
+        "The bumps don't change how hard a key presses. They mark F and J because that is where your index fingers rest when you touch type. Feeling them lets your hands settle into the right place without you looking at the keyboard.",
+        null,
+        "Anyone can feel them, but they aren't there to show which way up the keyboard is. They mark the two keys where your index fingers rest when you touch type, so your hands can find their starting place without you looking down."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Mental Floss: Why are there bumps on the F and J keys?",
+      "sourceUrl": "https://www.mentalfloss.com/article/623391/reason-for-bumps-on-computer-keys",
+      "image": {
+        "src": "/images/keyboard-bumps.webp",
+        "alt": "A keyboard with the F and J keys highlighted, each with a small raised bar",
+        "thumb": "/images/thumbs/keyboard-bumps.webp"
+      },
+      "tags": [
+        "keyboards",
+        "touch"
+      ],
+      "themes": [
+        "keys",
+        "everyday"
+      ]
+    },
+    {
+      "id": "golf-dimples",
+      "topic": "industrial",
+      "stem": "Why are golf balls covered in dimples?",
+      "options": [
+        "They hold extra backspin, so the ball rolls straighter and stops faster on the green",
+        "They shrink the pocket of air dragging behind the ball, so it flies further",
+        "They give the club face something to grip at impact, so shots come off cleaner",
+        "They stop the ball wobbling in flight if it isn't made perfectly round"
+      ],
+      "correctIndex": 1,
+      "hint": "Picture the air behind a ball as it flies.",
+      "explanationRight": "A smooth ball drags a wide pocket of low pressure behind it, and that pocket holds it back. Dimples stir up the thin layer of air right against the ball, which helps the air hug the surface further round the back. The wake shrinks and drag drops by about half, so a well struck ball carries roughly twice as far as a smooth one would.",
+      "explanationWrong": [
+        "Dimples do help a spinning ball make lift in the air, but they have nothing to do with rolling on the green. Their main job happens in flight. They help the air cling to the ball so the wake behind it is smaller, and less wake means less drag, so the ball flies much further.",
+        null,
+        "The dimples aren't about the moment of impact. They matter once the ball is in the air. They stir the air right against the ball so it hugs the surface further round the back, which shrinks the wake and roughly halves the drag. A dimpled ball flies about twice as far as a smooth one.",
+        "Dimples aren't there to hide an uneven shape. They change how air moves around the ball in flight, helping it cling to the surface so the wake behind is smaller. That cuts drag by about half, so the ball flies much further."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Scientific American: How do dimples in golf balls affect their flight?",
+      "sourceUrl": "https://www.scientificamerican.com/article/how-do-dimples-in-golf-ba/",
+      "image": {
+        "src": "/images/golf-dimples.webp",
+        "alt": "Two golf ball models: one fully dimpled, one with half its surface smooth",
+        "thumb": "/images/thumbs/golf-dimples.webp"
+      },
+      "tags": [
+        "air",
+        "sport"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "estop-mushroom",
+      "topic": "industrial",
+      "stem": "Why is a machine's emergency stop button shaped like a big mushroom?",
+      "options": [
+        "So it can't be pressed by accident when someone leans against the machine",
+        "So there's enough red on show to spot it quickly from across a busy factory floor",
+        "So it has room for a light inside that shows whether the machine is still running",
+        "So you can hit it with a palm, fist or elbow without aiming"
+      ],
+      "correctIndex": 3,
+      "hint": "In an emergency, your hands might be busy, gloved or shaking.",
+      "explanationRight": "In an emergency there's no time to find a small button with a fingertip. A wide, domed head gives you a big target you can slap with a palm or a fist, or knock with an elbow, even while wearing gloves. Machine safety standards such as IEC 60204-1 require push button emergency stops to be this palm or mushroom type.",
+      "explanationWrong": [
+        "Accidental presses are a fair worry, but the mushroom head makes the button easier to hit, not harder. It gives a big domed target you can slap with a palm, a fist or an elbow without aiming, even in gloves. Safety standards such as IEC 60204-1 require this palm or mushroom type.",
+        "Being easy to see matters, which is why these buttons are red on yellow. But the shape is about hitting it. A wide domed head can be struck with a palm, a fist or an elbow without careful aiming, even in gloves, when a machine has to stop right now.",
+        "Some stop buttons do light up, but that isn't why the head is so big. The shape lets you hit it without careful aiming, using a palm, a fist or an elbow, even through gloves. Safety standards such as IEC 60204-1 require this palm or mushroom type.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Kenaida Electric: Why mushroom push buttons are essential for emergency stops",
+      "sourceUrl": "https://www.kndele.com/why-mushroom-push-button-switches-are-essential-for-emergency-stop-systems/",
+      "image": {
+        "src": "/images/estop-mushroom.webp",
+        "alt": "A red mushroom-head emergency stop button on a yellow and black box",
+        "thumb": "/images/thumbs/estop-mushroom.webp"
+      },
+      "tags": [
+        "accidents",
+        "safety",
+        "buttons"
+      ],
+      "themes": [
+        "keys",
+        "safety"
+      ]
+    },
+    {
+      "id": "bic-cap-hole",
+      "topic": "everyday-object",
+      "stem": "Why does the cap of a BIC Cristal pen have a small hole in the top?",
+      "options": [
+        "It lets the cap breathe, so the ink in the tip doesn't dry out",
+        "It helps the plastic cool evenly when the cap is moulded",
+        "It lets air through if a child accidentally breathes the cap in",
+        "It makes the cap lighter so the pen balances when you write"
+      ],
+      "correctIndex": 2,
+      "hint": "The hole matters most for the smallest people who might get hold of a pen.",
+      "explanationRight": "Children sometimes chew pen caps, and a cap can be breathed in by accident. The hole means that if a cap gets stuck in the airway, some air can still get past it. BIC says the hole is there for exactly this reason, following the international safety standard for pen caps, ISO 11540.",
+      "explanationWrong": [
+        "Keeping the ink fresh is a fair thought, but the hole isn't there for the ink. It's a safety feature. If a child breathes the cap in and it lodges in the airway, air can still get through the hole. BIC says it follows the ISO 11540 safety standard for pen caps.",
+        "The hole isn't a leftover from making the cap. It's there on purpose, for safety. If a child breathes a cap in and it gets stuck in the airway, the hole still lets some air through. BIC points to the ISO 11540 safety standard as the reason.",
+        null,
+        "The hole is far too small to change how the pen balances. It's a safety feature: if a child breathes the cap in and it lodges in the airway, air can still pass through. BIC says this follows the ISO 11540 standard for pen caps."
+      ],
+      "confidence": "accurate",
+      "sourceName": "ScienceAlert: The reason for holes in the tops of pen caps (quoting BIC)",
+      "sourceUrl": "https://www.sciencealert.com/the-reason-for-holes-on-the-tops-of-pen-caps-is-surprisingly-awesome",
+      "image": {
+        "src": "/images/bic-cap-hole.webp",
+        "alt": "A BIC Cristal pen with its cap off, the hole in the tip of the cap circled in red",
+        "thumb": "/images/thumbs/bic-cap-hole.webp"
+      },
+      "tags": [
+        "safety",
+        "children"
+      ],
+      "themes": [
+        "everyday",
+        "safety"
+      ]
+    },
+    {
+      "id": "coin-edges",
+      "topic": "everyday-object",
+      "stem": "Why do some coins have ridges around the edge?",
+      "options": [
+        "So it's easy to see if someone has shaved precious metal off the edge",
+        "So people who are blind can tell coins apart by touch",
+        "So coins stack neatly in a column without sliding off each other",
+        "So they're easier to pick up off a flat table"
+      ],
+      "correctIndex": 0,
+      "hint": "Think back to when coins were made of silver and gold.",
+      "explanationRight": "When coins were made of gold and silver, people shaved thin slivers off the edges, spent the coin at full value and sold the metal. On a plain edge that was hard to spot. With ridges all the way round, any shaving leaves a smooth patch you can see at a glance. England's mint rolled out machine made coins with marked edges in the 1690s to stop this, and the US Mint gave its gold and silver coins ridges from the start.",
+      "explanationWrong": [
+        null,
+        "Ridges really do help people who are blind or have low vision tell coins apart, and that's a useful benefit today. But it came later. The ridges were first added so anyone could see if metal had been shaved off a gold or silver coin, because a clipped edge shows a smooth patch.",
+        "Coins stack fine with or without ridges. The ridges date from when coins were made of gold and silver and people shaved metal off the edges to sell. A ridged edge made that easy to spot, because any shaving left a smooth patch.",
+        "Grip isn't why they were added. When coins were gold and silver, people shaved slivers off the edges to keep the metal. Ridges made that obvious, because a shaved edge shows a smooth patch where the ridges should be."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "The Perth Mint: How Isaac Newton helped shape our coins",
+      "sourceUrl": "https://www.perthmint.com/news/collector/coin-collecting/how-isaac-newton-helped-shape-our-coins/",
+      "image": {
+        "src": "/images/coin-edges.webp",
+        "alt": "Stacks of silver coins, their ridged edges catching the light",
+        "thumb": "/images/thumbs/coin-edges.webp"
+      },
+      "tags": [
+        "money",
+        "touch"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "aircraft-window-corners",
+      "topic": "industrial",
+      "stem": "Why do passenger planes have windows with rounded corners?",
+      "options": [
+        "Rounded panes are less likely to fog up or ice over at cruising altitude",
+        "Rounded shapes are cheaper and quicker to cut from a sheet of acrylic",
+        "Sharp corners concentrated stress and let cracks start in the plane's body",
+        "Rounded windows give passengers a wider view of the ground below"
+      ],
+      "correctIndex": 2,
+      "hint": "The cabin is pumped up and let down again on every flight.",
+      "explanationRight": "The de Havilland Comet, the first jet airliner, had nearly square window openings. Every flight pressurised the cabin and then let it down again, and the stress bunched up at those sharp corners. Over thousands of cycles, fatigue cracks grew, and two Comets broke apart in the air in 1954. Rounded corners spread the stress out, and airliners have used them ever since.",
+      "explanationWrong": [
+        "Fog isn't the reason. The corners are about strength. Sharp corners gather stress every time the cabin is pressurised, and on the de Havilland Comet that stress led to fatigue cracks and two break ups in the air in 1954. Rounded corners spread the load out.",
+        "Cost isn't the reason. The curve is about strength. Sharp corners gather stress each time the cabin is pressurised and let down. On the de Havilland Comet that led to fatigue cracks and two break ups in 1954. Rounded corners spread the stress out.",
+        null,
+        "The view isn't the reason. The curve is about strength. Sharp corners gather stress each time the cabin is pressurised, and on the de Havilland Comet, the first jet airliner, that led to fatigue cracks and two break ups in 1954. Rounded corners spread the stress out."
+      ],
+      "confidence": "accurate",
+      "sourceName": "FAA Lessons Learned: de Havilland Comet 1 accidents",
+      "sourceUrl": "https://www.faa.gov/lessons_learned/transport_airplane/accidents/G-ALYV",
+      "image": {
+        "src": "/images/aircraft-window-corners.webp",
+        "alt": "A museum display of the Comet fatigue-test fuselage panel: square-cornered window openings, with the skin torn open from a window corner, marked \"origin of failure\"",
+        "thumb": "/images/thumbs/aircraft-window-corners.webp"
+      },
+      "tags": [
+        "aviation",
+        "strength"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ]
+    },
+    {
+      "id": "manhole-round",
+      "topic": "everyday-object",
+      "stem": "Why are most manhole covers round?",
+      "options": [
+        "A circle is the cheapest shape to cast in iron",
+        "A round cover can't fall through its own hole at any angle",
+        "Round holes are quicker and easier to dig by hand",
+        "Round covers let rainwater drain off the road more evenly"
+      ],
+      "correctIndex": 1,
+      "hint": "Try tipping a square lid on its edge over a square opening.",
+      "explanationRight": "A circle is the same width whichever way you turn it, so a round cover can't slip through a round hole that is even slightly smaller. A square cover can: stand it on its edge, line it up with the diagonal, and it drops straight in. Round covers also don't need lining up when you put them back, but not falling down the hole is the key reason.",
+      "explanationWrong": [
+        "Cost isn't the main reason. A circle is the same width in every direction, so a round cover can't slip through its hole however it's turned. A square or rectangular cover can drop through if it's tipped and lined up with the diagonal.",
+        null,
+        "The hole's shape isn't really the point, since a square lid could still sit over a round hole. The benefit is geometry. A circle is the same width in every direction, so a round cover can't slip through its hole however you turn it, while a square cover can drop through along its diagonal.",
+        "Drainage isn't the reason. A circle is the same width in every direction, so a round cover can never slip through its own hole. A square one can, if it's tipped and lined up with the diagonal."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "UC Berkeley Mistake-Proofing: Round manhole cover",
+      "sourceUrl": "https://p2sl-mistakeproofing.berkeley.edu/product/round-manhole-cover",
+      "image": {
+        "src": "/images/manhole-round.webp",
+        "alt": "A square manhole cover crossed out in red, beside a round manhole cover",
+        "thumb": "/images/thumbs/manhole-round.webp"
+      },
+      "tags": [
+        "geometry",
+        "safety"
+      ],
+      "themes": [
+        "everyday",
+        "safety"
+      ]
+    },
+    {
+      "id": "atm-braille",
+      "topic": "everyday-object",
+      "stem": "Why do drive-through cash machines have braille on the keypad?",
+      "options": [
+        "It's cheaper to make one keypad for every machine than two different ones",
+        "It lets drivers find the keys by touch without looking away from the screen",
+        "Blind passengers use them too, and accessibility rules make no exception",
+        "Most drive-through machines started out as walk-up machines and were later moved outside"
+      ],
+      "correctIndex": 2,
+      "hint": "Not everyone in the car is the driver.",
+      "explanationRight": "A blind person can't drive, but they can ride in a car or a taxi and reach the machine from the window. US accessibility rules for cash machines require braille, and drive-through machines get no exception on that point. When US banks asked for one, the Access Board, which writes the guidelines, turned them down for this very reason.",
+      "explanationWrong": [
+        "Using one keypad everywhere may well save money, and that explanation is often repeated. But the rule came first. US accessibility rules require braille on cash machines and make no exception for drive-through ones, because blind people ride as passengers or in taxis and can use them from the window. The Access Board refused banks' request for an exemption.",
+        "Drivers could learn the keys by feel, but the braille isn't for them. It's for blind passengers, who can reach the machine from a car or taxi window. US accessibility rules require braille on cash machines and give drive-through machines no exception.",
+        null,
+        "The braille isn't a leftover. It's there on purpose. Blind people can use these machines from a passenger seat or a taxi, so US accessibility rules require braille and give drive-through machines no exception."
+      ],
+      "confidence": "accurate",
+      "sourceName": "The Straight Dope: Why is there braille on drive-up teller machines?",
+      "sourceUrl": "https://www.straightdope.com/21342105/why-is-there-braille-on-drive-up-teller-machines",
+      "image": {
+        "src": "/images/atm-braille.webp",
+        "alt": "A finger reading the braille on a cash machine label beside the keypad",
+        "thumb": "/images/thumbs/atm-braille.webp"
+      },
+      "tags": [
+        "accessibility",
+        "touch",
+        "buttons"
+      ],
+      "themes": [
+        "keys",
+        "everyday"
+      ]
+    },
+    {
+      "id": "paimio-back",
+      "topic": "furniture",
+      "stem": "Why does the back of Alvar Aalto's Paimio chair sit at such a particular angle?",
+      "options": [
+        "To open up the sitter's chest and make breathing easier",
+        "To show how far bent plywood could curve without breaking",
+        "To let the chairs stack neatly in a small ward",
+        "So patients could look out of the low windows at the view"
+      ],
+      "correctIndex": 0,
+      "hint": "The chair was made for a tuberculosis hospital.",
+      "explanationRight": "Aalto designed the chair for the Paimio tuberculosis sanatorium in Finland, where patients spent long hours resting. The angle of the back was set to help them breathe more easily, supporting the back and opening up the chest rather than letting them slump. The bent plywood made the shape possible, but breathing is what set the angle.",
+      "explanationWrong": [
+        null,
+        "The bent plywood made the shape possible, but the angle wasn't there to show it off. The chair was made for a tuberculosis sanatorium, and the back was angled to help patients breathe more easily by supporting the back and opening up the chest.",
+        "Stacking wasn't the aim. The chair was made for a tuberculosis sanatorium, and the angle of the back was chosen to help patients breathe more easily as they rested.",
+        "The view wasn't what set the angle. The chair was made for tuberculosis patients, and the back was angled to help them breathe more easily while resting, supporting the back and opening the chest."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Cooper Hewitt, Smithsonian Design Museum: Paimio Sanatorium",
+      "sourceUrl": "https://www.cooperhewitt.org/2021/12/10/paimio-sanatorium-1929-33/",
+      "image": {
+        "src": "/images/paimio-back.webp",
+        "alt": "Alvar Aalto's Paimio chair: a black, scrolled plywood seat and back held between bent birch frames",
+        "thumb": "/images/thumbs/paimio-back.webp"
+      },
+      "tags": [
+        "chairs",
+        "health"
+      ],
+      "themes": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "eames-plywood",
+      "topic": "furniture",
+      "stem": "Why were Charles and Ray Eames already so good at moulding plywood by the mid 1940s?",
+      "options": [
+        "They had both trained as boat builders, bending wooden hulls by hand for years",
+        "They learned the method while working at Alvar Aalto's factory in Finland",
+        "A big furniture company taught them the whole process before hiring them",
+        "They had spent the war making plywood leg splints for the Navy"
+      ],
+      "correctIndex": 3,
+      "hint": "Think about what the US needed in huge numbers in the early 1940s.",
+      "explanationRight": "In 1942 the US Navy asked the Eameses to make leg splints for injured servicemen, because metal splints vibrated in transport and made injuries worse. They worked out how to press plywood into curves that followed the shape of a leg, using Charles's own leg as the model, and more than 150,000 splints were made. That wartime know how is what let them turn moulded plywood into chairs like the LCW soon after.",
+      "explanationWrong": [
+        "Neither of them trained as a boat builder. Their skill came from the war. In 1942 the US Navy asked them to make leg splints, and they worked out how to press plywood into curves that followed the shape of a leg. After more than 150,000 splints, they used the same know how on chairs.",
+        "Aalto's bent plywood was famous, but the Eameses didn't learn it at his factory. They built their skill making leg splints for the US Navy during the war, pressing plywood into curves shaped like a leg. More than 150,000 were made, and that know how went straight into their chairs.",
+        "No furniture company taught them. They built the skill themselves, making leg splints for the US Navy during the war by pressing plywood into curves shaped like a leg. More than 150,000 were made, and the same methods went into their chairs.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Eames Office: Molded plywood leg splint",
+      "sourceUrl": "https://www.eamesoffice.com/the-work/molded-plywood-leg-splint/",
+      "image": {
+        "src": "/images/eames-plywood.webp",
+        "alt": "The Eames moulded plywood leg splint: a curved sheet of wood with cut-out holes",
+        "thumb": "/images/thumbs/eames-plywood.webp"
+      },
+      "tags": [
+        "chairs",
+        "materials",
+        "war"
+      ],
+      "themes": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "chandigarh-name",
+      "topic": "furniture",
+      "stem": "Why is the teak and cane chair often credited to Pierre Jeanneret called the Chandigarh chair?",
+      "options": [
+        "It honours the local engineer who drew the very first version of the design",
+        "It was made for the government buildings of Chandigarh, a new Indian city",
+        "It was named after the craftsmen's workshop that first produced it by hand",
+        "It was designed to be sold as a souvenir to tourists visiting the city"
+      ],
+      "correctIndex": 1,
+      "hint": "Look at where Le Corbusier's team was building in the 1950s.",
+      "explanationRight": "In the 1950s Le Corbusier's team planned Chandigarh, a new capital city in India, and Pierre Jeanneret oversaw much of the furniture for its offices, courts and university. The chairs were made in teak and cane for those buildings, so they became known by the city's name. We rate this medium confidence because sources disagree about who designed them. The V&A credits Eulie Chowdhury, an Indian architect on the team, with at least one of the best known chairs, and other researchers say many pieces came from Indian designers such as Chowdhury, Jeet Malhotra and Aditya Prakash working alongside Jeanneret, so crediting him alone is disputed.",
+      "explanationWrong": [
+        "The name doesn't honour a person. The chairs were made for the offices, courts and university of Chandigarh, the new Indian city planned by Le Corbusier's team in the 1950s. This is medium confidence because who designed them is disputed: the V&A credits Eulie Chowdhury with at least one well known design, and other researchers say an Indian team worked alongside Jeanneret.",
+        null,
+        "It isn't named after a workshop. The chairs were made for the government buildings of Chandigarh, the new city in India planned by Le Corbusier's team, so they took the city's name. This is medium confidence because the design credit is disputed: the V&A names Eulie Chowdhury for at least one chair, and other researchers point to an Indian team working with Jeanneret.",
+        "They weren't made for tourists. They were working furniture for the offices, courts and university of Chandigarh, the new Indian city planned by Le Corbusier's team, which is where the name comes from. This is medium confidence because sources disagree over who designed them, with the V&A crediting Eulie Chowdhury for at least one chair."
+      ],
+      "confidence": "medium confidence",
+      "sourceName": "V&A: The Chandigarh chair",
+      "sourceUrl": "https://www.vam.ac.uk/articles/the-chandigarh-chair",
+      "image": {
+        "src": "/images/chandigarh-name.webp",
+        "alt": "Teak and cane office chairs from Chandigarh, gathered outdoors in the sun",
+        "thumb": "/images/thumbs/chandigarh-name.webp"
+      },
+      "tags": [
+        "chairs",
+        "names"
+      ],
+      "themes": [
+        "furniture",
+        "india"
+      ]
+    },
+    {
+      "id": "hamburger-icon",
+      "topic": "ui",
+      "stem": "Why is the menu icon drawn as three short horizontal lines?",
+      "options": [
+        "Three lines were the simplest shape that stayed sharp on early touchscreens",
+        "It copies the lines of dishes on a restaurant menu card",
+        "Its designer drew it to look like a hamburger, as a joke",
+        "It looks like the short list of commands it opens"
+      ],
+      "correctIndex": 3,
+      "hint": "Think about what appears when you tap it.",
+      "explanationRight": "Norm Cox drew the icon for the Xerox Star computer, released in 1981. It had to work at a tiny size, so he kept it as simple as a road sign. The three lines echo the rows of a short list, and a list of commands is exactly what appeared when you clicked it. Cox has said it was meant to mimic the look of the menu it opened.",
+      "explanationWrong": [
+        "The icon is far older than touchscreens. Norm Cox drew it in 1981 for the Xerox Star computer. The three lines stand for rows in a list, because clicking it opened a list of commands. Cox has said it was meant to mimic the look of that menu.",
+        "It is a list, but not a restaurant one. Norm Cox drew it for the Xerox Star in 1981, and the lines stand for the rows of commands that appeared when you clicked it. He has described it as a simple picture of the menu it opened.",
+        "The hamburger nickname came much later. Norm Cox, who drew it for the Xerox Star in 1981, meant the three lines to look like the short list of commands that opened when you clicked it. He joked that it was an air vent to keep the window cool, but the real idea was a picture of a list.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Mic Product Blog: A conversation with Norm Cox, creator of the hamburger menu",
+      "sourceUrl": "https://medium.com/readme-mic/a-conversation-with-norm-cox-creator-of-the-hamburger-menu-c913daea5f9e",
+      "image": {
+        "src": "/images/hamburger-icon.webp",
+        "alt": "A still from a 1981 Xerox Star demo, showing a window menu button drawn as three short lines",
+        "thumb": "/images/thumbs/hamburger-icon.webp"
+      },
+      "tags": [
+        "menus",
+        "symbols"
+      ],
+      "themes": [
+        "screens",
+        "symbols"
+      ]
+    },
+    {
+      "id": "cursor-tilt",
+      "topic": "ui",
+      "stem": "Why does the mouse pointer lean to one side instead of pointing straight up?",
+      "options": [
+        "An upright arrow was too hard to see on early low resolution screens",
+        "One upright edge and one slanted edge draw cleanly on a tiny pixel grid",
+        "It matches the natural angle of your hand as it rests on the mouse",
+        "Leaning it left kept the tip in the top corner, where clicks are measured from"
+      ],
+      "correctIndex": 1,
+      "hint": "The pointer was drawn one tiny square at a time.",
+      "explanationRight": "Alan Kay, who drew the pointer at Xerox PARC, explained it in an email: the Alto computer drew its pointer on a grid of 16 by 16 single pixels, and on a grid that small you get a neat arrowhead if one side runs straight up and the other runs at an angle. An upright arrow needs two slanted sides, and both come out jagged. We rate this medium confidence. Kay's is the only first hand account, recalled decades later, while the popular story that the tilt made the pointer easier to see on low resolution screens is repeated everywhere but traces back to a single Stack Exchange answer.",
+      "explanationWrong": [
+        "That's the story you'll usually read, but it traces back to a single Stack Exchange answer rather than anyone who was there. Alan Kay, who drew the pointer at Xerox PARC, gave a different reason: on the Alto's 16 by 16 pixel grid, an arrow with one vertical side and one angled side makes a clean arrowhead. We rate this medium confidence, since Kay's memory is the only first hand account.",
+        null,
+        "Nobody who worked on it has given that reason. Alan Kay, who drew the pointer at Xerox PARC, said it came from the pixel grid: on the Alto's 16 by 16 grid, one vertical side and one angled side make a clean arrowhead, while an upright arrow comes out jagged. This is medium confidence, since his is the only first hand account.",
+        "Having the tip in the top corner is sometimes given as the reason, but Alan Kay, who drew the pointer at Xerox PARC, explained it differently. On the Alto's 16 by 16 pixel grid, one vertical side and one angled side make the cleanest arrowhead. This is medium confidence, since his recollection is the only first hand account."
+      ],
+      "confidence": "medium confidence",
+      "sourceName": "James Hill-Khurana: A brief history of the mouse cursor, with Alan Kay's email",
+      "sourceUrl": "https://jameshk.com/mouse-cursor",
+      "tags": [
+        "pointer",
+        "pixels"
+      ],
+      "themes": [
+        "screens"
+      ],
+      "image": {
+        "src": "/dev-images/cursor-tilt.webp",
+        "alt": "A mouse pointer drawn in square pixels, leaning to one side",
+        "placeholder": true,
+        "thumb": "/dev-images/thumbs/cursor-tilt.webp"
+      }
+    },
+    {
+      "id": "qwerty",
+      "topic": "everyday-object",
+      "stem": "Why are the letters on a keyboard in the order Q W E R T Y?",
+      "options": [
+        "To slow typists down so the early typewriters wouldn't keep jamming",
+        "So salesmen could type the word TYPEWRITER using only the top row",
+        "It was reshaped over years for telegraph operators taking down Morse code",
+        "So pairs of letters often used together were split between the left and right hands"
+      ],
+      "correctIndex": 2,
+      "hint": "Some of the first people to type for a living weren't writing letters. They were receiving messages.",
+      "explanationRight": "Some of the first people to use typewriters for work were telegraph operators, typing out Morse messages as they came in. Research by Koichi and Motoko Yasuoka at Kyoto University traces how the key layout shifted over several years in response to that use, along with pressures from manufacturers and old patents, until it settled into QWERTY. We rate this medium confidence. The older account, still widely told and repeated in economist Paul David's well known 1985 paper, says the inventor Christopher Sholes rearranged the keys mainly so neighbouring type bars wouldn't clash and jam.",
+      "explanationWrong": [
+        "This is the most famous explanation, but the evidence for it is thin. Jams were a real problem, and some writers, including economist Paul David, credit the layout to keeping type bars apart. But research by Koichi and Motoko Yasuoka shows the layout shifted over years in response to telegraph operators, who were among the first people typing for work. We rate this medium confidence because the jamming account still has supporters.",
+        "TYPEWRITER really can be typed on the top row, and the salesman story is often told. But it's a quirk, not the reason for the whole layout. Research by Koichi and Motoko Yasuoka traces QWERTY to years of changes shaped by telegraph operators taking down Morse code. This is medium confidence, since the older type bar jamming explanation still has supporters.",
+        null,
+        "That's how later layouts such as Dvorak were designed, but it isn't how QWERTY came about. Research by Koichi and Motoko Yasuoka traces it to years of changes shaped by telegraph operators, who used early typewriters to take down Morse code. This is medium confidence, since the older explanation about stopping type bars from jamming still has supporters."
+      ],
+      "confidence": "medium confidence",
+      "sourceName": "Koichi Yasuoka and Motoko Yasuoka: On the Prehistory of QWERTY",
+      "sourceUrl": "http://kanji.zinbun.kyoto-u.ac.jp/~yasuoka/publications/PreQWERTY.html",
+      "image": {
+        "src": "/images/qwerty.webp",
+        "alt": "Patent drawing of an early Sholes and Glidden typewriter keyboard, with Q W E R T Y along the top row of letters",
+        "thumb": "/images/thumbs/qwerty.webp"
+      },
+      "tags": [
+        "keyboards",
+        "history"
+      ],
+      "themes": [
+        "keys"
+      ]
+    },
+    {
+      "id": "barcelona-chair",
+      "topic": "furniture",
+      "stem": "Why is Mies van der Rohe's Barcelona chair called that?",
+      "options": [
+        "It was made for Germany's pavilion at the 1929 Barcelona International Exposition",
+        "It was first made by a small furniture workshop based in Barcelona",
+        "Its crossed steel legs copy the curly ironwork on Barcelona's old balconies",
+        "Mies designed it during the years he spent living and working in Barcelona"
+      ],
+      "correctIndex": 0,
+      "hint": "Think about a big international event in 1929.",
+      "explanationRight": "In 1929 Germany took part in the International Exposition held in Barcelona, and Ludwig Mies van der Rohe, working with Lilly Reich, designed its pavilion. The chair and its matching stool were made for that building, reportedly as seats for the King and Queen of Spain. The pavilion stood for only a few months, but the chair kept the city's name.",
+      "explanationWrong": [
+        null,
+        "The name isn't about who made it. The chair was designed for the German Pavilion at the 1929 International Exposition in Barcelona, by Mies van der Rohe working with Lilly Reich. The pavilion stood for only a few months, but the chair kept the name.",
+        "The crossed legs are usually linked to ancient Roman folding chairs, not balconies. The name comes from the building the chair was made for: the German Pavilion at the 1929 International Exposition in Barcelona.",
+        "Mies didn't live in Barcelona. He designed the German Pavilion for the 1929 International Exposition there, and the chair was made for that building. It kept the city's name after the pavilion came down."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Knoll: Barcelona Chair",
+      "sourceUrl": "https://www.knoll.com/design-plan/product/barcelona-chair",
+      "image": {
+        "src": "/images/barcelona-chair.webp",
+        "alt": "A black leather Barcelona chair on crossed, curved chrome legs",
+        "thumb": "/images/thumbs/barcelona-chair.webp"
+      },
+      "tags": [
+        "chairs",
+        "names"
+      ],
+      "themes": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "wassily-steel",
+      "topic": "furniture",
+      "stem": "Why did Marcel Breuer build his Wassily chair from bent steel tubes?",
+      "options": [
+        "Wood was hard to get in Germany in the 1920s",
+        "He was inspired by the bent tubular handlebars of his own bicycle",
+        "Steel tube was the only material the Bauhaus workshop could weld",
+        "He wanted a chair that could be kept clean in hospitals"
+      ],
+      "correctIndex": 1,
+      "hint": "Breuer rode something to work that was made the same way.",
+      "explanationRight": "Breuer, then a young teacher at the Bauhaus, rode an Adler bicycle and admired its bent steel handlebars: light, strong and simple. He wondered whether the same tubes could make furniture, borrowed bending techniques from local plumbers, and reduced the heavy padded club chair to a frame of tubes with leather or fabric straps. Knoll, which makes the chair today, credits the bicycle as the spark.",
+      "explanationWrong": [
+        "The material wasn't forced on him. Breuer was inspired by the curved steel handlebars of his Adler bicycle and wondered if the same light, strong tubes could make a chair. The result turned the bulky club chair into a frame of tubes and straps.",
+        null,
+        "Breuer chose steel tube on purpose. He admired the bent tubular handlebars of his Adler bicycle and wondered if the same light, strong tubes could make furniture. He borrowed bending methods from local plumbers to build the frame.",
+        "The chair wasn't made for hospitals. Breuer chose steel tube after admiring the bent handlebars of his Adler bicycle, and wondered if the same light, strong tubes could reduce the bulky club chair to a simple frame."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Knoll: How the Wassily Chair changed it all",
+      "sourceUrl": "https://www.knoll.com/story/shop/how-the-wassily-chair-changed-it-all",
+      "image": {
+        "src": "/images/wassily-steel.webp",
+        "alt": "The Wassily chair: bent chrome steel tubes with black leather straps for the seat, back and arms",
+        "thumb": "/images/thumbs/wassily-steel.webp"
+      },
+      "tags": [
+        "chairs",
+        "materials"
+      ],
+      "themes": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "jeans-rivets",
+      "topic": "everyday-object",
+      "stem": "Why do jeans have small copper rivets at the corners of the pockets?",
+      "options": [
+        "To show where the pattern pieces line up when the jeans are sewn",
+        "Copper was thought to stop the indigo dye fading in the wash",
+        "To stop the pockets tearing where the fabric takes the most strain",
+        "To weigh the pockets down so they hang flat against the leg"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about where a pocket tears first when it's stuffed full.",
+      "explanationRight": "Working men in the 1870s kept splitting their trousers at the pocket corners, where the fabric pulled hardest. Jacob Davis, a tailor in Nevada, fixed this by putting metal rivets at those points of strain. He teamed up with his cloth supplier, Levi Strauss, and the two were granted a US patent for the idea in 1873.",
+      "explanationWrong": [
+        "The rivets aren't sewing guides. Jacob Davis, a tailor, added them in the 1870s because work trousers kept splitting at the pocket corners, where the fabric takes the most strain. He and Levi Strauss patented the idea in 1873.",
+        "Copper does nothing for the dye. The rivets were added because work trousers kept tearing at the pocket corners, where the strain is greatest. Jacob Davis, a tailor, came up with the fix and patented it with Levi Strauss in 1873.",
+        null,
+        "They're far too light to weigh anything down. Jacob Davis, a tailor, added metal rivets to work trousers in the 1870s because the pockets kept tearing at the corners, where the strain is greatest. He and Levi Strauss patented it in 1873."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Levi's: A riveting story",
+      "sourceUrl": "https://www.levi.com/US/en_US/blog/article/lvc-a-riveting-story",
+      "tags": [
+        "strength",
+        "materials"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "shinkansen-nose",
+      "topic": "industrial",
+      "stem": "Why does Japan's 500 series bullet train have such a long, pointed nose?",
+      "options": [
+        "To cut through strong crosswinds on high bridges and exposed viaducts",
+        "To give the driver a better view of the track ahead",
+        "To push deep snow off the rails in winter, like a plough",
+        "To stop the loud boom it made when shooting into a tunnel at speed"
+      ],
+      "correctIndex": 3,
+      "hint": "The trouble started where the track goes into a hill.",
+      "explanationRight": "When a fast train enters a tunnel, it pushes a wave of air ahead of it, and that pressure wave bursts out of the far end with a loud bang that disturbed people nearby. Eiji Nakatsu, the engineer leading the design and a keen birdwatcher, thought of the kingfisher, which dives from air into water with barely a splash. Testing showed the best nose shape was almost the same as a kingfisher's beak. The 500 series cut air pressure by 30 percent and used 15 percent less electricity, even while running faster.",
+      "explanationWrong": [
+        "Crosswinds weren't the reason. The problem was tunnels: a fast train pushes a wave of air ahead of it that bursts out of the far end with a loud bang. Engineer Eiji Nakatsu, a birdwatcher, borrowed the shape of a kingfisher's beak, which enters water with barely a splash, and the boom dropped.",
+        "The view wasn't the reason. The nose was shaped to fix a noise problem. A fast train entering a tunnel pushes a wave of air that bursts out of the far end with a bang. Engineer Eiji Nakatsu modelled the nose on a kingfisher's beak, which enters water with barely a splash.",
+        "Clearing snow wasn't the job. The nose was shaped to stop a boom: a fast train entering a tunnel pushes a wave of air that bursts out of the far end. Engineer Eiji Nakatsu, a birdwatcher, based the nose on a kingfisher's beak, and air pressure dropped by 30 percent.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Japan for Sustainability: Interview with Eiji Nakatsu",
+      "sourceUrl": "https://www.japanfs.org/en/news/archives/news_id027795.html",
+      "tags": [
+        "air",
+        "trains",
+        "nature"
+      ],
+      "themes": [
+        "travel"
+      ],
+      "image": {
+        "src": "/images/shinkansen-nose.webp",
+        "alt": "An E4 series Max bullet train at a platform, with a long, sloping nose",
+        "thumb": "/images/thumbs/shinkansen-nose.webp"
+      }
+    },
+    {
+      "id": "swiss-clock-pause",
+      "topic": "industrial",
+      "stem": "Why does the red second hand on Swiss railway clocks pause at the top of each minute?",
+      "options": [
+        "It gives passengers a calm moment to check their watch before a train leaves",
+        "It waits for a pulse from a master clock to keep all station clocks in step",
+        "The small motor needs a short rest each minute so it doesn't overheat",
+        "It lets the clock catch up after losing a little time during the minute"
+      ],
+      "correctIndex": 1,
+      "hint": "Every clock in every station was meant to show exactly the same time.",
+      "explanationRight": "Swiss station clocks were kept in step by a master clock that sent an electrical pulse once a minute, exactly on the minute. The second hand ran on its own simple motor, which wasn't precise enough to trust. So it was set to run slightly fast, finishing its lap in about 58.5 seconds, then waiting at twelve until the pulse arrived. That way every clock in the network starts the new minute at the same moment.",
+      "explanationWrong": [
+        "The designer, Hans Hilfiker, did like the calm that pause brought before a departure, but it began as a technical fix. A master clock sent one pulse each minute, and the second hand's own motor wasn't precise. It was set to run slightly fast, then wait at twelve for the pulse, so every clock started the minute together.",
+        null,
+        "The motor isn't resting. It runs slightly fast on purpose, reaching twelve a second or two early, then waits for the once a minute pulse from a master clock. That way every station clock starts the new minute together.",
+        "It's the other way round: the second hand runs slightly fast, not slow. It reaches twelve early and waits for a pulse from a master clock, sent once a minute, so every station clock begins the minute in step."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Swiss National Museum: The iconic Swiss station clock",
+      "sourceUrl": "https://blog.nationalmuseum.ch/en/2022/09/the-iconic-swiss-station-clock/",
+      "image": {
+        "src": "/images/swiss-clock-pause.webp",
+        "alt": "A Swiss railway station clock with its red second hand resting at twelve",
+        "thumb": "/images/thumbs/swiss-clock-pause.webp"
+      },
+      "tags": [
+        "trains",
+        "time"
+      ],
+      "themes": [
+        "travel"
+      ]
+    },
+    {
+      "id": "coke-bottle",
+      "topic": "everyday-object",
+      "stem": "Why was the curvy Coca-Cola bottle designed in 1915?",
+      "options": [
+        "Its curves were modelled on the fashionable hourglass figure of the day",
+        "Its ribs gave a firmer grip on a cold bottle dripping from the ice chest",
+        "Its narrow middle used less glass, which was costly at the time",
+        "So you'd know it by touch in the dark, even broken, and spot fakes"
+      ],
+      "correctIndex": 3,
+      "hint": "Lots of rival drinks were copying Coca-Cola's name and look.",
+      "explanationRight": "By 1915 Coca-Cola had a problem with imitators such as Koka-Nola and Toka-Cola copying its name and look, and lawsuits took years. So the bottlers asked glass companies for a bottle so distinct you would recognise it by feel in the dark, or lying broken on the ground. The Root Glass Company in Indiana came up with the winner, taking its long, ribbed shape from an illustration of a cocoa bean.",
+      "explanationWrong": [
+        "The bottle was later nicknamed the hobble skirt and the Mae West because of its curves, but that isn't where the shape came from. The brief was a bottle you could recognise by feel in the dark or lying broken on the ground, so shoppers wouldn't be fooled by copycat brands. The designers took the shape from an illustration of a cocoa bean.",
+        "Grip wasn't the brief. Coca-Cola wanted a bottle so distinct you would know it by feel in the dark or lying broken on the ground, to beat the copycat brands borrowing its look. The ribbed shape came from an illustration of a cocoa bean.",
+        "Saving glass wasn't the aim. Rival brands were copying Coca-Cola's look, so the bottlers asked for a bottle so distinct you could recognise it by feel in the dark or lying broken on the ground. The winning design took its shape from an illustration of a cocoa bean.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "The Coca-Cola Company: The history of the Coca-Cola contour bottle",
+      "sourceUrl": "https://www.coca-colacompany.com/about-us/history/the-history-of-the-coca-cola-contour-bottle",
+      "image": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/7/70/Coke_bottle_patent.JPG",
+        "alt": "Patent drawing of the 1915 Coca-Cola bottle: a tall bottle with a bulging, ribbed middle",
+        "credit": "US design patent 48,160, 1915. Public domain, via Wikimedia Commons."
+      },
+      "tags": [
+        "brands",
+        "touch"
+      ],
+      "themes": [
+        "everyday",
+        "symbols"
+      ]
+    },
+    {
+      "id": "jerrycan-handles",
+      "topic": "industrial",
+      "stem": "Why does a jerrycan have three handles side by side?",
+      "options": [
+        "So one soldier can carry two cans at once, or pass them quickly down a line",
+        "So the can can hang from a truck's rack in three different positions",
+        "So the thin steel keeps its shape when the fuel inside expands in desert heat",
+        "So left handed and right handed soldiers could both pour from it without spilling"
+      ],
+      "correctIndex": 0,
+      "hint": "Picture soldiers unloading a truck full of fuel as fast as they can.",
+      "explanationRight": "The jerrycan was designed in Germany in the late 1930s for the army, which wanted one soldier to be able to carry two full cans or four empty ones. Three handles make that possible: put two cans side by side and their handles line up into one big grip. They also let cans be handed quickly from person to person down a line, with each person grabbing a free handle.",
+      "explanationWrong": [
+        null,
+        "Racks weren't the reason. The German army wanted one soldier to be able to carry two full cans or four empty ones, and three handles let two cans share a grip. They also let cans be passed quickly from hand to hand down a line of people.",
+        "Heat has nothing to do with the handles. The army that ordered the can wanted one soldier to carry two full cans or four empty ones. With three handles, two cans side by side share one grip, and cans can be passed quickly down a line.",
+        "Pouring works the same either way. The three handles are for carrying. With them, one soldier could carry two full cans or four empty ones, since two cans side by side share a grip, and cans could be passed quickly from hand to hand."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Core77: The Wehrmachtkanister, or jerrycan",
+      "sourceUrl": "https://www.core77.com/posts/17788/the-wehrmachtkanister-aka-jerrycan-astonishingly-good-industrial-design-from-the-1930s-17788",
+      "image": {
+        "src": "/images/jerrycan-handles.webp",
+        "alt": "A row of old metal jerrycans, each with three handles side by side on top",
+        "thumb": "/images/thumbs/jerrycan-handles.webp"
+      },
+      "tags": [
+        "war",
+        "carrying"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "anglepoise-springs",
+      "topic": "industrial",
+      "stem": "Why does an Anglepoise lamp stay exactly where you leave it?",
+      "options": [
+        "Tight friction joints clamp each hinge so it can't slip out of place",
+        "A heavy hidden weight in the base pulls back against the shade",
+        "Springs balance the weight of the arm and shade in any position",
+        "Its joints click and lock into place every few degrees as you move it"
+      ],
+      "correctIndex": 2,
+      "hint": "Its inventor spent his working life designing car suspension.",
+      "explanationRight": "George Carwardine was an engineer who specialised in vehicle suspension. In the early 1930s he worked out a lamp arm where springs pull against the weight of the arm and shade, so the forces stay balanced wherever you move it. Nothing needs tightening or clamping: you move the shade and let go. He licensed the design to the spring maker Herbert Terry and Sons, and the Anglepoise went into production.",
+      "explanationWrong": [
+        "Friction joints would need tightening every time you moved the lamp. The Anglepoise uses springs instead. Its inventor, George Carwardine, designed car suspension, and set springs to pull against the weight of the arm and shade so the lamp balances in any position.",
+        "There's no hidden weight. The balance comes from springs. George Carwardine, a car suspension engineer, arranged them to pull against the weight of the arm and shade, so the lamp holds any position you leave it in.",
+        null,
+        "The joints don't click or lock. George Carwardine, a car suspension engineer, used springs that balance the weight of the arm and shade, so the lamp stays put wherever you let go of it, with no clamps or catches."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Design Museum: Anglepoise, under the spotlight",
+      "sourceUrl": "https://designmuseum.org/discover-design/all-design-objects/anglepoise-under-the-spotlight",
+      "image": {
+        "src": "/images/anglepoise-springs.webp",
+        "alt": "A black Anglepoise desk lamp, with the springs at the base of the arm visible",
+        "thumb": "/images/thumbs/anglepoise-springs.webp"
+      },
+      "tags": [
+        "balance",
+        "mechanisms"
+      ],
+      "themes": [
+        "everyday",
+        "furniture"
+      ]
+    },
+    {
+      "id": "thonet-14",
+      "topic": "furniture",
+      "stem": "Why was Thonet's No. 14 café chair made from just six pieces of bent wood and a few screws?",
+      "options": [
+        "Glued joints kept failing in the damp, steamy air of busy Viennese coffee houses",
+        "So it could ship flat in pieces and be put together on arrival",
+        "So café owners could replace a broken leg themselves without calling a carpenter",
+        "Early steam bending machines could only make short, simple curves in beech"
+      ],
+      "correctIndex": 1,
+      "hint": "The chair sold in huge numbers a very long way from Vienna.",
+      "explanationRight": "Thonet designed the No. 14 in 1859 to be made in huge numbers and sold around the world. Its six bent wood parts, ten screws and two nuts could be packed loose, with 36 chairs fitting in a crate of one cubic metre, then put together wherever they arrived. That cheap shipping helped make it one of the best selling chairs ever, with more than 50 million made by 1930.",
+      "explanationWrong": [
+        "Glue wasn't the problem it was solving. The chair was made to travel: six parts, ten screws and two nuts could be packed loose, 36 chairs to a one cubic metre crate, and put together on arrival anywhere in the world.",
+        null,
+        "Repairs weren't the main aim. The few parts were about shipping. Packed in pieces, 36 chairs fitted in a crate of one cubic metre, which made it cheap to send the chair around the world and assemble it where it landed.",
+        "Thonet's bending could make long, sweeping curves, like the chair's back legs and backrest. The few parts were about shipping: packed loose, 36 chairs fitted in a one cubic metre crate and were put together on arrival."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Thonet: The Thonet principle",
+      "sourceUrl": "https://www.thonet.de/en/magazine/history-brand/detail/the-thonet-principle",
+      "image": {
+        "src": "/images/thonet-14.webp",
+        "alt": "Bentwood café chairs in the Thonet No. 14 style around small round tables",
+        "thumb": "/images/thumbs/thonet-14.webp"
+      },
+      "tags": [
+        "chairs",
+        "shipping"
+      ],
+      "themes": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "tulip-pedestal",
+      "topic": "furniture",
+      "stem": "Why does Eero Saarinen's Tulip chair stand on a single stem instead of four legs?",
+      "options": [
+        "One central base let the chair swivel smoothly at an office desk",
+        "The plastic of the 1950s was too weak to make four thin legs",
+        "A single cast stem was cheaper to make than four separate legs",
+        "To clear away the messy 'slum of legs' under tables and chairs"
+      ],
+      "correctIndex": 3,
+      "hint": "Look under an ordinary dining table crowded with chairs.",
+      "explanationRight": "Saarinen complained that the underneath of chairs and tables made an 'ugly, confusing, unrestful world'. He wanted to 'clear up the slum of legs' and make the chair 'all one thing again'. After about five years of work, he released the Pedestal collection with Knoll in 1957: tables and chairs that each rest on one flowing stem, so every piece reads as a single calm shape.",
+      "explanationWrong": [
+        "Swivelling wasn't the aim. Saarinen wanted to get rid of what he called the 'slum of legs', the ugly, confusing clutter under tables and chairs. A single stem clears the floor and lets each piece read as one whole shape.",
+        "The strength of plastic wasn't the reason for one stem. Saarinen wanted to clear up what he called the 'slum of legs' under tables and chairs, and make the chair 'all one thing again'.",
+        "Cost wasn't the point. Saarinen said the legs under chairs and tables made an 'ugly, confusing, unrestful world', a 'slum of legs'. The single stem cleared that away so each piece reads as one calm shape.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Knoll: Tulip chair",
+      "sourceUrl": "https://www.knoll.com/design-plan/product/tulip-armless-chair?section=design",
+      "image": {
+        "src": "/images/tulip-pedestal.webp",
+        "alt": "Six white Tulip chairs with red cushions, each standing on a single stem",
+        "thumb": "/images/thumbs/tulip-pedestal.webp"
+      },
+      "tags": [
+        "chairs",
+        "clutter"
+      ],
+      "themes": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "aeron-mesh",
+      "topic": "furniture",
+      "stem": "Why does the Herman Miller Aeron chair use stretched mesh instead of foam cushions?",
+      "options": [
+        "Air and body heat pass through, so you stay cool for hours",
+        "Mesh was cheaper to make than moulded foam when the chair launched in 1994",
+        "It keeps the chair light enough to stack and carry between meeting rooms",
+        "Foam cushions were being phased out of offices because of new fire safety rules"
+      ],
+      "correctIndex": 0,
+      "hint": "Think about how a foam seat feels at the end of a long afternoon.",
+      "explanationRight": "Foam and fabric trap heat and moisture against your body, and after a few hours that gets uncomfortable. The Aeron's Pellicle mesh lets air, body heat and water vapour pass straight through the seat and back. Herman Miller's research found skin temperature rose most on foam padded chairs and barely changed on breathable suspension materials like Pellicle.",
+      "explanationWrong": [
+        null,
+        "Price wasn't the reason. Herman Miller developed a new material, Pellicle, because foam and fabric trap heat and moisture against your body. The mesh lets air and body heat pass through, and in its research skin temperature barely changed on mesh, while foam chairs warmed up the most.",
+        "Stacking wasn't the reason. The mesh is there for comfort over long hours: foam and fabric trap heat and moisture against you, while the Pellicle mesh lets air and body heat pass straight through the seat and back.",
+        "Fire rules weren't behind it. The mesh was chosen because foam traps heat and moisture against your body. Pellicle lets air and heat pass straight through, and Herman Miller's research found skin temperature barely changed on it compared with foam."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Herman Miller: The attributes of thermal comfort",
+      "sourceUrl": "https://www.hermanmiller.com/research/categories/white-papers/the-attributes-of-thermal-comfort/",
+      "image": {
+        "src": "/images/aeron-mesh.webp",
+        "alt": "Three Herman Miller Aeron chairs from the front, three-quarter and side, showing the stretched mesh seat and back",
+        "thumb": "/images/thumbs/aeron-mesh.webp"
+      },
+      "tags": [
+        "chairs",
+        "health"
+      ],
+      "themes": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "tube-map",
+      "topic": "ui",
+      "stem": "Why does the London Underground map ignore the real distances between stations?",
+      "options": [
+        "The real distances between stations were kept secret for wartime security reasons",
+        "A map to scale would have been too big to fold into a pocket",
+        "Riders need the order of stops and where to change, not distances",
+        "It was drawn by a draughtsman who had no street map to copy from"
+      ],
+      "correctIndex": 2,
+      "hint": "When you're underground, what can you actually see out of the window?",
+      "explanationRight": "Earlier Tube maps followed real geography, which crammed the busy centre into a tiny space and stretched the outer lines across the page. Harry Beck, an engineering draughtsman, saw that passengers underground mostly need the order of stations and where to change lines. His 1931 design used straight lines at set angles, much like the electrical circuit diagrams he knew from work, with evenly spaced stations and an enlarged centre. It was trialled in 1932 and printed in 1933.",
+      "explanationWrong": [
+        "Secrecy wasn't the reason. Harry Beck realised passengers underground mostly need the order of stations and where lines connect, so in 1931 he drew a clear diagram with evenly spaced stops and a larger centre instead of a map to scale.",
+        "Size was part of the trouble, but not in that way. Maps drawn to scale crammed central London into a tiny space, making it hard to read. Harry Beck saw that passengers mostly need the order of stations and the places to change, so he spread the centre out and spaced stations evenly.",
+        null,
+        "Harry Beck did work as an engineering draughtsman, and his map probably drew on the circuit diagrams he knew. But he left out distance on purpose. Underground, passengers mostly need the order of stations and where to change lines, so a clear diagram beats an accurate map."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "London Museum: How Harry Beck revolutionised the Tube map",
+      "sourceUrl": "https://www.londonmuseum.org.uk/collections/london-stories/harry-beck-revolutionised-tube-map/",
+      "image": {
+        "src": "/images/tube-map.webp",
+        "alt": "Harry Beck's 1933 London Underground map: straight lines at set angles and evenly spaced stations",
+        "thumb": "/images/thumbs/tube-map.webp"
+      },
+      "tags": [
+        "trains",
+        "maps"
+      ],
+      "themes": [
+        "travel",
+        "symbols"
+      ]
+    },
+    {
+      "id": "phone-keypad",
+      "topic": "ui",
+      "group": "keypads",
+      "stem": "Calculators already put 7 8 9 on top. Why did phone keypads put 1 2 3 there instead?",
+      "options": [
+        "So office workers wouldn't mix up their phone with the calculator on the desk",
+        "Bell Labs testing found it quickest, and it kept the letters in alphabetical order",
+        "Low digits turned up most often in phone numbers, so they went where the eye lands first",
+        "The circuits inside were cheaper to wire with the keys laid out that way"
+      ],
+      "correctIndex": 1,
+      "hint": "Before settling on a layout, the phone company brought in volunteers.",
+      "explanationRight": "Calculators came first, and accountants at the time argued the phone should copy them. But in the late 1950s a Bell Labs team led by Richard Deininger had volunteers try many layouts: circles, two rows of five, and three by three grids. The grid with 1 2 3 on top gave the fastest dialling with the fewest errors, and the calculator order was a little slower. It also kept the letters on the keys in alphabetical order, with ABC on the 2, which is how AT&T answered the accountants.",
+      "explanationWrong": [
+        "Avoiding a mix-up with calculators wasn't the aim. Bell Labs had volunteers try many layouts, and the grid with 1 2 3 on top gave the fastest dialling with the fewest errors. It also kept the letters on the keys in alphabetical order, with ABC on the 2.",
+        null,
+        "How often digits appeared didn't decide it. Bell Labs had volunteers try many layouts, and the grid with 1 2 3 on top gave the fastest dialling with the fewest errors. It also kept the letters on the keys in alphabetical order, starting with ABC.",
+        "The wiring didn't care about the order. Bell Labs had volunteers try many layouts, and the grid with 1 2 3 on top gave the fastest dialling with the fewest errors. It also kept the letters on the keys in alphabetical order, starting with ABC on the 2."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "IEEE-USA InSight: Dials, keypads and smartphones",
+      "sourceUrl": "https://insight.ieeeusa.org/articles/your-engineering-heritage-dials-keypads-and-smartphones/",
+      "image": {
+        "src": "/images/phone-keypad.webp",
+        "alt": "A phone keypad with 1 2 3 on the top row, beside a calculator keypad with 7 8 9 on top",
+        "thumb": "/images/thumbs/phone-keypad.webp"
+      },
+      "tags": [
+        "keypads",
+        "phones",
+        "testing"
+      ],
+      "themes": [
+        "keys"
+      ]
+    },
+    {
+      "id": "calculator-keypad",
+      "topic": "ui",
+      "group": "keypads",
+      "stem": "Why do calculators put 7 8 9 on the top row and 1 2 3 at the bottom?",
+      "options": [
+        "They copied adding machines, which kept the most used keys nearest the hand",
+        "Big numbers were placed where the eye lands first, since they matter most",
+        "Counting upward from the bottom row matched how values climb on a chart",
+        "Early electronic circuits were simplest to wire with the 1 at the bottom, next to the battery"
+      ],
+      "correctIndex": 0,
+      "hint": "Calculators inherited their keypad from machines office clerks used long before electronics.",
+      "explanationRight": "Calculator keypads copy mechanical adding machines, whose keys took real force to press all day. On the Comptometer, each column ran from 1 nearest the operator to 9 furthest away, and skilled operators avoided the high keys, pressing 4 twice rather than reaching for 8. Sundstrand's ten key adding machine of 1914 kept the low numbers near the hand and put a wide zero bar under the thumb, since zeros turn up constantly in amounts like 140.00. Electronic calculators kept the layout. We rate this medium confidence: the machines are well documented, but the reasons come from later accounts rather than the designers themselves.",
+      "explanationWrong": [
+        null,
+        "Importance didn't set the order. Calculators copied mechanical adding machines, which kept the low numbers nearest the operator's hand and put a wide zero bar under the thumb. Operators used the low keys most, even pressing 4 twice rather than reaching for 8. This is medium confidence, since the reasons come from later accounts.",
+        "Charts had nothing to do with it. Calculators copied mechanical adding machines, which kept the low numbers nearest the hand and put a wide zero bar under the thumb, because operators pressed those keys most. This is medium confidence, since the reasons come from later accounts.",
+        "The layout is older than electronics. Calculators copied mechanical adding machines, which kept the low numbers nearest the operator's hand and put a wide zero bar under the thumb, since those keys were pressed most. This is medium confidence, since the reasons come from later accounts."
+      ],
+      "confidence": "medium confidence",
+      "sourceName": "DOC: A brief history of the numeric keypad",
+      "sourceUrl": "https://www.doc.cc/articles/a-brief-history-of-the-numeric-keypad",
+      "image": {
+        "src": "/images/calculator-keypad.webp",
+        "alt": "An old Burroughs desk calculator seen from above, its keys running 7 8 9 on top and 1 2 3 at the bottom, with wide zero keys underneath",
+        "thumb": "/images/thumbs/calculator-keypad.webp"
+      },
+      "tags": [
+        "keypads",
+        "keyboards",
+        "reach"
+      ],
+      "themes": [
+        "keys"
+      ]
+    },
+    {
+      "id": "phone-zero",
+      "topic": "ui",
+      "group": "rotary",
+      "stem": "Why does 0 come after 9 on a phone keypad, instead of before 1?",
+      "options": [
+        "It was moved down so it wouldn't be mixed up with the letter O",
+        "Designers put it under the 8 so the pad looked balanced and even",
+        "Numbers starting with 0 were rare, so it went where it was hardest to reach",
+        "On old rotary dials, 0 sent ten clicks, so it came after 9"
+      ],
+      "correctIndex": 3,
+      "hint": "Before keypads, phones had a dial that clicked as it spun back.",
+      "explanationRight": "A rotary dial sent each digit as a run of clicks down the line: one for 1, two for 2, up to nine for 9. There's no way to send zero clicks, so 0 sent ten, and it sat on the dial one step past the 9. When push-button phones arrived in the 1960s, the keypad kept the dial's order, 1 to 9 and then 0, with the 0 on its own below the 8.",
+      "explanationWrong": [
+        "The letter O had nothing to do with it. On a rotary dial each digit was sent as a run of clicks, and since you can't send zero clicks, 0 sent ten. That put it one step past 9 on the dial, and the keypad kept the same order.",
+        "Looks weren't the reason. On a rotary dial each digit was sent as a run of clicks, and since you can't send zero clicks, 0 sent ten. That made it the last number on the dial, and push-button keypads kept the same order.",
+        "It wasn't about how often 0 was used. On a rotary dial each digit was sent as a run of clicks, and because you can't send zero clicks, 0 sent ten. It sat after 9 on the dial, and push-button keypads kept that order.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Wikipedia: Pulse dialing",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Pulse_dialing",
+      "image": {
+        "src": "/images/phone-zero.webp",
+        "alt": "A rotary telephone dial with the digits running 1 to 9 and then 0 last, next to the finger stop",
+        "thumb": "/images/thumbs/phone-zero.webp"
+      },
+      "tags": [
+        "keypads",
+        "phones",
+        "rotary"
+      ],
+      "themes": [
+        "keys"
+      ]
+    },
+    {
+      "id": "area-codes",
+      "topic": "everyday-object",
+      "group": "rotary",
+      "stem": "Why did New York, Los Angeles and Chicago get the area codes 212, 213 and 312?",
+      "options": [
+        "The codes were handed out in order of when each city joined the network",
+        "Each code was drawn by lottery, and the big cities were lucky",
+        "They were the quickest codes to dial on a rotary phone",
+        "They were chosen to be easy for visitors and tourists to remember"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about how long it took the dial to spin back after each number.",
+      "explanationRight": "On a rotary phone, each digit sent a run of clicks down the line: one for 1, two for 2, and ten for 0. When AT&T drew up area codes in 1947, the busiest places got the codes with the fewest clicks. 212 takes just five, so New York got it, and Los Angeles and Chicago got 213 and 312. A call to South Dakota's 605 took 21.",
+      "explanationWrong": [
+        "Order of joining had nothing to do with it. On a rotary phone each digit sent a run of clicks, one for 1 up to ten for 0, so low digits were faster. In 1947, AT&T gave the busiest places the codes with the fewest clicks. 212 takes just five.",
+        "Nothing was left to chance. On a rotary phone each digit sent a run of clicks, one for 1 up to ten for 0, so low digits dialled faster. In 1947, AT&T gave the busiest places the codes with the fewest clicks: 212 takes just five.",
+        null,
+        "Memory wasn't the aim. Speed was. On a rotary phone each digit sent a run of clicks, one for 1 up to ten for 0. In 1947, AT&T gave the busiest places the codes that took the fewest clicks to dial, and 212 takes just five."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "99% Invisible: How rotary phones shaped the distribution of US area codes",
+      "sourceUrl": "https://99percentinvisible.org/article/dialing-around-how-rotary-phones-shaped-the-distribution-of-us-area-codes/",
+      "tags": [
+        "phones",
+        "rotary",
+        "speed"
+      ],
+      "themes": [
+        "keys"
+      ]
+    },
+    {
+      "id": "mac-menu-bar",
+      "topic": "ui",
+      "stem": "Why does the Mac keep its menu bar along the very top edge of the screen?",
+      "options": [
+        "It keeps menus out of the way of the documents you're working on",
+        "Early Mac screens were too small to fit a menu in every window",
+        "People read from the top, so it's the first place they look",
+        "The pointer stops at the screen edge, so you can't overshoot it"
+      ],
+      "correctIndex": 3,
+      "hint": "Try to overshoot the top of your screen with the mouse.",
+      "explanationRight": "The pointer can't go past the edge of the screen. That makes a menu bar along the top edge, in effect, endlessly tall: you can shove the mouse upward as fast as you like and still land on it. Bruce Tognazzini, who wrote much of Apple's early interface guidance, used this to explain why Mac menus are much quicker to hit than menus sitting inside a window.",
+      "explanationWrong": [
+        "Keeping menus apart from documents is tidy, but the big win is speed. The pointer can't pass the top edge of the screen, so you can push the mouse up hard and still land on the menu bar. Bruce Tognazzini, who wrote much of Apple's early interface guidance, explained that this makes Mac menus much quicker to hit.",
+        "Screen size isn't the reason it's stayed there. The pointer can't pass the top edge of the screen, so a menu bar there is in effect endlessly tall, and you can push the mouse up fast without overshooting. Bruce Tognazzini, who wrote much of Apple's early interface guidance, explained it this way.",
+        "Reading order isn't the point. The pointer can't pass the top edge of the screen, so you can push the mouse up as hard as you like and still land on the menu bar. Bruce Tognazzini, who wrote much of Apple's early interface guidance, used this to explain why Mac menus are so quick to hit.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "AskTog: First principles of interaction design",
+      "sourceUrl": "https://asktog.com/atc/principles-of-interaction-design/",
+      "image": {
+        "src": "/images/mac-menu-bar.webp",
+        "alt": "A Mac screen with the menu bar along the very top edge highlighted",
+        "thumb": "/images/thumbs/mac-menu-bar.webp"
+      },
+      "tags": [
+        "pointer",
+        "menus",
+        "reach"
+      ],
+      "themes": [
+        "screens"
+      ]
+    },
+    {
+      "id": "context-menu",
+      "topic": "ui",
+      "stem": "Why does a right-click menu pop up right where your pointer is?",
+      "options": [
+        "So the menu covers the thing you clicked and keeps your focus there",
+        "The pointer is already there, so every choice is a tiny move away",
+        "Drawing it at the pointer was simpler for the graphics chips in early computers",
+        "Right-handed people find a menu down and to the right easiest to read"
+      ],
+      "correctIndex": 1,
+      "hint": "Think about how far your hand has to move.",
+      "explanationRight": "Every move of the mouse takes time, and the closer a target is, the faster you reach it. Interface designer Bruce Tognazzini calls the spot under the pointer the prime pixel, because reaching it takes no movement at all. A menu that opens right there puts its first choices a hair's width away, which is why right-click menus feel so quick. The same thinking puts the Mac's menu bar against the edge of the screen.",
+      "explanationWrong": [
+        "It does land beside what you clicked, but covering it isn't the aim. The point is distance. The spot under your pointer takes no movement at all to reach, which Bruce Tognazzini calls the prime pixel, so a menu that opens there puts every choice only a small move away.",
+        null,
+        "It wasn't a shortcut for the hardware. It's about your hand. The spot under your pointer takes no movement to reach, so a menu that opens there puts every choice a tiny move away. Interface designer Bruce Tognazzini calls that spot the prime pixel.",
+        "Reading direction isn't the reason. It's about distance: the spot under your pointer takes no movement at all to reach, so a menu that opens there keeps every choice within a tiny move. Bruce Tognazzini calls that spot the prime pixel."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "AskTog: A quiz designed to give you Fitts",
+      "sourceUrl": "https://asktog.com/columns/022DesignedToGiveFitts.html",
+      "image": {
+        "src": "/images/context-menu.webp",
+        "alt": "A Windows right-click menu opened beside the This PC icon",
+        "thumb": "/images/thumbs/context-menu.webp"
+      },
+      "tags": [
+        "pointer",
+        "menus",
+        "reach"
+      ],
+      "themes": [
+        "screens"
+      ]
+    },
+    {
+      "id": "command-key-symbol",
+      "topic": "ui",
+      "stem": "Why did Apple stop using its apple logo on the Mac's Command key?",
+      "options": [
+        "Steve Jobs felt the logo was being overused, cluttering menus all over the screen",
+        "Apple's lawyers worried that printing the logo on keys would weaken the trademark",
+        "The apple was too detailed to show clearly on the tiny early screens",
+        "Keyboards sold in other countries needed a plain symbol without any branding"
+      ],
+      "correctIndex": 0,
+      "hint": "The complaint came from the very top of the company.",
+      "explanationRight": "On the early Macintosh, menu shortcuts were shown with a small apple beside each command. Andy Hertzfeld recalls Steve Jobs seeing a screen full of them and complaining that there were too many apples, and that they were taking the logo in vain. With only days to spare, designer Susan Kare replaced it with ⌘, a symbol used on Swedish signs to mark a place of interest.",
+      "explanationWrong": [
+        null,
+        "Trademark worries weren't behind it. As Andy Hertzfeld tells it, Steve Jobs saw a screen full of little apples beside menu commands and said they were taking the logo in vain. Designer Susan Kare replaced it with ⌘, a symbol used on Swedish signs for a place of interest.",
+        "The apple was clear enough, since it was already in use. The objection came from Steve Jobs, who felt a screen full of little apples beside menu commands was overusing the logo. Susan Kare swapped in ⌘, borrowed from a Swedish sign for a place of interest.",
+        "Other markets weren't the trigger. Steve Jobs saw a screen full of little apples beside menu commands and complained the logo was being overused. Susan Kare found a replacement, ⌘, used on Swedish signs to mark a place of interest."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Folklore.org: Swedish Campground, by Andy Hertzfeld",
+      "sourceUrl": "https://www.folklore.org/Swedish_Campground.html",
+      "image": {
+        "src": "/images/command-key-symbol.webp",
+        "alt": "Close-up of a MacBook Command key marked with the ⌘ symbol",
+        "thumb": "/images/thumbs/command-key-symbol.webp"
+      },
+      "tags": [
+        "keyboards",
+        "symbols",
+        "brands"
+      ],
+      "themes": [
+        "keys",
+        "symbols"
+      ]
+    },
+    {
+      "id": "slide-to-unlock",
+      "topic": "ui",
+      "stem": "Why did the first iPhone make you slide a bar across the screen to unlock it?",
+      "options": [
+        "A slide was easier for new owners to learn than typing a passcode",
+        "It showed off that the new screen could follow a moving finger smoothly",
+        "A deliberate drag is unlikely to happen by accident in a pocket",
+        "Detecting a single tap used more battery power than tracking a swipe"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about what a touchscreen presses against when it isn't in your hand.",
+      "explanationRight": "A touchscreen reacts to any contact, so a phone in a pocket could be woken or used without anyone meaning to. Apple's patent for slide to unlock names that problem directly: unintentional contact with the touch screen. A tap can happen by chance, but dragging an image along a set path is very unlikely to, so it made a lock that still felt natural to use.",
+      "explanationWrong": [
+        "It was easy to learn, but that wasn't the main job. Apple's patent explains that touchscreens get touched by accident, for example in a pocket. Dragging an image along a set path is very unlikely to happen by chance, so the phone stays locked until you mean it.",
+        "It did show off the screen, but the patent gives a practical reason. Touchscreens get touched by accident, in pockets and bags. A drag along a set path is very unlikely to happen by chance, so it keeps the phone locked until you really mean to use it.",
+        null,
+        "Battery use wasn't the concern. Apple's patent points to unintentional contact: a touchscreen in a pocket can be touched by accident. Dragging an image along a set path almost never happens by chance, so it made a reliable lock."
+      ],
+      "confidence": "accurate",
+      "sourceName": "US Patent 7,657,849: Unlocking a device by performing gestures on an unlock image",
+      "sourceUrl": "https://patents.google.com/patent/US7657849B2/en",
+      "image": {
+        "src": "/images/slide-to-unlock.webp",
+        "alt": "The original iPhone lock screen, with the slide to unlock bar along the bottom",
+        "thumb": "/images/thumbs/slide-to-unlock.webp"
+      },
+      "tags": [
+        "phones",
+        "accidents",
+        "touch"
+      ],
+      "themes": [
+        "screens"
+      ]
+    },
+    {
+      "id": "rubber-band-scroll",
+      "topic": "ui",
+      "stem": "Why does a list on an iPhone stretch and bounce back when you scroll past the end?",
+      "options": [
+        "It shows you've hit the end, and that the phone hasn't frozen",
+        "It gives the screen time to load more items before you reach them",
+        "It stops you flicking so hard that the list scrolls off the screen",
+        "It hides a short pause while the phone catches up with your finger"
+      ],
+      "correctIndex": 0,
+      "hint": "Imagine flicking a list and having it just stop dead.",
+      "explanationRight": "While building the first iPhone's scrolling, designer Bas Ording found that a list which simply stopped at its end looked as if the phone had crashed. He let the list keep moving a little with your finger, more slowly than the finger, and then spring back into place. That stretch and bounce shows you've reached the end and that the phone is still listening. Apple patented it, and the patent later featured in its case against Samsung.",
+      "explanationWrong": [
+        null,
+        "Loading isn't the reason, and the bounce happens even on short lists that are already loaded. Designer Bas Ording found that a list which just stopped at its end looked as if the phone had crashed. The stretch and snap back shows you've hit the end and the phone is still responding.",
+        "Nothing can scroll off the screen, so there's nothing to stop. Designer Bas Ording added the bounce because a list that just stopped at its end looked as if the phone had frozen. The stretch shows you've reached the end and that the phone is still responding.",
+        "There's no pause to hide. Designer Bas Ording added the bounce because a list that simply stopped at its end looked as if the phone had crashed. The stretch and snap back tells you you've reached the end and the phone is still responding."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Cult of Mac: The inside story of the iconic rubber band effect",
+      "sourceUrl": "https://www.cultofmac.com/news/bas-ording-rubber-band-effect-iphone",
+      "image": {
+        "src": "/images/rubber-band-scroll.webp",
+        "alt": "Animation of a phone list scrolled past its end, first with the bounce switched off, then with it on",
+        "thumb": "/images/thumbs/rubber-band-scroll.webp"
+      },
+      "tags": [
+        "phones",
+        "touch",
+        "feedback"
+      ],
+      "themes": [
+        "screens"
+      ]
+    },
+    {
+      "id": "keyboard-hidden-targets",
+      "topic": "ui",
+      "stem": "Why could people type on the first iPhone when its keys were narrower than a fingertip?",
+      "options": [
+        "It read the pressure of each tap to work out which key you meant",
+        "It measured the exact spot under the centre of each fingertip very precisely",
+        "It quietly enlarged the touch area of the most likely next letter",
+        "It zoomed each row of keys up to full size as your finger got close"
+      ],
+      "correctIndex": 2,
+      "hint": "The keys looked fixed, but not everything about them was.",
+      "explanationRight": "Apple's designers wanted buttons at least 44 pixels wide, but the whole screen was only 320 pixels across, so the keys had to be tiny. Ken Kocienda, who built the keyboard, gave each key an invisible touch area that grows and shrinks as you type. After 't', 'i' and 'm', the area for 'e' quietly gets bigger, because 'time' is likely. The keys look exactly the same the whole time.",
+      "explanationWrong": [
+        "The first iPhone couldn't sense how hard you pressed. Its trick was invisible: Ken Kocienda, who built the keyboard, made each key's touch area grow or shrink depending on which letter was likely next. Type 'tim' and the area for 'e' gets bigger, though the keys look the same.",
+        "A fingertip covers several keys, so precision alone couldn't fix it. Ken Kocienda, who built the keyboard, made each key's invisible touch area grow or shrink depending on which letter was likely next. Type 'tim' and the area for 'e' quietly gets bigger.",
+        null,
+        "The keys never changed size on screen. Ken Kocienda, who built the keyboard, changed their invisible touch areas instead, making the likely next letter easier to hit. Type 'tim' and the area for 'e' quietly gets bigger, while the keys look exactly the same."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Inverse: Apple employee reveals how the iPhone keyboard came to life",
+      "sourceUrl": "https://www.inverse.com/article/47911-apple-employee-reveals-how-iphone-keyboard-came-to-life",
+      "image": {
+        "src": "/images/keyboard-hidden-targets.webp",
+        "alt": "The original iPhone on-screen keyboard, its keys much narrower than a fingertip",
+        "thumb": "/images/thumbs/keyboard-hidden-targets.webp"
+      },
+      "tags": [
+        "phones",
+        "keyboards",
+        "touch"
+      ],
+      "themes": [
+        "screens",
+        "keys"
+      ]
+    },
+    {
+      "id": "safari-bottom-bar",
+      "topic": "ui",
+      "stem": "Why did Apple move Safari's address bar to the bottom of the iPhone screen in 2021?",
+      "options": [
+        "To make room for the notch and camera at the top of the screen",
+        "So it wouldn't get covered by notifications sliding down from the top",
+        "To match Android phones, which already had their bars at the bottom",
+        "So your thumb can reach it while you hold the phone one handed"
+      ],
+      "correctIndex": 3,
+      "hint": "Phones kept getting bigger. Hands didn't.",
+      "explanationRight": "As iPhones grew, the top of the screen drifted out of reach of the thumb holding the phone. With iOS 15 in 2021, Apple moved Safari's address and tab bar to the bottom, saying the goal was to make controls easier to reach with one hand. Plenty of people disliked the change while it was being tested, so Apple added an option to put the bar back at the top, but the bottom stayed the default.",
+      "explanationWrong": [
+        "The notch had been there since 2017. The move was about reach: Apple said it wanted Safari's controls easier to reach with one hand, and on a big phone the bottom of the screen is where your thumb already is.",
+        "Notifications weren't the concern. Apple said the goal was to make Safari's controls easier to reach with one hand. On a big phone, the bottom of the screen is where your thumb already is.",
+        "Android browsers mostly kept their bars at the top. Apple's stated goal was to make Safari's controls easier to reach with one hand, and on a big phone that means the bottom of the screen, where your thumb already is.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Apple Newsroom: iOS 15 brings powerful new features",
+      "sourceUrl": "https://www.apple.com/newsroom/2021/06/ios-15-brings-powerful-new-features-to-stay-connected-focus-explore-and-more/",
+      "tags": [
+        "phones",
+        "reach"
+      ],
+      "themes": [
+        "screens"
+      ]
+    },
+    {
+      "id": "button-verbs",
+      "topic": "ui",
+      "stem": "Why do well designed pop-up messages label the button 'Delete' or 'Save' instead of 'OK'?",
+      "options": [
+        "Longer words give a bigger button that's easier to hit with a mouse",
+        "'OK' doesn't translate well into many languages, so verbs are safer to use",
+        "Screen readers used by blind people can't read out a button labelled 'OK'",
+        "People read buttons more than messages, so buttons should say what happens"
+      ],
+      "correctIndex": 3,
+      "hint": "Think about which part of a pop-up you actually read.",
+      "explanationRight": "Most people skip the text in a pop-up and go straight to the buttons. Microsoft's design guidelines say so plainly: people are far more likely to read button labels than the message, and should be able to understand the choice from the buttons alone. Apple's guidelines add that 'OK' is ambiguous. Does it mean 'OK, do it' or 'OK, I understand the risk'? A button that says 'Delete' leaves no doubt.",
+      "explanationWrong": [
+        "Size isn't the point. Microsoft's guidelines note that people read button labels far more than the message above them, so the button itself should say what will happen. 'OK' could mean 'do it' or 'I understand'. 'Delete' can't be misread.",
+        "'OK' is one of the most widely understood words there is. The reason is that people read button labels far more than the message, as Microsoft's guidelines point out. So the button should say what it does: 'Delete' can't be misread, while 'OK' could mean 'do it' or 'I understand'.",
+        "Screen readers read 'OK' just fine. The reason is that everyone, not just screen reader users, reads buttons far more than the message. Microsoft's guidelines say people should understand the choice from the button labels alone, and Apple's point out that 'OK' is ambiguous.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Microsoft Learn: Dialog boxes, Windows design guidelines",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/win32/uxguide/win-dialog-box",
+      "tags": [
+        "words",
+        "accidents",
+        "buttons"
+      ],
+      "themes": [
+        "screens",
+        "keys"
+      ]
+    },
+    {
+      "id": "menu-ellipsis",
+      "topic": "ui",
+      "stem": "Why do some menu commands end in three dots, like Save As…?",
+      "options": [
+        "The full name of the command was too long to fit, so it was cut short",
+        "The command will ask you for details before it does anything",
+        "The command is slow, so the dots mean please wait",
+        "There's a submenu with more choices tucked behind the command"
+      ],
+      "correctIndex": 1,
+      "hint": "Compare what happens when you choose Print… with plain Print.",
+      "explanationRight": "Apple and Microsoft set the same rule in their design guidelines: add the dots when a command needs more information from you before it can run. Save As… has to ask for a name and a place, so it gets them, while plain Save acts at once. The dots tell you it's safe to click, because you'll get a chance to make choices or cancel before anything happens. Microsoft adds that commands which simply open a window, like Options or About, shouldn't have them.",
+      "explanationWrong": [
+        "The dots don't mean the name was cut short. In Apple's and Microsoft's guidelines, they mean the command needs more information from you, usually in a dialog, before it runs. That tells you it's safe to click, since you can still change your mind.",
+        null,
+        "They're not a loading sign. In Apple's and Microsoft's design guidelines, the dots mean the command needs more information from you before it runs, like a name for Save As…. So you know you can click it safely and still cancel.",
+        "Submenus are marked with a small arrow instead. The dots mean the command needs more information from you before it runs, so a dialog will ask first. Apple and Microsoft both set this rule, so you can click without fear."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Microsoft Learn: Command buttons, using ellipses",
+      "sourceUrl": "https://learn.microsoft.com/en-us/windows/win32/uxguide/ctrl-command-buttons",
+      "tags": [
+        "menus",
+        "words"
+      ],
+      "themes": [
+        "screens",
+        "symbols"
+      ],
+      "image": {
+        "src": "/images/menu-ellipsis.webp",
+        "alt": "A chart of menu icons: three lines, a stepped triangle, a grid of squares, and three dots stacked or in a row",
+        "thumb": "/images/thumbs/menu-ellipsis.webp"
+      }
+    },
+    {
+      "id": "ctrl-alt-del",
+      "topic": "ui",
+      "stem": "Why did the IBM PC make you press Ctrl, Alt and Delete together to restart it?",
+      "options": [
+        "Those were the three keys least likely to be worn out by daily typing",
+        "Early chips could only watch for keys sitting in the same row of wiring",
+        "So a restart couldn't happen by accident: it needed both hands",
+        "Delete told the computer to wipe its memory, and the other two confirmed it"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about how easy it would be to restart the machine by mistake.",
+      "explanationRight": "IBM engineer David Bradley first used Ctrl, Alt and Esc for a quick restart, but those keys sat close together on the left, and it was far too easy to bump them and lose your work. The combination was changed to Ctrl, Alt and Delete. On the original IBM PC keyboard, Delete sat across the keyboard from the other two, so you couldn't press all three with one hand, let alone by accident.",
+      "explanationWrong": [
+        "Wear had nothing to do with it. IBM engineer David Bradley first used Ctrl, Alt and Esc, but those keys sat close together and were easy to bump by accident. Switching to Ctrl, Alt and Delete meant you needed two hands on the original IBM PC keyboard.",
+        "The chips could watch any keys. The worry was accidents: the first choice, Ctrl, Alt and Esc, sat close together and was easy to bump. Ctrl, Alt and Delete were far enough apart on the original IBM PC keyboard that you needed two hands.",
+        null,
+        "Delete doesn't wipe anything here. IBM engineer David Bradley first used Ctrl, Alt and Esc for a restart, but they were too easy to bump together. Ctrl, Alt and Delete needed two hands on the original IBM PC keyboard, so it couldn't happen by accident."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Mental Floss: The history of Ctrl+Alt+Delete",
+      "sourceUrl": "https://www.mentalfloss.com/article/51674/history-ctrl-alt-delete",
+      "tags": [
+        "keyboards",
+        "accidents",
+        "buttons"
+      ],
+      "themes": [
+        "keys",
+        "safety"
+      ]
+    },
+    {
+      "id": "fuel-door-arrow",
+      "topic": "ui",
+      "stem": "Why is there a small arrow next to the fuel pump symbol on most car dashboards?",
+      "options": [
+        "It shows whether the tank is filling or emptying while the engine runs",
+        "It points to the side of the car the fuel cap is on",
+        "It warns you the tank is below a quarter and you should fill up soon",
+        "It marks which of the two tanks the car is drawing from"
+      ],
+      "correctIndex": 1,
+      "hint": "It saves you from one of the most common small mistakes at a petrol station.",
+      "explanationRight": "On a rainy day in 1986, Ford designer Jim Moylan pulled up to a pump on the wrong side of his company car and got soaked moving it. Back at his desk he wrote a suggestion: a small symbol by the fuel gauge showing which side the fuel door is on. It first appeared on the 1989 Ford Escort and Mercury Tracer, and most car makers now use it.",
+      "explanationWrong": [
+        "The gauge needle already shows that. The arrow was proposed by Ford designer Jim Moylan in 1986, after he parked on the wrong side of a pump in the rain. It points to the side of the car with the fuel door.",
+        null,
+        "Low fuel gets its own warning light. The arrow was suggested by Ford designer Jim Moylan in 1986, after he pulled up on the wrong side of a pump in the rain. It points to the side of the car where the fuel door is.",
+        "Most cars have only one tank. The arrow comes from Ford designer Jim Moylan, who in 1986 pulled up on the wrong side of a pump in the rain and suggested a symbol showing which side the fuel door is on."
+      ],
+      "confidence": "accurate",
+      "sourceName": "The Drive: The Moylan arrow is one of Ford's best contributions to car design",
+      "sourceUrl": "https://www.thedrive.com/news/the-moylan-arrow-is-one-of-fords-best-contributions-to-car-design",
+      "image": {
+        "src": "/images/fuel-door-arrow.webp",
+        "alt": "A car fuel gauge with a small arrow beside the pump symbol, pointing left",
+        "thumb": "/images/thumbs/fuel-door-arrow.webp"
+      },
+      "tags": [
+        "road",
+        "symbols"
+      ],
+      "themes": [
+        "travel",
+        "symbols"
+      ]
+    },
+    {
+      "id": "qr-finder",
+      "topic": "ui",
+      "stem": "Why do QR codes have three big squares in their corners?",
+      "options": [
+        "They hold the web address, and the small dots between them are padding",
+        "They mark it as an official code, so fake copies can be spotted",
+        "They give the printer a guide so every dot is placed in line",
+        "They let a scanner find the code fast from any angle"
+      ],
+      "correctIndex": 3,
+      "hint": "A camera sees the code at any angle, often among lots of other printed marks.",
+      "explanationRight": "Denso Wave, the Japanese company that invented the QR code in 1994, wanted it to be read as fast as possible. The three squares tell a scanner where the code is and which way round it sits, from any angle. The team even surveyed flyers, magazines and cardboard boxes to find the ratio of black to white that turned up least often in print, 1:1:3:1:1, so the squares wouldn't be mistaken for anything else.",
+      "explanationWrong": [
+        "The data is spread across the small squares in between. The three big squares tell a scanner where the code is and which way round it sits, from any angle. Denso Wave, which invented the code, designed them so it could be read as fast as possible.",
+        "The squares don't prove anything is official. They tell a scanner where the code is and which way round it sits, from any angle, so it can be read quickly. Denso Wave, which invented the code in 1994, even picked their proportions to look unlike anything else in print.",
+        "Printers don't need them. Scanners do: the three squares tell a camera where the code is and which way round it sits, from any angle. Denso Wave, which invented the code, designed them so it could be read as fast as possible.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "Denso Wave: History of QR Code",
+      "sourceUrl": "https://www.qrcode.com/en/history/",
+      "image": {
+        "src": "/images/qr-finder.webp",
+        "alt": "A QR code with labels pointing to the large squares in three of its corners",
+        "thumb": "/images/thumbs/qr-finder.webp"
+      },
+      "tags": [
+        "symbols",
+        "codes"
+      ],
+      "themes": [
+        "symbols",
+        "screens"
+      ]
+    },
+    {
+      "id": "google-blue",
+      "topic": "ui",
+      "stem": "Why are the links in Google's ads that exact shade of blue?",
+      "options": [
+        "It tested 41 shades on real users and kept the one clicked most",
+        "It's the blue browsers used for links in the 1990s, kept for familiarity",
+        "It's the blue from Google's logo, so ads feel like part of the page",
+        "Its founders picked it as the easiest blue to read on old monitors"
+      ],
+      "correctIndex": 0,
+      "hint": "Google is famous for settling arguments with data.",
+      "explanationRight": "Google's ads in Search and Gmail used two slightly different blues. Rather than let a designer choose, Google showed 41 shades to small slices of its users and measured which got the most clicks. Dan Cobley, then head of Google UK, said a slightly purpler blue won and brought in an extra $200 million a year. Designer Doug Bowman cited the test when he left Google in 2009, as a sign that data had crowded out design judgement.",
+      "explanationWrong": [
+        null,
+        "It's close to the classic link blue, but it was set by testing. Google showed 41 shades to small slices of its users and kept the one that got the most clicks. Dan Cobley, then head of Google UK, said the winning, slightly purpler blue earned an extra $200 million a year.",
+        "The logo didn't decide it. A test did: Google showed 41 shades of blue to small slices of its users and kept the one that got the most clicks. Dan Cobley, then head of Google UK, said the winner earned an extra $200 million a year.",
+        "No one picked it by eye. Google showed 41 shades of blue to small slices of its users and kept the one that got the most clicks. Dan Cobley, then head of Google UK, said the winning shade earned an extra $200 million a year."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Stopdesign: Goodbye, Google, by Doug Bowman",
+      "sourceUrl": "https://stopdesign.com/journal/2009/03/20/goodbye-google.html",
+      "tags": [
+        "colour",
+        "testing",
+        "brands"
+      ],
+      "themes": [
+        "screens",
+        "symbols"
+      ]
+    },
+    {
+      "id": "plane-ashtray",
+      "topic": "everyday-object",
+      "stem": "Why do planes still have ashtrays by the toilet door when smoking has been banned for decades?",
+      "options": [
+        "The older aircraft designs were simply never updated to take the ashtrays out",
+        "Taking them out of every plane would cost far more than leaving them in",
+        "Cabin crew use them to collect small bits of rubbish like chewing gum",
+        "If someone smokes anyway, the cigarette needs a safe place to go"
+      ],
+      "correctIndex": 3,
+      "hint": "Think about what could happen if a lit cigarette went into a bin full of paper towels.",
+      "explanationRight": "Rules alone don't stop everyone. If a passenger does light up in the toilet, the worst place for that cigarette is a waste bin full of paper towels, where it could start a fire. So US aviation rules still require airliners to have ashtrays on or near each toilet door, even though smoking in there is not allowed. A missing ashtray can even delay a flight.",
+      "explanationWrong": [
+        "New planes get them too. US aviation rules require ashtrays on or near every toilet door, because if someone smokes anyway, a bin full of paper towels is the worst place for the cigarette to end up.",
+        "They aren't optional, so cost doesn't come into it. US aviation rules require ashtrays on or near every toilet door. If someone breaks the smoking ban, there needs to be a safe place to put the cigarette out instead of the paper towel bin.",
+        "They're not for rubbish. US aviation rules require ashtrays by the toilet doors so that if someone smokes anyway, the cigarette can be put out safely instead of going into a bin full of paper towels.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "US Code of Federal Regulations: 14 CFR 25.853, compartment interiors",
+      "sourceUrl": "https://www.ecfr.gov/current/title-14/chapter-I/subchapter-C/part-25/subpart-D/subject-group-ECFR1e1f52030ba4797/section-25.853",
+      "tags": [
+        "aviation",
+        "safety",
+        "rules"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ]
+    },
+    {
+      "id": "school-bus-yellow",
+      "topic": "everyday-object",
+      "stem": "Why are school buses in the US painted yellow?",
+      "options": [
+        "Yellow with black lettering was easiest to see in dim morning and evening light",
+        "Yellow was the cheapest durable paint that factories could buy in bulk at the time",
+        "It was the company colour of the first big school bus maker",
+        "Yellow was thought to be a calming colour for children on long rides"
+      ],
+      "correctIndex": 0,
+      "hint": "School runs happen when the light is at its worst.",
+      "explanationRight": "In 1939 Frank Cyr, a professor at Teachers College, Columbia University, brought together transport officials and experts to agree national standards for school buses. They chose a shade of yellow with black lettering because it was easiest to see in the dim light of early morning and late afternoon, when school buses are on the road. The colour became the standard and has stuck ever since.",
+      "explanationWrong": [
+        null,
+        "Cost wasn't it. At a 1939 national conference led by Frank Cyr at Teachers College, Columbia University, experts chose yellow with black lettering because it was easiest to see in the dim light of early morning and late afternoon.",
+        "It wasn't a company colour. A 1939 conference led by Frank Cyr at Teachers College, Columbia University picked the shade because yellow with black lettering was easiest for other drivers to see in early morning and late afternoon light.",
+        "Calm children weren't the goal. Safety on the road was. At a 1939 conference led by Frank Cyr, yellow with black lettering was chosen as the easiest to see in the dim light of early morning and late afternoon."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Smithsonian Magazine: The history of how school buses became yellow",
+      "sourceUrl": "https://www.smithsonianmag.com/history/history-how-school-buses-became-yellow-180973041/",
+      "tags": [
+        "road",
+        "colour",
+        "safety"
+      ],
+      "themes": [
+        "travel",
+        "safety",
+        "symbols"
+      ]
+    },
+    {
+      "id": "stop-sign-octagon",
+      "topic": "everyday-object",
+      "stem": "Why are stop signs in the US eight sided?",
+      "options": [
+        "Eight sides was the easiest shape to cut from a square sheet of steel",
+        "Planners gave more sides to bigger dangers, and stopping ranked near the top",
+        "The shape was copied from the stop signs already used across Europe",
+        "An octagon frames the four letters of STOP neatly on a single line"
+      ],
+      "correctIndex": 1,
+      "hint": "In the 1920s, planners thought the number of corners should tell you how careful to be.",
+      "explanationRight": "In 1923 a group of Midwestern state highway departments proposed a simple rule: the more sides a sign has, the greater the danger it warns of. A circle, counted as having endless sides, went to railway crossings. The octagon, with eight, went to stop signs as the next most serious. A shape used for nothing else also meant drivers could recognise the sign from a distance, at night or even from behind, before they could read it.",
+      "explanationWrong": [
+        "Cutting corners off a square is easy, but that isn't why. In 1923, US highway planners ranked sign shapes by danger: the more sides, the more serious. Circles went to railway crossings and octagons to stop signs, the next most serious, giving drivers a shape they could recognise before reading.",
+        null,
+        "It wasn't copied from Europe. In 1923 a group of US state highway departments proposed that the more sides a sign had, the greater the danger. Circles went to railway crossings, and octagons to stop signs as the next most serious.",
+        "The word would fit many shapes. The octagon came from a 1923 plan that gave more sides to greater dangers: circles for railway crossings, then octagons for stops as the next most serious. A unique shape could be recognised before the word could be read."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "99% Invisible: How safety shaped the octagonal stop sign",
+      "sourceUrl": "https://99percentinvisible.org/article/red-white-sometimes-blue-how-safety-shaped-the-octagonal-stop-sign/",
+      "tags": [
+        "road",
+        "symbols",
+        "safety"
+      ],
+      "themes": [
+        "travel",
+        "symbols",
+        "safety"
+      ],
+      "image": {
+        "src": "/dev-images/stop-sign-octagon.webp",
+        "alt": "A red, eight sided stop sign against a blue sky",
+        "placeholder": true,
+        "thumb": "/dev-images/thumbs/stop-sign-octagon.webp"
+      }
+    },
+    {
+      "id": "golden-gate-orange",
+      "topic": "industrial",
+      "stem": "Why is the Golden Gate Bridge painted orange?",
+      "options": [
+        "The steel's orange primer looked so good that it was simply never painted over",
+        "The US Navy asked for a colour its ships could see from miles out in fog",
+        "Its architect thought it suited the hills and stood out against sea and sky",
+        "Orange paint was tested and lasted longest in the fog and salty sea air"
+      ],
+      "correctIndex": 2,
+      "hint": "The decision came down to one person's eye for the landscape.",
+      "explanationRight": "The steel arrived coated in a red lead primer, and the consulting architect, Irving Morrow, grew fond of its warm colour as the towers went up. He studied black, aluminium and greys too, and in a 1935 report argued for the orange we now call International Orange, because it blended with the nearby hills while contrasting with the ocean and sky. He wanted the bridge to be a proud part of the landscape rather than something to hide.",
+      "explanationWrong": [
+        "The primer did inspire it, but the bridge wasn't simply left in primer. The architect, Irving Morrow, liked that warm tone, studied other colours, and chose a specific orange because it blended with the hills and contrasted with the ocean and sky.",
+        "The colour wasn't a Navy order. It was chosen by the bridge's consulting architect, Irving Morrow, for how it looked in its setting. He compared black, aluminium and greys, and picked orange because it blended with the hills while contrasting with the sea and sky.",
+        null,
+        "The colour wasn't picked for how long it would last. The architect, Irving Morrow, chose it for how it looked. In a 1935 report he argued that the orange blended with the hills and contrasted with the ocean and sky, making the bridge a proud part of the view."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Golden Gate Bridge: Color and Art Deco styling",
+      "sourceUrl": "https://www.goldengate.org/bridge/history-research/bridge-features/color-art-deco-styling/",
+      "tags": [
+        "colour"
+      ],
+      "themes": [
+        "travel",
+        "symbols"
+      ]
+    },
+    {
+      "id": "apple-logo-bite",
+      "topic": "myth-buster",
+      "stem": "Why does the Apple logo have a bite taken out of it?",
+      "options": [
+        "It's a quiet tribute to Alan Turing, who died beside a bitten apple in 1954",
+        "So that at small sizes it still read as an apple, not a cherry",
+        "It's a pun on byte, the word for a unit of computer memory",
+        "It stands for Eve biting the apple in the Garden of Eden"
+      ],
+      "correctIndex": 1,
+      "hint": "Imagine the logo shrunk to the size of a fingernail with no bite.",
+      "explanationRight": "Rob Janoff, who designed the logo in 1977, has said the bite was about scale. A plain apple shape, shrunk down, could be mistaken for a cherry or another round fruit, and the bite makes it clearly an apple. He has called the byte pun a happy accident, and has said the popular Alan Turing story isn't true.",
+      "explanationWrong": [
+        "It's a moving story and very widely told, but the designer says it isn't true. Rob Janoff, who drew the logo in 1977, has said the bite was about scale: without it, a small apple shape could pass for a cherry.",
+        null,
+        "The designer, Rob Janoff, has called the byte pun a happy accident. He added the bite for scale, so a small apple shape wouldn't be mistaken for a cherry.",
+        "Rob Janoff, who designed the logo, has dismissed the Garden of Eden reading. The bite was about scale, so that a small apple shape would still read as an apple rather than a cherry."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Revert to Saved: An interview with Rob Janoff, designer of the Apple logo",
+      "sourceUrl": "https://reverttosaved.com/2011/02/23/an-interview-with-rob-janoff-designer-of-the-apple-logo/",
+      "tags": [
+        "brands",
+        "symbols"
+      ],
+      "themes": [
+        "symbols"
+      ]
+    },
+    {
+      "id": "escalator-brushes",
+      "topic": "myth-buster",
+      "stem": "Why do escalators have brushes running along the sides of the steps?",
+      "options": [
+        "To give people's shoes a quick brush and clean as they ride up",
+        "To sweep dust and grit off the steps before it clogs the machinery",
+        "To stop children from sitting on or sliding down the sides",
+        "To keep feet, laces and loose clothing away from the gap at the side"
+      ],
+      "correctIndex": 3,
+      "hint": "The risky part of an escalator is the narrow gap where the moving step meets the fixed side.",
+      "explanationRight": "Between each moving step and the fixed side panel, called the skirt, there's a narrow gap where a shoe, a lace or a trailing hem can get caught. The brushes, known as skirt deflectors, sit just above that gap and gently nudge anything that drifts too close back toward the middle. Escalator maker KONE warns that using them to clean your shoes defeats the point, because it puts your foot right next to the gap.",
+      "explanationWrong": [
+        "Lots of people use them this way, but it's the opposite of what they're for. They're safety brushes, called skirt deflectors, that keep feet, laces and clothing away from the gap between the moving steps and the side panel. Escalator maker KONE warns that rubbing your shoes on them puts your foot right where it could get caught.",
+        "They do help keep small things out of the gap, but their main job is keeping people away from it. The brushes, called skirt deflectors, nudge feet, laces and clothing back from the narrow gap between the moving step and the side panel, where they could get caught.",
+        "They aren't there to stop sliding. The brushes sit low beside the steps and nudge feet, laces and clothing away from the narrow gap between the moving step and the side panel, where they could get caught.",
+        null
+      ],
+      "confidence": "accurate",
+      "sourceName": "KONE: Why do escalators have brushes?",
+      "sourceUrl": "https://www.kone.us/blog/why-do-escalators-have-brushes.html",
+      "image": {
+        "src": "/images/escalator-brushes.webp",
+        "alt": "Escalator steps with long bristle brushes running along the side panel",
+        "thumb": "/images/thumbs/escalator-brushes.webp"
+      },
+      "tags": [
+        "safety",
+        "accidents"
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "id": "crosswalk-buttons",
+      "topic": "myth-buster",
+      "stem": "Why do so many pedestrian crossing buttons in big cities seem to do nothing?",
+      "options": [
+        "They work, but only after a set number of people have pressed them",
+        "Many really do nothing, because computers now time the lights for the traffic",
+        "They only count presses at night, when there's less traffic around",
+        "They're wired to a light on the other side, telling drivers to slow down"
+      ],
+      "correctIndex": 1,
+      "hint": "Think about who, or what, decides when a city's lights change.",
+      "explanationRight": "In 2004 The New York Times found that more than 2,500 of the city's 3,250 crossing buttons did nothing at all. Most had been switched off years before, once computers took over timing the lights to keep traffic flowing, and taking them out would have cost money. Buttons at quieter junctions in other places often do still work, and newer ones that beep and vibrate help blind pedestrians, though pressing them won't make the light change any faster.",
+      "explanationWrong": [
+        "There's no counting of presses. In 2004 The New York Times found that more than 2,500 of the city's 3,250 buttons did nothing at all. They'd been switched off after computers took over timing the lights, and were left in place because removing them costs money.",
+        null,
+        "Time of day doesn't come into it. In 2004 The New York Times found that more than 2,500 of the city's 3,250 buttons did nothing. They'd been switched off once computers took over timing the lights, and were simply left in place.",
+        "They aren't linked to anything drivers see. In 2004 The New York Times found that more than 2,500 of the city's 3,250 buttons did nothing. They'd been switched off once computers took over timing the lights, and were left in place because removing them costs money."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "NY1: A closer look at the buttons that do nothing",
+      "sourceUrl": "https://ny1.com/nyc/all-boroughs/news/2018/07/03/a-closer-look-at-nothin-buttons-in-new-york-city-buttons-that-do-not-do-anything",
+      "tags": [
+        "road",
+        "buttons",
+        "placebo"
+      ],
+      "themes": [
+        "keys",
+        "travel"
+      ]
+    },
+    {
+      "id": "stay-on-tab",
+      "topic": "everyday-object",
+      "stem": "Why did drink cans switch from pull off rings to tabs that stay attached?",
+      "options": [
+        "Loose tabs were littering beaches and parks, and some people swallowed them",
+        "Cans with the tab attached were easier to recycle in one piece",
+        "Pull off rings cut people's fingers as they opened cans",
+        "Tabs that stay on let you press the opening shut again to keep the fizz"
+      ],
+      "correctIndex": 0,
+      "hint": "Think about where a pulled off ring ended up once the can was open.",
+      "explanationRight": "Early pull tabs came off completely, and huge numbers were dropped on beaches, in parks and along roads, where animals ate them too. Some people dropped the sharp tab into their can and swallowed it by accident. Several US states threatened to ban cans unless the tab stayed on. In 1975 Daniel Cudzik at Reynolds Metals designed the stay on tab, which pushes a flap into the can instead of tearing a strip off.",
+      "explanationWrong": [
+        null,
+        "Recycling wasn't the push. Loose pull tabs were a huge litter problem, and some people swallowed tabs they had dropped into their drink. With states threatening to ban cans, Reynolds Metals brought in Daniel Cudzik's stay on tab in 1975.",
+        "The main problems were litter and swallowed tabs. Loose rings were dropped everywhere, and some people swallowed ones that fell into their drink. With states threatening to ban cans, Reynolds Metals introduced a tab that stays on in 1975.",
+        "Tabs that stay on don't reseal the can. They were brought in because loose rings littered beaches, parks and roads, and some people swallowed tabs that fell into their drink. Several US states threatened to ban cans unless the tab stayed attached."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "The Roanoke Times: Stay-on-tab opened new era (1993)",
+      "sourceUrl": "https://scholar.lib.vt.edu/VA-news/ROA-Times/issues/1993/rt9308/930809/08090020.htm",
+      "tags": [
+        "safety",
+        "rules"
+      ],
+      "themes": [
+        "everyday",
+        "safety"
+      ]
+    },
+    {
+      "id": "power-symbol",
+      "topic": "ui",
+      "stem": "Why is the power symbol a line and a circle?",
+      "options": [
+        "It combines the 1 for on and the 0 for off marked on switches",
+        "It shows the end of a round electrical plug, seen head on",
+        "It's a simplified lightning bolt drawn inside the outline of a bulb",
+        "It shows a switch lever sitting inside its round housing, seen from above"
+      ],
+      "correctIndex": 0,
+      "hint": "Look at the labels on an old rocker switch.",
+      "explanationRight": "Switches on equipment were marked with a 1 for on and a 0 for off, which works in any language. The International Electrotechnical Commission turned those into standard symbols, a line and a circle, and the familiar power icon puts the two together. Strictly, the IEC describes them as a line and a circle rather than as numbers, but on and off is where they came from.",
+      "explanationWrong": [
+        null,
+        "It isn't a plug. The line and circle come from the 1 for on and 0 for off marked on switches, which the International Electrotechnical Commission turned into standard symbols and then combined.",
+        "There's no lightning bolt in it. The line is the 1 for on and the circle is the 0 for off, as marked on switches. The International Electrotechnical Commission standardised them, and the power symbol puts the two together.",
+        "It's a fair guess, since it sits on switches, but the shapes come from labels, not the lever. Switches were marked 1 for on and 0 for off, and the power symbol combines the two."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "99% Invisible: The binary logic behind the universal power symbol",
+      "sourceUrl": "https://99percentinvisible.org/article/modern-hieroglyphics-binary-logic-behind-universal-power-symbol/",
+      "tags": [
+        "symbols",
+        "buttons"
+      ],
+      "themes": [
+        "keys",
+        "symbols"
+      ]
+    },
+    {
+      "id": "winglets",
+      "topic": "industrial",
+      "stem": "Why do the wing tips of many airliners turn upward?",
+      "options": [
+        "They weaken the swirl of air off the wing tip, which saves fuel",
+        "They stop the wing tips scraping the runway on a bumpy landing",
+        "They keep the plane steadier when strong crosswinds hit it side on",
+        "They let a wing work like a longer one while still fitting at airport gates"
+      ],
+      "correctIndex": 0,
+      "hint": "The air under a wing is always trying to sneak round the end to the top.",
+      "explanationRight": "The air under a wing is at higher pressure than the air above it, so at the tip it curls round from underneath and spins off in a strong swirl. That swirl creates drag. NASA engineer Richard Whitcomb, looking for ways to save fuel after the 1973 oil crisis, showed that a well shaped upturned tip weakens the swirl, and predicted about 20 percent less of that drag on large planes. NASA flight tests in 1979 and 1980 backed him up, and winglets have since saved billions of gallons of fuel.",
+      "explanationWrong": [
+        null,
+        "Scraping the runway isn't the concern. Winglets are there to save fuel. Air spills round the wing tip from the higher pressure underside and spins off in a swirl that causes drag. NASA engineer Richard Whitcomb showed that an upturned tip weakens that swirl.",
+        "Crosswinds aren't the reason. At the wing tip, air curls up from the higher pressure underside and spins off in a swirl that causes drag. NASA engineer Richard Whitcomb showed that an upturned tip weakens the swirl, cutting drag and fuel use.",
+        "That's part of their appeal: NASA noted that simply making wings longer could leave a plane too wide for airport gates. But winglets help at all because of the swirl of air at the tip, which curls up from the higher pressure underside and causes drag. An upturned tip weakens that swirl, so the plane burns less fuel."
+      ],
+      "confidence": "accurate",
+      "sourceName": "NASA Spinoff: Winglets save billions of dollars in fuel costs",
+      "sourceUrl": "https://spinoff.nasa.gov/Spinoff2010/t_5.html",
+      "image": {
+        "src": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Boeing_KC-135A_55-3129_NASA_Winglet_Study.jpg/960px-Boeing_KC-135A_55-3129_NASA_Winglet_Study.jpg",
+        "alt": "NASA's KC-135 test aircraft in flight with experimental winglets fitted to its wing tips",
+        "credit": "NASA Dryden Flight Research Center, 1979. Public domain, via Wikimedia Commons."
+      },
+      "tags": [
+        "aviation",
+        "air"
+      ],
+      "themes": [
+        "travel"
+      ]
+    },
+    {
+      "id": "jaali-screens",
+      "topic": "everyday-object",
+      "stem": "Why do many old buildings in Rajasthan have windows filled with carved stone lattice, called jaali?",
+      "options": [
+        "It was cheaper to carve stone than to import sheets of glass",
+        "It lets breeze and light in while blocking harsh sun and outside eyes",
+        "Its small holes kept arrows and bullets from reaching the rooms inside",
+        "Each pattern showed which family or clan lived in the house"
+      ],
+      "correctIndex": 1,
+      "hint": "Think about a hot, bright afternoon in the desert.",
+      "explanationRight": "A jaali breaks a window into many small openings. Breeze still gets through, and squeezing through the narrow holes speeds it up slightly, while most of the harsh sun and glare is blocked. The lattice also gave privacy: people inside could look out without being easily seen. Jaipur's Hawa Mahal, the Palace of Winds, has 953 small windows screened this way, built so the women of the royal household could watch the street below while staying cool and out of sight.",
+      "explanationWrong": [
+        "Cost wasn't the point. A jaali lets breeze and light through its small openings while blocking most of the harsh sun, and gives privacy, since people inside can see out without being seen. Jaipur's Hawa Mahal uses 953 screened windows this way.",
+        null,
+        "Defence wasn't its job. The lattice lets breeze and light in while cutting the harsh sun, and gives privacy, since people inside can see out without being easily seen. Jaipur's Hawa Mahal has 953 screened windows for exactly this.",
+        "The patterns are decorative, not a family code. The real job is climate and privacy: the small openings let breeze and light in while blocking harsh sun, and people inside can see out without being seen."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Wikipedia: Jali",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Jali",
+      "tags": [
+        "india",
+        "heat",
+        "air",
+        "privacy",
+        "buildings"
+      ],
+      "themes": [
+        "india"
+      ]
+    },
+    {
+      "id": "fan-regulator-heat",
+      "topic": "everyday-object",
+      "stem": "Why did the old, bulky ceiling fan regulators in Indian homes get warm to the touch?",
+      "options": [
+        "The fan's motor sent its own heat back down along the wire",
+        "They had a small bulb inside to light up the speed numbers",
+        "Their thick plastic case soaked up heat from the sunny room",
+        "They slowed the fan by burning off extra electricity as heat"
+      ],
+      "correctIndex": 3,
+      "hint": "Slowing the fan down meant the unused electricity had to go somewhere.",
+      "explanationRight": "Old regulators were resistive: to slow the fan, they put coils of resistance wire in the way, and the electricity the fan didn't use was turned into heat in those coils. That's why the box got warm, and why running a fan on low saved much less power than you'd expect. Modern electronic regulators, many built around capacitors, cut the fan's power without burning it off, so they stay cool and are small enough to fit in a switchboard.",
+      "explanationWrong": [
+        "The motor's heat stays up at the ceiling. The warmth came from the regulator itself: it slowed the fan by pushing the current through resistance wire, turning the unused electricity into heat. Modern electronic regulators don't waste it, so they stay cool.",
+        "There was no bulb. The warmth came from how it worked: it slowed the fan by pushing the current through coils of resistance wire, which turned the unused electricity into heat. Modern electronic regulators don't waste it, so they stay cool.",
+        "The heat came from inside, not the room. The regulator slowed the fan by pushing current through resistance wire, turning the unused electricity into heat. Modern electronic regulators cut the power without burning it off, so they stay cool.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Electrical Volt: Effect of the fan regulator on power consumption",
+      "sourceUrl": "https://www.electricalvolt.com/what-is-the-effect-of-the-speed-regulator-of-a-ceiling-fan-on-power-consumption/",
+      "tags": [
+        "india",
+        "electricity",
+        "heat"
+      ],
+      "themes": [
+        "everyday",
+        "india"
+      ]
+    },
+    {
+      "id": "auto-rickshaw-three-wheels",
+      "topic": "industrial",
+      "stem": "Why does an auto-rickshaw have three wheels and handlebars instead of a steering wheel?",
+      "options": [
+        "Three wheels were required by old Indian taxi laws for small vehicles",
+        "It started life as a scooter, with two back wheels and a load bed added",
+        "A single front wheel uses much less fuel than two would on rough roads",
+        "Handlebars take up less room, leaving space for a third passenger"
+      ],
+      "correctIndex": 1,
+      "hint": "Look at how the driver steers, and think what else steers that way.",
+      "explanationRight": "The auto's ancestor is the Piaggio Ape, made in Italy from 1948. Corradino D'Ascanio, who had designed the Vespa scooter, took the Vespa and added two rear wheels with a flat load bed, to make a small van that was cheap to buy and run, easy to drive and nimble in busy traffic. The idea took off in India, where Piaggio and Bajaj both build the passenger version we call the auto.",
+      "explanationWrong": [
+        "No law set the number of wheels. The auto grew out of a scooter: in 1948 Piaggio took its Vespa, kept the handlebars, and added two rear wheels and a load bed. The result was cheap to buy and run and nimble in busy traffic.",
+        null,
+        "Fuel wasn't the reason for the layout. The auto grew out of a scooter: in 1948 Piaggio took its Vespa, kept the handlebars, and added two rear wheels and a load bed, making a small van that was cheap to buy and run.",
+        "The handlebars weren't a space-saving choice. They're a leftover from the auto's ancestor, the Vespa scooter: in 1948 Piaggio added two rear wheels and a load bed to it, making a small van that was cheap to buy and run."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Piaggio Group: Ape (1948-2019), an Italian story",
+      "sourceUrl": "https://press.piaggiogroup.com/en_EN/post/show/137787/ape-1948-2019-an-italian-story.html",
+      "tags": [
+        "india",
+        "vehicles",
+        "road",
+        "history"
+      ],
+      "themes": [
+        "travel",
+        "india"
+      ]
+    },
+    {
+      "id": "matka-cooling",
+      "topic": "everyday-object",
+      "stem": "Why does water stored in a clay matka stay cooler than the room around it?",
+      "options": [
+        "Clay naturally holds on to the cold from the night before",
+        "Minerals in the clay react with the water and absorb its heat",
+        "Water seeps through the clay and evaporates, taking heat with it",
+        "The pot's thick walls reflect the sun's heat away from the water"
+      ],
+      "correctIndex": 2,
+      "hint": "Touch the outside of a matka on a hot day. It feels slightly damp.",
+      "explanationRight": "Unglazed clay is full of tiny pores. A little water seeps through them to the outside of the pot and evaporates, and evaporating water takes heat with it, from the pot and the water inside. It's the same reason wet skin feels cool in a breeze. It works best in hot, dry weather, when evaporation is fastest, and much less well in humid monsoon air. Studies of clay pot coolers measure drops of several degrees below the air around them.",
+      "explanationWrong": [
+        "Clay doesn't store cold. The cooling happens all day: water seeps through the pot's tiny pores and evaporates from the outside, and evaporation takes heat with it, cooling the water inside. It works best in hot, dry weather.",
+        "No chemical reaction is involved. Water seeps through the clay's tiny pores and evaporates from the outer surface, and evaporation carries heat away from the pot and the water inside, the way wet skin cools in a breeze.",
+        null,
+        "Clay doesn't reflect much heat. The cooling comes from evaporation: water seeps through the pot's tiny pores and evaporates from the outside, taking heat from the water inside. That's why it works best in hot, dry weather."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "ScienceDirect: Traditional clay pot coolers for urban heat adaptation in Bangladesh",
+      "sourceUrl": "https://www.sciencedirect.com/science/article/pii/S2213138825004060",
+      "tags": [
+        "india",
+        "heat",
+        "water",
+        "materials"
+      ],
+      "themes": [
+        "everyday",
+        "india"
+      ]
+    },
+    {
+      "id": "middle-berth",
+      "topic": "furniture",
+      "stem": "On Indian Railways sleeper coaches, why does the middle berth fold flat against the wall?",
+      "options": [
+        "So cleaners can sweep under the lower berth between journeys",
+        "So it can't fall onto the lower berth if the train brakes hard",
+        "So passengers can open the window without the berth in the way",
+        "So the lower berth works as a seat for three people during the day"
+      ],
+      "correctIndex": 3,
+      "hint": "Think about where everyone in that bay sits at three in the afternoon.",
+      "explanationRight": "A sleeper bay stacks three berths on each side, but by day nobody wants to lie down. With the middle berth folded up against the wall, the lower berth becomes a bench that all three passengers on that side share. At night it's lowered for sleeping. Railway rules set the hours: the middle berth can be used for sleeping from 10 pm to 6 am, and must be folded back during the day so the lower berth can be sat on.",
+      "explanationWrong": [
+        "Cleaning isn't the reason. By day, with the middle berth folded up, the lower berth becomes a bench that all three passengers on that side share. Railway rules say the middle berth is for sleeping from 10 pm to 6 am and must be folded back during the day.",
+        "The berth is held securely either way. It folds so that by day, the lower berth becomes a bench for all three passengers on that side. Railway rules say the middle berth is for sleeping from 10 pm to 6 am and folded back the rest of the time.",
+        "The window isn't the reason. By day, folding the middle berth up turns the lower berth into a bench that all three passengers share. Railway rules say it's for sleeping from 10 pm to 6 am and folded back during the day.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "RailMitra: Middle berth rules and railway guidelines",
+      "sourceUrl": "https://www.railmitra.com/blog/middle-berth-in-train",
+      "tags": [
+        "india",
+        "trains",
+        "seats"
+      ],
+      "themes": [
+        "travel",
+        "india",
+        "furniture"
+      ]
+    },
+    {
+      "id": "indian-plug-earth-pin",
+      "topic": "everyday-object",
+      "stem": "Why is the top pin on an Indian three-pin plug longer and thicker than the other two?",
+      "options": [
+        "It carries most of the power, so it needs more metal to stay cool",
+        "Its extra length holds the plug firmly so it can't fall out",
+        "It connects to earth first, lets go last, and won't fit a live hole",
+        "It was made larger so older, loose sockets could still grip it"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about which connection you'd want in place before the power arrives.",
+      "explanationRight": "The big top pin is the earth. Because it's longer, it touches the socket's earth contact before the live and neutral pins connect, and it's the last to leave when you pull the plug out, so a metal-bodied appliance is earthed whenever it has power. Because it's thicker, it can't be pushed into a live or neutral hole by mistake. Indian plugs follow the IS 1293 standard, which is based on the old British BS 546 design.",
+      "explanationWrong": [
+        "The earth pin carries no current in normal use. It's longer so it connects before the live and neutral pins and disconnects after them, keeping a metal appliance earthed whenever it has power, and thicker so it can't go into the wrong hole.",
+        "Grip isn't what the length is for. The longer earth pin connects before the live and neutral pins and disconnects after them, so a metal appliance is earthed whenever it has power. Being thicker, it also can't be pushed into the wrong hole.",
+        null,
+        "It isn't about old sockets. The top pin is the earth: longer so it connects before the live and neutral pins and lets go after them, and thicker so it can't be pushed into a live or neutral hole by mistake."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Electrical Technology: Why is the earth pin thicker and longer in a 3-pin plug?",
+      "sourceUrl": "https://www.electricaltechnology.org/2019/05/why-earth-pin-is-thicker-and-longer.html",
+      "tags": [
+        "india",
+        "electricity",
+        "safety"
+      ],
+      "themes": [
+        "everyday",
+        "india",
+        "safety"
+      ]
+    },
+    {
+      "id": "lpg-smell",
+      "topic": "everyday-object",
+      "stem": "Why does the gas from an LPG cooking cylinder smell so strongly of rotten cabbage?",
+      "options": [
+        "The gas starts to break down as it's squeezed into the cylinder",
+        "A strong-smelling chemical is added so leaks can't go unnoticed",
+        "The smell comes from the rubber pipe reacting with the gas",
+        "Natural impurities are left in to keep the price of gas low"
+      ],
+      "correctIndex": 1,
+      "hint": "Imagine a gas leak you couldn't smell at all.",
+      "explanationRight": "LPG has no smell of its own. A tiny amount of ethyl mercaptan, a sulphur compound that smells of rotten cabbage, is added so that even a small leak is easy to notice before the gas builds up enough to catch fire or explode. India's oil companies say exactly this in their safety advice: if you smell it, turn off the regulator, open the doors and windows, and don't switch on lights or strike a match.",
+      "explanationWrong": [
+        "LPG doesn't break down in the cylinder; on its own it has no smell at all. A sulphur compound, ethyl mercaptan, is added on purpose so that even a small leak is noticed before the gas can build up and catch fire.",
+        null,
+        "The pipe isn't the source. LPG is odourless, so a strong-smelling sulphur compound, ethyl mercaptan, is added on purpose. That way even a small leak gets noticed before the gas builds up enough to catch fire.",
+        "It's the opposite: the gas is odourless, and the smell is added deliberately. A sulphur compound called ethyl mercaptan makes even a small leak easy to notice before the gas can build up and catch fire."
+      ],
+      "confidence": "accurate",
+      "sourceName": "ELGAS: The LPG smell of safety",
+      "sourceUrl": "https://www.elgas.com.au/elgas-knowledge-hub/residential-lpg/lpg-smell/",
+      "tags": [
+        "india",
+        "safety",
+        "kitchen",
+        "gas"
+      ],
+      "themes": [
+        "everyday",
+        "india",
+        "safety"
+      ]
+    },
+    {
+      "id": "chips-packet-air",
+      "topic": "industrial",
+      "stem": "Why is a packet of chips so puffed up with air?",
+      "options": [
+        "It's filled with nitrogen, which keeps chips fresh and stops them breaking",
+        "It's a light gas that makes the packets cheaper to transport",
+        "Hot air from frying is sealed in and expands as the packet cools",
+        "The bag is puffed up so it can survive the pressure on a plane"
+      ],
+      "correctIndex": 0,
+      "hint": "Think about what makes old chips taste stale, and what happens to a flat packet in a bag.",
+      "explanationRight": "Chip makers flush the packet with nitrogen before sealing it. Oxygen makes the oil in chips go stale and rancid; nitrogen doesn't react with them, so they stay crisp and fresh for months. The puffed-up packet also works as a cushion, so the chips aren't crushed into crumbs on the way to the shop.",
+      "explanationWrong": [
+        null,
+        "Nitrogen isn't lighter in any way that matters; it weighs about the same as air. It's there because oxygen makes the oil in chips go stale, and nitrogen doesn't. The puffed-up packet also cushions the chips so they don't break.",
+        "Air cools and shrinks, it doesn't expand. The packet is deliberately flushed with nitrogen, because oxygen makes the oil in chips go stale and nitrogen doesn't. The puffed-up bag also cushions the chips on the way to the shop.",
+        "Planes aren't the reason. The packet is flushed with nitrogen, because oxygen makes the oil in chips go stale and rancid, and nitrogen doesn't react with them. The puffed-up bag also cushions the chips so they don't break."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "WITT: How modified atmosphere packaging extends shelf life",
+      "sourceUrl": "https://www.wittgas.com/fileadmin/user_upload/Dateien/whitepapers/Whitepaper_modified_atmosphere_packaging_US.pdf",
+      "tags": [
+        "food",
+        "packaging",
+        "air"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "hexagonal-pencil",
+      "topic": "everyday-object",
+      "stem": "Why are most wooden pencils made with six flat sides instead of being round?",
+      "options": [
+        "Six sides make the pencil much harder to snap in half",
+        "The flat faces were added to print the maker's name clearly",
+        "Flat sides stop them rolling off a desk and give fingers a grip",
+        "The sides hide the seam where the two wooden halves are glued"
+      ],
+      "correctIndex": 2,
+      "hint": "Put a round pen down on a slightly sloping desk.",
+      "explanationRight": "A round pencil rolls off any desk that isn't perfectly level. Six flat sides stop that, and the edges give the fingers something to hold. There's a maker's reason too: a hexagon wastes less of the wooden slat than a circle, so the same slat can be cut into more pencils.",
+      "explanationWrong": [
+        "A hexagon isn't meaningfully stronger. The flat sides are there so the pencil doesn't roll off a desk, and so fingers can grip it. Makers liked it too: a hexagon wastes less of the wooden slat, so each slat gives more pencils.",
+        "Round pencils are printed on just fine. The flat sides are there so the pencil doesn't roll off a desk and is easy to grip, and a hexagon wastes less wood, so each wooden slat makes more pencils.",
+        null,
+        "The shape doesn't hide the glued seam. The flat sides stop the pencil rolling off a desk and give fingers a grip, and a hexagon wastes less of the wooden slat, so each slat makes more pencils."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "IFLScience: Why are pencils hexagonal?",
+      "sourceUrl": "https://www.iflscience.com/why-are-pencils-hexagonal-79206",
+      "tags": [
+        "stationery",
+        "shape",
+        "grip"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "padlock-hole",
+      "topic": "everyday-object",
+      "stem": "Why do many padlocks have a tiny hole in the bottom of the body?",
+      "options": [
+        "It lets rainwater drain out so the lock doesn't rust or freeze",
+        "It's where the factory tested the lock by pushing a pin through it",
+        "It lets the owner tie the lock to a chain so it can't get lost",
+        "It lets air in so the shackle doesn't stick when it's cold"
+      ],
+      "correctIndex": 0,
+      "hint": "Picture a padlock left on a gate through a rainy winter.",
+      "explanationRight": "Padlocks spend their lives outdoors, and water gets in around the shackle and keyhole. The small hole at the bottom lets it drain out instead of pooling inside, where it would rust the pins and springs, or freeze and jam the mechanism in cold weather. The same hole is a handy spot to add a little lubricant.",
+      "explanationWrong": [
+        null,
+        "It isn't a factory leftover. The hole lets water that gets into the lock drain out instead of pooling inside, where it would rust the mechanism or freeze solid in cold weather. It also makes a handy spot to add lubricant.",
+        "It's too small for a chain. The hole is a drain: water that gets in around the shackle and keyhole runs out instead of pooling inside, where it would rust the parts or freeze and jam the lock.",
+        "It's about water, not air. Rain gets in around the shackle and keyhole, and the hole lets it drain out rather than pool inside, where it would rust the parts or freeze and jam the lock in winter."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Monroe Engineering: Why padlocks have a small hole on the bottom",
+      "sourceUrl": "https://monroeengineering.com/blog/why-padlocks-have-a-small-hole-on-the-bottom/",
+      "tags": [
+        "locks",
+        "water",
+        "weather"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "convex-side-mirror",
+      "topic": "industrial",
+      "stem": "Why do some car side mirrors warn that objects are closer than they appear?",
+      "options": [
+        "The mirror bulges outward to show a wider view, which shrinks things",
+        "The glass is tinted to cut glare, which makes things look far off",
+        "The mirror sits far from the driver's eyes, so everything looks small",
+        "Cheap glass bends the light, and makers are required to admit it"
+      ],
+      "correctIndex": 0,
+      "hint": "Compare your reflection in a flat mirror with the back of a spoon.",
+      "explanationRight": "The passenger-side mirror is convex: it bulges outward, like the back of a spoon. That shows a much wider view, which helps cover the blind spot beside the car, but everything in it looks smaller, and smaller things look further away. The driver's-side mirror is flat, showing true distances but a narrower view. US federal rules require the convex mirror to carry the warning printed on the glass.",
+      "explanationWrong": [
+        null,
+        "Tint isn't the reason. The mirror is convex, bulging outward like the back of a spoon, so it shows a wider view that helps cover the blind spot. The catch is that everything looks smaller, so it seems further away.",
+        "Distance from the eye isn't it. The mirror is convex, bulging outward like the back of a spoon, so it shows a wider view that helps cover the blind spot, but makes everything look smaller and so further away.",
+        "The glass is fine; the curve is deliberate. The mirror bulges outward like the back of a spoon, giving a wider view that helps cover the blind spot, at the cost of making things look smaller and further away."
+      ],
+      "confidence": "accurate",
+      "sourceName": "US Code of Federal Regulations: FMVSS 111, rearview mirrors",
+      "sourceUrl": "https://www.govinfo.gov/content/pkg/CFR-2004-title49-vol5/xml/CFR-2004-title49-vol5-sec571-111.xml",
+      "tags": [
+        "road",
+        "vehicles",
+        "optics",
+        "safety"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ]
+    }
+  ],
+  "tidbits": [
+    {
+      "id": "tidbit-kingfisher",
+      "tidbitFor": "shinkansen-nose",
+      "text": "A kingfisher can dive from the air into a river at full speed and barely leave a splash. Its long, narrow beak eases into the water instead of slamming into it. Engineers who build very fast things, especially things that plunge into tight spaces, have taken notes."
+    },
+    {
+      "id": "tidbit-master-clock",
+      "tidbitFor": "swiss-clock-pause",
+      "text": "Railway networks used to keep all their station clocks in step with one master clock, which sent out an electrical pulse at the start of every minute. A clock that ran a little fast didn't need fixing. It just had to wait for the pulse."
+    },
+    {
+      "id": "tidbit-suspension",
+      "tidbitFor": "anglepoise-springs",
+      "text": "Car suspension works by letting springs carry weight and push back just as hard as they are pushed, so the body floats steady over bumps. In the early 1930s, one suspension engineer started wondering what else a set of well chosen springs could hold perfectly still."
+    },
+    {
+      "id": "tidbit-wingtip-swirl",
+      "tidbitFor": "winglets",
+      "text": "Air always tries to move from high pressure to low. Under a flying wing the pressure is higher than on top, so right at the tip, air curls round from underneath and spins away behind the plane in a long, invisible swirl that tugs it backwards."
+    },
+    {
+      "id": "tidbit-empty-space",
+      "tidbitFor": "thonet-14",
+      "text": "In the 1800s, shipping furniture across oceans was expensive, and much of that cost was paying to move empty space. A chair in pieces takes up a small fraction of the room of a built one. One Viennese company worked out that 36 of theirs fitted in a single cubic metre."
+    },
+    {
+      "id": "tidbit-under-the-table",
+      "tidbitFor": "tulip-pedestal",
+      "text": "Next time you're in a busy café, glance under the tables. Table legs, chair legs, people's legs, all crossing each other. One well known designer found that view so messy that he called it a slum, and spent years trying to get rid of it."
+    },
+    {
+      "id": "tidbit-foam-heat",
+      "tidbitFor": "aeron-mesh",
+      "text": "Sit on a foam cushion for a few hours and the patch under you gets warm and a little damp. Foam holds heat and moisture close to the skin, while an open weave lets both drift away. Office chair makers have spent a lot of money on that difference."
+    },
+    {
+      "id": "tidbit-underground-window",
+      "tidbitFor": "tube-map",
+      "text": "On an underground train there's nothing to see out of the window but tunnel wall. What riders really keep track of is how many stops are left and where they need to change. How far apart those stops are hardly matters."
+    },
+    {
+      "id": "tidbit-volunteers",
+      "tidbitFor": "phone-keypad",
+      "text": "Before push button phones reached homes, Bell Labs asked volunteers to try out many different arrangements of number keys. The researchers timed them, counted mistakes, and asked which layouts felt most natural. Most people liked numbers that ran the way they read."
+    },
+    {
+      "id": "tidbit-many-apples",
+      "tidbitFor": "command-key-symbol",
+      "text": "On the early Macintosh, every keyboard shortcut in the menus was shown with a tiny apple beside it. Open a long menu and you'd see a whole column of little logos. Not everyone at Apple thought that was a good look."
+    },
+    {
+      "id": "tidbit-pocket-touch",
+      "tidbitFor": "slide-to-unlock",
+      "text": "A touchscreen can't tell a finger from the lining of a pocket. Anything that presses on it counts as a touch, which is why phone makers need a way for the phone to know you really mean it."
+    },
+    {
+      "id": "tidbit-copycats",
+      "tidbitFor": "coke-bottle",
+      "text": "In the early 1900s, shop shelves were full of drinks with names like Koka-Nola and Toka-Cola, dressed up to look like the famous brand. The real one needed a way to be spotted instantly, even without looking."
+    },
+    {
+      "id": "tidbit-winter-morning",
+      "tidbitFor": "school-bus-yellow",
+      "text": "Yellow with black on top is one of the easiest colour pairs to pick out, which is why it turns up on so many warning signs. Now picture the grey half light of a winter morning, when children are waiting at the side of the road."
+    },
+    {
+      "id": "tidbit-corners",
+      "tidbitFor": "stop-sign-octagon",
+      "text": "In the 1920s, some American road planners wanted sign shapes to speak for themselves. Their idea: the more corners a sign had, the more careful you should be. A circle, with no corners at all, counted as having endless sides."
+    }
+  ]
+}

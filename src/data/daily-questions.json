@@ -1,0 +1,159 @@
+{
+  "note": "Question of the day. Added to the end of the daily queue, in this order, the first time the server sees them. They never appear in runs.",
+  "questions": [
+    {
+      "id": "daily-liquid-glass",
+      "topic": "ui",
+      "stem": "Why did Apple make the buttons and bars in iOS 26 look like see-through glass?",
+      "options": [
+        "Glass effects use less battery than solid colours",
+        "To match the glass backs of recent iPhones",
+        "So the controls step back and your content stays in focus",
+        "To hide design differences between older and newer apps"
+      ],
+      "correctIndex": 2,
+      "explanationRight": "Apple says Liquid Glass reflects and refracts what's behind it while bringing greater focus to content. Controls give way to what you're looking at: in iOS 26, tab bars shrink as you scroll and come back when you need them. The same material runs across iPhone, iPad, Mac, Watch and TV, so it all feels of a piece.",
+      "explanationWrong": [
+        "Battery wasn't the reason, and glass effects take more work to draw, not less. Apple's aim was to let controls give way to content, so what you're reading or watching stays in focus.",
+        "The look isn't about the hardware. Apple made controls translucent and lets them shrink out of the way, so the content underneath stays the focus.",
+        null,
+        "It isn't a disguise for older apps. The glass lets buttons and bars sit lightly over the content, and tab bars even shrink as you scroll, keeping the focus on what you came for."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Apple Newsroom: Apple introduces a delightful and elegant new software design (June 2025)",
+      "sourceUrl": "https://www.apple.com/newsroom/2025/06/apple-introduces-a-delightful-and-elegant-new-software-design/",
+      "tags": [
+        "phones",
+        "transparency",
+        "menus"
+      ],
+      "themes": [
+        "screens"
+      ]
+    },
+    {
+      "id": "daily-rapido-captains",
+      "topic": "ui",
+      "stem": "While you wait for a ride, why does Rapido tell you how many captains turned your request down?",
+      "options": [
+        "Indian law makes ride apps publish every rejection",
+        "It shows the search is working, so the wait feels fair",
+        "It warns you off booking at the busiest times",
+        "Captains asked for it, to explain their choices"
+      ],
+      "correctIndex": 1,
+      "explanationRight": "Rapido has never published why, so this one is a deduction: the best explanation the evidence supports. Designers call it operational transparency: showing the work while people wait. In a Harvard study from 2011, people valued a service more when it showed the work being done, and some even preferred a longer wait with the work on show to an instant answer. A running count of captains asked tells you the app isn't stuck. Some designers point out it can also nudge riders to add a tip or accept a higher fare.",
+      "explanationWrong": [
+        "No law requires it. Showing the count is Rapido's choice, and the likeliest reason is that seeing the search at work makes a wait feel fairer than staring at a spinner.",
+        null,
+        "The count shows on any search, busy or not. Its job is to show the app is working for you, so the wait doesn't feel like a frozen screen.",
+        "The count is about your wait, not the captains' reasons. Seeing the search at work makes waiting feel less like being ignored."
+      ],
+      "confidence": "deduction",
+      "sourceName": "Buell and Norton, Harvard Business School: The labor illusion (2011)",
+      "sourceUrl": "https://www.hbs.edu/faculty/Pages/item.aspx?num=40158",
+      "tags": [
+        "waiting",
+        "transparency",
+        "apps"
+      ],
+      "themes": [
+        "screens",
+        "india",
+        "travel"
+      ]
+    },
+    {
+      "id": "daily-swiss-passport-uv",
+      "topic": "everyday-object",
+      "stem": "Why do the pages of Switzerland's 2022 passport reveal hidden contour lines and landmarks under ultraviolet light?",
+      "options": [
+        "They let border staff check it in dark booths",
+        "They show which canton issued the passport",
+        "They guide blind holders to the right page",
+        "They're security marks that are very hard to forge"
+      ],
+      "correctIndex": 3,
+      "explanationRight": "Switzerland's federal police say the passport carries its most advanced security features yet, some visible to the eye and some only under UV light. The Geneva studio RETINAA made those features part of the picture: each page shows the mountains and rivers of a canton, and under UV light contour lines and landmarks appear. Ink that only shows under UV is very hard for a forger to reproduce, so the art doubles as protection.",
+      "explanationWrong": [
+        "Border checks don't happen in the dark. The hidden layers are security features: they only appear under UV light, which makes the passport very hard to fake.",
+        "Each page already shows a canton's mountains and rivers in plain sight. The UV layer is a security feature, hidden so that forgers can't easily copy it.",
+        "UV images can't be felt, so they wouldn't help. They're a security feature, hidden in the design so that a fake is easy to spot and hard to make.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Le News: New Swiss passport features rivers and mountains (November 2022)",
+      "sourceUrl": "https://lenews.ch/2022/11/04/new-swiss-passport-features-rivers-and-mountains/",
+      "tags": [
+        "security",
+        "printing",
+        "maps"
+      ],
+      "themes": [
+        "travel",
+        "symbols"
+      ]
+    },
+    {
+      "id": "daily-duolingo-energy",
+      "topic": "ui",
+      "stem": "In 2025, why did Duolingo replace hearts, which you lost for every mistake, with energy?",
+      "options": [
+        "Players outside gaming didn't understand the idea of lives",
+        "Losing hearts for mistakes punished beginners, who make the most",
+        "An energy bar takes less room on small screens",
+        "Learners asked for a way to finish lessons faster"
+      ],
+      "correctIndex": 1,
+      "explanationRight": "Duolingo said hearts weren't the best way to support learning. Every mistake cost a free learner a heart, and beginners, who are still finding their feet, were twice as likely to run out of hearts partway through a lesson. That's discouraging, since mistakes are part of learning. Energy is spent on right answers too, and a run of right answers earns some back, so the system rewards getting things right instead of only punishing slips.",
+      "explanationWrong": [
+        "People understood hearts well enough. The problem Duolingo named was that hearts only ever punished mistakes, and beginners ran out twice as often, often mid-lesson.",
+        null,
+        "Screen space wasn't the issue. Duolingo said losing a heart for every mistake discouraged beginners, who were twice as likely to run out partway through a lesson.",
+        "Speed wasn't the aim. Duolingo moved to energy because hearts punished mistakes, and beginners, who make the most, were running out mid-lesson."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Duolingo blog: Duolingo energy (July 2025)",
+      "sourceUrl": "https://blog.duolingo.com/duolingo-energy/",
+      "tags": [
+        "learning",
+        "games",
+        "apps"
+      ],
+      "themes": [
+        "screens"
+      ]
+    },
+    {
+      "id": "daily-google-icon-colours",
+      "topic": "ui",
+      "stem": "Why did Google's 2026 icons for Docs, Drive and Meet stop using all four of its colours?",
+      "options": [
+        "Four colours cost too much to print on merchandise",
+        "So each app is easier to pick out at a glance",
+        "Tiny icons blurred the four colours into a brown smudge",
+        "A court ruled the colours copied another brand's logo"
+      ],
+      "correctIndex": 1,
+      "explanationRight": "Google said the new designs give every app a more distinct identity and keep each one recognisable on your screen. Since 2020, Gmail, Calendar, Drive, Docs and Meet had all been drawn in the same red, yellow, green and blue, so a row of them looked alike at a glance. The 2026 icons give most apps one main colour; only Gmail keeps all four.",
+      "explanationWrong": [
+        "Merchandise had nothing to do with it. Google said the change gives every app a more distinct identity, so each one is easier to recognise on a crowded screen.",
+        null,
+        "The icons weren't blurring. The trouble was that they all used the same four colours, so they looked alike. Giving each app one main colour makes it easier to spot.",
+        "There was no ruling. Google changed the icons so each app has a more distinct identity and is easier to recognise at a glance."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Google Workspace Updates: A fresh visual identity for Google Workspace app icons (May 2026)",
+      "sourceUrl": "https://workspaceupdates.googleblog.com/2026/05/introducing-fresh-visual-identity-for-Google-Workspace-app-icons.html",
+      "tags": [
+        "icons",
+        "colour",
+        "brands"
+      ],
+      "themes": [
+        "screens",
+        "symbols"
+      ]
+    }
+  ]
+}

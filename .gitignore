@@ -1,0 +1,15 @@
+node_modules
+dist
+.DS_Store
+*.log
+.tmp
+.localdb
+.vercel
+.env
+.env.local
+.env*.local
+
+# Local-only placeholder images (watermarked stand-ins); never deployed.
+/dev-images/
+# Original image files. The optimised copies in public/images are what ships.
+/images/
