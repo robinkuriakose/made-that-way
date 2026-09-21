@@ -5,6 +5,14 @@ import { put } from '@vercel/blob';
 import { requireBuilder } from '../../auth.js';
 import { body, isText, methodNotAllowed, serverError } from '../../http.js';
 
+// Vercel names it BLOB_READ_WRITE_TOKEN, or puts a prefix in front if one
+// was chosen when connecting the store.
+function blobToken(env = process.env) {
+  if (env.BLOB_READ_WRITE_TOKEN) return env.BLOB_READ_WRITE_TOKEN;
+  const key = Object.keys(env).find((k) => k.endsWith('READ_WRITE_TOKEN'));
+  return key ? env[key] : undefined;
+}
+
 const MAX_BYTES = 3 * 1024 * 1024; // Vercel caps a request at 4.5 MB, and base64 adds a third.
 const TYPES = { 'image/webp': 'webp', 'image/jpeg': 'jpg', 'image/png': 'png', 'image/gif': 'gif', 'image/avif': 'avif' };
 
@@ -26,7 +34,7 @@ export default async function handler(req, res) {
     const local = globalThis.__MTW_LOCAL_BLOB__;
     const saved = local
       ? await local(pathname, buffer, b.contentType)
-      : await put(pathname, buffer, { access: 'public', addRandomSuffix: true, contentType: b.contentType });
+      : await put(pathname, buffer, { access: 'public', addRandomSuffix: true, contentType: b.contentType, token: blobToken() });
     return res.status(200).json({ url: saved.url });
   } catch (err) {
     if (String(err?.message).includes('BLOB_READ_WRITE_TOKEN') || String(err?.message).includes('token')) {

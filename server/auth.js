@@ -2,12 +2,13 @@
 // environment variable (never in the code). Signing in returns a token that
 // expires after TOKEN_TTL_MS; builder routes check it on every request.
 import { createHash, createHmac, timingSafeEqual } from 'node:crypto';
+import { NotConfigured } from './db.js';
 
 export const TOKEN_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 
 function password() {
   const value = process.env.BUILDER_PASSWORD;
-  if (!value) throw new Error('BUILDER_PASSWORD is not set. Add it in the Vercel dashboard under Settings, Environment Variables.');
+  if (!value) throw new NotConfigured('The builder password is not set yet. Add BUILDER_PASSWORD in the Vercel dashboard (Settings, Environment Variables), then redeploy.');
   return value;
 }
 
@@ -39,7 +40,13 @@ export function verifyToken(token, now = Date.now()) {
 export function requireBuilder(req, res) {
   const header = req.headers?.authorization ?? '';
   const token = header.startsWith('Bearer ') ? header.slice(7) : null;
-  if (verifyToken(token)) return true;
+  try {
+    if (verifyToken(token)) return true;
+  } catch (err) {
+    if (err?.code !== 'NOT_CONFIGURED') throw err;
+    res.status(503).json({ error: err.message });
+    return false;
+  }
   res.status(401).json({ error: 'Sign in to the builder first.' });
   return false;
 }

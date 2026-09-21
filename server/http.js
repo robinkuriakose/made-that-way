@@ -21,6 +21,9 @@ export function methodNotAllowed(res, allowed) {
 
 export function serverError(res, err) {
   console.error(err);
+  // A missing setting (no database connected, no builder password) says so,
+  // since that's setup rather than a bug, and says nothing sensitive.
+  if (err?.code === 'NOT_CONFIGURED') return res.status(503).json({ error: err.message });
   return res.status(500).json({ error: 'server error' });
 }
 
