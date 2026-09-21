@@ -66,6 +66,17 @@ mindmap
       Score verification
 ```
 
+## Round 9 requests (20 and 21 September 2026)
+
+| You asked for | Status | Where |
+|---|---|---|
+| No spoiler control on images: the goal is to make people guess and learn | Done: images always show with the question; the switch is gone | `src/components/QuestionScreen.jsx` |
+| Mark the Rapido question as a deduction | Done: a new confidence level, Deduction ("nobody has published the reason; this is the best explanation the evidence supports") | `src/lib/labels.js`, `src/lib/questionRules.js` |
+| Hard mode only once 20 people have finished a run | Agreed; to be built before the live site reaches 20 finished runs | `docs/later.md` |
+| Present the research PDF | Done, and `npm run pdf` now makes a PDF from any document | `docs/made-that-way-ux-research.pdf`, `scripts/md-to-pdf.js` |
+| Host the site | Done: https://madethatway.vercel.app. You made the accounts, repo and storage; I pushed the code and fixed what the live environment showed | `vercel.json`, `server/db.js` |
+| (Found going live) | Every function crashed on load because this deployment predated the database connection. The connection is now made on first use, a missing database or password answers with a plain reason instead of crashing, and the database and Blob store are found even when Vercel prefixes their variable names | `server/db.js`, `server/http.js`, `server/auth.js` |
+
 ## Round 8 requests (20 September 2026)
 
 | You asked for | Status | Where |
@@ -83,7 +94,7 @@ mindmap
 | Prefer the alternatives to a CAPTCHA | Done: every run registers with the server when it starts, and saving, flagging and signing all require it; limits per network; strict size and shape checks; names refuse links and swear words; a Players tab to hide a name | `server/routes/events.js`, `server/limits.js`, `src/lib/names.js`, `src/builder/PlayersPanel.jsx` |
 | The name on the home screen, changeable, limited to 3 changes | Done. Changing it renames you on every board | `src/components/PlayerName.jsx`, `server/routes/leaderboard.js:186` |
 | Images: remove area-codes, keep the rest | Done. The other four are attached; the two watermarked ones are marked as placeholders, so they show locally and never reach the live site | `docs/images-needed.md`, `scripts/optimize-images.js` |
-| Show the images in the questions too | Done: the picture sits under the question, in the same frame every time. An image that would give the answer away can be set to wait until the answer is in | `src/components/QuestionScreen.jsx:169`, `src/builder/ImageField.jsx` |
+| Show the images in the questions too | Done: the picture sits under the question, in the same frame every time. (A "show after answering" switch was added, then removed in round 9: seeing it is part of working it out) | `src/components/QuestionScreen.jsx:169`, `src/builder/ImageField.jsx` |
 | Build as groundwork for a much bigger app | Ongoing rule. This round: routes split into `api/` entry points and `server/` logic, one function for the whole builder, analytics worked out in the database rather than by loading every run, topics and the daily queue as data, and a test flag on every table | `docs/code-map.md` |
 | Suggest a "hardest quiz" made of the least-answered-right questions | Open: my answer and a safer shape for it are in `docs/later.md` | |
 | The UX research PDF | Content this round, PDF next. Reminder carried in `docs/later.md` | |

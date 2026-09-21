@@ -4,14 +4,12 @@ Everything here is something only you can supply or do. I keep it current; tick 
 
 Last updated 20 September 2026.
 
-## To go live
+## Live
 
-These are account steps, so they're yours. The README's "Deploying to Vercel" section walks through each one.
+The site is live at https://madethatway.vercel.app (21 September 2026): database connected, builder password set, every route checked end to end.
 
-- [ ] **Postgres.** In the Vercel project, open Storage, add a Neon Postgres database and connect it. This holds questions, runs, the leaderboard, flags and the daily question. Tables are created and filled on the first visit.
-- [ ] **Blob storage.** In the same Storage tab, add a Blob store and connect it. This is where images you upload in the builder are kept. Without it everything else works, but the builder's image upload says it isn't set up.
-- [ ] **Builder password.** In Settings, Environment Variables, add `BUILDER_PASSWORD` with the password you chose. Once the site is public, a longer one is safer, since anyone can find `/builder`; sign-in now locks a network out after five wrong tries.
-- [ ] **Redeploy** after the steps above, so the new settings take effect.
+- [ ] **Try an image upload in the builder,** on any question. It's the one thing I couldn't check without signing in as you, and it proves the Blob store is connected.
+- [ ] **Optional: a custom domain,** under Settings, Domains in Vercel.
 
 ## Content
 
@@ -30,6 +28,8 @@ These are account steps, so they're yours. The README's "Deploying to Vercel" se
 - [ ] The open items in [docs/later.md](later.md): the hard mode design, which agent runs the persona prompts, name moderation, redeem points.
 
 ## Done
+
+- [x] Deployed to Vercel, with Neon Postgres, Blob storage and the builder password (21 September).
 
 - [x] GitHub repository created, and the code pushed to it (21 September).
 - [x] Vercel account, signed in with GitHub.

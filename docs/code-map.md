@@ -80,7 +80,7 @@ mindmap
 | What | Where |
 |---|---|
 | Home: headline, name, Start or Continue, topics, rules, today's question, the wall, the board | `src/components/HomeScreen.jsx:20` |
-| Question screen. The question's image sits under the stem, in the same frame every time; an image marked `afterAnswer` waits until the answer is in | `src/components/QuestionScreen.jsx:135`; image at `:169` |
+| Question screen. The question's image sits under the stem, in the same frame every time, before the answer on purpose | `src/components/QuestionScreen.jsx:135`; image at `:169` |
 | Timer that ticks and freezes | `src/components/QuestionScreen.jsx:10` (`useElapsed`) |
 | Top bar: Home and Restart during a run, position, score, timer line | `src/components/TopBar.jsx:7` |
 | Tidbit card | `src/components/TidbitScreen.jsx:3` |
@@ -142,7 +142,7 @@ mindmap
 
 | What | Where |
 |---|---|
-| Database client (Neon in the cloud, PGlite locally) | `server/db.js` |
+| Database client (Neon in the cloud, PGlite locally), connected on first use; a missing database is a 503 with a plain reason, not a crash | `server/db.js` (`connectionString`, `NotConfigured`) |
 | Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:36` (`ensureSchema`), `:58` (`createTables`), `:245` (`seed`) |
 | Builder password and tokens | `server/auth.js` |
 | Request helpers, id and day checks, the hashed network key | `server/http.js` |
@@ -193,7 +193,7 @@ mindmap
 
 | What | Where |
 |---|---|
-| Unit tests (`npm test`) | `src/lib/lib.test.js`, `bank.test.js`, `round8.test.js`, `server/auth.test.js` |
+| Unit tests (`npm test`) | `src/lib/lib.test.js`, `bank.test.js`, `round8.test.js`, `server/auth.test.js`, `server/db.test.js` |
 | Runs the `api/` routes inside `npm run dev` against a local Postgres in `.localdb/`, through Vite, so any change to `api/` or `server/` applies on the next request | `tools/local-api.js`, plugged in by `vite.config.js` |
 | Local secrets (builder password) | `.env.local`, not committed |
 | Preview launch config | `.claude/launch.json` |

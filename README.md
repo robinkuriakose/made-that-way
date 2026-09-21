@@ -2,7 +2,7 @@
 
 A quiz that teaches why well designed things are shaped the way they are. One run is 10 multiple choice questions on everyday objects, industrial design, furniture and interfaces, each followed by the reasoning behind the answer.
 
-A run is ten questions, and there's also a question of the day that never repeats. React and Vite, plain CSS, with a handful of serverless functions for shared state. Questions, runs, the leaderboard, flags and the daily queue live in a shared Postgres database; `src/data/questions.json` is the starting set and the fallback if the database is slow. The run you're currently playing stays in your browser (there are no accounts). A password-protected builder at `/builder` is where questions are added, edited, reviewed and measured. Deployed at: _add your Vercel URL here once you've deployed it_.
+A run is ten questions, and there's also a question of the day that never repeats. React and Vite, plain CSS, with a handful of serverless functions for shared state. Questions, runs, the leaderboard, flags and the daily queue live in a shared Postgres database; `src/data/questions.json` is the starting set and the fallback if the database is slow. The run you're currently playing stays in your browser (there are no accounts). A password-protected builder at `/builder` is where questions are added, edited, reviewed and measured. Live at https://madethatway.vercel.app.
 
 What's still needed from the owner (images, credits, account steps) is in [docs/owner-checklist.md](docs/owner-checklist.md).
 

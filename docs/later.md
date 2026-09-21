@@ -2,18 +2,18 @@
 
 Agreed, parked, or waiting on a decision. Nothing here is being built right now.
 
-Last updated 20 September 2026.
+Last updated 21 September 2026.
 
 ## Next up
 
-- **The UX research PDF.** The writing is done in [ux-research.md](ux-research.md): quiz and trivia apps studied, wild ideas, the frameworks, the insights, a ranked feature list, and three persona prompts. Turning it into a PDF is the next round's job. **Remind the owner about this.**
+- **The UX research PDF.** Done: `docs/made-that-way-ux-research.pdf`, made with `npm run pdf`.
 - **The three persona prompts** (non-designer, beginner, ten-year veteran). Written, in the same file. Still to settle: which agent runs them, and how it reaches the quiz.
-  - If that agent can open a web page on this machine, it can play at `http://localhost:5173`.
+  - If that agent can open a web page, it can play the live site at https://madethatway.vercel.app. Its runs would count as real players, so they should run in test mode; I can set that up when you pick the agent.
   - If not, I'll produce a "player pack" (every question and its options, no answers) and a separate answer key, so it can play blind and be scored afterwards.
 
 ## Decisions waiting on you
 
-- **A "hardest quiz" made of the questions fewest people get right.** Worth doing, with two changes. As proposed, the same ten questions would face everyone, so they'd be memorised and shared, and a second attempt would mean nothing. Instead: **Hard mode** draws ten at random from the hardest third, so it stays different every time. It needs a minimum number of answers per question before difficulty means anything (say 30), so it should stay hidden until the numbers arrive. Two open questions: should hard runs sit on the same leaderboard as normal ones, and should the home screen show the invitation ("only 14% get these right") or keep it quieter?
+- **Hard mode (agreed).** Ten questions drawn at random from the hardest third, so it stays fresh and can't be memorised. It stays hidden until 20 people have finished a run on the live site, since before that "hardest" means nothing. Still open: whether hard runs share the leaderboard with normal ones.
 - **Leaderboard names.** Links, handles and a short list of swear words are refused, and the Players tab can hide anyone. Nothing else is moderated.
 - **Redeem points.** Still a quarter of the band.
 
