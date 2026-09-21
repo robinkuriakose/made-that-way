@@ -8,9 +8,6 @@ Last updated 20 September 2026.
 
 These are account steps, so they're yours. The README's "Deploying to Vercel" section walks through each one.
 
-- [ ] **Git name and email.** Git needs them before the first commit. Tell me the name and email you want on commits, or set them yourself with `git config --global user.name "…"` and `git config --global user.email "…"`.
-- [ ] **GitHub.** Make a new, empty repository and sign in on this machine (the GitHub Desktop app is the easiest way), so the code can be pushed. You said "Git later", so this waits for you.
-- [ ] **Vercel.** Import the GitHub repository as a new project.
 - [ ] **Postgres.** In the Vercel project, open Storage, add a Neon Postgres database and connect it. This holds questions, runs, the leaderboard, flags and the daily question. Tables are created and filled on the first visit.
 - [ ] **Blob storage.** In the same Storage tab, add a Blob store and connect it. This is where images you upload in the builder are kept. Without it everything else works, but the builder's image upload says it isn't set up.
 - [ ] **Builder password.** In Settings, Environment Variables, add `BUILDER_PASSWORD` with the password you chose. Once the site is public, a longer one is safer, since anyone can find `/builder`; sign-in now locks a network out after five wrong tries.
@@ -33,6 +30,9 @@ These are account steps, so they're yours. The README's "Deploying to Vercel" se
 - [ ] The open items in [docs/later.md](later.md): the hard mode design, which agent runs the persona prompts, name moderation, redeem points.
 
 ## Done
+
+- [x] GitHub repository created, and the code pushed to it (21 September).
+- [x] Vercel account, signed in with GitHub.
 
 - [x] Builder password chosen. Kept only in the gitignored `.env.local` locally, and in Vercel's settings once deployed; never in the repository.
 - [x] 39 images sent (38 used, 2 of them local only).
