@@ -27,43 +27,52 @@ function write(items) {
   }
 }
 
+// Sends queued items in order until the queue is empty (true) or one can't
+// be sent right now (false).
+async function drain() {
+  for (let items = read(); items.length; items = read()) {
+    const [item] = items;
+    let res;
+    try {
+      res = await fetch(item.url, {
+        method: item.method ?? 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(item.body),
+      });
+    } catch {
+      return false; // Offline: try again later.
+    }
+    if (res.status >= 500 || res.status === 429 || res.status === 408) return false;
+    write(read().filter((i) => i.id !== item.id));
+  }
+  return true;
+}
+
 let flushing = null;
 
+// One drain at a time; callers during a drain share it. The reset happens in
+// .finally, which always runs after `flushing` is assigned. (Resetting inside
+// the drain itself once let an empty queue finish before the assignment,
+// leaving `flushing` set for good, so nothing queued afterwards was ever sent.)
 export function flush() {
-  flushing ??= (async () => {
-    try {
-      let items = read();
-      while (items.length) {
-        const [item] = items;
-        let res;
-        try {
-          res = await fetch(item.url, {
-            method: item.method ?? 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(item.body),
-          });
-        } catch {
-          return; // Offline: try again later.
-        }
-        if (res.status >= 500 || res.status === 429 || res.status === 408) return;
-        items = read().filter((i) => i.id !== item.id);
-        write(items);
-      }
-    } finally {
+  if (!flushing) {
+    flushing = drain().finally(() => {
       flushing = null;
-    }
-  })();
+    });
+  }
   return flushing;
 }
 
 let counter = 0;
 
-// Queues a request and starts sending. Resolves once the queue has been
-// tried, whether or not this item made it.
-export function send(url, body) {
+// Queues a request and sends it. If it was queued just as another drain was
+// finishing, that drain may have missed it, so it gets a second go.
+export async function send(url, body) {
   counter += 1;
-  write([...read(), { id: `${Date.now()}-${counter}`, url, body }]);
-  return flush();
+  const id = `${Date.now()}-${counter}`;
+  write([...read(), { id, url, body }]);
+  const sent = await flush();
+  if (sent && read().some((i) => i.id === id)) await flush();
 }
 
 if (typeof window !== 'undefined') {
