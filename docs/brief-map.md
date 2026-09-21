@@ -77,6 +77,8 @@ mindmap
 | Host the site | Done: https://madethatway.vercel.app. You made the accounts, repo and storage; I pushed the code and fixed what the live environment showed | `vercel.json`, `server/db.js` |
 | (Found going live) | Every function crashed on load because this deployment predated the database connection. The connection is now made on first use, a missing database or password answers with a plain reason instead of crashing, and the database and Blob store are found even when Vercel prefixes their variable names | `server/db.js`, `server/http.js`, `server/auth.js` |
 
+| "That run isn't known here" when signing; any name should show, and a "test" name should go after two minutes | Fixed. My bug: the queue that sends "run started" and "run finished" could jam for good after tidying an empty queue, which answering the daily question, signing and flagging all do. The next run on that page never reached the server. Now fixed and tested on the live site: daily question answered, then two runs in the same page, signed as "test" and as another name, both shown, both gone two minutes later. A run caught by the bug before the fix can't be signed (its timing can't be checked), but every new run works | `src/lib/outbox.js`, `src/lib/outbox.test.js` |
+
 ## Round 8 requests (20 September 2026)
 
 | You asked for | Status | Where |

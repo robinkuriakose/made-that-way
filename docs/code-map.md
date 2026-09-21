@@ -110,7 +110,7 @@ mindmap
 | Names: cleaning, links and swear words, test names, the 3 change limit | `src/lib/names.js:8` (`cleanName`), `:19` (`isTestName`), `:32` (`nameProblem`), `:5` (`NAME_CHANGE_LIMIT`) |
 | Daily question maths: the player's day, plausible days, streaks | `src/lib/daily.js:11` (`localDay`), `:20` (`isPlausibleDay`), `:33` (`computeStreak`) |
 | Daily question over the network, cached per day | `src/lib/dailyClient.js` (`fetchDaily`, `answerDaily`, `cachedDaily`) |
-| Anything that must not be lost offline (run starts, finished runs, events) | `src/lib/outbox.js:63` (`send`), `:32` (`flush`) |
+| Anything that must not be lost offline (run starts, finished runs, events), sent in order | `src/lib/outbox.js` (`send`, `flush`, `drain`); tested in `outbox.test.js` |
 | Activity events | `src/lib/events.js` (`track`, `screenKind`) |
 | Test mode: separate id and storage on this device | `src/lib/testMode.js` (`initTestMode`, `isTestMode`, `storageKey`) |
 | Question bank: live, cached, or bundled | `src/lib/questionBank.js:27` (`initialBank`), `:40` (`fetchLiveBank`) |
@@ -193,7 +193,7 @@ mindmap
 
 | What | Where |
 |---|---|
-| Unit tests (`npm test`) | `src/lib/lib.test.js`, `bank.test.js`, `round8.test.js`, `server/auth.test.js`, `server/db.test.js` |
+| Unit tests (`npm test`) | `src/lib/lib.test.js`, `bank.test.js`, `round8.test.js`, `outbox.test.js`, `server/auth.test.js`, `server/db.test.js` |
 | Runs the `api/` routes inside `npm run dev` against a local Postgres in `.localdb/`, through Vite, so any change to `api/` or `server/` applies on the next request | `tools/local-api.js`, plugged in by `vite.config.js` |
 | Local secrets (builder password) | `.env.local`, not committed |
 | Preview launch config | `.claude/launch.json` |
