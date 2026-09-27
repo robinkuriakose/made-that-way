@@ -44,7 +44,7 @@ Last updated 27 September 2026.
 
 ## Current state (27 September)
 
-- **V2 is built**, from the test group's feedback and the owner's answers. See `docs/v2-plan.md` and the V2 section of `docs/brief-map.md`.
+- **V2 is live** (pushed and checked on the live site in test mode, 27 September: daily question, a run with a redeem, a level break, stop and sign as "test", play again, all in one visit; the test entry left the board after two minutes). Built from the test group's feedback and the owner's answers. See `docs/v2-plan.md` and the V2 section of `docs/brief-map.md`.
 - **Proposed, not agreed:** a principle on every question, and "spot the flaw" questions (`docs/later.md`). Both push the design-thinking promise into the game.
 - **The bank is the limit now:** 38 picture questions on the live site; strong players will see them all in one run.
 - **Still with the owner:** `docs/owner-checklist.md`.

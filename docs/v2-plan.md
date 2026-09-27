@@ -2,7 +2,7 @@
 
 From the test group (27 September 2026): developers and some product designers, average score 50%.
 
-Status: **built** (27 September 2026). Where each piece lives: the V2 section of `docs/brief-map.md`.
+Status: **live** (27 September 2026), checked on the live site in test mode. Where each piece lives: the V2 section of `docs/brief-map.md`.
 
 ## What they said, and what V2 does about it
 
