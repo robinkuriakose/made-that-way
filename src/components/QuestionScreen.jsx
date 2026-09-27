@@ -1,28 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import TopBar from './TopBar.jsx';
 import ImageFrame from './ImageFrame.jsx';
-import { TIME_LIMIT_SECONDS, HINT_PENALTY_SECONDS, redeemPoints } from '../lib/scoring.js';
+import { firstSentence } from '../lib/text.js';
+import { percentRight } from '../lib/levels.js';
 
 const LETTERS = ['A', 'B', 'C', 'D'];
 
-// Elapsed seconds on this question, including the hint penalty. Ticks while
-// the question is open and freezes at the recorded value once answered.
-function useElapsed(current) {
-  const running = current.phase === 'answering' && current.startedAt != null;
-  const [now, setNow] = useState(() => Date.now());
-
-  useEffect(() => {
-    if (!running) return undefined;
-    setNow(Date.now());
-    const timer = setInterval(() => setNow(Date.now()), 250);
-    return () => clearInterval(timer);
-  }, [running, current.hintUsed]);
-
-  if (!running) return current.elapsedSeconds ?? 0;
-  return Math.max(0, (now - current.startedAt) / 1000) + (current.hintUsed ? HINT_PENALTY_SECONDS : 0);
-}
-
-function Option({ index, text, state, isChosen, onAnswer, onExplain }) {
+function Option({ index, text, state, onAnswer }) {
   if (state === 'open') {
     return (
       <button type="button" className="option" onClick={() => onAnswer(index)}>
@@ -37,98 +21,61 @@ function Option({ index, text, state, isChosen, onAnswer, onExplain }) {
       <span className="option-body">
         <span className="option-text">{text}</span>
         {state === 'wrong' && <span className="option-note">Your answer</span>}
-        {state === 'correct' && (
-          <button type="button" className="explain-link" onClick={onExplain}>
-            Explain why
-          </button>
-        )}
-        {state === 'correct' && isChosen && <span className="visually-hidden">Your answer</span>}
       </span>
     </div>
   );
 }
 
-const pointsWord = (n) => (n === 1 ? 'point' : 'points');
+// The reward for answering: why it's made that way, in one line, straight
+// away. "Read more" opens the full reasoning and its source.
+function Reason({ question, onExplain }) {
+  const share = percentRight(question);
+  return (
+    <div className="reason">
+      <p className="reason-label">Why it's made that way</p>
+      <p className="reason-text">{firstSentence(question.explanationRight)}</p>
+      <p className="reason-foot">
+        <button type="button" className="text-button" onClick={onExplain}>
+          Read more
+        </button>
+        {share != null && <span className="muted reason-share">{share}% of players get this right</span>}
+      </p>
+    </div>
+  );
+}
 
-function Status({ question, current, canRedeem, onHint, onOpenRedeem }) {
-  const { phase, points, hintUsed, band, redeem } = current;
-  const backAvailable = redeemPoints(band ?? 0);
-
-  const hint = hintUsed ? (
-    <p className="hint">
-      <span className="hint-label">Hint</span>
-      {question.hint}
-    </p>
-  ) : null;
-
-  switch (phase) {
-    case 'answering':
-      return (
-        hint ?? (
-          <button type="button" className="text-button" onClick={onHint}>
-            Show a hint
-          </button>
-        )
-      );
-    case 'correct':
-      return (
-        <>
-          <p className="feedback">
-            {points > 0 ? (
-              <>
-                Right. <span className="points">+{points}</span>
-              </>
-            ) : (
-              'Right. No points this time, but you knew it.'
-            )}
-          </p>
-          {hint}
-        </>
-      );
-    case 'wrong':
-    case 'redeeming':
-      return (
-        <>
-          <p className="feedback">Not this one.</p>
-          {canRedeem && (
-            <>
-              <p className="muted">
-                {backAvailable > 0
-                  ? `Answer a related question to win back ${backAvailable} ${pointsWord(backAvailable)}.`
-                  : 'The clock ran out, so there are no points to win back, but you can still try a related question.'}
-              </p>
-              <div className="actions">
-                <button type="button" className="button button-accent" onClick={onOpenRedeem}>
-                  Redeem
-                </button>
-              </div>
-            </>
-          )}
-          {hint}
-        </>
-      );
-    case 'redeemed':
-      return (
-        <>
-          <p className="feedback">
-            {redeem?.correct ? (
-              points > 0 ? (
-                <>
-                  Redeemed. <span className="points">+{points}</span>
-                </>
-              ) : (
-                'Redeemed, though there were no points left to win back.'
-              )
-            ) : (
-              'No points back this time.'
-            )}
-          </p>
-          {hint}
-        </>
-      );
-    default:
-      return null;
+function Feedback({ current, streak, lives, canRedeem, onOpenRedeem }) {
+  const { phase, points, redeem } = current;
+  if (phase === 'correct') {
+    return (
+      <p className="feedback feedback-right">
+        Right.{' '}
+        <span className="points points-pop" key={points}>
+          +{points}
+        </span>
+        {streak >= 3 && <span className="streak-note">{streak} in a row</span>}
+      </p>
+    );
   }
+  if (phase === 'redeemed') {
+    return <p className="feedback">{redeem?.correct ? 'Life won back.' : 'No life back this time.'}</p>;
+  }
+  // wrong, or a redeem in progress
+  return (
+    <>
+      <p className="feedback feedback-wrong">{lives === 0 ? 'Not this one. That was your last life.' : 'Not this one. You lost a life.'}</p>
+      {canRedeem && (
+        <div className="redeem-offer">
+          <p className="muted">
+            {lives === 0 ? 'One last chance: answer a related question to stay in.' : 'Answer a related question to win the life back.'}
+          </p>
+          <button type="button" className="button button-accent" onClick={onOpenRedeem}>
+            Win it back
+          </button>
+        </div>
+      )}
+    </>
+  );
 }
 
 // `question` is the view the player sees (options already shuffled), and
@@ -136,11 +83,11 @@ function Status({ question, current, canRedeem, onHint, onOpenRedeem }) {
 export default function QuestionScreen({
   question,
   label,
-  position,
-  total,
-  score,
+  play,
   current,
-  isLast,
+  streak,
+  lives,
+  nextLabel,
   canRedeem,
   flagged,
   onHint,
@@ -152,10 +99,17 @@ export default function QuestionScreen({
   onHome,
   onRestart,
 }) {
-  const elapsed = useElapsed(current);
-  const progress = Math.min(1, elapsed / TIME_LIMIT_SECONDS);
-  const { phase, chosenIndex } = current;
+  const { phase, chosenIndex, hintUsed } = current;
   const answered = phase !== 'answering';
+  const statusRef = useRef(null);
+
+  // On a phone the result and the reason land below the fold. Bring them
+  // into view once, as the answer is given; nothing moves if they fit.
+  useEffect(() => {
+    if (!answered) return;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    statusRef.current?.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+  }, [answered]);
 
   function optionState(i) {
     if (!answered) return 'open';
@@ -166,39 +120,41 @@ export default function QuestionScreen({
 
   return (
     <div className="page">
-      <TopBar position={position} total={total} score={score} progress={progress} onHome={onHome} onRestart={onRestart} />
-      <main className="stage">
+      <TopBar play={play} onHome={onHome} onRestart={onRestart} />
+      <main className="stage question">
         <p className="eyebrow">{label}</p>
         <h1 className="stem">{question.stem}</h1>
         {/* Below the question, so the question itself always sits at the same
             height, and every image fills the same frame. Images show before
-            the answer on purpose: the point is to work it out, not to be
-            tested. */}
+            the answer on purpose: the point is to work it out. */}
         {question.image && <ImageFrame image={question.image} compact />}
 
-        <ol className="options">
+        <ol className={`options${answered ? ' is-answered' : ''}`}>
           {question.options.map((text, i) => (
             <li key={i}>
-              <Option
-                index={i}
-                text={text}
-                state={optionState(i)}
-                isChosen={i === chosenIndex}
-                onAnswer={onAnswer}
-                onExplain={onExplain}
-              />
+              <Option index={i} text={text} state={optionState(i)} onAnswer={onAnswer} />
             </li>
           ))}
         </ol>
 
-        <div className="status" aria-live="polite">
-          <Status
-            question={question}
-            current={current}
-            canRedeem={canRedeem}
-            onHint={onHint}
-            onOpenRedeem={onOpenRedeem}
-          />
+        <div className="status" aria-live="polite" ref={statusRef}>
+          {!answered &&
+            (hintUsed ? (
+              <p className="hint">
+                <span className="hint-label">Hint</span>
+                {question.hint}
+              </p>
+            ) : (
+              <button type="button" className="text-button" onClick={onHint}>
+                Show a hint <span className="muted">(halves the points)</span>
+              </button>
+            ))}
+          {answered && (
+            <>
+              <Feedback current={current} streak={streak} lives={lives} canRedeem={canRedeem} onOpenRedeem={onOpenRedeem} />
+              <Reason question={question} onExplain={onExplain} />
+            </>
+          )}
         </div>
 
         {answered && (
@@ -211,7 +167,7 @@ export default function QuestionScreen({
               </button>
             )}
             <button type="button" className="button button-primary" onClick={onNext}>
-              {isLast ? 'See your results' : 'Next question'}
+              {nextLabel}
             </button>
           </div>
         )}

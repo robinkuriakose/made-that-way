@@ -23,7 +23,7 @@ function Stats({ me }) {
 // points, one go. Afterwards: the reason, how everyone else did, and this
 // player's streak and average. Hidden quietly if the server can't be reached
 // and nothing is cached, so the home screen never shows a broken card.
-export default function DailyCard({ onFlag, flagged }) {
+export default function DailyCard({ onFlag, flagged, onStreak = null }) {
   const day = useMemo(() => localDay(), []);
   const [state, setState] = useState(() => cachedDaily(day));
   const [failed, setFailed] = useState(false);
@@ -40,6 +40,12 @@ export default function DailyCard({ onFlag, flagged }) {
       live = false;
     };
   }, [day]);
+
+  // The streak feeds the home screen's progress line and the streak badge.
+  const streak = state?.me?.streak ?? null;
+  useEffect(() => {
+    if (streak != null) onStreak?.(streak);
+  }, [streak]);
 
   // The same shuffle every time for this device and day.
   const order = useMemo(() => optionOrder(4, seededRandom(`${getDeviceId()}:${day}`)), [day]);

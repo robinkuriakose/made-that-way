@@ -27,7 +27,7 @@ try {
   // No daily questions written yet.
 }
 
-const SCHEMA_VERSION = '8';
+const SCHEMA_VERSION = '9';
 const SEED_HASH = createHash('sha256').update(JSON.stringify([pending, daily, themes])).digest('hex').slice(0, 16);
 
 let ready = null;
@@ -218,6 +218,36 @@ async function createTables() {
     )
   `;
   await sql`CREATE INDEX IF NOT EXISTS daily_answers_day_idx ON daily_answers (day)`;
+  // How often each question is answered right, kept as running totals so
+  // /api/questions never has to scan old runs. Levels use it to put easier
+  // questions first; only verified runs count, and test runs keep their own
+  // rows. Filled once from the runs saved before the table existed.
+  await sql`
+    CREATE TABLE IF NOT EXISTS question_stats (
+      question_id TEXT NOT NULL,
+      is_test BOOLEAN NOT NULL DEFAULT false,
+      asked INTEGER NOT NULL DEFAULT 0,
+      right_count INTEGER NOT NULL DEFAULT 0,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      PRIMARY KEY (question_id, is_test)
+    )
+  `;
+  await sql`
+    INSERT INTO question_stats (question_id, is_test, asked, right_count)
+    SELECT id, false, count(*)::int, count(*) FILTER (WHERE ok)::int
+    FROM (
+      SELECT a->>'id' AS id, coalesce((a->>'correct')::boolean, false) AS ok
+      FROM sessions s CROSS JOIN LATERAL jsonb_array_elements(s.data->'questions') AS a
+      WHERE s.verified AND NOT s.is_test
+      UNION ALL
+      SELECT a->>'redeemQuestionId', coalesce((a->>'redeemPassed')::boolean, false)
+      FROM sessions s CROSS JOIN LATERAL jsonb_array_elements(s.data->'questions') AS a
+      WHERE s.verified AND NOT s.is_test AND coalesce((a->>'redeemUsed')::boolean, false) AND a->>'redeemQuestionId' IS NOT NULL
+    ) answers
+    WHERE id IS NOT NULL AND NOT EXISTS (SELECT 1 FROM question_stats)
+    GROUP BY id
+    ON CONFLICT (question_id, is_test) DO NOTHING
+  `;
   await sql`
     CREATE TABLE IF NOT EXISTS rate_limits (
       key TEXT PRIMARY KEY,

@@ -1,4 +1,5 @@
-// Public: light activity events, for the overview analytics.
+// Public: light activity events, for the overview analytics. level_cleared
+// marks each level a run gets through.
 // POST { type, deviceId, runId?, test?, data? }  or  { events: [ ... ] }
 //
 // run_started also registers the run. Saving a session, flagging a question
@@ -8,6 +9,7 @@ import { sql } from '../db.js';
 import { ensureSchema } from '../schema.js';
 import { body, isId, methodNotAllowed, serverError, sizeOf } from '../http.js';
 import { hit, tooMany } from '../limits.js';
+import { MAX_ANSWERS } from '../../src/lib/scoring.js';
 
 const MAX_PER_REQUEST = 20;
 const DEVICES = ['phone', 'tablet', 'desktop'];
@@ -17,7 +19,8 @@ function cleanData(data) {
   const out = {};
   if (!data || typeof data !== 'object') return out;
   if (DEVICES.includes(data.device)) out.device = data.device;
-  if (Number.isInteger(data.position) && data.position >= 1 && data.position <= 50) out.position = data.position;
+  if (Number.isInteger(data.position) && data.position >= 1 && data.position <= MAX_ANSWERS) out.position = data.position;
+  if (Number.isInteger(data.level) && data.level >= 1 && data.level <= MAX_ANSWERS) out.level = data.level;
   if (typeof data.questionId === 'string' && data.questionId.length <= 64) out.questionId = data.questionId;
   if (Array.isArray(data.themes) && data.themes.length <= 30) out.themes = data.themes.filter((t) => typeof t === 'string' && t.length <= 40);
   return out;
@@ -53,7 +56,7 @@ async function record(e) {
   `;
 }
 
-const TYPES = new Set(['page_opened', 'run_started', 'run_left', 'run_restarted', 'run_resumed', 'daily_opened']);
+const TYPES = new Set(['page_opened', 'run_started', 'run_left', 'run_restarted', 'run_resumed', 'level_cleared', 'daily_opened']);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return methodNotAllowed(res, ['POST']);

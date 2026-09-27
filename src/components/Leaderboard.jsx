@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { resetWords } from '../lib/week.js';
 
 export function ordinal(n) {
   const tens = n % 100;
@@ -13,7 +13,7 @@ export function BoardList({ board, limit = 10 }) {
   const me = board?.me;
   const rows = me && !top.some((e) => e.isMe) ? [...top, null, me] : top;
 
-  if (top.length === 0) return <p className="muted board-empty">No names here yet. Finish a run and add yours.</p>;
+  if (top.length === 0) return <p className="muted board-empty">No names yet this week. Finish a run and add yours.</p>;
 
   return (
     <ol className="board">
@@ -30,7 +30,7 @@ export function BoardList({ board, limit = 10 }) {
               {entry.isMe && <span className="board-you"> (you)</span>}
             </span>
             <span className="board-detail">
-              {entry.correct} of {entry.total} right
+              Level {entry.level} · {entry.correct} right
             </span>
             <span className="board-score">{entry.score}</span>
           </li>
@@ -40,34 +40,19 @@ export function BoardList({ board, limit = 10 }) {
   );
 }
 
-const TABS = [
-  { id: 'week', label: 'This week' },
-  { id: 'allTime', label: 'All time' },
-];
-
-// Both boards behind a small switch. This week is the default, so a newcomer
-// has a real chance of seeing their name near the top; it falls back to all
-// time when nobody has played this week.
-export default function Leaderboard({ boards, limit = 10, title = 'Leaderboard', titleId = 'board-title' }) {
-  // null until the player picks, so the default follows the data as it loads.
-  const [picked, setTab] = useState(null);
-  const weekEmpty = !boards?.week?.entries?.length;
-  const tab = picked ?? (weekEmpty && boards?.allTime?.entries?.length ? 'allTime' : 'week');
+// This week's board. It starts again every Monday (lib/week.js), so a
+// newcomer always has a real chance of seeing their name near the top. A
+// player's all-time best is shown to them alone, on the home screen.
+export default function Leaderboard({ boards, limit = 10, title = 'This week', titleId = 'board-title' }) {
   return (
     <div className="board-wrap">
       <div className="board-head">
         <p id={titleId} className="section-title">
           {title}
         </p>
-        <div className="segmented segmented-small" role="group" aria-labelledby={titleId}>
-          {TABS.map((t) => (
-            <button key={t.id} type="button" aria-pressed={tab === t.id} onClick={() => setTab(t.id)}>
-              {t.label}
-            </button>
-          ))}
-        </div>
+        <p className="muted board-reset">{resetWords()}</p>
       </div>
-      <BoardList board={boards?.[tab]} limit={limit} />
+      <BoardList board={boards?.week} limit={limit} />
     </div>
   );
 }

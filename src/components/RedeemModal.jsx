@@ -13,12 +13,13 @@ function optionState(question, i, chosenIndex) {
 }
 
 // Three related questions are offered after a wrong answer. The player picks
-// one, answers it, and sees the reasoning. Back returns to the three choices
-// until an answer is given; after that the result stands.
+// one and answers it: right wins the lost life back. Either way they see the
+// reasoning. Back returns to the three choices until an answer is given;
+// after that the result stands.
 //
 // `offered` are the views the player sees (options shuffled), and
 // redeem.chosenIndex is in that same order. labelFor gives each its topic label.
-export default function RedeemModal({ offered, redeem, pointsAvailable, labelFor, flagged, onFlag, onPick, onBack, onAnswer, onClose }) {
+export default function RedeemModal({ offered, redeem, lastLife, labelFor, flagged, onFlag, onPick, onBack, onAnswer, onClose }) {
   const headingRef = useRef(null);
   const picked = offered.find((q) => q.id === redeem.pickedId) ?? null;
   const step = !picked ? 'choose' : redeem.chosenIndex == null ? 'answer' : 'result';
@@ -31,14 +32,14 @@ export default function RedeemModal({ offered, redeem, pointsAvailable, labelFor
   if (step === 'choose') {
     body = (
       <>
-        <p className="eyebrow">Redeem</p>
+        <p className="eyebrow">Win a life back</p>
         <h2 id="redeem-title" className="modal-title" tabIndex={-1} ref={headingRef}>
           Pick a related question
         </h2>
         <p className="modal-lede">
-          {pointsAvailable > 0
-            ? `Answer it right to win back ${pointsAvailable} ${pointsAvailable === 1 ? 'point' : 'points'}. Choose the one you feel surest about.`
-            : 'The clock had run out, so there are no points to win back, but you can still try one.'}
+          {lastLife
+            ? 'Answer it right and your run carries on. Choose the one you feel surest about.'
+            : 'Answer it right to win the life back. Choose the one you feel surest about.'}
         </p>
         <ul className="redeem-choices">
           {offered.map((q) => (
@@ -93,17 +94,7 @@ export default function RedeemModal({ offered, redeem, pointsAvailable, labelFor
         {done && (
           <div className="redeem-result" aria-live="polite">
             <p className="feedback">
-              {redeem.correct ? (
-                pointsAvailable > 0 ? (
-                  <>
-                    Redeemed. <span className="points">+{pointsAvailable}</span>
-                  </>
-                ) : (
-                  'Right, though there were no points left to win back.'
-                )
-              ) : (
-                'Not this one either. Here is why.'
-              )}
+              {redeem.correct ? 'Right. Life won back.' : 'Not this one either. Here is why.'}
             </p>
             <Explanation question={picked} wasCorrect={redeem.correct} chosenIndex={redeem.chosenIndex} />
           </div>

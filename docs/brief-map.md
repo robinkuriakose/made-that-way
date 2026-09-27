@@ -58,6 +58,15 @@ mindmap
       UX research PDF
       Hardest quiz
       Persona prompts
+    V2
+      Levels of five, three lives
+      No clock
+      Combos and rising levels
+      Reason right after each answer
+      Picture questions only
+      Whys collection and badges
+      Weekly board
+      Design thinking promise
     Cloud hosting
       Vercel deployment
       Shared database
@@ -65,6 +74,27 @@ mindmap
       Personal best per device
       Score verification
 ```
+
+## V2 (27 September 2026): the test group's feedback
+
+The test group (mostly developers, some product designers, 50% average) didn't see the point, tired by questions 5 to 7, saw no reason to play again, and found text-only questions tiring. Plan and your answers: `docs/v2-plan.md`.
+
+| You asked for | Status | Where |
+|---|---|---|
+| Runs of 5, then "Level 2", with the score carried on like an endless run | Done. Five questions make a level; a break between levels shows the running score, what the level earned and a clue for the next one. The run carries on until the lives run out, the player stops at a break, or the questions run out | `src/lib/scoring.js` (`LEVEL_SIZE`, `replay`), `src/App.jsx` (`next`, `openBreak`), `src/components/LevelBreak.jsx` |
+| An ending for the endless run (my pushback, agreed) | Done: 3 lives. A wrong answer costs one, a right redeem wins it back, and each level cleared adds one (5 at most). Simulated: a player at 50% lasts about 17 questions (level 4); at 70%, most see every picture question | `src/lib/scoring.js` (`START_LIVES`, `MAX_LIVES`), `src/components/Hearts.jsx` |
+| Levels worth more, and slightly harder | Done: x1, x1.2, x1.5, x2, x2.5, then x3. Easier questions come first, measured by how often real players get each one right, so later levels get harder by themselves | `src/lib/scoring.js` (`levelMultiplier`), `src/lib/levels.js` (`buildLevel`, `easeOf`), `server/schema.js` (`question_stats`) |
+| Timer: "no" | Done: no clock at all. Points come from right answers, combos and levels. A hint halves the points | `src/lib/scoring.js` (`pointsFor`) |
+| Rewards: combo, level-up moment, whys collection, 4 badges; no coins | Done. Combo x1.5 from 3 in a row, x2 from 5. Level-up burst, +1 life, perfect level. Every question answered adds its reason to your collection. Badges: first level, perfect level, 3 day streak, 50 whys | `src/lib/rewards.js`, `src/components/WhysScreen.jsx`, `src/components/LevelBreak.jsx` |
+| Micro-interactions and delight | Done: points pop up, the score counts up, hearts drop and refill, a wrong answer shakes, the right one glows, a burst at each level. All still for people who ask their device for less motion | `src/styles.css` (V2 section), `src/components/CountUp.jsx`, `src/components/Burst.jsx` |
+| Weekly leaderboard, resetting Monday; all-time best private | Done: the board starts again at midnight on Monday, India time, for everyone. Your best shows only to you, on the home screen | `src/lib/week.js`, `server/routes/leaderboard.js` (`board`), `src/components/Leaderboard.jsx` |
+| Tidbits at the level break | Done: each break shows a clue for a question in the level about to start, so what you read, you use | `src/lib/levels.js` (`buildLevel`, `withTidbit`), `src/components/LevelBreak.jsx` |
+| The reason right after each answer, one line and "read more" | Done: the short reason (the first sentence, or two when the first only sets up the problem) under every answer, with how many players get it right once ten have answered. On a phone it scrolls into view | `src/components/QuestionScreen.jsx` (`Reason`), `src/lib/text.js` (`firstSentence`) |
+| Home: only the promise, Start and today's question above the fold | Done. Returning players also get one line: best, whys, streak, badges. How it works, the board, the wall, name and topics sit below | `src/components/HomeScreen.jsx` |
+| The promise: people who question design themselves, spot the flaw, know the fix, build better with AI | Done as "Everything is designed. Learn to see the thinking.", with a line about seeing what works, what doesn't and how you'd fix it. The bigger lever, principles on every question, is a proposal in `docs/later.md` | `src/components/HomeScreen.jsx` |
+| Picture questions only in runs | Done: levels play from questions with a picture (38 on the live site). Redeems prefer text questions, so the levels last longer | `src/App.jsx` (`levelPool`), `src/lib/redeem.js` (`keepIds`) |
+| Topics | Changed: with 38 picture questions, filtering by topic would leave too few for an endless run, so your topics now come first instead of being the only ones | `src/lib/levels.js` (`buildLevel`) |
+| (Bot protection, carried over) | Kept, and tightened for longer runs: a run needs at least 2 seconds an answer to be verified, and redeems are checked against the real question too | `server/routes/sessions.js`, `src/lib/verifySession.js` |
 
 ## Round 9 requests (20 and 21 September 2026)
 
@@ -83,11 +113,11 @@ mindmap
 
 | You asked for | Status | Where |
 |---|---|---|
-| Leaving and coming back should change the question, not restart its clock | Done. Leave at a question you haven't answered and you get a different one at that place when you return, so there's no point looking the answer up | `src/App.jsx:267` (`resumeRun`), `src/lib/run.js:171` (`replacementFor`) |
+| Leaving and coming back should change the question, not restart its clock | Done. Leave at a question you haven't answered and you get a different one at that place when you return, so there's no point looking the answer up | `src/App.jsx` (`resumeRun`), `src/lib/levels.js` (`replacementFor`) |
 | Shuffle the answers; they were always in the same place | Done. Every run shuffles each question's four options, and the daily question shuffles per device and day. Answers are still stored in the question's own order, so scoring, flags and analytics are unaffected | `src/lib/shuffle.js`, used in `src/App.jsx:310` |
 | Go back or leave from a question, and Restart | Done: "‹ Home" and "Restart" sit quietly in the top bar, and the phone's Back button now goes home instead of leaving the site. No "are you sure?": Restart offers Undo for ten seconds instead | `src/components/TopBar.jsx`, `src/App.jsx:213` (`goHome`), `:248` (`restartRun`) |
 | Fewer topics; several had under 5 questions | Done: 8 topics, each with 8 to 18 live questions. Every question carries its topics, so nothing in the code changes when you add more | `src/data/themes.json`, `src/lib/themes.js` |
-| Don't make the player think: no question counts in the picker | Done. Pick at least 3 and nothing else is asked. If a choice is small, runs quietly borrow the closest related questions | `src/components/TopicPicker.jsx`, `src/lib/run.js:49` (`questionPool`) |
+| Don't make the player think: no question counts in the picker | Done. Pick at least 3 and nothing else is asked. In V2 your topics come first rather than being the only ones | `src/components/TopicPicker.jsx`, `src/lib/levels.js` (`buildLevel`) |
 | Accept all but the last 5 in the queue | Done: 11 accepted (auto-rickshaw, chips packet, side mirror, fan regulator, pencil, plug, jaali, LPG, matka, middle berth, padlock). Still waiting: plane window hole, pressure cooker, rupee marks, safety match, toothpaste marks | `src/data/questions.json`, `src/data/pending-questions.json` |
 | A daily question, with the points from round 7, plus the next five days written | Done. One a day for everyone, from a queue you manage; it never repeats and never appears in runs; no timer or points; a streak and an average; days with no question never break a streak; the server checks the answer | `server/routes/daily.js`, `src/components/DailyCard.jsx`, `src/data/daily-questions.json` |
 | Recent design questions, using the companies' own reasons | Done: Apple's Liquid Glass, Rapido's "captains turned it down" count, the Swiss passport's UV layers, Duolingo swapping hearts for energy, Google's 2026 icon colours. Rapido never published its reasoning, so that one carries a new "Deduction" confidence label and says so in the answer | `src/data/daily-questions.json`, `SOURCES.md` |
@@ -177,14 +207,14 @@ mindmap
 | # | You asked for | Status | Where |
 |---|---|---|---|
 | 1 | A mind map of the code and a separate one of your instructions | Done | `docs/code-map.md`, this file |
-| 2 | Replace typed redeem: 3 related questions, pick one, answer its 4 options, give back, in a modal | Done. "Give back" was read two ways and both are built: a **Back** link to choose a different question before answering, and **points back** for a right answer (a quarter of the band, as before) | Picking: `src/lib/redeem.js:18`. Flow: `src/App.jsx:157` to `:189`. Window: `src/components/RedeemModal.jsx:18`. Points: `src/lib/scoring.js:4` (`REDEEM_SHARE`) |
+| 2 | Replace typed redeem: 3 related questions, pick one, answer its 4 options, give back, in a modal | Done. "Give back" was read two ways and both are built: a **Back** link to choose a different question before answering, and **points back** for a right answer. In V2 a right redeem wins the lost life back instead | Picking: `src/lib/redeem.js`. Flow: `src/App.jsx` (`openRedeem`, `answerRedeem`). Window: `src/components/RedeemModal.jsx` |
 | 3 | Options of similar length, wrong ones sometimes 2 to 5 words longer | Done. Right answer was longest in 30 of 40; now never more than 2 words longer, and longest about as often as chance | `src/data/questions.json`; rules at `scripts/content-rules.js:6` to `:11` |
 | 4 | A list of the images needed | Waiting on your images | `docs/images-needed.md` |
-| 5 | 10 questions per run | Done | `src/lib/scoring.js:3`; topic limits for 10 at `src/lib/run.js:8` |
+| 5 | 10 questions per run | Replaced in V2 by levels of 5 with lives | `src/lib/scoring.js` (`LEVEL_SIZE`) |
 | 6 | Ask for a name on the score screen | Done, as "Sign your score" | `src/components/EndScreen.jsx:6` (`SignForm`) |
 | 7 | Leaderboard, local storage for now | Done, then moved to shared cloud storage in round 3: top 10 on the end screen, top 5 on the start screen | `src/lib/leaderboard.js`, `api/leaderboard.js`, `src/components/Leaderboard.jsx:9`, `src/App.jsx:290` |
-| 8 | More questions like the Mac menu bar one | Done: 13 new, mostly interface questions; interface gets 3 or 4 of every 10 | New ids: `context-menu`, `rubber-band-scroll`, `keyboard-hidden-targets`, `button-verbs`, `safari-bottom-bar`, `ctrl-alt-del`, `fuel-door-arrow`, `qr-finder`, `google-blue`, `calculator-keypad`, `phone-zero`, `area-codes`, `crosswalk-buttons`. Weighting: `src/lib/run.js:8` |
-| 9 | Fix phone keypad vs calculator, using your two explanations | Changed: split into three questions. Your calculator reason is used (medium confidence). Your rotary reason explains why 0 sits after 9, but not why 1 2 3 is on top, so that stays with Bell Labs' testing | `calculator-keypad`, `phone-keypad`, `phone-zero` in `questions.json`; they share `group: "keypads"` or `"rotary"` so near duplicates never meet in one run (`src/lib/run.js:31`). Notes in `SOURCES.md` |
+| 8 | More questions like the Mac menu bar one | Done: 13 new, mostly interface questions; interface gets 3 or 4 of every 10 | New ids: `context-menu`, `rubber-band-scroll`, `keyboard-hidden-targets`, `button-verbs`, `safari-bottom-bar`, `ctrl-alt-del`, `fuel-door-arrow`, `qr-finder`, `google-blue`, `calculator-keypad`, `phone-zero`, `area-codes`, `crosswalk-buttons`. The topic weighting was replaced in V2 by difficulty (`src/lib/levels.js`) |
+| 9 | Fix phone keypad vs calculator, using your two explanations | Changed: split into three questions. Your calculator reason is used (medium confidence). Your rotary reason explains why 0 sits after 9, but not why 1 2 3 is on top, so that stays with Bell Labs' testing | `calculator-keypad`, `phone-keypad`, `phone-zero` in `questions.json`; they share `group: "keypads"` or `"rotary"` so near duplicates never meet in one run (`src/lib/levels.js`, `openQuestions`). Notes in `SOURCES.md` |
 | 10 | Suggest features and developments | Done in chat, 19 September | Not stored in code |
 | 11 | Test as a user and report the UX | Done in chat, 19 September | Not stored in code |
 
@@ -192,20 +222,20 @@ mindmap
 
 | Requirement | Status | Where |
 |---|---|---|
-| Run of 20 questions | Changed to 10 in round 2 | `src/lib/scoring.js:3` |
-| 45 second limit, shown quietly | Done | `src/lib/scoring.js:1`; timer line `src/components/TopBar.jsx:4`; ticking `src/components/QuestionScreen.jsx:10` |
-| Points: 10, 8, 7, 6, 5 by time, 0 after 45 s | Done | `src/lib/scoring.js:8` (`pointBand`) |
-| One hint per question, costs 10 seconds | Done | `src/lib/scoring.js:2`, `src/App.jsx:133` |
+| Run of 20 questions | Changed to 10 in round 2, then to open-ended levels of 5 in V2 | `src/lib/scoring.js` (`LEVEL_SIZE`) |
+| 45 second limit, shown quietly | Removed in V2, at your call: no clock | |
+| Points: 10, 8, 7, 6, 5 by time, 0 after 45 s | Replaced in V2: 10 for a right answer, times the level and the combo | `src/lib/scoring.js` (`pointsFor`) |
+| One hint per question, costs 10 seconds | Changed in V2: a hint halves the points | `src/lib/scoring.js` (`pointsFor`), `src/App.jsx` (`takeHint`) |
 | Redeem by explaining the reason in your own words, keyword matched | Changed in round 2 to related questions (see above). Keyword matching and `redeemKeywords` were removed | Old code gone; new code `src/lib/redeem.js` |
-| Redeem scores a quarter of the band, rounded up | Done, still applies | `src/lib/scoring.js:20` |
-| After 3 wrong in a row, a tidbit, with its question 3 later | Done | `src/lib/run.js:145` (`planTidbit`), triggered in `src/App.jsx:204` (`next`) |
-| End screen listing every question, tap to read the reasoning | Done; also shows Redeemed | `src/components/EndScreen.jsx:85` |
+| Redeem scores a quarter of the band, rounded up | Replaced in V2: a right redeem wins the lost life back | `src/App.jsx` (`answerRedeem`) |
+| After 3 wrong in a row, a tidbit, with its question 3 later | Replaced in V2: a clue at each level break, for a question in the next level | `src/lib/levels.js` (`buildLevel`), `src/components/LevelBreak.jsx` |
+| End screen listing every question, tap to read the reasoning | Done; grouped by level in V2 | `src/components/EndScreen.jsx` |
 | Analytics per session and question, viewable at `/dev`, exportable | Done; moved into the builder's Analytics tab in round 5, behind the password (`/dev` is gone) | `src/lib/storage.js:19`, `src/lib/analytics.js:31`, `src/builder/Analytics.jsx:81` |
 | All state in localStorage, one write function for analytics | Changed in round 3: analytics and the leaderboard moved to a shared Postgres database, since the point of a leaderboard is that everyone sees the same one. Run-in-progress state and the one write function for analytics both stayed exactly as designed, just now pointed at an API instead of localStorage | `src/lib/storage.js:9` (`recordSession`), `api/sessions.js` |
 | Question fields: stem, 4 options, hint, explanations, confidence, source, optional image, tidbits | Done; `explanationWrong` is one per option, and `tags` and `group` were added in round 2 | `src/data/questions.json`, checked by `scripts/content-rules.js:26` |
 | Never invent or soften a fact; two sources per question | Done | `SOURCES.md` |
-| At most one myth buster per run, in about half of runs | Done | `src/lib/run.js:46` |
-| Topics balanced, neighbours differ | Done | `src/lib/run.js:46`, `:82` |
+| At most one myth buster per run, in about half of runs | Changed in V2: at most one per level | `src/lib/levels.js` (`takeLevel`) |
+| Topics balanced, neighbours differ | Neighbours still differ; balance gave way to difficulty in V2 | `src/lib/levels.js` (`arrangeByTopic`) |
 | Minimal, restrained look; Poppins everywhere; generous whitespace; no card grids | Done | `src/styles.css:1` tokens, `:21` Poppins |
 | No em dashes, no "cognitive load", no "wayfinding" | Done, enforced | `scripts/content-rules.js:13` (`BANNED_TEXT`) |
 | React and Vite, plain CSS, no backend | Changed in round 3: you asked to host on Vercel with cloud storage, which needs a backend. Two small serverless functions were added; everything else about the stack is unchanged | `package.json`, `vite.config.js`, `api/` |
@@ -215,9 +245,10 @@ mindmap
 
 | Question | Current default | Where to change it |
 |---|---|---|
-| How many points should a redeem give back? | A quarter of the band (3 of 10) | `src/lib/scoring.js:4` (`REDEEM_SHARE`) |
+| How long should runs last? | 3 lives, +1 a level (5 at most), a redeem after every wrong answer | `src/lib/scoring.js` (`START_LIVES`, `MAX_LIVES`), `src/App.jsx` (`canRedeem`) |
+| How steeply should points rise? | x1, x1.2, x1.5, x2, x2.5, x3 a level; combo x1.5 from 3, x2 from 5 | `src/lib/scoring.js` (`LEVEL_MULTIPLIERS`, `COMBOS`) |
 | Should redeem questions be written specially for each question, or keep drawing related ones from the pool? | Drawn from the pool, ranked by group, tags and topic | `src/lib/redeem.js:5` |
-| Should interface questions keep extra weight? | 3 or 4 of every 10 | `src/lib/run.js:8` |
+| Unseen questions first, or easy ones first, for returning players? | Unseen first, then your topics, then easiest | `src/lib/levels.js` (`buildLevel`) |
 | Should leaderboard names be moderated? | Not yet: names are only length-capped and stripped of control characters. (Reading analytics now needs the builder password; saving a session is still open, which is the remaining way a scripted fake run could reach the board) | `src/lib/leaderboard.js` (`cleanName`), `api/sessions.js` |
 | Should flags from one device be rate limited? | One flag per question per run per device, no other limit | `api/flags.js` |
 

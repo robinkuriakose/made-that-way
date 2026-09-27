@@ -14,7 +14,7 @@ export { cleanName, NAME_MAX_LENGTH, NAME_CHANGE_LIMIT } from './names.js';
 export { rankEntries, isBetterRun } from './ranking.js';
 
 const NAME_KEY = 'madeThatWay.playerName.v1';
-const EMPTY = { allTime: { entries: [], me: null }, week: { entries: [], me: null }, player: null };
+const EMPTY = { week: { entries: [], me: null, startsAt: null }, player: null };
 
 async function parse(res) {
   try {
@@ -24,7 +24,7 @@ async function parse(res) {
   }
 }
 
-// Both boards (this week, all time) and this device's name, in one call.
+// This week's board and this device's name and best, in one call.
 export async function readBoards(limit = 10) {
   try {
     const res = await fetch(`/api/leaderboard?deviceId=${encodeURIComponent(getDeviceId())}&limit=${limit}`);

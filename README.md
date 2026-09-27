@@ -2,7 +2,7 @@
 
 A quiz that teaches why well designed things are shaped the way they are. One run is 10 multiple choice questions on everyday objects, industrial design, furniture and interfaces, each followed by the reasoning behind the answer.
 
-A run is ten questions, and there's also a question of the day that never repeats. React and Vite, plain CSS, with a handful of serverless functions for shared state. Questions, runs, the leaderboard, flags and the daily queue live in a shared Postgres database; `src/data/questions.json` is the starting set and the fallback if the database is slow. The run you're currently playing stays in your browser (there are no accounts). A password-protected builder at `/builder` is where questions are added, edited, reviewed and measured. Live at https://madethatway.vercel.app.
+A run is played in levels of five questions, with three lives, and there's also a question of the day that never repeats. React and Vite, plain CSS, with a handful of serverless functions for shared state. Questions, runs, the leaderboard, flags and the daily queue live in a shared Postgres database; `src/data/questions.json` is the starting set and the fallback if the database is slow. The run you're currently playing stays in your browser (there are no accounts). A password-protected builder at `/builder` is where questions are added, edited, reviewed and measured. Live at https://madethatway.vercel.app.
 
 What's still needed from the owner (images, credits, account steps) is in [docs/owner-checklist.md](docs/owner-checklist.md).
 
@@ -36,7 +36,7 @@ Other scripts:
 | Command | What it does |
 |---|---|
 | `npm run build` | Production build into `dist/` |
-| `npm test` | Unit tests for scoring, run assembly, tidbits, redeem, leaderboard, analytics, score verification, question rules and builder sign-in (`node --test`) |
+| `npm test` | Unit tests for scoring and lives, level building, clues, redeem, rewards, the weekly reset, leaderboard, analytics, score verification, question rules and builder sign-in (`node --test`) |
 | `npm run check:content` | Checks every content file against the question rules in `src/lib/questionRules.js`: four options, one wrong explanation per wrong option, topics, tags, confidence labels, working source links, alt text on images, even option lengths, no em or en dashes, no banned terms. It also checks the words on screen in `src/`. The builder form and the API use the same rules. |
 | `npm run images` | Converts every image in `images/` to WebP in `public/images/`, with a thumbnail each (max 1600 px wide; GIFs stay animated). An image a question marks as a placeholder goes to `dev-images/` instead, which is never deployed |
 
@@ -125,8 +125,9 @@ server/
 src/
   App.jsx                 run state and the flow between screens
   main.jsx                /builder or the quiz
-  components/             Home, Question, Tidbit, End, DailyCard, WallOfWhys,
-                          Leaderboard, PlayerName, TopicPicker, top bar, Toast,
+  components/             Home, Question, LevelBreak, End, Whys (collection),
+                          DailyCard, WallOfWhys, Leaderboard, PlayerName,
+                          TopicPicker, top bar, Hearts, CountUp, Burst, Toast,
                           Modal, ExplainModal, RedeemModal, FlagModal,
                           Explanation, ImageFrame
   builder/                the /builder app: review queue, questions, daily,
@@ -135,7 +136,8 @@ src/
   data/pending-questions.json   new questions waiting for review
   data/daily-questions.json     the daily queue
   data/themes.json        topics players choose from
-  lib/                    scoring, run building, shuffling, topics, seen list,
+  lib/                    scoring and lives, levels, rewards, the week,
+                          shuffling, topics, seen list,
                           daily, names, ranking, question bank, question rules,
                           flags, outbox, events, test mode, storage
   styles.css
@@ -166,30 +168,39 @@ Keep option lengths even. The correct option must not be more than two words lon
 
 ## How a run is built
 
-1. **Pick 10.** A coin flip decides whether this run gets one myth buster (never more than one). The rest come from the other topics: interface questions get 3 or 4 slots, every other topic 2 or 3. At least 3 of the 10 have a tidbit, and no two share a `group`.
-2. **Order them.** Questions are dealt out so that no two neighbours share a topic. Seeded questions are then moved out of the first five slots, by swapping them with a question of the same topic, because the earliest a tidbit can fire is after question 3, pointing at question 6.
-3. **Fire tidbits during the run.** After a third wrong answer in a row at position n, if no tidbit is pending, the app looks for a tidbit whose question is still unasked. It prefers one on a different topic from the three misses, then a swap that doesn't put two same-topic questions side by side, then the smallest move. That question is swapped into position n + 3 with whatever was there. Both are unasked, so the set of 10 never changes, only the order of what's left. The tidbit card shows before the next question and doesn't count towards the 10. If n + 3 is past the end, or no unasked seeded question is left, no tidbit is shown.
+A run is played in levels of five questions (`src/lib/levels.js`). Only questions with a picture are used, since text-only ones tired people out; a bank without enough pictures falls back to every question.
+
+1. **Each level is built when the one before it is cleared**, from the questions the run hasn't used. Questions this device hasn't seen come first, then the player's chosen topics, then the easiest. How easy a question is comes from real players: `question_stats` keeps how often each one is answered right, pulled towards a half until there are enough answers. So level 1 builds momentum, and later levels get harder by themselves as the easy questions are used up.
+2. **Within a level** no two questions share a `group` (near duplicates never meet in a run), there's at most one myth buster, and neighbours differ in topic.
+3. **At each level break**, a clue (the tidbit) is shown for one of the questions in the level about to start. If none of the five has a clue, the best-placed question that has one is swapped in.
+4. **Leaving and coming back** to an unanswered question swaps it for a fresh one, so there's no point looking the answer up.
+5. **The run ends** when the lives run out, when the player stops at a level break, or when there are no questions left.
 
 ## Answering and redeeming
 
-- A wrong answer shows the correct one straight away, with a Redeem button and Next.
-- Redeem opens a window with three related questions taken from outside the run, so it never spoils a question still to come. They're ranked by shared group, then shared tags, then topic. The player picks one, can go back and pick another until they answer, then sees the result and the reasoning.
-- The three are fixed once offered, so closing and reopening the window can't reroll them. A reload during a redeem reopens it where it was.
-- A right redeem scores `ceil(band * 0.25)`, where the band is the one the wrong answer was given in. Change `REDEEM_SHARE` in `src/lib/scoring.js` to give back more.
+- There's no clock. After an answer: the result, then the short reason (the first sentence of the explanation, or the first two when the first only sets up the problem), with "Read more" for the full reasoning and source, and how many players get it right once ten have answered.
+- A wrong answer costs a life, and offers a redeem: three related questions from outside the run, ranked by shared group, then shared tags, then topic, preferring questions without a picture so the levels last longer. Answer one right and the life comes back. The three are fixed once offered, so closing and reopening the window can't reroll them.
+- Every question answered, redeems included, joins the player's collection of whys.
 
-## Scoring notes
+## Scoring
 
-- Elapsed time includes the 10 second hint penalty. The band uses whole seconds (7.9s is still 10 points), and anything strictly over 45s scores 0.
-- A correct answer after 45 seconds still counts as right for streaks and analytics, with 0 points.
-- A redeemed question still counts as wrong for the tidbit streak.
+All in `src/lib/scoring.js`, shared by the quiz and the server:
+
+- 10 points for a right answer, times the level (x1, x1.2, x1.5, x2, x2.5, then x3) and the combo (x1.5 from three right in a row, x2 from five). A hint halves it. A wrong answer scores 0 and ends the combo.
+- Three lives to start. A wrong answer costs one, a right redeem wins it back, and each level cleared adds one, up to five.
+- `replay()` works all of this out from the answers alone, which is how the server checks a run.
+
+## Rewards
+
+On the device (`src/lib/rewards.js`): the whys uncovered, four badges (first level, perfect level, three day streak, 50 whys) and the best run. The collection screen shows them all. A level break marks the level with a burst, the extra life, a perfect level and any new badge.
 
 ## Leaderboard
 
-Two boards, behind a small switch: **This week** (the best run each player has signed in the last seven days) and **All time** (each player's best ever). This week is the default, so a newcomer has a real chance of seeing their name near the top. Both show on the home screen (top 5) and the end screen (top 10, plus your own row if you rank below the cut).
+One board, **this week's**. It starts again every Monday at midnight, India time, for everyone (`src/lib/week.js`), so a newcomer always has a real chance. A player's all-time best is shown only to them, on the home screen. The board shows on the home screen (top 5) and the end screen (top 10, plus your own row if you rank below the cut).
 
 A player is a device. `src/lib/device.js` gives each browser a random id the first time it's needed (not an account: a new browser or cleared site starts fresh), and the server keeps a separate random public id for the board, so device ids never reach other players. A name is set the first time a run is signed, and can be changed from the home screen three times; changing it renames you everywhere.
 
-The score itself is never taken from the client's word. Signing sends only `{ deviceId, runId, name }`; the server looks up the run it registered when play started and the session saved at the end, checks the timing against its own clock, and recomputes the score from the answers, against the version of each question the player actually saw. A run that doesn't check out is refused, with a plain reason on screen.
+The score itself is never taken from the client's word. Signing sends only `{ deviceId, runId, name }`; the server looks up the run it registered when play started and the session saved at the end, checks the timing against its own clock (at least 2 seconds an answer), and replays the answers with the quiz's own scoring, checking every answer and every redeem against the version of each question the player actually saw. A run that doesn't check out is refused, with a plain reason on screen.
 
 Everything goes through `src/lib/leaderboard.js` on the client and `server/routes/leaderboard.js` on the server.
 
@@ -201,10 +212,10 @@ The day is the player's own date, so it turns over at their midnight; the server
 
 ## Topics
 
-Players can narrow runs to the topics they like (at least three). Topics live in the database, seeded from `src/data/themes.json`, and every question carries the ones it belongs to, so adding a topic is a content change rather than a code change. If a choice covers too few questions, runs quietly borrow the closest related ones rather than asking the player to widen their choice.
+Players can choose the topics they like (at least three), and levels draw from those first before the rest, so an endless run never runs short. Topics live in the database, seeded from `src/data/themes.json`, and every question carries the ones it belongs to, so adding a topic is a content change rather than a code change.
 
 ## Analytics
 
-Each completed run is saved through `recordSession()` in `src/lib/storage.js`, which posts to `api/sessions.js`, the only analytics write in the app. Each session stores the timestamp, total score, duration, tidbits shown, and for each question: id, topic, position, chosen option, correct or not, time to answer, elapsed time including the hint penalty, hint used, redeem used, redeem passed, the three questions offered, the one picked, the option chosen on it, and points awarded.
+Each completed run is saved through `recordSession()` in `src/lib/storage.js`, which posts to `api/sessions.js`, the only analytics write in the app. Each session stores the timestamp, total score, the level reached, how it ended, duration, clues shown, and for each question: id, topic, position, level, chosen option, correct or not, time to answer, hint used, redeem used, redeem passed, the three questions offered, the one picked, the option chosen on it, and points awarded. A verified run also adds its answers to `question_stats`, which levels use to put easier questions first.
 
 In the builder's Analytics tab, redeem rate is out of wrong answers, since redeem is only offered on a wrong answer. Redeem pass rate is out of redeems. The question table also shows how often each question was offered as a redeem choice, how often it was picked, and how often players got it right when they picked it.

@@ -3,13 +3,13 @@ import Leaderboard from './Leaderboard.jsx';
 import PlayerName from './PlayerName.jsx';
 import DailyCard from './DailyCard.jsx';
 import WallOfWhys from './WallOfWhys.jsx';
-import { RUN_LENGTH } from '../lib/scoring.js';
+import { BADGES } from '../lib/rewards.js';
 
 function TopicsLine({ themes, chosen, onChoose }) {
   const names = chosen ? themes.filter((t) => chosen.includes(t.id)).map((t) => t.label) : null;
   return (
     <p className="topics-line">
-      <span className="muted">Topics:</span> <span>{names ? names.join(', ') : 'All'}</span>
+      <span className="muted">Topics first:</span> <span>{names ? names.join(', ') : 'All'}</span>
       <button type="button" className="text-button topics-change" onClick={onChoose}>
         Choose topics
       </button>
@@ -17,13 +17,44 @@ function TopicsLine({ themes, chosen, onChoose }) {
   );
 }
 
+// What this player has built up, in one line. Only for returning players:
+// a first visit shows nothing here.
+function Progress({ best, whys, streak, badges, onCollection }) {
+  if (!best && !whys && !streak && !badges) return null;
+  return (
+    <p className="progress-line">
+      {best && (
+        <span>
+          Your best <strong>{best.score}</strong>
+        </span>
+      )}
+      {whys > 0 && (
+        <button type="button" className="link-button" onClick={onCollection}>
+          <strong>{whys}</strong> {whys === 1 ? 'why' : 'whys'} uncovered
+        </button>
+      )}
+      {streak > 0 && (
+        <span>
+          <strong>{streak}</strong> day streak
+        </span>
+      )}
+      {badges > 0 && (
+        <button type="button" className="link-button" onClick={onCollection}>
+          <strong>{badges}</strong> of {BADGES.length} badges
+        </button>
+      )}
+    </p>
+  );
+}
+
+// Above the fold: the promise, Start and today's question, nothing else.
+// Everything that needs explaining or scrolling sits below.
 export default function HomeScreen({
-  canResume,
-  resumePosition,
-  total,
+  resume,
   boards,
   starting,
   player,
+  progress,
   themes,
   chosenThemes,
   questions,
@@ -33,50 +64,61 @@ export default function HomeScreen({
   onRename,
   onChooseThemes,
   onFlagDaily,
+  onStreak,
+  onCollection,
 }) {
   return (
     <div className="page">
       <TopBar />
       <main className="stage start home">
-        <h1 className="stem">Why are well designed things shaped the way they are?</h1>
+        <h1 className="promise">Everything is designed. Learn to see the thinking.</h1>
         <p className="lede">
-          Ten questions about everyday objects, furniture, machines and screens. Every one has a real reason behind it,
-          and you can read that reason once you answer.
+          Quick questions about the things around you. Each answer shows the problem its designer was solving, so you
+          start to see what works, what doesn't, and how you'd fix it.
         </p>
 
-        <PlayerName name={player.name} changesLeft={player.changesLeft} onRename={onRename} />
-
         <div className="actions start-actions">
-          {canResume ? (
+          {resume ? (
             <>
               <button type="button" className="button button-primary" onClick={onResume}>
-                Continue from question {resumePosition} of {total ?? RUN_LENGTH}
+                {resume}
               </button>
               <button type="button" className="button" onClick={onStart} disabled={starting}>
                 {starting ? 'Loading questions…' : 'Start a new run'}
               </button>
             </>
           ) : (
-            <button type="button" className="button button-primary" onClick={onStart} disabled={starting}>
+            <button type="button" className="button button-primary button-big" onClick={onStart} disabled={starting}>
               {starting ? 'Loading questions…' : 'Start'}
             </button>
           )}
         </div>
-        <TopicsLine themes={themes} chosen={chosenThemes} onChoose={onChooseThemes} />
+        <Progress {...progress} onCollection={onCollection} />
 
-        <ul className="rules">
-          <li>Take up to 45 seconds a question. Answering sooner scores a little more.</li>
-          <li>One hint per question. It costs 10 seconds.</li>
-          <li>Get one wrong and you can win a few points back by answering a related question.</li>
-        </ul>
+        <DailyCard onFlag={onFlagDaily} flagged={dailyFlagged} onStreak={onStreak} />
 
-        <DailyCard onFlag={onFlagDaily} flagged={dailyFlagged} />
-
-        <WallOfWhys questions={questions} themes={themes} />
+        <section className="how" aria-labelledby="how-title">
+          <p id="how-title" className="section-title">
+            How it works
+          </p>
+          <ul className="rules">
+            <li>Five questions make a level, and each level is worth more than the last.</li>
+            <li>You have three lives. A wrong answer costs one; answer a related question to win it back.</li>
+            <li>Clear a level for an extra life. Get answers right in a row for a combo.</li>
+            <li>No clock. Take the time to think it through.</li>
+          </ul>
+        </section>
 
         <section className="end-section start-board" aria-labelledby="start-board-title">
           <Leaderboard boards={boards} limit={5} titleId="start-board-title" />
         </section>
+
+        <WallOfWhys questions={questions} themes={themes} />
+
+        <div className="home-foot">
+          <PlayerName name={player.name} changesLeft={player.changesLeft} onRename={onRename} />
+          <TopicsLine themes={themes} chosen={chosenThemes} onChoose={onChooseThemes} />
+        </div>
       </main>
     </div>
   );

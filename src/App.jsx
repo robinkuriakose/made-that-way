@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { buildRun, planTidbit, replacementFor, WRONG_STREAK_FOR_TIDBIT } from './lib/run.js';
-import { pointBand, redeemPoints, HINT_PENALTY_SECONDS } from './lib/scoring.js';
+import { buildLevel, replacementFor } from './lib/levels.js';
+import { pointsFor, replay, levelOf, comboMultiplier, isPerfectLevel, LEVEL_SIZE } from './lib/scoring.js';
 import { pickRedeemQuestions, REDEEM_CHOICES } from './lib/redeem.js';
 import { loadRun, saveRun } from './lib/runStore.js';
 import { recordSession } from './lib/storage.js';
@@ -17,31 +17,43 @@ import { seenIds, markSeen } from './lib/seen.js';
 import { track, screenKind } from './lib/events.js';
 import { flush } from './lib/outbox.js';
 import { isTestMode, exitTestMode } from './lib/testMode.js';
+import {
+  BADGES,
+  award,
+  earnedBadges,
+  levelBadges,
+  readBest,
+  recordBest,
+  streakBadges,
+  uncover,
+  uncoveredIds,
+  whysBadges,
+} from './lib/rewards.js';
 import HomeScreen from './components/HomeScreen.jsx';
 import QuestionScreen from './components/QuestionScreen.jsx';
-import TidbitScreen from './components/TidbitScreen.jsx';
+import LevelBreak from './components/LevelBreak.jsx';
 import EndScreen from './components/EndScreen.jsx';
+import WhysScreen from './components/WhysScreen.jsx';
 import ExplainModal from './components/ExplainModal.jsx';
 import RedeemModal from './components/RedeemModal.jsx';
 import FlagModal from './components/FlagModal.jsx';
 import TopicPicker from './components/TopicPicker.jsx';
 import Toast from './components/Toast.jsx';
+import { showsImage } from './components/ImageFrame.jsx';
 
 // Bumped when the saved run's shape changes, so an old saved run is dropped
-// instead of crashing. v4: shuffled options, chosen topics, swapped questions.
-const RUN_VERSION = 4;
+// instead of crashing. v5: levels and lives, no clock.
+const RUN_VERSION = 5;
 const DONE_PHASES = ['correct', 'wrong', 'redeemed'];
-const EMPTY_BOARDS = { allTime: { entries: [], me: null }, week: { entries: [], me: null }, player: null };
+const EMPTY_BOARDS = { week: { entries: [], me: null, startsAt: null }, player: null };
 
-function freshQuestionState(startClock) {
+function freshQuestionState() {
   return {
-    startedAt: startClock ? Date.now() : null,
+    startedAt: Date.now(),
     hintUsed: false,
     phase: 'answering',
     chosenIndex: null,
     timeToAnswerMs: null,
-    elapsedSeconds: null,
-    band: null,
     redeem: null,
     points: 0,
   };
@@ -49,64 +61,78 @@ function freshQuestionState(startClock) {
 
 const byIdOf = (list) => Object.fromEntries(list.map((q) => [q.id, q]));
 const ordersFor = (ids) => Object.fromEntries(ids.map((id) => [id, optionOrder()]));
+const pick = (byId, ids) => Object.fromEntries(ids.map((id) => [id, byId[id]]));
+
+// Levels play from questions with a picture: text-only ones tired people out.
+// A bank without enough pictures plays from everything.
+function levelPool(questions) {
+  const withPictures = questions.filter((q) => showsImage(q.image));
+  return withPictures.length >= LEVEL_SIZE * 2 ? withPictures : questions;
+}
+
+// Everything a run has asked, queued or answered as a redeem. None of it
+// comes back in the same run.
+const usedIdsOf = (run) => [...run.order, ...(run.redeemUsed ?? [])];
+
+const levelSizeOf = (run, level) => Math.min(LEVEL_SIZE, run.order.length - (level - 1) * LEVEL_SIZE);
 
 // A run keeps its own copy of every question it shows (so it stays playable
 // and reviewable even if the bank changes underneath it), and the order each
 // question's options are shown in. Answers are always recorded in the
-// question's original option order; see lib/shuffle.js.
+// question's original option order; see lib/shuffle.js. Levels are added one
+// at a time, at each level break (see lib/levels.js).
 function createRun(bank, themeIds) {
-  const order = buildRun(bank.questions, bank.tidbits, Math.random, { themeIds, seen: new Set(seenIds()) });
-  const byId = byIdOf(bank.questions);
+  const { ids } = buildLevel({ questions: levelPool(bank.questions), themeIds, seen: new Set(seenIds()) });
   return {
     version: RUN_VERSION,
     id: makeId(),
     startedAt: Date.now(),
     themeIds: themeIds ?? null,
-    order,
-    questions: Object.fromEntries(order.map((id) => [id, byId[id]])),
-    optionOrders: ordersFor(order),
+    order: ids,
+    questions: pick(byIdOf(bank.questions), ids),
+    optionOrders: ordersFor(ids),
     index: 0,
     results: [],
-    current: freshQuestionState(true),
-    wrongStreak: 0,
-    pending: null,
-    tidbitOnScreen: null,
+    current: freshQuestionState(),
+    onBreak: null,
     tidbitsShown: [],
     redeemOffered: [],
+    redeemUsed: [],
     swapped: [],
     flags: {},
+    badges: [],
+    newWhys: 0,
     finishedAt: null,
+    endReason: null,
+    isNewBest: false,
     signed: null,
   };
-}
-
-function runTidbits(run) {
-  return splitTidbits(Object.values(run.questions)).tidbits;
 }
 
 // A saved run is only usable if it's the current shape and has every
 // question it points at.
 function isUsableRun(run) {
   if (!run || run.version !== RUN_VERSION || !Array.isArray(run.order) || !run.questions || !run.optionOrders) return false;
+  if (!Array.isArray(run.results) || !replay(run.results)) return false;
   const has = (id) => Boolean(run.questions[id]);
   return (
     run.order.every(has) &&
-    (!run.tidbitOnScreen || runTidbits(run).some((t) => t.id === run.tidbitOnScreen)) &&
+    (Boolean(run.finishedAt) || run.index < run.order.length) &&
     (!run.current?.redeem || run.current.redeem.offered.every(has))
   );
 }
 
-function sumPoints(results) {
-  return results.reduce((total, r) => total + r.points, 0);
-}
-
 function toSession(run) {
+  const summary = replay(run.results);
   return {
     id: run.id,
     deviceId: getDeviceId(),
+    format: 2,
     timestamp: new Date(run.startedAt).toISOString(),
     finishedAt: new Date(run.finishedAt).toISOString(),
-    totalScore: sumPoints(run.results),
+    totalScore: summary?.score ?? 0,
+    level: summary?.level ?? 1,
+    endReason: run.endReason,
     durationMs: run.finishedAt - run.startedAt,
     themes: run.themeIds,
     tidbitsShown: run.tidbitsShown,
@@ -114,6 +140,8 @@ function toSession(run) {
     questions: run.results,
   };
 }
+
+const badgeWords = (ids) => ids.map((id) => BADGES.find((b) => b.id === id)?.label ?? id).join(' and ');
 
 export default function App() {
   const testMode = useMemo(() => isTestMode(), []);
@@ -144,6 +172,9 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [localName, setLocalName] = useState(readLocalName);
   const [dailyFlagged, setDailyFlagged] = useState(false);
+  const [collection, setCollection] = useState(() => ({ uncovered: uncoveredIds(), badges: earnedBadges() }));
+  const [best, setBest] = useState(readBest);
+  const [streak, setStreak] = useState(0);
 
   useEffect(() => {
     saveRun(run);
@@ -174,15 +205,23 @@ export default function App() {
   const question = run ? run.questions[currentId] : null;
   const orderOf = (id) => run?.optionOrders?.[id];
   const labelFor = (q) => questionLabel(q, bank.themes);
+  // Everything that follows from the answers so far: score, lives, combo.
+  const progress = useMemo(() => (run ? replay(run.results) : null), [run?.results]);
 
   // Remember what's been shown, so later runs prefer questions not seen yet.
+  const onQuestion = screen === 'play' && Boolean(currentId) && !run?.onBreak;
   useEffect(() => {
-    if (screen === 'play' && currentId && !run?.tidbitOnScreen) markSeen([currentId]);
-  }, [screen, currentId, run?.tidbitOnScreen]);
+    if (onQuestion) markSeen([currentId]);
+  }, [onQuestion, currentId]);
 
-  // Navigation. Play and the end screen each get a history entry, so the
-  // phone's Back button (or the browser's) returns to the home screen
-  // instead of leaving the site.
+  // Each new question, break or screen starts at the top of the page.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [screen, run?.index, Boolean(run?.onBreak)]);
+
+  // Navigation. Play, the end screen and the collection each get a history
+  // entry, so the phone's Back button (or the browser's) returns to the home
+  // screen instead of leaving the site.
   const showHome = useCallback(() => {
     const r = runRef.current;
     if (screenRef.current === 'play' && r && !r.finishedAt) track('run_left', { runId: r.id, data: { position: r.index + 1 } });
@@ -223,6 +262,39 @@ export default function App() {
     setRun((r) => ({ ...r, current: { ...r.current, redeem: { ...r.current.redeem, ...patch } } }));
   }
 
+  // Rewards. Badges are kept on the device; the ones won during a run are
+  // also listed on its end screen.
+  function grant(ids) {
+    const fresh = award(ids);
+    if (fresh.length) setCollection({ uncovered: uncoveredIds(), badges: earnedBadges() });
+    return fresh;
+  }
+
+  function announce(fresh) {
+    if (!fresh.length) return;
+    if (runRef.current && !runRef.current.finishedAt) setRun((r) => ({ ...r, badges: [...r.badges, ...fresh] }));
+    setToast({ message: `New badge: ${badgeWords(fresh)}.`, duration: 5000 });
+  }
+
+  // A question's reason has been shown: it joins the collection.
+  function uncovered(id) {
+    const fresh = uncover([id]);
+    if (!fresh) return 0;
+    const all = uncoveredIds();
+    setCollection({ uncovered: all, badges: earnedBadges() });
+    announce(grant(whysBadges(all.length)));
+    return fresh;
+  }
+
+  const onStreak = useCallback((n) => {
+    setStreak(n);
+    const fresh = award(streakBadges(n));
+    if (fresh.length) {
+      setCollection({ uncovered: uncoveredIds(), badges: earnedBadges() });
+      setToast({ message: `New badge: ${badgeWords(fresh)}.`, duration: 5000 });
+    }
+  }, []);
+
   async function startRun() {
     if (starting) return null;
     const previous = runRef.current;
@@ -249,7 +321,7 @@ export default function App() {
     const previous = await startRun();
     if (!previous || previous.finishedAt) return;
     setToast({
-      message: 'New quiz started.',
+      message: 'New run started.',
       actionLabel: 'Undo',
       onAction: () => {
         const abandoned = runRef.current;
@@ -268,13 +340,12 @@ export default function App() {
     const r = runRef.current;
     if (!r) return;
     let next = r;
-    if (r.current.phase === 'answering' && !r.tidbitOnScreen) {
+    if (r.current.phase === 'answering' && !r.onBreak) {
       const replacedId = r.order[r.index];
       const newId = replacementFor({
         replacedId,
-        runIds: r.order,
-        excludeIds: r.redeemOffered,
-        questions: bankRef.current.questions,
+        usedIds: usedIdsOf(r),
+        questions: levelPool(bankRef.current.questions),
         themeIds: r.themeIds,
         seen: new Set(seenIds()),
       });
@@ -287,11 +358,10 @@ export default function App() {
           questions: { ...r.questions, [newId]: byIdOf(bankRef.current.questions)[newId] },
           optionOrders: { ...r.optionOrders, [newId]: optionOrder() },
           swapped: [...(r.swapped ?? []), { id: replacedId, position: r.index + 1 }],
-          pending: r.pending?.seededIndex === r.index ? null : r.pending,
-          current: freshQuestionState(true),
+          current: freshQuestionState(),
         };
       } else {
-        // Nothing left to swap in (a tiny bank): carry on with a fresh clock.
+        // Nothing left to swap in: carry on with the same question.
         next = { ...r, current: { ...r.current, startedAt: Date.now() } };
       }
     }
@@ -311,18 +381,15 @@ export default function App() {
     const c = run.current;
     if (c.phase !== 'answering') return;
     const chosen = toOriginal(orderOf(currentId), displayIndex);
-    const timeToAnswerMs = Date.now() - c.startedAt;
-    const elapsedSeconds = timeToAnswerMs / 1000 + (c.hintUsed ? HINT_PENALTY_SECONDS : 0);
-    const band = pointBand(elapsedSeconds);
     const correct = chosen === question.correctIndex;
-    patchCurrent({
-      phase: correct ? 'correct' : 'wrong',
-      chosenIndex: chosen,
-      timeToAnswerMs,
-      elapsedSeconds,
-      band,
-      points: correct ? band : 0,
-    });
+    const position = run.index + 1;
+    const points = pointsFor({ correct, level: levelOf(position), streak: correct ? progress.streak + 1 : 0, hintUsed: c.hintUsed });
+    const fresh = uncovered(question.id);
+    setRun((r) => ({
+      ...r,
+      newWhys: (r.newWhys ?? 0) + fresh,
+      current: { ...r.current, phase: correct ? 'correct' : 'wrong', chosenIndex: chosen, timeToAnswerMs: Date.now() - c.startedAt, points },
+    }));
   }
 
   // The three offered questions are chosen once per question and kept, so
@@ -332,12 +399,18 @@ export default function App() {
     if (c.phase !== 'wrong' || !canRedeem) return;
     const offered =
       c.redeem?.offered ??
-      pickRedeemQuestions({ missed: question, questions: bank.questions, runIds: run.order, alreadyOffered: run.redeemOffered });
+      pickRedeemQuestions({
+        missed: question,
+        questions: bank.questions,
+        usedIds: usedIdsOf(run),
+        alreadyOffered: run.redeemOffered,
+        keepIds: levelPool(bank.questions).map((q) => q.id),
+      });
     const bankById = byIdOf(bank.questions);
     const fresh = offered.filter((id) => !run.questions[id]);
     setRun((r) => ({
       ...r,
-      questions: { ...r.questions, ...Object.fromEntries(fresh.map((id) => [id, bankById[id]])) },
+      questions: { ...r.questions, ...pick(bankById, fresh) },
       optionOrders: { ...ordersFor(fresh), ...r.optionOrders },
       redeemOffered: c.redeem ? r.redeemOffered : [...r.redeemOffered, ...offered],
       current: {
@@ -363,21 +436,79 @@ export default function App() {
     if (run.current.phase === 'redeeming') patchRedeem({ pickedId: null });
   }
 
+  // Right wins the lost life back. The question answered is used up for the
+  // rest of the run either way.
   function answerRedeem(displayIndex) {
     const c = run.current;
     if (c.phase !== 'redeeming' || !c.redeem?.pickedId) return;
     const pickedId = c.redeem.pickedId;
     const chosen = toOriginal(orderOf(pickedId), displayIndex);
     const correct = chosen === run.questions[pickedId].correctIndex;
+    const fresh = uncovered(pickedId);
     setRun((r) => ({
       ...r,
-      current: {
-        ...r.current,
-        phase: 'redeemed',
-        points: correct ? redeemPoints(r.current.band) : 0,
-        redeem: { ...r.current.redeem, chosenIndex: chosen, correct },
-      },
+      newWhys: (r.newWhys ?? 0) + fresh,
+      redeemUsed: [...(r.redeemUsed ?? []), pickedId],
+      current: { ...r.current, phase: 'redeemed', redeem: { ...r.current.redeem, chosenIndex: chosen, correct } },
     }));
+  }
+
+  function finishRun(base, reason) {
+    const finished = { ...base, onBreak: null, finishedAt: Date.now(), endReason: reason };
+    const summary = replay(finished.results) ?? { score: 0, level: 1 };
+    const isNewBest = recordBest({ score: summary.score, level: summary.level });
+    if (isNewBest) setBest(readBest());
+    setRun({ ...finished, isNewBest });
+    recordSession(toSession(finished));
+    enter('end');
+  }
+
+  // A level is cleared: build the next one now, so its clue can be shown on
+  // the break, and mark the moment. With nothing left to ask, the run is
+  // complete.
+  function openBreak(base, state) {
+    const level = levelOf(base.results.length);
+    const slice = base.results.slice(-LEVEL_SIZE);
+    const earned = grant(levelBadges(slice));
+    track('level_cleared', { runId: base.id, data: { level, position: base.results.length } });
+
+    const current = bankRef.current;
+    const pool = levelPool(current.questions);
+    const { tidbits } = splitTidbits(pool);
+    const built = buildLevel({
+      questions: pool,
+      usedIds: usedIdsOf(base),
+      tidbits,
+      usedTidbitIds: base.tidbitsShown.map((t) => t.tidbitId),
+      withTidbit: true,
+      themeIds: base.themeIds,
+      seen: new Set(seenIds()),
+    });
+    const withBadges = { ...base, badges: [...base.badges, ...earned] };
+    if (!built.ids.length) {
+      finishRun(withBadges, 'complete');
+      return;
+    }
+    const tidbit = tidbits.find((t) => t.id === built.tidbitId) ?? null;
+    setRun({
+      ...withBadges,
+      order: [...base.order, ...built.ids],
+      questions: { ...base.questions, ...pick(byIdOf(current.questions), built.ids) },
+      optionOrders: { ...base.optionOrders, ...ordersFor(built.ids) },
+      index: base.index + 1,
+      current: freshQuestionState(),
+      onBreak: {
+        level,
+        perfect: isPerfectLevel(slice),
+        lifeGained: state.steps.at(-1).lifeGained,
+        levelPoints: slice.reduce((sum, r) => sum + r.points, 0),
+        badges: earned,
+        tidbit: tidbit && { id: tidbit.id, text: tidbit.text, questionId: tidbit.tidbitFor },
+      },
+      tidbitsShown: tidbit
+        ? [...base.tidbitsShown, { tidbitId: tidbit.id, afterLevel: level, seededQuestionId: tidbit.tidbitFor }]
+        : base.tidbitsShown,
+    });
   }
 
   function next() {
@@ -385,82 +516,41 @@ export default function App() {
     if (!DONE_PHASES.includes(c.phase)) return;
     setRedeemOpen(false);
 
+    const position = run.index + 1;
+    const redeemed = c.phase === 'redeemed';
     const record = {
       id: question.id,
       topic: question.topic,
-      position: run.index + 1,
+      position,
+      level: levelOf(position),
       chosenIndex: c.chosenIndex,
       correct: c.phase === 'correct',
       timeToAnswerMs: Math.round(c.timeToAnswerMs),
-      elapsedSeconds: Math.round(c.elapsedSeconds * 10) / 10,
+      elapsedSeconds: Math.round(c.timeToAnswerMs / 100) / 10,
       hintUsed: c.hintUsed,
-      redeemUsed: c.phase === 'redeemed',
-      redeemPassed: c.phase === 'redeemed' && c.redeem?.correct === true,
+      redeemUsed: redeemed,
+      redeemPassed: redeemed && c.redeem?.correct === true,
       redeemOffered: c.redeem?.offered ?? null,
-      redeemQuestionId: c.phase === 'redeemed' ? c.redeem.pickedId : null,
-      redeemChosenIndex: c.phase === 'redeemed' ? c.redeem.chosenIndex : null,
+      redeemQuestionId: redeemed ? c.redeem.pickedId : null,
+      redeemChosenIndex: redeemed ? c.redeem.chosenIndex : null,
       points: c.points,
     };
-    const results = [...run.results, record];
-    const wrongStreak = record.correct ? 0 : run.wrongStreak + 1;
-    // A pending tidbit is resolved once its seeded question has been answered.
-    const pending = run.pending && run.pending.seededIndex <= run.index ? null : run.pending;
+    const base = { ...run, results: [...run.results, record] };
+    const state = replay(base.results);
 
-    if (run.index >= run.order.length - 1) {
-      const finished = { ...run, results, wrongStreak, pending, finishedAt: Date.now() };
-      setRun(finished);
-      recordSession(toSession(finished));
-      enter('end');
-      return;
-    }
-
-    let order = run.order;
-    let nextPending = pending;
-    let nextStreak = wrongStreak;
-    let tidbitOnScreen = null;
-    let tidbitsShown = run.tidbitsShown;
-
-    if (!pending && wrongStreak >= WRONG_STREAK_FOR_TIDBIT) {
-      const plan = planTidbit({
-        order,
-        afterIndex: run.index,
-        missedIds: results.slice(-WRONG_STREAK_FOR_TIDBIT).map((r) => r.id),
-        questionsById: run.questions,
-        tidbits: runTidbits(run),
-        usedTidbitIds: run.tidbitsShown.map((t) => t.tidbitId),
-      });
-      if (plan) {
-        order = plan.order;
-        nextPending = { tidbitId: plan.tidbit.id, seededIndex: plan.seededIndex };
-        nextStreak = 0;
-        tidbitOnScreen = plan.tidbit.id;
-        tidbitsShown = [
-          ...tidbitsShown,
-          {
-            tidbitId: plan.tidbit.id,
-            shownAfterPosition: run.index + 1,
-            seededQuestionId: plan.tidbit.tidbitFor,
-            seededPosition: plan.seededIndex + 1,
-          },
-        ];
-      }
-    }
-
-    setRun({
-      ...run,
-      order,
-      results,
-      wrongStreak: nextStreak,
-      pending: nextPending,
-      tidbitOnScreen,
-      tidbitsShown,
-      index: run.index + 1,
-      current: freshQuestionState(!tidbitOnScreen),
-    });
+    if (!state || state.lives <= 0) finishRun(base, 'lives');
+    else if (position % LEVEL_SIZE === 0) openBreak(base, state);
+    else if (run.index < run.order.length - 1) setRun({ ...base, index: run.index + 1, current: freshQuestionState() });
+    // A short last level: the bank has nothing more to ask.
+    else finishRun(base, 'complete');
   }
 
-  function continueFromTidbit() {
-    setRun((r) => ({ ...r, tidbitOnScreen: null, current: { ...r.current, startedAt: Date.now() } }));
+  function continueLevel() {
+    setRun((r) => ({ ...r, onBreak: null, current: { ...r.current, startedAt: Date.now() } }));
+  }
+
+  function finishAtBreak() {
+    if (run?.onBreak) finishRun(run, 'finished');
   }
 
   async function signScore(name) {
@@ -528,39 +618,56 @@ export default function App() {
   const closeExplain = () => setExplaining(null);
   const clearToast = useCallback(() => setToast(null), []);
 
-  // Enough unasked questions outside the run to offer a full set of three.
+  // Enough unused questions outside the run to offer a full set of three.
   const canRedeem = Boolean(
-    run && (run.current.redeem || bank.questions.length - run.order.length >= REDEEM_CHOICES),
+    run &&
+      (run.current.redeem ||
+        bank.questions.filter((q) => !usedIdsOf(run).includes(q.id)).length >= REDEEM_CHOICES),
   );
   const flagged = (id) => Boolean(run?.flags?.[id]);
 
   let body;
-  if (screen === 'play' && run && !run.finishedAt) {
-    const score = sumPoints(run.results) + run.current.points;
-    if (run.tidbitOnScreen) {
+  if (screen === 'play' && run && !run.finishedAt && progress) {
+    const c = run.current;
+    const lostNow = c.phase === 'wrong' || c.phase === 'redeeming' || (c.phase === 'redeemed' && !c.redeem?.correct);
+    const lives = progress.lives - (lostNow ? 1 : 0);
+    const streakNow = c.phase === 'correct' ? progress.streak + 1 : DONE_PHASES.includes(c.phase) || c.phase === 'redeeming' ? 0 : progress.streak;
+    const score = progress.score + c.points;
+    const level = levelOf(run.index + 1);
+
+    if (run.onBreak) {
       body = (
-        <TidbitScreen
-          tidbit={runTidbits(run).find((t) => t.id === run.tidbitOnScreen)}
-          position={run.index + 1}
-          total={run.order.length}
-          score={score}
-          onContinue={continueFromTidbit}
+        <LevelBreak
+          brk={run.onBreak}
+          score={progress.score}
+          lives={progress.lives}
+          starting={starting}
+          onContinue={continueLevel}
+          onFinish={finishAtBreak}
           onHome={goHome}
           onRestart={restartRun}
         />
       );
     } else {
+      const levelSize = levelSizeOf(run, level);
+      const step = run.index - (level - 1) * LEVEL_SIZE + 1;
+      const nextLabel =
+        lives <= 0 || (step === levelSize && levelSize < LEVEL_SIZE)
+          ? 'See your run'
+          : step === LEVEL_SIZE
+            ? `Finish level ${level}`
+            : 'Next question';
       body = (
         <QuestionScreen
           key={`${run.id}-${run.index}-${currentId}`}
           question={viewOf(question, orderOf(currentId))}
           label={labelFor(question)}
-          position={run.index + 1}
-          total={run.order.length}
-          score={score}
-          current={{ ...run.current, chosenIndex: toDisplay(orderOf(currentId), run.current.chosenIndex) }}
-          isLast={run.index === run.order.length - 1}
-          canRedeem={canRedeem && run.current.phase !== 'redeemed'}
+          play={{ level, step, levelSize, lives, score, combo: comboMultiplier(streakNow) }}
+          current={{ ...c, chosenIndex: toDisplay(orderOf(currentId), c.chosenIndex) }}
+          streak={streakNow}
+          lives={lives}
+          nextLabel={nextLabel}
+          canRedeem={canRedeem && c.phase !== 'redeemed'}
           flagged={flagged(question.id)}
           onHint={takeHint}
           onAnswer={answer}
@@ -571,15 +678,15 @@ export default function App() {
           onFlag={() =>
             openFlag({
               questionId: question.id,
-              chosenIndex: run.current.chosenIndex,
-              wasCorrect: run.current.phase === 'correct',
+              chosenIndex: c.chosenIndex,
+              wasCorrect: c.phase === 'correct',
             })
           }
           onExplain={() =>
             setExplaining({
               questionId: question.id,
-              wasCorrect: run.current.phase === 'correct',
-              chosenIndex: run.current.chosenIndex,
+              wasCorrect: c.phase === 'correct',
+              chosenIndex: c.chosenIndex,
             })
           }
         />
@@ -597,22 +704,46 @@ export default function App() {
         starting={starting}
         onSign={signScore}
         onHome={goHome}
+        onCollection={() => enter('whys')}
         onExplain={(result) =>
           setExplaining({ questionId: result.id, wasCorrect: result.correct, chosenIndex: result.chosenIndex })
         }
         onPlayAgain={startRun}
       />
     );
+  } else if (screen === 'whys') {
+    body = (
+      <WhysScreen
+        uncovered={collection.uncovered}
+        questionsById={questionsById}
+        total={bank.questions.length}
+        badges={collection.badges}
+        labelFor={labelFor}
+        starting={starting}
+        onStart={startRun}
+        onHome={goHome}
+        onExplain={(id) => setExplaining({ questionId: id, wasCorrect: true, chosenIndex: null, fromCollection: true })}
+      />
+    );
   } else {
-    const canResume = Boolean(run && !run.finishedAt);
+    const inRun = run && !run.finishedAt;
+    const resume = inRun
+      ? run.onBreak
+        ? `Continue to level ${run.onBreak.level + 1}`
+        : `Continue level ${levelOf(run.index + 1)}`
+      : null;
     body = (
       <HomeScreen
-        canResume={canResume}
-        resumePosition={canResume ? run.index + 1 : null}
-        total={run?.order.length}
+        resume={resume}
         boards={boards}
         starting={starting}
         player={{ name: boards.player?.name ?? localName, changesLeft: boards.player ? boards.player.nameChangesLeft : null }}
+        progress={{
+          best,
+          whys: collection.uncovered.length,
+          streak,
+          badges: Object.keys(collection.badges).length,
+        }}
         themes={bank.themes}
         chosenThemes={chosenThemes}
         questions={bank.questions}
@@ -622,6 +753,8 @@ export default function App() {
         onRename={rename}
         onChooseThemes={() => setPickingTopics(true)}
         onFlagDaily={openFlag}
+        onStreak={onStreak}
+        onCollection={() => enter('whys')}
       />
     );
   }
@@ -655,7 +788,7 @@ export default function App() {
           chosenIndex={toDisplay(orderOf(explaining.questionId), explaining.chosenIndex)}
           flagged={flagged(explaining.questionId)}
           onFlag={
-            run
+            run && !explaining.fromCollection
               ? () =>
                   openFlag({
                     questionId: explaining.questionId,
@@ -679,7 +812,7 @@ export default function App() {
         <RedeemModal
           offered={redeem.offered.map((id) => viewOf(run.questions[id], orderOf(id)))}
           redeem={{ ...redeem, chosenIndex: toDisplay(pickedOrder, redeem.chosenIndex) }}
-          pointsAvailable={redeemPoints(run.current.band ?? 0)}
+          lastLife={Boolean(progress) && progress.lives <= 1}
           labelFor={labelFor}
           flagged={flagged(redeem.pickedId)}
           onFlag={(picked) =>
@@ -699,6 +832,7 @@ export default function App() {
           message={toast.message}
           actionLabel={toast.actionLabel}
           onAction={toast.onAction}
+          duration={toast.duration}
           onDone={clearToast}
         />
       )}

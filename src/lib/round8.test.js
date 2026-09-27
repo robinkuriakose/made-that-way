@@ -3,11 +3,8 @@ import assert from 'node:assert/strict';
 import { seededRandom, optionOrder, viewOf, toOriginal, toDisplay } from './shuffle.js';
 import { cleanName, isTestName, nameProblem } from './names.js';
 import { computeStreak, isPlausibleDay } from './daily.js';
-import { buildRun, questionPool, replacementFor } from './run.js';
-import { verifySession } from './verifySession.js';
 import { checkQuestion } from './questionRules.js';
 import { checkCopy } from '../../scripts/content-rules.js';
-import { RUN_LENGTH } from './scoring.js';
 
 const question = {
   id: 'q',
@@ -64,69 +61,6 @@ test('only days within a day of the server date are accepted', () => {
   assert.equal(isPlausibleDay('2026-09-19', now), true);
   assert.equal(isPlausibleDay('2026-09-17', now), false);
   assert.equal(isPlausibleDay('2027-01-01', now), false);
-});
-
-// A bank of 60 questions over three themes and four topics.
-function bank() {
-  const topics = ['everyday-object', 'industrial', 'furniture', 'ui'];
-  return Array.from({ length: 60 }, (_, i) => ({
-    id: `q${i}`,
-    topic: topics[i % 4],
-    themes: [['a', 'b', 'c'][i % 3]],
-    tags: [`t${i % 5}`],
-  }));
-}
-
-test('a narrow topic choice is quietly topped up to a full pool from related questions', () => {
-  const questions = bank();
-  const onlyA = questionPool(questions, ['a'], seededRandom('x'));
-  assert.equal(onlyA.length, 20, 'a stays at its 20');
-  const tiny = questions.slice(0, 12);
-  const pool = questionPool(tiny, ['a'], seededRandom('x'));
-  assert.ok(pool.length >= Math.min(tiny.length, RUN_LENGTH), 'enough to build a run');
-});
-
-test('runs keep to chosen topics and prefer questions not seen yet', () => {
-  const questions = bank();
-  const order = buildRun(questions, [], seededRandom('run'), { themeIds: ['a', 'b'] });
-  const byId = Object.fromEntries(questions.map((q) => [q.id, q]));
-  assert.equal(order.length, RUN_LENGTH);
-  assert.ok(order.every((id) => ['a', 'b'].includes(byId[id].themes[0])));
-  const seen = new Set(questions.filter((q) => q.themes[0] !== 'c').map((q) => q.id).slice(0, 30));
-  const fresh = buildRun(questions, [], seededRandom('fresh'), { seen });
-  assert.ok(fresh.filter((id) => seen.has(id)).length <= 2, 'mostly unseen questions');
-});
-
-test('a swapped-in question is new to the run, shares no group, and keeps the topic when it can', () => {
-  const questions = [
-    { id: 'a', topic: 'ui', group: 'g' },
-    { id: 'b', topic: 'ui' },
-    { id: 'c', topic: 'ui', group: 'g' },
-    { id: 'd', topic: 'furniture' },
-    { id: 'e', topic: 'ui' },
-    { id: 'm', topic: 'myth-buster' },
-  ];
-  const pick = replacementFor({ replacedId: 'b', runIds: ['a', 'b', 'd'], questions, random: seededRandom('s') });
-  assert.equal(pick, 'e', 'c shares a group with a, d is in the run, m is a myth');
-  assert.equal(replacementFor({ replacedId: 'b', runIds: ['a', 'b', 'd', 'e'], excludeIds: ['c'], questions }), null);
-});
-
-test('a run checks out against the version of a question its player saw', () => {
-  const answers = Array.from({ length: RUN_LENGTH }, (_, i) => ({
-    id: `v${i}`,
-    topic: 'ui',
-    chosenIndex: 0,
-    correct: true,
-    elapsedSeconds: 5,
-    points: 10,
-  }));
-  const session = { questions: answers, timestamp: '2026-09-20T10:00:00.000Z', finishedAt: '2026-09-20T10:05:00.000Z', durationMs: 300000 };
-  const current = Object.fromEntries(answers.map((a) => [a.id, { id: a.id, topic: 'ui', correctIndex: 0 }]));
-  // v0's answer was changed to option 3 after this run started.
-  const edited = { ...current, v0: [{ id: 'v0', topic: 'ui', correctIndex: 3 }] };
-  assert.equal(verifySession(session, edited), null, 'without the old version it fails');
-  const withHistory = { ...current, v0: [{ id: 'v0', topic: 'ui', correctIndex: 3 }, { id: 'v0', topic: 'ui', correctIndex: 0 }] };
-  assert.equal(verifySession(session, withHistory).score, 100);
 });
 
 test('questions need a known topic; daily questions need no hint', () => {

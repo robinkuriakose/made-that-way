@@ -208,7 +208,7 @@ export default function Analytics({ api, questions, themes, onEdit }) {
             <Kpi label="Runs finished" value={k.finished} now={k.finished} before={p?.finished} rangeWords={rangeWords} note={`${num(k.started)} started`} />
             <Kpi label="Completion" value={k.completion} format={pct} now={k.completion} before={p?.completion} rangeWords={rangeWords} note="Started runs that were finished" />
             <Kpi label="Returning players" value={k.returning} now={k.returning} before={p?.returning} rangeWords={rangeWords} note="Came back on another day" />
-            <Kpi label="Average score" value={k.avgScore} format={(v) => fixed(v, 0)} now={k.avgScore} before={p?.avgScore} rangeWords={rangeWords} note="Out of 100" />
+            <Kpi label="Average score" value={k.avgScore} format={(v) => fixed(v, 0)} now={k.avgScore} before={p?.avgScore} rangeWords={rangeWords} />
             <Kpi label="Daily answers" value={k.dailyAnswers} now={k.dailyAnswers} before={p?.dailyAnswers} rangeWords={rangeWords} note="Question of the day" />
           </div>
 
@@ -243,12 +243,13 @@ export default function Analytics({ api, questions, themes, onEdit }) {
               />
             </Section>
 
-            <Section id="dash-dropoff" title="Where runs are abandoned" note="The question a run was left or restarted on.">
+            <Section id="dash-dropoff" title="Where runs are abandoned" note="The level a run was left or restarted on.">
               <VBars
                 height={90}
                 bars={Array.from({ length: 10 }, (_, i) => {
-                  const n = data.dropOff.positions.find((d) => d.position === i + 1)?.n ?? 0;
-                  return { key: i, label: String(i + 1), title: `Question ${i + 1}: ${n}`, values: [{ series: 'drop', value: n }] };
+                  const n = (data.dropOff.levels ?? []).find((d) => d.level === i + 1)?.n ?? 0;
+                  const label = i === 9 ? '10+' : String(i + 1);
+                  return { key: i, label, title: `Level ${label}: ${n}`, values: [{ series: 'drop', value: n }] };
                 })}
                 empty="No abandoned runs."
               />
@@ -264,12 +265,26 @@ export default function Analytics({ api, questions, themes, onEdit }) {
             >
               <VBars
                 height={90}
-                bars={data.scores.buckets.map((n, i) => ({
-                  key: i,
-                  label: `${i * 10}`,
-                  title: `${i * 10} to ${i === 9 ? 100 : i * 10 + 9} points: ${n} runs`,
-                  values: [{ series: 'score', value: n }],
-                }))}
+                bars={data.scores.buckets.map((n, i) => {
+                  const w = data.scores.bucketWidth ?? 10;
+                  return {
+                    key: i,
+                    label: `${i * w}`,
+                    title: `${i * w}${i === 9 ? ' and up' : ` to ${(i + 1) * w - 1}`} points: ${n} runs`,
+                    values: [{ series: 'score', value: n }],
+                  };
+                })}
+                empty="No finished runs yet."
+              />
+            </Section>
+
+            <Section id="dash-levels" title="Levels reached" note="The level each finished run ended on.">
+              <VBars
+                height={90}
+                bars={(data.levelsReached ?? []).map((n, i) => {
+                  const label = i === 9 ? '10+' : String(i + 1);
+                  return { key: i, label, title: `Level ${label}: ${n} runs`, values: [{ series: 'level', value: n }] };
+                })}
                 empty="No finished runs yet."
               />
             </Section>

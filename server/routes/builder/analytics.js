@@ -9,10 +9,25 @@ import { sql } from '../../db.js';
 import { ensureSchema } from '../../schema.js';
 import { requireBuilder } from '../../auth.js';
 import { methodNotAllowed, serverError } from '../../http.js';
+import { LEVEL_SIZE } from '../../../src/lib/scoring.js';
+
+const LEVEL_BARS = 10;
+const SCORE_BARS = 10;
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const RANGES = { '7d': 7, '30d': 30, '90d': 90, all: null };
 const EPOCH = '1970-01-01T00:00:00Z';
+
+// 10, 20, 25, 50, 100, 200, 250, 500 and so on: the smallest that fits.
+export function bucketWidth(top) {
+  const need = Math.max(1, top) / SCORE_BARS;
+  for (let power = 1; ; power *= 10) {
+    for (const step of [1, 2, 2.5, 5]) {
+      const width = step * power * 10;
+      if (width >= need) return width;
+    }
+  }
+}
 
 function validZone(tz) {
   try {
@@ -103,9 +118,17 @@ export default async function handler(req, res) {
       GROUP BY 1
     `;
 
+    // By level rather than question, now that runs have no fixed length.
     const { rows: dropOff } = await sql`
-      SELECT last_position AS position, count(*)::int AS n FROM runs
+      SELECT least((greatest(last_position, 1) - 1) / ${LEVEL_SIZE} + 1, ${LEVEL_BARS})::int AS level, count(*)::int AS n FROM runs
       WHERE is_test = ${t} AND started_at >= ${since}::timestamptz AND status IN ('left', 'restarted')
+      GROUP BY 1 ORDER BY 1
+    `;
+    const { rows: levels } = await sql`
+      SELECT least((jsonb_array_length(data->'questions') - 1) / ${LEVEL_SIZE} + 1, ${LEVEL_BARS})::int AS level, count(*)::int AS n
+      FROM sessions
+      WHERE verified AND is_test = ${t} AND created_at >= ${since}::timestamptz AND jsonb_typeof(data->'questions') = 'array'
+        AND jsonb_array_length(data->'questions') > 0
       GROUP BY 1 ORDER BY 1
     `;
     const { rows: quiet } = await sql`
@@ -118,8 +141,15 @@ export default async function handler(req, res) {
              percentile_cont(0.5) WITHIN GROUP (ORDER BY score)::float AS median
       FROM sessions WHERE verified AND is_test = ${t} AND created_at >= ${since}::timestamptz
     `;
+    // Ten bars whatever the range of scores: the width is a round number
+    // that fits the highest score in the period.
+    const { rows: scoreMax } = await sql`
+      SELECT coalesce(max(score), 0)::int AS top FROM sessions
+      WHERE verified AND is_test = ${t} AND created_at >= ${since}::timestamptz
+    `;
+    const width = bucketWidth(scoreMax[0].top);
     const { rows: scoreBuckets } = await sql`
-      SELECT least(floor(score / 10.0), 9)::int AS bucket, count(*)::int AS n
+      SELECT least(floor(score / ${width}::float), ${SCORE_BARS - 1})::int AS bucket, count(*)::int AS n
       FROM sessions WHERE verified AND is_test = ${t} AND created_at >= ${since}::timestamptz AND score IS NOT NULL
       GROUP BY 1
     `;
@@ -215,8 +245,10 @@ export default async function handler(req, res) {
       activity.push({ day, visitors: 0, started: 0, finished: 0, ...byDay.get(day) });
     }
 
-    const buckets = Array(10).fill(0);
-    for (const r of scoreBuckets) buckets[Math.max(0, Math.min(9, r.bucket))] = r.n;
+    const buckets = Array(SCORE_BARS).fill(0);
+    for (const r of scoreBuckets) buckets[Math.max(0, Math.min(SCORE_BARS - 1, r.bucket))] = r.n;
+    const levelCounts = Array(LEVEL_BARS).fill(0);
+    for (const r of levels) levelCounts[r.level - 1] = r.n;
     const hourCounts = Array(24).fill(0);
     for (const r of hours) hourCounts[r.hour] = r.n;
 
@@ -228,8 +260,9 @@ export default async function handler(req, res) {
       kpis: { current, previous },
       funnel: funnel[0],
       activity,
-      dropOff: { positions: dropOff, quiet: quiet[0].n },
-      scores: { n: scoreStats[0].n, avg: scoreStats[0].avg, median: scoreStats[0].median, buckets },
+      dropOff: { levels: dropOff, quiet: quiet[0].n },
+      scores: { n: scoreStats[0].n, avg: scoreStats[0].avg, median: scoreStats[0].median, buckets, bucketWidth: width },
+      levelsReached: levelCounts,
       questions: questionStats.map((r) => ({
         id: r.id,
         asked: r.asked,

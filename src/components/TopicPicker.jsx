@@ -2,8 +2,8 @@ import { useRef, useState } from 'react';
 import Modal from './Modal.jsx';
 import { MIN_THEMES } from '../lib/themes.js';
 
-// Choose which topics runs draw from. At least MIN_THEMES. Nothing else to
-// think about: if a choice is small, runs quietly borrow related questions.
+// Choose which topics levels draw on first. At least MIN_THEMES. Nothing else to
+// think about: when they run out, levels carry on with the other topics.
 export default function TopicPicker({ themes, chosen, onSave, onClose }) {
   const [picked, setPicked] = useState(() => new Set(chosen ?? themes.map((t) => t.id)));
   const titleRef = useRef(null);
@@ -24,7 +24,7 @@ export default function TopicPicker({ themes, chosen, onSave, onClose }) {
       <h2 id="topics-title" className="modal-title" tabIndex={-1} ref={titleRef}>
         Choose topics
       </h2>
-      <p className="modal-lede">Pick at least {MIN_THEMES}. Your runs will come from these.</p>
+      <p className="modal-lede">Pick at least {MIN_THEMES}. Your levels draw on these first.</p>
       <div className="topic-pills" role="group" aria-labelledby="topics-title">
         {themes.map((t) => (
           <button key={t.id} type="button" className="topic-pill" aria-pressed={picked.has(t.id)} onClick={() => toggle(t.id)}>

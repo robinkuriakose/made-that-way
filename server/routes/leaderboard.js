@@ -1,9 +1,12 @@
-// Public: the shared leaderboard.
+// Public: the shared leaderboard. It's weekly: it starts again every Monday
+// at midnight, India time (lib/week.js), so a newcomer always has a chance.
+// A player's all-time best is theirs alone: it comes back as player.best,
+// never on a public board.
 //
-// GET   ?deviceId&limit          -> { allTime, week, player }
-//        each board is { entries, me }; me is this device's row when it's
-//        below the top `limit`. player is this device's name and how many
-//        name changes it has left.
+// GET   ?deviceId&limit          -> { week, player }
+//        week is { entries, me, startsAt }; me is this device's row when
+//        it's below the top `limit`. player is this device's name, how many
+//        name changes it has left, and its best run.
 // POST  { deviceId, runId, name?, test? } -> sign a finished run
 // PATCH { deviceId, name }        -> change this device's name (3 times at most)
 //
@@ -24,7 +27,9 @@ import { body, isId, methodNotAllowed, serverError } from '../http.js';
 import { hit, tooMany } from '../limits.js';
 import { isBetterRun } from '../../src/lib/ranking.js';
 import { cleanName, isTestName, nameProblem, NAME_CHANGE_LIMIT } from '../../src/lib/names.js';
-import { verifySession } from '../../src/lib/verifySession.js';
+import { verifySession, sessionQuestionIds } from '../../src/lib/verifySession.js';
+import { levelOf } from '../../src/lib/scoring.js';
+import { weekStart } from '../../src/lib/week.js';
 
 const DEFAULT_LIMIT = 10;
 const TEST_VISIBLE = '2 minutes';
@@ -35,6 +40,7 @@ const entryFrom = (row, deviceId) => ({
   score: row.score,
   correct: row.correct,
   total: row.total,
+  level: levelOf(row.total),
   durationMs: Number(row.duration_ms),
   finishedAt: isoTime(row.finished_at),
   rank: row.rank == null ? null : Number(row.rank),
@@ -55,21 +61,13 @@ function withTests(rows, tests, limit, deviceId) {
   return { entries: merged, me };
 }
 
-async function boards(deviceId, limit) {
-  const { rows: allTime } = await sql`
-    WITH ranked AS (
-      SELECT device_id, public_id, name, best_score AS score, best_correct AS correct, best_total AS total,
-             best_duration_ms AS duration_ms, best_finished_at AS finished_at,
-             rank() OVER (ORDER BY best_score DESC, best_correct DESC, best_duration_ms ASC) AS rank
-      FROM players WHERE best_run_id IS NOT NULL AND NOT hidden
-    )
-    SELECT * FROM ranked WHERE rank <= ${limit} OR device_id = ${deviceId ?? ''} ORDER BY rank
-  `;
+async function board(deviceId, limit) {
+  const since = weekStart().toISOString();
   const { rows: week } = await sql`
     WITH best AS (
       SELECT DISTINCT ON (s.device_id) s.device_id, s.score, s.correct, s.total, s.duration_ms, s.finished_at, p.public_id, p.name
       FROM signed_runs s JOIN players p ON p.device_id = s.device_id
-      WHERE NOT s.is_test AND NOT p.hidden AND s.created_at > now() - interval '7 days'
+      WHERE NOT s.is_test AND NOT p.hidden AND s.created_at >= ${since}::timestamptz
       ORDER BY s.device_id, s.score DESC, s.correct DESC, s.duration_ms ASC
     ), ranked AS (
       SELECT *, rank() OVER (ORDER BY score DESC, correct DESC, duration_ms ASC) AS rank FROM best
@@ -80,7 +78,7 @@ async function boards(deviceId, limit) {
     SELECT run_id, device_id, test_name AS name, score, correct, total, duration_ms, finished_at
     FROM signed_runs WHERE is_test AND created_at > now() - ${TEST_VISIBLE}::interval
   `;
-  return { allTime: withTests(allTime, tests, limit, deviceId), week: withTests(week, tests, limit, deviceId) };
+  return { ...withTests(week, tests, limit, deviceId), startsAt: since };
 }
 
 async function playerFor(deviceId) {
@@ -89,13 +87,19 @@ async function playerFor(deviceId) {
   return rows[0] ?? null;
 }
 
-const publicPlayer = (p) => (p ? { name: p.name, nameChangesLeft: Math.max(0, NAME_CHANGE_LIMIT - p.name_changes) } : null);
+const publicPlayer = (p) =>
+  p
+    ? {
+        name: p.name,
+        nameChangesLeft: Math.max(0, NAME_CHANGE_LIMIT - p.name_changes),
+        best: p.best_run_id ? { score: p.best_score, level: levelOf(p.best_total), finishedAt: isoTime(p.best_finished_at) } : null,
+      }
+    : null;
 
 // Every version of each question this run could have seen: the current one,
 // plus any replaced since the run started.
 async function versionsFor(session, startedAt) {
-  const ids = [...new Set((session?.questions ?? []).map((q) => q?.id).filter((id) => typeof id === 'string'))];
-  const list = JSON.stringify(ids);
+  const list = JSON.stringify(sessionQuestionIds(session));
   const { rows: current } = await sql`
     SELECT id, data FROM questions WHERE id IN (SELECT jsonb_array_elements_text(${list}::jsonb))
   `;
@@ -209,9 +213,9 @@ export default async function handler(req, res) {
     if (req.method === 'GET') {
       const deviceId = isId(req.query?.deviceId) ? req.query.deviceId : null;
       const limit = Math.min(50, Math.max(1, Number.parseInt(req.query?.limit, 10) || DEFAULT_LIMIT));
-      const [board, player] = await Promise.all([boards(deviceId, limit), playerFor(deviceId)]);
+      const [week, player] = await Promise.all([board(deviceId, limit), playerFor(deviceId)]);
       res.setHeader('Cache-Control', 'no-store');
-      return res.status(200).json({ ...board, player: publicPlayer(player) });
+      return res.status(200).json({ week, player: publicPlayer(player) });
     }
     if (req.method === 'POST') return await sign(req, res);
     if (req.method === 'PATCH') return await rename(req, res);
