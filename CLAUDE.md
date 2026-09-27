@@ -1,6 +1,6 @@
 # Made That Way
 
-Before reading source files, open `docs/code-map.md` (where each piece of code lives, with `file:line`) and `docs/brief-map.md` (each instruction from the owner, its status and the code that carries it out). Read only the files those maps point to. `docs/later.md` holds what's agreed but not built, and `docs/owner-checklist.md` what's waiting on the owner.
+Start with `docs/context.md`: the short handoff with the product, the owner, the current state and where everything is. Before reading source files, open `docs/code-map.md` (where each piece of code lives, with `file:line`) and `docs/brief-map.md` (each instruction from the owner, its status and the code that carries it out). Read only the files those maps point to. `docs/later.md` holds what's agreed but not built, and `docs/owner-checklist.md` what's waiting on the owner.
 
 When a change moves, adds or renames something listed in either map, update the map in the same change.
 
