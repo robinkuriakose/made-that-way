@@ -12,6 +12,16 @@ Status as of 20 September 2026: 40 of 64 live questions have an image, and each 
 - **What to show:** the one detail the explanation is about, filling the frame. A close crop beats a pretty wide shot.
 - **Rights:** only images you took, have a licence for, or that are public domain. For each, a credit line: photographer or source, and the licence. No watermarked stock.
 
+## Needed soonest: the next daily questions (3)
+
+These go out one a day from 28 September 2026 (a day nobody visits doesn't use one up, so the dates can slip later, never earlier). Upload each in the builder's **Daily** tab before its day: the database copy is what players see, so adding a file to `images/` won't reach the live site for these. The other two (the ruler and the progress bar) have illustrations drawn for them.
+
+| Question | Goes out about | What it should show |
+|---|---|---|
+| `daily-heinz-red-border` | 29 September | A Heinz squeezy bottle whose label has the red border, ideally beside a plate of ketchup so the reds can be compared |
+| `daily-kadokeshi-corners` | 1 October | The Kadokeshi eraser, its little cubes and corners clearly visible |
+| `daily-lift-mirrors` | 2 October | A lift, or a lift lobby, with a mirror on the wall |
+
 ## Received and attached: credit line still needed (38)
 
 These are live now, with alt text. Each one needs a credit and licence before the site is public. Many look like product or museum photos (Knoll, Herman Miller, Vitra and similar), which are usually not free to reuse, so those are worth checking first.

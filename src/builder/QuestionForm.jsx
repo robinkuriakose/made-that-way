@@ -177,7 +177,7 @@ export default function QuestionForm({ initial, kind: newKind = 'run', themes, e
           </h1>
           {!isNew && !['live', 'queued'].includes(initial.status) && <p className="muted">This question is {initial.status}.</p>}
           {isDaily && (
-            <p className="muted">Daily questions go out one a day, in queue order. They never appear in runs, and have no timer or hint.</p>
+            <p className="muted">Daily questions go out one a day, in queue order. Once their day has passed, they join the questions runs play from.</p>
           )}
         </div>
       </header>
@@ -283,11 +283,13 @@ export default function QuestionForm({ initial, kind: newKind = 'run', themes, e
         <textarea id="q-right" rows={4} value={form.explanationRight} onChange={(e) => set({ explanationRight: e.target.value })} />
       </Field>
 
-      {!isDaily && (
-        <Field label="Hint" htmlFor="q-hint" note="A nudge, not the answer. Costs the player 10 seconds.">
-          <input id="q-hint" type="text" value={form.hint} onChange={(e) => set({ hint: e.target.value })} />
-        </Field>
-      )}
+      <Field
+        label={isDaily ? 'Hint (optional)' : 'Hint'}
+        htmlFor="q-hint"
+        note={isDaily ? 'Not shown on the daily card. Used once the question joins runs, where a hint halves the points.' : 'A nudge, not the answer. Using it halves the points.'}
+      >
+        <input id="q-hint" type="text" value={form.hint} onChange={(e) => set({ hint: e.target.value })} />
+      </Field>
 
       <div className="field">
         <p className="field-label">Image</p>
@@ -316,7 +318,7 @@ export default function QuestionForm({ initial, kind: newKind = 'run', themes, e
       <Field
         label="Tidbit (optional)"
         htmlFor="q-tidbit"
-        note="A short fact shown after three wrong answers in a row, three questions before this one comes up. It should nudge, not give the answer away."
+        note="A short clue shown at the level break before this question's level. It should nudge, not give the answer away."
       >
         <textarea
           id="q-tidbit"

@@ -1,5 +1,5 @@
 {
-  "note": "Question of the day. Added to the end of the daily queue, in this order, the first time the server sees them. They never appear in runs.",
+  "note": "Question of the day. Added to the end of the daily queue, in this order, the first time the server sees them. Once a question's day has passed everywhere, it joins the question pool for runs.",
   "questions": [
     {
       "id": "daily-liquid-glass",
@@ -153,6 +153,174 @@
       "themes": [
         "screens",
         "symbols"
+      ]
+    },
+    {
+      "id": "daily-ruler-zero",
+      "topic": "everyday-object",
+      "stem": "Why doesn't the 0 on most rulers sit right at the very end?",
+      "options": [
+        "It gives your thumb a place to hold the ruler still",
+        "It leaves room for the maker to print their name",
+        "The ends get chipped, and a 0 there would chip too",
+        "Rulers need a blank end so they are safe for children"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about which part of a ruler takes the most knocks.",
+      "explanationRight": "The ends of a ruler take the knocks: dropped on the floor, pushed against walls, rattled around in pencil cases. If the 0 sat right at the edge, every chip would move it, and every measurement after that would come out a little short. Setting the 0 a few millimetres in keeps it on the flat of the ruler, where it stays accurate long after the corners have worn round. It also means the end doesn't have to be cut perfectly when the ruler is made.",
+      "explanationWrong": [
+        "You can hold a ruler anywhere, and the gap is too small to grip. The reason is wear: the ends take the knocks, so a 0 right at the edge would be chipped away and every measurement would drift. Setting it a little way in keeps it accurate.",
+        "Makers print their name along the middle, where there's plenty of room. The gap is there because the ends get chipped and worn, and a 0 at the very edge would wear away with them.",
+        null,
+        "No rule asks for that, and a blank end is no blunter than a numbered one. The ends of a ruler get knocked about, so the 0 sits a little way in, where a chip can't move it."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Family Handyman: Why is there a space before the zero mark on a ruler?",
+      "sourceUrl": "https://www.familyhandyman.com/article/space-before-zero-ruler/",
+      "tags": [
+        "measuring",
+        "wear",
+        "stationery"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/daily-ruler-zero.webp",
+        "thumb": "/images/thumbs/daily-ruler-zero.webp",
+        "alt": "The end of a wooden ruler: the 0 mark sits a few millimetres in from the edge, with a blank strip before it.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "daily-heinz-red-border",
+      "topic": "everyday-object",
+      "stem": "Why did Heinz print a border in one exact shade of red around its ketchup labels?",
+      "options": [
+        "So the bottle is easier to find on a busy table",
+        "Red makes food look tastier and makes people hungry",
+        "So diners can spot a bottle refilled with cheap ketchup",
+        "To show at a glance how full the bottle still is"
+      ],
+      "correctIndex": 2,
+      "hint": "Restaurants don't always buy a new bottle when one runs out.",
+      "explanationRight": "Some restaurants refill empty Heinz bottles with cheaper ketchup, so diners think they're getting Heinz and get something else. In 2023 Heinz in Turkey printed a border in the exact red of its own ketchup, Pantone 7626C, around the label. Hold the bottle up: if the sauce inside doesn't match the border, it probably isn't Heinz. The agency behind it reported far fewer refilled bottles in the street food restaurants it checked.",
+      "explanationWrong": [
+        "A Heinz bottle is easy enough to spot already. The border is a colour test: it's printed in the exact red of Heinz ketchup, so if the sauce inside looks different, someone has probably refilled the bottle with a cheaper brand.",
+        "Red is common on food packaging, but this border had a sharper job. It matches the exact colour of Heinz ketchup, so if the sauce in the bottle is a different red, you know it's been refilled with something cheaper.",
+        null,
+        "The border runs round the edge of the label, not up the side like a gauge. It's printed in the exact red of Heinz ketchup, so diners can check that what's inside really is Heinz and not a cheaper refill."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Contagious: Heinz cracks down on counterfeiters with ketchup colour swatch labels",
+      "sourceUrl": "https://www.contagious.com/en/article/news-and-views/campaign-of-the-week-heinz-cracks-down-on-counterfeiters-with-ketchup-colour-swatch-labels",
+      "tags": [
+        "packaging",
+        "colour",
+        "food",
+        "fraud"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "daily-progress-head-start",
+      "topic": "ui",
+      "stem": "Why do some sign-up progress bars start a little way full, before you've done anything?",
+      "options": [
+        "A sliver of colour shows people where the bar is",
+        "Screens round up, so a bar never shows exactly zero",
+        "It copies video games, where you start at level 1",
+        "Starting ahead makes people more likely to finish"
+      ],
+      "correctIndex": 3,
+      "hint": "Think of a loyalty card that comes with two stamps already on it.",
+      "explanationRight": "People who feel they've already made progress are more likely to see a task through. In a well known study, car wash customers got loyalty cards needing 8 stamps, or cards needing 10 with 2 already stamped: the same 8 washes either way. Far more of the second group finished their cards, 34% against 19%, and they finished faster. Sign-up and set-up screens use the same trick, so a bar that starts part full keeps you going to the end.",
+      "explanationWrong": [
+        "The empty track already shows where the bar is. The head start is there to motivate: people who feel they've begun are more likely to finish, the same reason loyalty cards often come with a couple of stamps already on them.",
+        "A progress bar shows whatever the designer tells it to, and zero is easy to draw. It starts part full on purpose, because feeling you've already started makes you more likely to finish.",
+        "Games aren't where it comes from. Researchers found that a head start, even a made-up one, makes people more likely to finish a task, so sign-up screens start the bar a little way along.",
+        null
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Nunes and Drèze: The Endowed Progress Effect, Journal of Consumer Research (2006)",
+      "sourceUrl": "https://academic.oup.com/jcr/article-abstract/32/4/504/1787425",
+      "tags": [
+        "progress",
+        "motivation",
+        "sign-up"
+      ],
+      "themes": [
+        "screens"
+      ],
+      "image": {
+        "src": "/images/daily-progress-head-start.webp",
+        "thumb": "/images/thumbs/daily-progress-head-start.webp",
+        "alt": "A sign-up screen with an empty form, and a progress bar that already shows step 1 of 5, 20% done.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "daily-kadokeshi-corners",
+      "topic": "everyday-object",
+      "stem": "Why does the Kadokeshi eraser from Japan have 28 corners?",
+      "options": [
+        "Each corner is a different firmness for different pencils",
+        "It grips better, so it won't slip from your fingers",
+        "There's always a sharp corner left for tiny details",
+        "The bumps stop it rolling off a sloping desk"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about what happens to the corner of an ordinary eraser after a few uses.",
+      "explanationRight": "A new eraser's sharp corner is perfect for rubbing out one small mark, but after a few uses it goes round and blunt, and a block only has 8 corners. The Kadokeshi, designed by Hideo Kanbara for Kokuyo in 2001, is made of little cubes joined together, which gives it 28. As one corner wears down, there's always another sharp one ready for fine details. Its name joins the Japanese words for corner and eraser, and it's in the collection of the Museum of Modern Art in New York.",
+      "explanationWrong": [
+        "The whole eraser is one piece of the same rubber. The shape is about corners: an ordinary eraser soon wears its 8 corners round, and the Kadokeshi's 28 mean there's always a sharp one for rubbing out small details.",
+        "It isn't a grip. The little cubes add corners, 28 of them instead of a block's 8, so as one wears blunt there's always a sharp one left for precise erasing.",
+        null,
+        "An ordinary block doesn't roll either. The shape is about corners: each is a sharp point for rubbing out tiny details, and with 28 of them there's always a fresh one when the last goes round."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Kokuyo: Kadokeshi eraser",
+      "sourceUrl": "https://www.kokuyostore.com/en_US/kadokeshi-eraser/KESHI-U700N.html",
+      "tags": [
+        "stationery",
+        "wear",
+        "japan"
+      ],
+      "themes": [
+        "everyday"
+      ]
+    },
+    {
+      "id": "daily-lift-mirrors",
+      "topic": "everyday-object",
+      "stem": "Why do so many lifts have mirrors?",
+      "options": [
+        "Glass panels are lighter, so the lift can move faster",
+        "Waiting feels shorter when there's something to look at",
+        "Mirrors hide scratches and dents better than paint",
+        "Mirrors stay cool, so the lift needs less air conditioning"
+      ],
+      "correctIndex": 1,
+      "hint": "The complaints were about how long people waited, and the lifts never got faster.",
+      "explanationRight": "Waiting with nothing to do feels longer than it is. In the classic case, told about a New York office block and about a hotel group, people complained the lifts were too slow. Rather than rebuild them, the owners put up mirrors where people waited. People checked their hair and glanced at each other, the wait felt shorter, and the complaints dropped, though the lifts were no faster. Today mirrors in and around lifts are everywhere, and the same idea is behind the screens and music wherever people queue.",
+      "explanationWrong": [
+        "A mirror is no lighter than the panel it replaces, and the lifts in the famous case never got faster. The mirrors worked because a wait with something to look at feels shorter, so the complaints about slow lifts stopped.",
+        null,
+        "Mirrors show scratches, if anything. They went up where people waited because time with something to look at passes faster: people who had complained about slow lifts stopped, though the lifts were just as slow.",
+        "Mirrors don't cool anything. They were put where people waited, because a wait with something to look at, like your own reflection, feels shorter, and the complaints about slow lifts stopped."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "David Maister: The Psychology of Waiting Lines (1985)",
+      "sourceUrl": "https://www.columbia.edu/~ww2040/4615S13/Psychology_of_Waiting_Lines.pdf",
+      "tags": [
+        "waiting",
+        "lifts",
+        "psychology"
+      ],
+      "themes": [
+        "everyday"
       ]
     }
   ]

@@ -85,8 +85,8 @@ mindmap
 
 | What | Where |
 |---|---|
-| Home: the promise, Start or Continue and today's question above the fold; a progress line for returning players; how it works, the board, the wall, name and topics below | `src/components/HomeScreen.jsx:52`; progress at `:22` |
-| Question screen. The image sits under the stem, in the same frame every time, before the answer on purpose. After answering: the result, the redeem offer, and the short reason, scrolled into view on a phone | `src/components/QuestionScreen.jsx:83`; reason at `:31`, result at `:47` |
+| Home: the headline, "Start guessing" and today's question above the fold; a progress line for returning players; how it works, the board, the wall, name and topics below | `src/components/HomeScreen.jsx:52`; progress at `:22` |
+| Question screen. The image sits under the stem, in the same frame every time, before the answer on purpose. After answering: the two answers that matter lead (the others shrink to a line), then the result and the short reason; the next step sits in one action bar, pinned to the bottom on a phone. The hint only shows when the question has one | `src/components/QuestionScreen.jsx:120`; result at `:32`, reason at `:63`, action bar at `:89`, scroll into view at `:147` |
 | Top bar: Home and Restart during a run, then the level, hearts, combo and score, and a segment per question in the level | `src/components/TopBar.jsx:13` |
 | Hearts that drop and refill; a number that counts up; the level-up burst | `src/components/Hearts.jsx:15`, `CountUp.jsx`, `Burst.jsx` |
 | Level break: score so far, what the level earned, a clue for the next level, carry on or stop | `src/components/LevelBreak.jsx:13` |
@@ -153,15 +153,15 @@ mindmap
 | What | Where |
 |---|---|
 | Database client (Neon in the cloud, PGlite locally), connected on first use; a missing database is a 503 with a plain reason, not a crash | `server/db.js` (`connectionString`, `NotConfigured`) |
-| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:36` (`ensureSchema`), `:58` (`createTables`), `:260` (`seed`); `question_stats` at `:226` |
+| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:36` (`ensureSchema`), `:58` (`createTables`), `:279` (`seed`); `question_stats` at `:226`, daily answers folded in once at `:253` |
 | Builder password and tokens | `server/auth.js` |
 | Request helpers, id and day checks, the hashed network key | `server/http.js` |
 | Rate limits per network, kept in the database | `server/limits.js` (`hit`, `isBlocked`, `LIMITS`) |
-| `GET /api/questions`: live questions with how often each is answered right, and topics | `server/routes/questions.js` |
+| `GET /api/questions`: live questions, plus daily questions whose day has passed everywhere, with how often each is answered right, and topics | `server/routes/questions.js` |
 | `POST /api/events`: page opened, run started (which registers the run), left, restarted, resumed, level cleared | `server/routes/events.js` (`record`) |
 | `POST /api/sessions`: save a finished run, checked against its registered run and the real questions; adds its answers to `question_stats` | `server/routes/sessions.js` |
 | `GET/POST/PATCH /api/leaderboard`: this week's board and the player's private best, signing, renaming | `server/routes/leaderboard.js:64` (`board`), `:116` (`sign`), `:187` (`rename`) |
-| `GET/POST /api/daily`: the question of the day, answered and marked here | `server/routes/daily.js:31` (`questionFor`), `:88` (`statsFor`) |
+| `GET/POST /api/daily`: the question of the day, answered and marked here; a real first answer also counts in `question_stats` | `server/routes/daily.js:34` (`questionFor`), `:91` (`statsFor`) |
 | `POST /api/flags`: a player flags a question | `server/routes/flags.js` |
 | Builder routes | `server/routes/builder/`: `login.js`, `questions.js`, `upload.js`, `flags.js`, `daily.js`, `players.js`, `sessions.js`, `analytics.js` |
 | Function entry points and the builder dispatcher | `api/*.js`, `api/builder.js` |
@@ -176,7 +176,8 @@ mindmap
 |---|---|
 | Live questions and tidbits (the seed, and the fallback if the database is slow) | `src/data/questions.json` |
 | New questions waiting for review | `src/data/pending-questions.json` |
-| The daily question queue | `src/data/daily-questions.json` |
+| The daily question queue (after its day, each joins the run pool) | `src/data/daily-questions.json` |
+| What makes a good question: the aha recipe, the audit of live questions, ideas for the next batch | `docs/question-strategy.md` |
 | Topics players choose from | `src/data/themes.json` |
 | Content check for all of them, plus on-screen copy | `scripts/content-rules.js` (`checkContent`, `checkCopy`), run by `scripts/check-content.js` |
 | Images: originals in `images/`, published copies and thumbnails in `public/images/`, local-only placeholders in `dev-images/` | `scripts/optimize-images.js` (`npm run images`) |

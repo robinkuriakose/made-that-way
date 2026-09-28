@@ -245,10 +245,6 @@ button.option:hover {
 .status {
   margin-top: 28px;
   min-height: 28px;
-  /* Room for the sticky top bar above, and the Next button below, when an
-     answer scrolls the result into view. */
-  scroll-margin-top: 120px;
-  scroll-margin-bottom: 110px;
 }
 
 .text-button {
@@ -2844,21 +2840,88 @@ td.wrap {
   color: var(--accent-ink);
 }
 
-.redeem-offer {
+/* Once answered: the two answers that matter lead, the others shrink to a
+   line, and a first highlighted answer brought into view clears the top bar. */
+
+.options.is-answered .option {
+  scroll-margin-top: 132px;
+}
+
+.options.is-answered > li {
+  min-width: 0;
+}
+
+.options.is-answered .option.is-idle {
+  overflow: hidden;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  font-size: 14px;
+  border-color: transparent;
+}
+
+.options.is-answered .option.is-idle .option-body {
+  flex: 1;
+  min-width: 0;
+  align-items: stretch;
+}
+
+.options.is-answered .option.is-idle .option-text {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.life-lost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 9px 1px 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #8a2c12;
+  background: #fbe7df;
+  border-radius: 999px;
+}
+
+.life-lost .heart {
+  width: 13px;
+  height: 13px;
+  stroke: #8a2c12;
+}
+
+/* What to do next: one place, one leading choice. */
+
+.answer-actions {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 10px 16px;
-  margin: 14px 0 0;
-  padding: 14px 16px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
+  margin-top: 28px;
 }
 
-.redeem-offer .muted {
-  flex: 1 1 14rem;
+.answer-actions-note {
+  flex: 1 1 16rem;
+  margin: 0;
+  font-size: 14px;
+  color: var(--ink-2);
+}
+
+.answer-actions-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.answer-actions .button-accent {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.answer-actions .button-accent .heart {
+  width: 15px;
+  height: 15px;
 }
 
 /* The reason, right after an answer */
@@ -2892,11 +2955,13 @@ td.wrap {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
+  justify-content: space-between;
   gap: 4px 16px;
   margin: 0;
 }
 
 .reason-share {
+  margin: -4px 0 10px;
   font-size: 13px;
 }
 
@@ -3100,6 +3165,13 @@ td.wrap {
   font-size: 15.5px;
 }
 
+.start-note {
+  align-self: center;
+  margin: 0;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
 .progress-line {
   display: flex;
   flex-wrap: wrap;
@@ -3242,6 +3314,45 @@ td.wrap {
   line-height: 1.35;
 }
 
+/* On a phone the next step stays under your thumb: the action bar pins to
+   the bottom of the screen while the result and reason scroll above it. */
+@media (max-width: 640px) {
+  .stage.question.is-answered {
+    padding-bottom: 0;
+  }
+
+  .answer-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 4;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin: 24px -20px 0;
+    padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+
+  .answer-actions-note {
+    font-size: 13px;
+    text-align: center;
+  }
+
+  .answer-actions-buttons .button {
+    flex: 1;
+    justify-content: center;
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+
+  .answer-actions.has-offer .answer-actions-buttons .button:first-child {
+    flex: 0 0 auto;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+}
+
 @media (max-width: 520px) {
   .playbar {
     gap: 8px;
@@ -3251,8 +3362,9 @@ td.wrap {
     display: none;
   }
 
-  .redeem-offer .button {
-    flex: 1 1 100%;
+  .start-note {
+    flex-basis: 100%;
+    text-align: center;
   }
 
   .level-break .next-row-split {

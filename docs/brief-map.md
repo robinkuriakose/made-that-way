@@ -75,6 +75,18 @@ mindmap
       Score verification
 ```
 
+## Round 10 (28 September 2026): aha questions, home copy, mobile hierarchy
+
+| You asked for | Status | Where |
+|---|---|---|
+| Write the other options for your five questions (ruler, Heinz, progress bars, Kadokeshi, lift mirrors) | Done: three tempting wrong options each, explanations for every option, hints, two sources each. None of the wrong options is also a real reason. Two wordings changed for accuracy: the Heinz border was a 2023 campaign in Turkey, and the famous lift mirrors were where people waited | `src/data/daily-questions.json`, `SOURCES.md` (D6 to D10) |
+| These five as the daily question for the next five days | Done: the live queue was empty, so they go out in order from today. The ruler and the progress bar have illustrations drawn for them; the other three need pictures uploaded in the builder before their day | `src/data/daily-questions.json`, `docs/images-needed.md` |
+| Understand what kind of questions these are; rethink the strategy | Done as a recipe (six tests), an audit of the 64 live questions (48 aha, 4 to rewrite, 12 story questions you can't work out) and a list of ideas for the next batch. Principles on every question dropped | `docs/question-strategy.md` |
+| Daily questions join the pool once they're done | Done: once its day has passed everywhere, a daily question is served with the run questions, with its answer rate from the daily card already counted. Without a picture it can only be a redeem choice, not a level question | `server/routes/questions.js`, `server/routes/daily.js`, `server/schema.js` (v10) |
+| The home copy: welcoming, strong, curious | Rewritten: "You've seen it a thousand times. Ever wondered why?", three real examples from the game, "Start guessing", and "Quick picture questions. No clock, no sign-up." | `src/components/HomeScreen.jsx` |
+| Redeem after every wrong answer | Kept | `src/App.jsx` (`canRedeem`) |
+| Take care of the hierarchy, especially on mobile | Done for the answered question: the right answer and yours lead and the other two shrink to a line; the result and the reason follow; one action bar with one leading choice (Win it back, or Next) is pinned to the bottom of a phone screen; flagging moved into the reason card | `src/components/QuestionScreen.jsx`, `src/styles.css` |
+
 ## V2 (27 September 2026): the test group's feedback
 
 The test group (mostly developers, some product designers, 50% average) didn't see the point, tired by questions 5 to 7, saw no reason to play again, and found text-only questions tiring. Plan and your answers: `docs/v2-plan.md`.
@@ -91,7 +103,7 @@ The test group (mostly developers, some product designers, 50% average) didn't s
 | Tidbits at the level break | Done: each break shows a clue for a question in the level about to start, so what you read, you use | `src/lib/levels.js` (`buildLevel`, `withTidbit`), `src/components/LevelBreak.jsx` |
 | The reason right after each answer, one line and "read more" | Done: the short reason (the first sentence, or two when the first only sets up the problem) under every answer, with how many players get it right once ten have answered. On a phone it scrolls into view | `src/components/QuestionScreen.jsx` (`Reason`), `src/lib/text.js` (`firstSentence`) |
 | Home: only the promise, Start and today's question above the fold | Done. Returning players also get one line: best, whys, streak, badges. How it works, the board, the wall, name and topics sit below | `src/components/HomeScreen.jsx` |
-| The promise: people who question design themselves, spot the flaw, know the fix, build better with AI | Done as "Everything is designed. Learn to see the thinking.", with a line about seeing what works, what doesn't and how you'd fix it. The bigger lever, principles on every question, is a proposal in `docs/later.md` | `src/components/HomeScreen.jsx` |
+| The promise: people who question design themselves, spot the flaw, know the fix, build better with AI | Done as "Everything is designed. Learn to see the thinking." Replaced in round 10: the aha questions carry the thinking, and the home copy leads with curiosity | `src/components/HomeScreen.jsx`, `docs/question-strategy.md` |
 | Picture questions only in runs | Done: levels play from questions with a picture (38 on the live site). Redeems prefer text questions, so the levels last longer | `src/App.jsx` (`levelPool`), `src/lib/redeem.js` (`keepIds`) |
 | Topics | Changed: with 38 picture questions, filtering by topic would leave too few for an endless run, so your topics now come first instead of being the only ones | `src/lib/levels.js` (`buildLevel`) |
 | (Bot protection, carried over) | Kept, and tightened for longer runs: a run needs at least 2 seconds an answer to be verified, and redeems are checked against the real question too | `server/routes/sessions.js`, `src/lib/verifySession.js` |

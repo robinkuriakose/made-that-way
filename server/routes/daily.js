@@ -6,11 +6,14 @@
 // The day is the player's own date. Each day takes the next question from
 // the daily queue the first time anyone opens it, so it's the same question
 // for everyone that day, it never repeats, and a day nobody visits doesn't
-// use one up. Daily questions never appear in runs.
+// use one up. Once its day has passed everywhere, a daily question joins the
+// bank runs play from (see routes/questions.js).
 //
 // The answer is checked here, not in the browser: the question is sent
 // without its answer or explanations, which come back only after answering.
-// One answer per device per day (test mode can answer again).
+// One answer per device per day (test mode can answer again). A real
+// player's first answer also counts towards how easy the question has proved
+// (question_stats), ready for when it joins runs.
 import { sql } from '../db.js';
 import { ensureSchema, asObject, isoTime } from '../schema.js';
 import { body, isDay, isId, methodNotAllowed, serverError } from '../http.js';
@@ -149,11 +152,22 @@ export default async function handler(req, res) {
             chosen_index = EXCLUDED.chosen_index, correct = EXCLUDED.correct, time_ms = EXCLUDED.time_ms, answered_at = now()
         `;
       } else {
-        await sql`
+        const { rows: inserted } = await sql`
           INSERT INTO daily_answers (device_id, day, is_test, question_id, chosen_index, correct, time_ms)
           VALUES (${deviceId}, ${day}::date, false, ${row.question_id}, ${chosen}, ${correct}, ${timeMs})
           ON CONFLICT (device_id, day, is_test) DO NOTHING
+          RETURNING question_id
         `;
+        if (inserted.length) {
+          await sql`
+            INSERT INTO question_stats (question_id, is_test, asked, right_count)
+            VALUES (${row.question_id}, false, 1, ${correct ? 1 : 0})
+            ON CONFLICT (question_id, is_test) DO UPDATE SET
+              asked = question_stats.asked + 1,
+              right_count = question_stats.right_count + EXCLUDED.right_count,
+              updated_at = now()
+          `;
+        }
       }
       return res.status(200).json(await state(day, deviceId, isTest));
     }

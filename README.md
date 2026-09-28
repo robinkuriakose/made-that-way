@@ -206,7 +206,7 @@ Everything goes through `src/lib/leaderboard.js` on the client and `server/route
 
 ## Question of the day
 
-One question a day, the same for everyone, answered on the home screen: no timer, no points, one go. It never repeats and never appears in a run. A day takes the next question from the queue the first time anyone opens it, so a day nobody visits doesn't use one up, and the queue is managed in the builder's Daily tab.
+One question a day, the same for everyone, answered on the home screen: no timer, no points, one go. It never repeats, and once its day has passed everywhere it joins the questions runs play from, bringing its answer rate with it. A day takes the next question from the queue the first time anyone opens it, so a day nobody visits doesn't use one up, and the queue is managed in the builder's Daily tab.
 
 The day is the player's own date, so it turns over at their midnight; the server only accepts a date within a day of its own, so a changed phone clock can't fake a streak. The answer is checked on the server, and the question is sent without its answer until it's been answered. Answering adds to a streak; a day with no question, or one you voided in the builder, never breaks it. The card also shows the share of players who got today's question right, and this player's average.
 

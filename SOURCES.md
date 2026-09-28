@@ -99,12 +99,26 @@ Recent design decisions, told in the words of the people who made them where pos
 
 **On the Rapido question.** Rapido has never published why it shows how many captains declined. The question says so, and the answer rests on the research behind showing work in progress while people wait, which is why it carries the **Deduction** label: nobody has published the reason, and this is the best explanation the evidence supports. If Rapido ever explains it, the question should be revisited.
 
+### Daily questions (28 September 2026, the owner's five)
+
+The owner gave the question and the answer; I wrote the other options, the explanations and the hints, and checked each answer against two sources. Two changes from the owner's wording, both for accuracy: the Heinz border was a 2023 campaign in Turkey, and the lift mirror story is about mirrors where people waited for the lifts (the explanation says so). Wrong options were chosen so none of them is also a real reason: rulers' blank ends also give the maker room when cutting, and mirrors inside lifts also help wheelchair users see behind them, so neither is offered as a wrong answer.
+
+| # | Question id | Confidence | Source shown in the app | Second source |
+|---|---|---|---|---|
+| D6 | daily-ruler-zero | High | [Family Handyman: Why is there a space before the zero mark on a ruler?](https://www.familyhandyman.com/article/space-before-zero-ruler/) (read; the end "is vulnerable to chips, dents, and other types of wear"; also room for the cut edge) | [Daily Galaxy, April 2026](https://dailygalaxy.com/2026/04/why-is-there-space-before-0-on-a-ruler/) (excerpt; a chipped end would shift every measurement) |
+| D7 | daily-heinz-red-border | High | [Contagious: Heinz cracks down on counterfeiters with ketchup colour swatch labels](https://www.contagious.com/en/article/news-and-views/campaign-of-the-week-heinz-cracks-down-on-counterfeiters-with-ketchup-colour-swatch-labels) (read; Turkey, March 2023, Wunderman Thompson Turkey; the red "added to the border of the label to help people detect if they're being served authentic Heinz Ketchup") | [Tasting Table: Is that restaurant ketchup bottle actually filled with Heinz?](https://www.tastingtable.com/2131991/restaurant-ketchup-secret-heinz-bottle-design/) (read; Pantone 7626C, the exact hue of the ketchup; restaurants refilling with cheaper brands) |
+| D8 | daily-progress-head-start | High | [Nunes and Drèze: The Endowed Progress Effect, Journal of Consumer Research, 2006](https://academic.oup.com/jcr/article-abstract/32/4/504/1787425) (abstract read; artificial progress raises completion and speed; the car wash cards) | [Userpilot: the psychology behind progress bars in onboarding](https://userpilot.com/blog/progress-bar-psychology/) (excerpt; bars that start part filled, LinkedIn and Asana) |
+| D9 | daily-kadokeshi-corners | Accurate | [Kokuyo: Kadokeshi eraser](https://www.kokuyostore.com/en_US/kadokeshi-eraser/KESHI-U700N.html) (read; "With 28 corners, you can use many and erase fine details"; new facets as it wears) | [MoMA collection: Hideo Kanbara, Kadokeshi Plastic Eraser, 2001](https://www.moma.org/collection/works/90107) (excerpt) |
+| D10 | daily-lift-mirrors | High | [David Maister: The Psychology of Waiting Lines, 1985](https://www.columbia.edu/~ww2040/4615S13/Psychology_of_Waiting_Lines.pdf) (read; a hotel group's lift complaints, "mirrors be installed near where guests waited for elevators", complaints fell, the wait unchanged) | [Ackoff and Greenberg, via Signal v. Noise](https://signalvnoise.com/posts/1244-defining-the-problem-of-elevator-waiting-times) (read; a New York office building, mirrors in the boarding areas, "The complaints about waiting stopped") |
+
 ## Images
 
 | Question | Image | Licence check |
 |---|---|---|
 | coke-bottle | [US design patent 48,160 drawing](https://commons.wikimedia.org/wiki/File:Coke_bottle_patent.JPG) | Commons page read: public domain in the US, published before 1931 |
 | winglets | [NASA KC-135 winglet study, 1979](https://commons.wikimedia.org/wiki/File:Boeing_KC-135A_55-3129_NASA_Winglet_Study.jpg) | Commons page read: NASA work, public domain in the US |
+| daily-ruler-zero | Illustration drawn for this site (the end of a ruler, 0 set 4 mm in) | Our own work |
+| daily-progress-head-start | Illustration drawn for this site (a sign-up screen at step 1 of 5, 20%) | Our own work |
 
 34 more images came from your drop folder on 19 September 2026 and are attached with alt text, but without a credit or licence line yet. They're listed, with what each still needs, in [docs/images-needed.md](docs/images-needed.md), which also lists the images still wanted.
 

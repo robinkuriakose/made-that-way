@@ -27,7 +27,7 @@ try {
   // No daily questions written yet.
 }
 
-const SCHEMA_VERSION = '9';
+const SCHEMA_VERSION = '10';
 const SEED_HASH = createHash('sha256').update(JSON.stringify([pending, daily, themes])).digest('hex').slice(0, 16);
 
 let ready = null;
@@ -247,6 +247,25 @@ async function createTables() {
     WHERE id IS NOT NULL AND NOT EXISTS (SELECT 1 FROM question_stats)
     GROUP BY id
     ON CONFLICT (question_id, is_test) DO NOTHING
+  `;
+  // Daily answers count towards question_stats from now on (routes/daily.js).
+  // The ones given before that are folded in once; the meta row makes sure
+  // it happens only once, in the same statement.
+  await sql`
+    WITH once AS (
+      INSERT INTO meta (key, value) VALUES ('daily_stats_folded', '1')
+      ON CONFLICT (key) DO NOTHING
+      RETURNING key
+    )
+    INSERT INTO question_stats (question_id, is_test, asked, right_count)
+    SELECT question_id, false, count(*)::int, count(*) FILTER (WHERE correct)::int
+    FROM daily_answers
+    WHERE NOT is_test AND EXISTS (SELECT 1 FROM once)
+    GROUP BY question_id
+    ON CONFLICT (question_id, is_test) DO UPDATE SET
+      asked = question_stats.asked + EXCLUDED.asked,
+      right_count = question_stats.right_count + EXCLUDED.right_count,
+      updated_at = now()
   `;
   await sql`
     CREATE TABLE IF NOT EXISTS rate_limits (

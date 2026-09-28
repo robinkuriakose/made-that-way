@@ -42,7 +42,7 @@ export default function DailyPanel({ questions, api, act, onEdit, onAdd, notify 
         <div>
           <h1 className="builder-title">Daily question</h1>
           <p className="muted">
-            One question a day, the same for everyone, in this order. They never repeat and never appear in runs.
+            One question a day, the same for everyone, in this order. They never repeat, and once their day has passed they join the questions runs play from.
           </p>
         </div>
         <button type="button" className="button button-primary" onClick={onAdd}>

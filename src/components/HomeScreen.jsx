@@ -71,10 +71,10 @@ export default function HomeScreen({
     <div className="page">
       <TopBar />
       <main className="stage start home">
-        <h1 className="promise">Everything is designed. Learn to see the thinking.</h1>
+        <h1 className="promise">You've seen it a thousand times. Ever wondered why?</h1>
         <p className="lede">
-          Quick questions about the things around you. Each answer shows the problem its designer was solving, so you
-          start to see what works, what doesn't, and how you'd fix it.
+          Why F and J have little bumps. Why manhole covers are round. Why a pen cap has a hole in it. Everyday things
+          are full of clever decisions: take a guess, and enjoy the moment it clicks.
         </p>
 
         <div className="actions start-actions">
@@ -88,9 +88,12 @@ export default function HomeScreen({
               </button>
             </>
           ) : (
-            <button type="button" className="button button-primary button-big" onClick={onStart} disabled={starting}>
-              {starting ? 'Loading questions…' : 'Start'}
-            </button>
+            <>
+              <button type="button" className="button button-primary button-big" onClick={onStart} disabled={starting}>
+                {starting ? 'Loading questions…' : 'Start guessing'}
+              </button>
+              <p className="start-note">Quick picture questions. No clock, no sign-up.</p>
+            </>
           )}
         </div>
         <Progress {...progress} onCollection={onCollection} />

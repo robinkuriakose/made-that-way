@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import TopBar from './TopBar.jsx';
 import ImageFrame from './ImageFrame.jsx';
+import { Heart } from './Hearts.jsx';
 import { firstSentence } from '../lib/text.js';
 import { percentRight } from '../lib/levels.js';
 
@@ -26,25 +27,9 @@ function Option({ index, text, state, onAnswer }) {
   );
 }
 
-// The reward for answering: why it's made that way, in one line, straight
-// away. "Read more" opens the full reasoning and its source.
-function Reason({ question, onExplain }) {
-  const share = percentRight(question);
-  return (
-    <div className="reason">
-      <p className="reason-label">Why it's made that way</p>
-      <p className="reason-text">{firstSentence(question.explanationRight)}</p>
-      <p className="reason-foot">
-        <button type="button" className="text-button" onClick={onExplain}>
-          Read more
-        </button>
-        {share != null && <span className="muted reason-share">{share}% of players get this right</span>}
-      </p>
-    </div>
-  );
-}
-
-function Feedback({ current, streak, lives, canRedeem, onOpenRedeem }) {
+// One line: how it went. Points and the streak for a right answer, the life
+// lost for a wrong one.
+function Result({ current, streak, lives }) {
   const { phase, points, redeem } = current;
   if (phase === 'correct') {
     return (
@@ -60,21 +45,73 @@ function Feedback({ current, streak, lives, canRedeem, onOpenRedeem }) {
   if (phase === 'redeemed') {
     return <p className="feedback">{redeem?.correct ? 'Life won back.' : 'No life back this time.'}</p>;
   }
-  // wrong, or a redeem in progress
   return (
-    <>
-      <p className="feedback feedback-wrong">{lives === 0 ? 'Not this one. That was your last life.' : 'Not this one. You lost a life.'}</p>
-      {canRedeem && (
-        <div className="redeem-offer">
-          <p className="muted">
-            {lives === 0 ? 'One last chance: answer a related question to stay in.' : 'Answer a related question to win the life back.'}
-          </p>
-          <button type="button" className="button button-accent" onClick={onOpenRedeem}>
-            Win it back
-          </button>
-        </div>
+    <p className="feedback feedback-wrong">
+      {lives === 0 ? 'Not this one. That was your last life.' : 'Not this one.'}
+      {lives > 0 && (
+        <span className="life-lost">
+          <Heart state="empty" /> −1 life
+        </span>
       )}
-    </>
+    </p>
+  );
+}
+
+// The reward for answering: why it's made that way, short, straight away.
+// "Read more" opens the full reasoning and its source; flagging sits here,
+// quietly, beside it.
+function Reason({ question, flagged, onExplain, onFlag }) {
+  const share = percentRight(question);
+  return (
+    <div className="reason">
+      <p className="reason-label">Why it's made that way</p>
+      <p className="reason-text">{firstSentence(question.explanationRight)}</p>
+      {share != null && <p className="muted reason-share">{share}% of players get this right.</p>}
+      <p className="reason-foot">
+        <button type="button" className="text-button" onClick={onExplain}>
+          Read more
+        </button>
+        {flagged ? (
+          <span className="flag-done">Flagged. Thanks.</span>
+        ) : (
+          <button type="button" className="text-button flag-link" onClick={onFlag}>
+            Flag this question
+          </button>
+        )}
+      </p>
+    </div>
+  );
+}
+
+// What to do next, in one place. After a wrong answer with a redeem on
+// offer there are two choices, and winning the life back leads; otherwise
+// there's one. On a phone this bar stays pinned to the bottom of the screen.
+function Actions({ current, lives, canRedeem, nextLabel, onOpenRedeem, onNext }) {
+  const offer = canRedeem && (current.phase === 'wrong' || current.phase === 'redeeming');
+  return (
+    <div className={`answer-actions${offer ? ' has-offer' : ''}`}>
+      {offer && (
+        <p className="answer-actions-note">
+          {lives === 0 ? 'One last chance: answer a related question to stay in.' : 'Answer a related question to win your life back.'}
+        </p>
+      )}
+      <div className="answer-actions-buttons">
+        {offer ? (
+          <>
+            <button type="button" className="button" onClick={onNext}>
+              {nextLabel}
+            </button>
+            <button type="button" className="button button-accent" onClick={onOpenRedeem}>
+              <Heart /> Win it back
+            </button>
+          </>
+        ) : (
+          <button type="button" className="button button-primary" onClick={onNext}>
+            {nextLabel}
+          </button>
+        )}
+      </div>
+    </div>
   );
 }
 
@@ -101,14 +138,19 @@ export default function QuestionScreen({
 }) {
   const { phase, chosenIndex, hintUsed } = current;
   const answered = phase !== 'answering';
-  const statusRef = useRef(null);
+  const optionsRef = useRef(null);
 
-  // On a phone the result and the reason land below the fold. Bring them
-  // into view once, as the answer is given; nothing moves if they fit.
+  // Once answered, the answers themselves lead: the two that are neither
+  // yours nor right shrink to a line, and the screen brings the first of the
+  // two that matter to the top, with the result and the reason right under
+  // them. Nothing moves if it's all in view already.
   useEffect(() => {
     if (!answered) return;
+    const first = optionsRef.current?.querySelector('.is-correct, .is-wrong');
+    if (!first) return;
+    const top = first.getBoundingClientRect().top;
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    statusRef.current?.scrollIntoView({ block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+    if (top < 0 || top > window.innerHeight * 0.45) first.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
   }, [answered]);
 
   function optionState(i) {
@@ -121,7 +163,7 @@ export default function QuestionScreen({
   return (
     <div className="page">
       <TopBar play={play} onHome={onHome} onRestart={onRestart} />
-      <main className="stage question">
+      <main className={`stage question${answered ? ' is-answered' : ''}`}>
         <p className="eyebrow">{label}</p>
         <h1 className="stem">{question.stem}</h1>
         {/* Below the question, so the question itself always sits at the same
@@ -129,7 +171,7 @@ export default function QuestionScreen({
             the answer on purpose: the point is to work it out. */}
         {question.image && <ImageFrame image={question.image} compact />}
 
-        <ol className={`options${answered ? ' is-answered' : ''}`}>
+        <ol ref={optionsRef} className={`options${answered ? ' is-answered' : ''}`}>
           {question.options.map((text, i) => (
             <li key={i}>
               <Option index={i} text={text} state={optionState(i)} onAnswer={onAnswer} />
@@ -137,8 +179,9 @@ export default function QuestionScreen({
           ))}
         </ol>
 
-        <div className="status" aria-live="polite" ref={statusRef}>
+        <div className="status" aria-live="polite">
           {!answered &&
+            question.hint &&
             (hintUsed ? (
               <p className="hint">
                 <span className="hint-label">Hint</span>
@@ -151,25 +194,21 @@ export default function QuestionScreen({
             ))}
           {answered && (
             <>
-              <Feedback current={current} streak={streak} lives={lives} canRedeem={canRedeem} onOpenRedeem={onOpenRedeem} />
-              <Reason question={question} onExplain={onExplain} />
+              <Result current={current} streak={streak} lives={lives} />
+              <Reason question={question} flagged={flagged} onExplain={onExplain} onFlag={onFlag} />
             </>
           )}
         </div>
 
         {answered && (
-          <div className="next-row next-row-split">
-            {flagged ? (
-              <span className="flag-done">Flagged. Thanks.</span>
-            ) : (
-              <button type="button" className="text-button flag-link" onClick={onFlag}>
-                Flag this question
-              </button>
-            )}
-            <button type="button" className="button button-primary" onClick={onNext}>
-              {nextLabel}
-            </button>
-          </div>
+          <Actions
+            current={current}
+            lives={lives}
+            canRedeem={canRedeem}
+            nextLabel={nextLabel}
+            onOpenRedeem={onOpenRedeem}
+            onNext={onNext}
+          />
         )}
       </main>
     </div>

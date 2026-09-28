@@ -6,7 +6,7 @@ Last updated 27 September 2026.
 
 ## The product
 
-**Made That Way**: a quiz that teaches why everyday things are designed the way they are. The promise: "Everything is designed. Learn to see the thinking." The owner wants players to question design themselves, see the flaw, know the fix, and build better in the age of AI.
+**Made That Way**: a quiz that teaches why everyday things are designed the way they are. The home headline: "You've seen it a thousand times. Ever wondered why?" Every question should be an aha question (`docs/question-strategy.md`). The owner wants players to question design themselves, see the flaw, know the fix, and build better in the age of AI.
 - **Live:** https://madethatway.vercel.app
 - **Builder:** `/builder`, behind a password
 - **Code:** https://github.com/robinkuriakose/made-that-way (`main`). Every push redeploys.
@@ -42,10 +42,14 @@ Last updated 27 September 2026.
 | Sources for every question | `SOURCES.md` |
 | Working rules for this repo | `CLAUDE.md` |
 
-## Current state (27 September)
+## Current state (28 September)
+
+- **Round 10:** the owner's five "aha" questions are the daily questions from 28 September; finished daily questions now join the run pool; new home copy ("You've seen it a thousand times. Ever wondered why?"); a clearer answered-question screen on phones. The kind of question wanted is written up in `docs/question-strategy.md`: read it before writing any question.
+- **Waiting on the owner:** pictures for three daily questions (Heinz, Kadokeshi, lift mirrors) before their days; whether to take the 12 story questions out of runs; go-ahead for the next batch.
+
+## Earlier (27 September)
 
 - **V2 is live** (pushed and checked on the live site in test mode, 27 September: a run with a redeem, a level break, stop and sign as "test", play again, all in one visit (the daily question then a run was checked locally); the test entry left the board after two minutes). Built from the test group's feedback and the owner's answers. See `docs/v2-plan.md` and the V2 section of `docs/brief-map.md`.
-- **Proposed, not agreed:** a principle on every question, and "spot the flaw" questions (`docs/later.md`). Both push the design-thinking promise into the game.
 - **The bank is the limit now:** 38 picture questions on the live site; strong players will see them all in one run.
 - **Still with the owner:** `docs/owner-checklist.md`.
 

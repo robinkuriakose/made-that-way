@@ -8,6 +8,7 @@ Last updated 20 September 2026.
 
 The site is live at https://madethatway.vercel.app (21 September 2026): database connected, builder password set, every route checked end to end.
 
+- [ ] **Pictures for the next three daily questions** (Heinz border, Kadokeshi eraser, lift mirrors), uploaded in the builder's Daily tab before each one's day, from 29 September. What each should show: `docs/images-needed.md`.
 - [ ] **Try an image upload in the builder,** on any question. It's the one thing I couldn't check without signing in as you, and it proves the Blob store is connected.
 - [ ] **Optional: a custom domain,** under Settings, Domains in Vercel.
 
