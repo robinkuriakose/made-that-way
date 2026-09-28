@@ -80,9 +80,10 @@ const levelSizeOf = (run, level) => Math.min(LEVEL_SIZE, run.order.length - (lev
 // and reviewable even if the bank changes underneath it), and the order each
 // question's options are shown in. Answers are always recorded in the
 // question's original option order; see lib/shuffle.js. Levels are added one
-// at a time, at each level break (see lib/levels.js).
-function createRun(bank, themeIds) {
-  const { ids } = buildLevel({ questions: levelPool(bank.questions), themeIds, seen: new Set(seenIds()) });
+// at a time, at each level break (see lib/levels.js). firstId is a question
+// the player picked from the pictures on the home screen, to start with.
+function createRun(bank, themeIds, firstId = null) {
+  const { ids } = buildLevel({ questions: levelPool(bank.questions), themeIds, firstId, seen: new Set(seenIds()) });
   return {
     version: RUN_VERSION,
     id: makeId(),
@@ -295,7 +296,9 @@ export default function App() {
     }
   }, []);
 
-  async function startRun() {
+  // firstId: a question to start with (a picture tapped on the home screen).
+  // Buttons call this with a click event, which is ignored.
+  async function startRun(firstId = null) {
     if (starting) return null;
     const previous = runRef.current;
     setStarting(true);
@@ -305,7 +308,7 @@ export default function App() {
     // Waits for the live bank only if it's still on its way, and never past
     // the 3 second limit (see lib/questionBank.js).
     const live = await liveBank.current;
-    const next = createRun(live ?? bankRef.current, chosenThemes);
+    const next = createRun(live ?? bankRef.current, chosenThemes, typeof firstId === 'string' ? firstId : null);
     if (previous && !previous.finishedAt) track('run_restarted', { runId: previous.id, data: { position: previous.index + 1 } });
     track('run_started', { runId: next.id, data: next.themeIds ? { themes: next.themeIds } : {} });
     setRun(next);
@@ -316,9 +319,10 @@ export default function App() {
   }
 
   // Restart goes straight to a new run from question 1, with a few seconds
-  // to undo it instead of an "are you sure?" in the way.
-  async function restartRun() {
-    const previous = await startRun();
+  // to undo it instead of an "are you sure?" in the way. Playing a picture
+  // from the home screen mid-run works the same way.
+  async function restartRun(firstId = null) {
+    const previous = await startRun(firstId);
     if (!previous || previous.finishedAt) return;
     setToast({
       message: 'New run started.',
@@ -755,6 +759,7 @@ export default function App() {
         onFlagDaily={openFlag}
         onStreak={onStreak}
         onCollection={() => enter('whys')}
+        onPlayQuestion={(id) => restartRun(id)}
       />
     );
   }

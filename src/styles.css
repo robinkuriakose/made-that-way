@@ -2067,7 +2067,8 @@ td.wrap {
   }
 }
 
-/* The wall of whys: a slowly drifting strip of pictures that turn over */
+/* The wall of whys: a row of pictures you swipe by hand. Tapping one opens
+   it big, with its question, in a sheet (WhyPreview). */
 
 .wall {
   margin: 0 0 48px;
@@ -2075,140 +2076,169 @@ td.wrap {
 
 .wall-head {
   display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 4px 16px;
-  margin-bottom: 14px;
+  gap: 16px;
+  margin-bottom: 12px;
 }
 
 .wall-head .section-title {
   margin: 0;
 }
 
-.wall-hint {
-  margin: 0;
-  font-size: 12.5px;
+/* Arrows only where there's a mouse; fingers swipe. */
+.wall-arrows {
+  display: none;
+  gap: 6px;
 }
 
-.wall-viewport {
-  margin: 0 -24px;
-  padding: 4px 0;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+@media (hover: hover) and (pointer: fine) {
+  .wall-arrows {
+    display: flex;
+  }
 }
 
-.wall-track {
+.wall-arrow {
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 2px;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.wall-arrow:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+.wall-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Runs edge to edge, so the next picture peeks in and says "swipe". */
+.wall-row {
   display: flex;
   gap: 12px;
-  width: max-content;
-  margin: 0;
-  padding: 0 24px;
+  margin: 0 -24px;
+  padding: 4px 24px 10px;
   list-style: none;
-  animation: wall-drift 90s linear infinite;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scroll-padding: 0 24px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
 }
 
-.wall-viewport:hover .wall-track,
-.wall-viewport:focus-within .wall-track,
-.wall-viewport.is-paused .wall-track {
-  animation-play-state: paused;
-}
-
-@keyframes wall-drift {
-  to {
-    transform: translateX(calc(-50% - 6px));
-  }
+.wall-row::-webkit-scrollbar {
+  display: none;
 }
 
 .wall-item {
   flex: none;
+  scroll-snap-align: start;
 }
 
 .wall-tile {
   position: relative;
   display: block;
-  width: 150px;
-  height: 172px;
+  width: 176px;
+  height: 212px;
   padding: 0;
-  background: none;
-  border: 0;
-  border-radius: var(--radius);
-  cursor: pointer;
-  perspective: 800px;
-}
-
-.wall-face {
-  position: absolute;
-  inset: 0;
-  display: flex;
   overflow: hidden;
-  border-radius: var(--radius);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.wall-front {
   background: var(--surface);
   border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
 }
 
-.wall-front img {
+.wall-tile img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.wall-back {
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 14px;
-  text-align: left;
+.wall-tile:hover img,
+.wall-tile:focus-visible img {
+  transform: scale(1.05);
+}
+
+.wall-why {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 3px 11px;
+  font-size: 12.5px;
+  font-weight: 500;
   color: var(--ink);
-  background: var(--accent-soft);
-  border: 1px solid #dde9ae;
-  transform: rotateY(180deg);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 999px;
 }
 
-.wall-tile.is-flipped .wall-front {
-  transform: rotateY(-180deg);
+/* The picture opened big */
+
+.modal-why {
+  max-width: 34rem;
 }
 
-.wall-tile.is-flipped .wall-back {
-  transform: rotateY(0);
+.modal-why .image-frame {
+  margin-bottom: 18px;
 }
 
-.wall-label {
-  font-size: 10.5px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--accent-ink);
+.modal-why .image-frame-box {
+  height: 280px;
 }
 
-.wall-stem {
-  font-size: 13.5px;
-  font-weight: 500;
-  line-height: 1.35;
+.why-label {
+  margin-bottom: 6px;
+}
+
+.why-title {
+  margin-bottom: 4px;
+  font-size: 1.3rem;
+}
+
+.why-actions {
+  margin-top: 22px;
+}
+
+@media (max-width: 520px) {
+  .wall-row {
+    margin: 0 -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    scroll-padding: 0 20px;
+  }
+
+  .wall-tile {
+    width: 42vw;
+    max-width: 176px;
+    height: 200px;
+  }
+
+  .modal-why .image-frame-box {
+    height: 230px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .wall-viewport {
-    overflow-x: auto;
-  }
-
-  .wall-track {
-    animation: none;
-  }
-
-  .wall-item[aria-hidden='true'] {
-    display: none;
-  }
-
-  .wall-face {
+  .wall-tile img {
     transition: none;
+  }
+
+  .wall-tile:hover img,
+  .wall-tile:focus-visible img {
+    transform: none;
   }
 }
 
@@ -2608,19 +2638,6 @@ td.wrap {
 @media (max-width: 520px) {
   .daily {
     padding: 20px 18px;
-  }
-
-  .wall-viewport {
-    margin: 0 -20px;
-  }
-
-  .wall-track {
-    padding: 0 20px;
-  }
-
-  .wall-tile {
-    width: 132px;
-    height: 156px;
   }
 
   .topbar-meta {

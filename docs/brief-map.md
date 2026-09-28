@@ -75,6 +75,12 @@ mindmap
       Score verification
 ```
 
+## Round 11 (28 September 2026): the picture strip
+
+| You asked for | Status | Where |
+|---|---|---|
+| The pictures that reveal a question: text runs out, people try to swipe and can't, it's uninviting. Rethink it (go with B, flip cards, but open them as a modal or by resizing; think of more ways, question them, build the best) | Done. Weighed six ways of opening a picture: flip in place (text never fits), widen the card (thin text column, fights swiping), grow it downwards or a shared caption (jumps, or permanent text), text over the picture (hides the hook), and a sheet like a photo gallery. Built the sheet: the row swipes by hand and never moves on its own, bigger pictures with only a "Why?" tag, arrows on a computer. Tapping opens the picture big with its question and "Play this one", which starts a run with that question first (Undo if a run was going), and "Another one". The row now sits under today's question, and shows questions not seen yet first | `src/components/WallOfWhys.jsx`, `src/components/WhyPreview.jsx`, `src/lib/levels.js` (`firstId`), `src/App.jsx` (`restartRun`) |
+
 ## Round 10 (28 September 2026): aha questions, home copy, mobile hierarchy
 
 | You asked for | Status | Where |

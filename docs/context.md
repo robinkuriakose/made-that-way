@@ -44,6 +44,8 @@ Last updated 27 September 2026.
 
 ## Current state (28 September)
 
+- **Round 11:** the home picture strip is rebuilt: swipe by hand, tap a picture to open it big with its question, "Play this one" starts a run with it first. It sits under today's question.
+
 - **Round 10:** the owner's five "aha" questions are the daily questions from 28 September; finished daily questions now join the run pool; new home copy ("You've seen it a thousand times. Ever wondered why?"); a clearer answered-question screen on phones. The kind of question wanted is written up in `docs/question-strategy.md`: read it before writing any question.
 - **Waiting on the owner:** pictures for three daily questions (Heinz, Kadokeshi, lift mirrors) before their days; whether to take the 12 story questions out of runs; go-ahead for the next batch.
 

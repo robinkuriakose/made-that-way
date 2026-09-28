@@ -67,19 +67,19 @@ mindmap
 | What | Where |
 |---|---|
 | Entry point; `/builder` loads the builder lazily. Test mode is switched on here | `src/main.jsx:11` (`initTestMode`), `:14` (`isBuilderRoute`) |
-| Run shape, bumped when state changes shape | `src/App.jsx:46` (`RUN_VERSION`, now 5), `:84` (`createRun`) |
-| A run keeps its own copy of its questions, the topics it was built from, and the order each question's options are shown in. It starts with level 1 only; each level is added at the break before it | `src/App.jsx:84` (`createRun`), `:469` (`openBreak`) |
+| Run shape, bumped when state changes shape | `src/App.jsx:46` (`RUN_VERSION`, now 5), `:85` (`createRun`) |
+| A run keeps its own copy of its questions, the topics it was built from, and the order each question's options are shown in. It starts with level 1 only; each level is added at the break before it | `src/App.jsx:85` (`createRun`), `:473` (`openBreak`) |
 | Levels play from picture questions only (text-only ones tired people out) | `src/App.jsx:68` (`levelPool`) |
-| Resume a saved run. Coming back to an unanswered question swaps it for a fresh one, so leaving can't be used to look the answer up | `src/App.jsx:339` (`resumeRun`), pick at `src/lib/levels.js:143` (`replacementFor`) |
-| Home, Back and Restart. Play, the end screen and the collection each get a history entry, so the phone's Back button goes home | `src/App.jsx:225` (`showHome`), `:243` (`enter`), `:252` (`goHome`), `:320` (`restartRun`, with an Undo toast) |
-| Start a run (waits for the live bank, at most 3 s from page load) | `src/App.jsx:298` (`startRun`) |
-| Answering: display order in, original order stored; points worked out from the answers so far | `src/App.jsx:380` (`answer`), `:441` (`answerRedeem`, a right one wins the life back) |
-| Hint, redeem, next, the level break, finishing | `src/App.jsx:374` (`takeHint`), `:397` (`openRedeem`), `:514` (`next`), `:469` (`openBreak`), `:548` (`continueLevel`), `:552` (`finishAtBreak`), `:456` (`finishRun`) |
-| Rewards during play: whys uncovered, badges, the streak badge from the daily card | `src/App.jsx:280` (`uncovered`), `:267` (`grant`), `:289` (`onStreak`) |
-| Sign the leaderboard, change the name | `src/App.jsx:556` (`signScore`), `:572` (`rename`) |
-| Flag a question (runs, redeem questions and the daily question) | `src/App.jsx:590` (`openFlag`), `:596` (`submitFlag`) |
-| Choose topics (they come first in levels) | `src/App.jsx:612` (`saveTopics`), window at `src/components/TopicPicker.jsx` |
-| Which screen renders, and the test mode banner | `src/App.jsx:629` onwards |
+| Resume a saved run. Coming back to an unanswered question swaps it for a fresh one, so leaving can't be used to look the answer up | `src/App.jsx:343` (`resumeRun`), pick at `src/lib/levels.js:161` (`replacementFor`) |
+| Home, Back and Restart. Play, the end screen and the collection each get a history entry, so the phone's Back button goes home | `src/App.jsx:226` (`showHome`), `:244` (`enter`), `:253` (`goHome`), `:324` (`restartRun`, with an Undo toast) |
+| Start a run (waits for the live bank, at most 3 s from page load), optionally with a picked first question; mid-run it offers Undo | `src/App.jsx:301` (`startRun`), `:324` (`restartRun`) |
+| Answering: display order in, original order stored; points worked out from the answers so far | `src/App.jsx:384` (`answer`), `:445` (`answerRedeem`, a right one wins the life back) |
+| Hint, redeem, next, the level break, finishing | `src/App.jsx:378` (`takeHint`), `:401` (`openRedeem`), `:518` (`next`), `:473` (`openBreak`), `:552` (`continueLevel`), `:556` (`finishAtBreak`), `:460` (`finishRun`) |
+| Rewards during play: whys uncovered, badges, the streak badge from the daily card | `src/App.jsx:281` (`uncovered`), `:268` (`grant`), `:290` (`onStreak`) |
+| Sign the leaderboard, change the name | `src/App.jsx:560` (`signScore`), `:576` (`rename`) |
+| Flag a question (runs, redeem questions and the daily question) | `src/App.jsx:594` (`openFlag`), `:600` (`submitFlag`) |
+| Choose topics (they come first in levels) | `src/App.jsx:616` (`saveTopics`), window at `src/components/TopicPicker.jsx` |
+| Which screen renders, and the test mode banner | `src/App.jsx:633` onwards |
 
 ## Screens and components
 
@@ -93,7 +93,7 @@ mindmap
 | End screen: score, levels, whys and badges earned, Play again, signing (one tap when the name is known), this week's board, review by level | `src/components/EndScreen.jsx:70`; sign form at `:11` |
 | Collection: badges and every why uncovered, each opening its reasoning | `src/components/WhysScreen.jsx:8` |
 | Question of the day: answer in place, then the reason, how everyone did, streak and average | `src/components/DailyCard.jsx:27` |
-| The wall of whys: a drifting strip of pictures that turn over to show their question | `src/components/WallOfWhys.jsx:12` |
+| The wall of whys: a row of pictures swiped by hand (arrows on a computer), unseen ones first; tapping one opens it big with its question, "Another one" and "Play this one" | `src/components/WallOfWhys.jsx:16`, the sheet at `src/components/WhyPreview.jsx:9` |
 | Name on the board, and changing it (3 changes) | `src/components/PlayerName.jsx:7` |
 | This week's board, with when it resets | `src/components/Leaderboard.jsx` (`Leaderboard`, `BoardList`) |
 | Topic picker: pills, at least 3 | `src/components/TopicPicker.jsx:7` |
@@ -107,9 +107,9 @@ mindmap
 |---|---|
 | Level size, lives, points: the level multiplier, the combo, a hint halving them | `src/lib/scoring.js:10` to `:15`, `:32` (`pointsFor`) |
 | Everything that follows from a run's answers (points, lives, combo, levels cleared), shared by the quiz and the server | `src/lib/scoring.js:43` (`replay`) |
-| Build the next level: unseen first, then chosen topics, then easiest; no near duplicates; neighbours differ; a clue for one of its questions | `src/lib/levels.js:88` (`buildLevel`), `:52` (`openQuestions`) |
+| Build the next level: unseen first, then chosen topics, then easiest; no near duplicates; two a topic at most; neighbours differ; a clue for one of its questions; a picked question (`firstId`) opens it | `src/lib/levels.js:100` (`buildLevel`), `:52` (`openQuestions`) |
 | How easy a question has proved, and the share who get it right | `src/lib/levels.js:26` (`easeOf`), `:33` (`percentRight`) |
-| A replacement question when a player leaves and comes back | `src/lib/levels.js:143` (`replacementFor`) |
+| A replacement question when a player leaves and comes back | `src/lib/levels.js:161` (`replacementFor`) |
 | Redeem choices: most related first, keeping picture questions for the levels | `src/lib/redeem.js:24` (`pickRedeemQuestions`) |
 | Rewards on this device: whys uncovered, badges, best run | `src/lib/rewards.js:16` (`BADGES`), `:60` (`uncover`), `:74` (`award`), `:91` (`recordBest`) |
 | The weekly board's week (Monday, India time) | `src/lib/week.js:9` (`weekStart`), `:19` (`resetWords`) |
@@ -198,8 +198,8 @@ mindmap
 | Redeem and flag windows | `:835`, `:922` |
 | Builder shell, review queue, question list, form, flags, analytics tables | `:979`, `:1088`, `:1286`, `:1367`, `:1498`, `:1576` |
 | Phone layout | `:1697` |
-| Round 8: navigation, home, daily, wall, topics, dashboard | `:1846` onwards |
-| V2: top bar during play, hearts, answering, the reason, level break, burst, end, home, collection, less motion | `:2636` onwards |
+| Round 8: navigation, home, daily, wall, topics, dashboard | `:1842` onwards; the picture row and its sheet at `:2070` |
+| V2: top bar during play, hearts, answering, the reason, level break, burst, end, home, collection, less motion | `:2649` onwards |
 
 ## Tooling
 

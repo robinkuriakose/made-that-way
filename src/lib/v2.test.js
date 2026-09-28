@@ -178,6 +178,22 @@ test('the last level can be short, and an empty one means the bank is used up', 
   assert.deepEqual(buildLevel({ questions, usedIds: ids }).ids, []);
 });
 
+test('a picked question opens level 1, with four others that suit it', () => {
+  const { questions } = pool();
+  const map = byId(questions);
+  for (let seed = 0; seed < 20; seed++) {
+    const { ids } = buildLevel({ questions, firstId: 'q1', random: seededRandom(`first-${seed}`) });
+    assert.equal(ids[0], 'q1');
+    assert.equal(ids.length, LEVEL_SIZE);
+    assert.equal(new Set(ids).size, LEVEL_SIZE);
+    assert.ok(!ids.includes('q0'), 'q0 shares the keypads group with q1');
+    assert.ok(ids.every((id, i) => i === 0 || map[id].topic !== map[ids[i - 1]].topic), 'neighbours differ');
+  }
+  const myth = buildLevel({ questions, firstId: 'q38', random: seededRandom('myth') }).ids;
+  assert.equal(myth.filter((id) => map[id].topic === MYTH_TOPIC).length, 1, 'no second myth buster');
+  assert.equal(buildLevel({ questions, firstId: 'nope', random: seededRandom('x') }).ids.length, LEVEL_SIZE, 'an unknown pick is ignored');
+});
+
 test('a swapped-in question is new to the run, shares no group, and keeps the topic when it can', () => {
   const questions = [
     { id: 'a', topic: 'ui', group: 'g' },

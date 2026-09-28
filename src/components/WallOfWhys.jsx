@@ -1,48 +1,54 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { showsImage } from './ImageFrame.jsx';
+import WhyPreview from './WhyPreview.jsx';
 import { shuffled } from '../lib/shuffle.js';
 import { questionLabel } from '../lib/themes.js';
+import { seenIds } from '../lib/seen.js';
 
-const TILE_COUNT = 14;
+const TILE_COUNT = 12;
+const reducedMotion = () => window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
 
-// A slowly drifting strip of things from the quiz. Tapping a picture turns
-// it over to show its question, never the answer: a taste of what the quiz
-// is about, and a reason to find out. The strip pauses while hovered or
-// while a card is turned, and doesn't move at all for people who ask their
-// device for less motion (it scrolls by hand instead).
-export default function WallOfWhys({ questions, themes }) {
-  const tiles = useMemo(
-    () => shuffled(questions.filter((q) => showsImage(q.image))).slice(0, TILE_COUNT),
-    // Picked once per visit, so the strip doesn't reshuffle when the live bank arrives.
-    [questions.length > 0],
-  );
-  const [flipped, setFlipped] = useState(null);
+// A row of pictures from the quiz, and nothing else: the pictures are the
+// hook, and the home screen has enough words. Swipe it by hand (it never
+// moves on its own); on a computer, arrows page through it. Tapping one opens
+// it big with its question, never the answer, and "Play this one" starts a
+// run with that question first. Questions this device hasn't seen come first.
+export default function WallOfWhys({ questions, themes, starting, onPlay }) {
+  const tiles = useMemo(() => {
+    const seen = new Set(seenIds());
+    const pictures = questions.filter((q) => showsImage(q.image));
+    return [...shuffled(pictures.filter((q) => !seen.has(q.id))), ...shuffled(pictures.filter((q) => seen.has(q.id)))].slice(
+      0,
+      TILE_COUNT,
+    );
+    // Picked once per visit, so the row doesn't reshuffle when the live bank arrives.
+  }, [questions.length > 0]);
+  const [open, setOpen] = useState(null);
+  const [ends, setEnds] = useState({ start: true, end: false });
+  const rowRef = useRef(null);
+
+  const readEnds = () => {
+    const row = rowRef.current;
+    if (!row) return;
+    setEnds({ start: row.scrollLeft < 8, end: row.scrollLeft + row.clientWidth > row.scrollWidth - 8 });
+  };
+  useEffect(readEnds, [tiles.length]);
 
   if (tiles.length < 4) return null;
 
-  const tile = (q, copy) => {
-    const isFlipped = flipped === q.id && copy === 0;
-    return (
-      <li key={`${q.id}-${copy}`} className="wall-item" aria-hidden={copy === 1 ? 'true' : undefined}>
-        <button
-          type="button"
-          className={`wall-tile${isFlipped ? ' is-flipped' : ''}`}
-          aria-pressed={copy === 0 ? isFlipped : undefined}
-          aria-label={copy === 0 ? (isFlipped ? q.stem : `${q.image.alt}. Show its question.`) : undefined}
-          tabIndex={copy === 1 ? -1 : 0}
-          onClick={() => setFlipped(isFlipped || copy === 1 ? null : q.id)}
-        >
-          <span className="wall-face wall-front">
-            <img src={q.image.thumb ?? q.image.src} alt="" loading="lazy" decoding="async" />
-          </span>
-          <span className="wall-face wall-back">
-            <span className="wall-label">{questionLabel(q, themes)}</span>
-            <span className="wall-stem">{q.stem}</span>
-          </span>
-        </button>
-      </li>
-    );
+  const page = (dir) => {
+    const row = rowRef.current;
+    row?.scrollBy({ left: dir * row.clientWidth * 0.8, behavior: reducedMotion() ? 'auto' : 'smooth' });
   };
+
+  // Closing leaves the row showing the last picture looked at.
+  const close = () => {
+    const tile = rowRef.current?.children[open]?.querySelector('button');
+    setOpen(null);
+    tile?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: reducedMotion() ? 'auto' : 'smooth' });
+  };
+
+  const question = open == null ? null : tiles[open];
 
   return (
     <section className="wall" aria-labelledby="wall-title">
@@ -50,14 +56,37 @@ export default function WallOfWhys({ questions, themes }) {
         <p id="wall-title" className="section-title">
           Why is it like that?
         </p>
-        <p className="muted wall-hint">Tap a picture to see its question.</p>
+        <div className="wall-arrows">
+          <button type="button" className="wall-arrow" aria-label="Earlier pictures" onClick={() => page(-1)} disabled={ends.start}>
+            <span aria-hidden="true">‹</span>
+          </button>
+          <button type="button" className="wall-arrow" aria-label="More pictures" onClick={() => page(1)} disabled={ends.end}>
+            <span aria-hidden="true">›</span>
+          </button>
+        </div>
       </div>
-      <div className={`wall-viewport${flipped ? ' is-paused' : ''}`}>
-        <ul className="wall-track">
-          {tiles.map((q) => tile(q, 0))}
-          {tiles.map((q) => tile(q, 1))}
-        </ul>
-      </div>
+      <ul className="wall-row" ref={rowRef} onScroll={readEnds}>
+        {tiles.map((q, i) => (
+          <li key={q.id} className="wall-item">
+            <button type="button" className="wall-tile" aria-label={`${q.image.alt}. See its question.`} onClick={() => setOpen(i)}>
+              <img src={q.image.thumb ?? q.image.src} alt="" loading="lazy" decoding="async" />
+              <span className="wall-why" aria-hidden="true">
+                Why?
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+      {question && (
+        <WhyPreview
+          question={question}
+          label={questionLabel(question, themes)}
+          starting={starting}
+          onPlay={() => onPlay(question.id)}
+          onAnother={() => setOpen((i) => (i + 1) % tiles.length)}
+          onClose={close}
+        />
+      )}
     </section>
   );
 }

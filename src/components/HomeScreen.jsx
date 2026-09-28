@@ -66,6 +66,7 @@ export default function HomeScreen({
   onFlagDaily,
   onStreak,
   onCollection,
+  onPlayQuestion,
 }) {
   return (
     <div className="page">
@@ -100,6 +101,8 @@ export default function HomeScreen({
 
         <DailyCard onFlag={onFlagDaily} flagged={dailyFlagged} onStreak={onStreak} />
 
+        <WallOfWhys questions={questions} themes={themes} starting={starting} onPlay={onPlayQuestion} />
+
         <section className="how" aria-labelledby="how-title">
           <p id="how-title" className="section-title">
             How it works
@@ -116,7 +119,6 @@ export default function HomeScreen({
           <Leaderboard boards={boards} limit={5} titleId="start-board-title" />
         </section>
 
-        <WallOfWhys questions={questions} themes={themes} />
 
         <div className="home-foot">
           <PlayerName name={player.name} changesLeft={player.changesLeft} onRename={onRename} />

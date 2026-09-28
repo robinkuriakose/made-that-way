@@ -128,7 +128,7 @@ src/
   components/             Home, Question, LevelBreak, End, Whys (collection),
                           DailyCard, WallOfWhys, Leaderboard, PlayerName,
                           TopicPicker, top bar, Hearts, CountUp, Burst, Toast,
-                          Modal, ExplainModal, RedeemModal, FlagModal,
+                          Modal, ExplainModal, RedeemModal, FlagModal, WhyPreview,
                           Explanation, ImageFrame
   builder/                the /builder app: review queue, questions, daily,
                           flags, players, analytics

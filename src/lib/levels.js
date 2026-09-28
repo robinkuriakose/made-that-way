@@ -57,37 +57,50 @@ export function openQuestions(questions, usedIds) {
 }
 
 // Deal questions out so no two neighbours share a topic, when that's possible.
-function arrangeByTopic(chosen, random) {
+// `after` is a question that comes just before the first one.
+function arrangeByTopic(chosen, random, after = null) {
   for (let attempt = 0; attempt < 30; attempt++) {
     const order = shuffle(chosen, random);
-    if (order.every((q, i) => i === 0 || q.topic !== order[i - 1].topic)) return order;
+    if (order.every((q, i) => q.topic !== (i === 0 ? after?.topic : order[i - 1].topic))) return order;
   }
   return shuffle(chosen, random);
 }
 
-// Picks up to `count` from a ranked list: distinct groups, one myth buster at most.
-function takeLevel(ranked, count) {
-  const out = [];
-  const groups = new Set();
-  let myth = false;
-  for (const q of ranked) {
-    if (out.length === count) break;
-    if (q.group && groups.has(q.group)) continue;
-    if (q.topic === MYTH_TOPIC && myth) continue;
-    if (q.group) groups.add(q.group);
-    if (q.topic === MYTH_TOPIC) myth = true;
-    out.push(q);
-  }
-  return out;
+// Picks up to `count` from a ranked list: distinct groups, one myth buster at
+// most, and no more than two from one topic while that's possible, so
+// neighbours can always differ. `taken` are questions already in the level
+// (a picked first question).
+function takeLevel(ranked, count, taken = []) {
+  const attempt = (perTopic) => {
+    const out = [];
+    const groups = new Set(taken.map((q) => q.group).filter(Boolean));
+    const topics = new Map();
+    for (const q of taken) topics.set(q.topic, (topics.get(q.topic) ?? 0) + 1);
+    for (const q of ranked) {
+      if (out.length === count) break;
+      if (q.group && groups.has(q.group)) continue;
+      if (q.topic === MYTH_TOPIC && topics.get(MYTH_TOPIC)) continue;
+      if ((topics.get(q.topic) ?? 0) >= perTopic) continue;
+      if (q.group) groups.add(q.group);
+      topics.set(q.topic, (topics.get(q.topic) ?? 0) + 1);
+      out.push(q);
+    }
+    return out;
+  };
+  const capped = attempt(2);
+  return capped.length === count ? capped : attempt(Infinity);
 }
 
 // Builds the next level. questions: the pool the run plays from (in the
 // quiz, questions with a picture). usedIds: every question the run has
 // asked, queued or used as a redeem. tidbits: [{ id, tidbitFor, text }].
+// firstId: a question the player picked to start with (from the pictures on
+// the home screen); it opens the level and the other four are built round it.
 // Returns { ids, tidbitId }; ids is empty when nothing is left.
 export function buildLevel({
   questions,
-  usedIds = [],
+  usedIds: usedBefore = [],
+  firstId = null,
   tidbits = [],
   usedTidbitIds = [],
   withTidbit = false,
@@ -95,6 +108,10 @@ export function buildLevel({
   seen = null,
   random = Math.random,
 }) {
+  const first = firstId ? openQuestions(questions, usedBefore).find((q) => q.id === firstId) ?? null : null;
+  const usedIds = first ? [...usedBefore, first.id] : usedBefore;
+  const size = first ? LEVEL_SIZE - 1 : LEVEL_SIZE;
+  const taken = first ? [first] : [];
   const open = openQuestions(questions, usedIds);
   // Tiers first (unseen in the chosen topics, unseen elsewhere, seen in the
   // topics, seen elsewhere), then ease within a tier. Ease is 0 to 1, so a
@@ -106,8 +123,8 @@ export function buildLevel({
     .sort((a, b) => b.p - a.p)
     .map((x) => x.q);
 
-  let chosen = takeLevel(shuffle(ranked.slice(0, WINDOW), random), LEVEL_SIZE);
-  if (chosen.length < LEVEL_SIZE) chosen = takeLevel(ranked, LEVEL_SIZE);
+  let chosen = takeLevel(shuffle(ranked.slice(0, WINDOW), random), size, taken);
+  if (chosen.length < size) chosen = takeLevel(ranked, size, taken);
 
   let tidbitId = null;
   if (withTidbit && chosen.length) {
@@ -133,7 +150,8 @@ export function buildLevel({
     }
   }
 
-  return { ids: arrangeByTopic(chosen, random).map((q) => q.id), tidbitId };
+  const ids = arrangeByTopic(chosen, random, first).map((q) => q.id);
+  return { ids: first ? [first.id, ...ids] : ids, tidbitId };
 }
 
 // When a player leaves a question and comes back, they've had time to look
