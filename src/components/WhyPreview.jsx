@@ -10,7 +10,7 @@ export default function WhyPreview({ question, label, starting, onPlay, onAnothe
   const playRef = useRef(null);
   return (
     <Modal labelledBy="why-title" onClose={onClose} initialFocusRef={playRef} className="modal-why">
-      <ImageFrame key={question.id} image={question.image} />
+      <ImageFrame key={question.id} image={question.image} placeholder={question.image.thumb} eager />
       <p className="eyebrow why-label">{label}</p>
       <h2 id="why-title" className="modal-title why-title" aria-live="polite">
         {question.stem}

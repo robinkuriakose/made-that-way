@@ -8,13 +8,15 @@ import { useState } from 'react';
 // running locally; the live site behaves as if there were no image.
 export const showsImage = (image) => Boolean(image?.src) && !(image.placeholder && import.meta.env.PROD);
 
-export default function ImageFrame({ image, compact = false }) {
+// placeholder: a small copy already on screen (a thumbnail), shown in the
+// frame while the full picture loads. eager: load now, not when scrolled to.
+export default function ImageFrame({ image, compact = false, placeholder = null, eager = false }) {
   const [broken, setBroken] = useState(false);
   if (broken || !showsImage(image)) return null;
   return (
     <figure className={`image-frame${compact ? ' is-compact' : ''}`}>
-      <div className="image-frame-box">
-        <img src={image.src} alt={image.alt} loading="lazy" decoding="async" onError={() => setBroken(true)} />
+      <div className={`image-frame-box${placeholder ? ' has-placeholder' : ''}`} style={placeholder ? { backgroundImage: `url(${placeholder})` } : undefined}>
+        <img src={image.src} alt={image.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" onError={() => setBroken(true)} />
       </div>
       {image.credit && <figcaption>{image.credit}</figcaption>}
     </figure>

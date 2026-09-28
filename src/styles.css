@@ -758,6 +758,13 @@ input[readonly] {
   border-radius: 4px;
 }
 
+.image-frame-box.has-placeholder {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-origin: content-box;
+}
+
 .image-frame.is-compact .image-frame-box {
   height: 180px;
 }
