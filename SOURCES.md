@@ -117,7 +117,7 @@ The owner gave the question and the answer; I wrote the other options, the expla
 |---|---|---|
 | coke-bottle | [US design patent 48,160 drawing](https://commons.wikimedia.org/wiki/File:Coke_bottle_patent.JPG) | Commons page read: public domain in the US, published before 1931 |
 | winglets | [NASA KC-135 winglet study, 1979](https://commons.wikimedia.org/wiki/File:Boeing_KC-135A_55-3129_NASA_Winglet_Study.jpg) | Commons page read: NASA work, public domain in the US |
-| daily-ruler-zero | Illustration drawn for this site (the end of a ruler, 0 set 4 mm in) | Our own work |
+| daily-ruler-zero | Illustration drawn for this site (the end of a ruler, close up, 0 set 4 mm in) | Our own work |
 | daily-progress-head-start | Illustration drawn for this site (a sign-up screen at step 1 of 5, 20%) | Our own work |
 
 34 more images came from your drop folder on 19 September 2026 and are attached with alt text, but without a credit or licence line yet. They're listed, with what each still needs, in [docs/images-needed.md](docs/images-needed.md), which also lists the images still wanted.
