@@ -12,7 +12,9 @@ dist
 # Local-only placeholder images (watermarked stand-ins); never deployed.
 /dev-images/
 # Original image files. The optimised copies in public/images are what ships.
-/images/
+# The list of images still wanted lives beside them and is kept.
+/images/*
+!/images/IMAGES-NEEDED.md
 
 # Generated PDFs keep their source markdown in docs/; the print HTML is temporary.
 docs/*.print.html

@@ -61,3 +61,28 @@ Each still needs two sources and a picture before it's written. All pass the six
 | Coffee cup lids | The small hole beside the drinking hole | Air has to get in or the drink glugs and splashes |
 | Running shoes | The extra eyelet at the top | Laced through it, the heel stops slipping |
 | Supermarkets | Milk and bread at the back | You walk past everything else to get them |
+
+## Difficulty tags (proposed 30 September 2026, waiting for the owner's OK)
+
+The owner's definitions:
+- **Easy:** logic only, straightforward options, no general knowledge.
+- **Medium:** logic with a little everyday knowledge, a bit tougher.
+- **Hard:** needs real design skill or knowledge only a keen designer would have.
+
+**Easy (26):** keyboard-bumps, estop-mushroom, bic-cap-hole, manhole-round, jerrycan-handles, hexagonal-pencil, padlock-hole, convex-side-mirror, lpg-smell, middle-berth, stay-on-tab, jeans-rivets, school-bus-yellow, escalator-brushes, tube-map, slide-to-unlock, fuel-door-arrow, safari-bottom-bar, ctrl-alt-del, aeron-mesh, daily-ruler-zero, daily-heinz-red-border, daily-kadokeshi-corners, pressure-cooker-whistle, rupee-tactile-marks, safety-match.
+
+**Medium (36):** atm-braille, chips-packet-air, indian-plug-earth-pin, matka-cooling, fan-regulator-heat, jaali-screens, auto-rickshaw-three-wheels, plane-ashtray, stop-sign-octagon, golden-gate-orange, crosswalk-buttons, coin-edges, aircraft-window-corners, golf-dimples, winglets, shinkansen-nose, mac-menu-bar, context-menu, rubber-band-scroll, menu-ellipsis, qr-finder, button-verbs, power-symbol, phone-zero, apple-logo-bite, coke-bottle, anglepoise-springs, thonet-14, daily-liquid-glass, daily-swiss-passport-uv, daily-duolingo-energy, daily-google-icon-colours, daily-progress-head-start, daily-lift-mirrors, plane-window-hole, toothpaste-marks.
+
+**Hard (17):** keyboard-hidden-targets, area-codes, google-blue, hamburger-icon, cursor-tilt, qwerty, command-key-symbol, calculator-keypad, phone-keypad, swiss-clock-pause, tulip-pedestal, paimio-back, eames-plywood, chandigarh-name, barcelona-chair, wassily-steel, daily-rapido-captains.
+
+### The bank against the proposed level plan
+
+A full 15-level run asks 75 questions, before any redeems.
+
+| | Easy | Medium | Hard |
+|---|---|---|---|
+| Needed by the owner's plan | about 27 | about 15 | about 33 |
+| In the bank now | 26 | 36 | 17 |
+| With a picture now | 11 | 16 | 13 |
+
+Only 40 questions can appear in levels today (levels use picture questions only). And hard is 16 short even before pictures.

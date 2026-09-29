@@ -8,7 +8,7 @@ Last updated 20 September 2026.
 
 The site is live at https://madethatway.vercel.app (21 September 2026): database connected, builder password set, every route checked end to end.
 
-- [ ] **Pictures for the next three daily questions** (Heinz border, Kadokeshi eraser, lift mirrors), uploaded in the builder's Daily tab before each one's day, from 29 September. What each should show: `docs/images-needed.md`.
+- [ ] **44 pictures** (36 new, 8 replacements), most urgent first: the Kadokeshi eraser (daily question on 1 October) and a lift mirror (2 October). File names and what each should show: `images/IMAGES-NEEDED.md`.
 - [ ] **Try an image upload in the builder,** on any question. It's the one thing I couldn't check without signing in as you, and it proves the Blob store is connected.
 - [ ] **Optional: a custom domain,** under Settings, Domains in Vercel.
 
@@ -18,11 +18,12 @@ The site is live at https://madethatway.vercel.app (21 September 2026): database
 - [ ] **Check the 5 daily questions** in the Daily tab before they go out, one a day, in the order shown. The Rapido one carries a new "Deduction" label, because Rapido has never published its own reasoning.
 - [ ] **Keep the daily queue topped up.** The tab warns you when fewer than three are left. Tell me when you want another batch written.
 - [ ] **CEED papers and answer keys** (PDFs). I'll write the reasoning for each answer and put them through the review queue.
-- [ ] **Credit lines for 38 images:** photographer or source, and licence, for each. Several look like brand or museum photos, which usually aren't free to reuse. List in `docs/images-needed.md`.
+- [ ] **Credit lines for 38 images:** photographer or source, and licence, for each. Several look like brand or museum photos, which usually aren't free to reuse. List in `images/IMAGES-NEEDED.md`.
 - [ ] **Replacements for 2 watermarked images** (cursor-tilt, stop-sign-octagon). They show only when running locally and never on the live site.
 - [ ] **Better versions of 2 images** whose subject is wrong: menu-ellipsis (an icon chart rather than a menu) and shinkansen-nose (an E4 series train, not the 500 series the question is about). They are live, with alt text that says what they really show.
 - [ ] **Sharper versions of 4 images:** qwerty, calculator-keypad, manhole-round, rubber-band-scroll.
-- [ ] **12 images still missing** for live questions, and 16 for the questions waiting for review. Details in `docs/images-needed.md`.
+- [ ] **The exact error when uploading an image in the builder** (a screenshot is fine). The code looks right, so it is most likely the Blob store connection in Vercel.
+- [ ] **Answers to the round 12 questions** (difficulty plan, the level 15 finale, the copy rewrite, the home page).
 
 ## Decisions waiting on you
 

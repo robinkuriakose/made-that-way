@@ -182,7 +182,7 @@ mindmap
 | Content check for all of them, plus on-screen copy | `scripts/content-rules.js` (`checkContent`, `checkCopy`), run by `scripts/check-content.js` |
 | Images: originals in `images/`, published copies and thumbnails in `public/images/`, local-only placeholders in `dev-images/` | `scripts/optimize-images.js` (`npm run images`) |
 | Sources for every question | `SOURCES.md` |
-| Images still wanted | `docs/images-needed.md` |
+| Images still wanted: file names, what each should show, credits owed | `images/IMAGES-NEEDED.md` (kept in git; everything else in `images/` is not) |
 | What only the owner can supply | `docs/owner-checklist.md` |
 | Agreed but not built yet | `docs/later.md` |
 

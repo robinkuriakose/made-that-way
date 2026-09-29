@@ -42,7 +42,9 @@ Last updated 27 September 2026.
 | Sources for every question | `SOURCES.md` |
 | Working rules for this repo | `CLAUDE.md` |
 
-## Current state (28 September)
+## Current state (30 September)
+
+- **Round 12 in discussion:** difficulty tags and a 15-level plan, a level 15 finale, shorter copy, a visual home page, names and a profile page, builder changes, 20 more questions. Proposed tags are in `docs/question-strategy.md`, the pictures wanted in `images/IMAGES-NEEDED.md`. **The daily queue runs out after 2 October.**
 
 - **Round 11:** the home picture strip is rebuilt: swipe by hand, tap a picture to open it big with its question, "Play this one" starts a run with it first. It sits under today's question.
 
