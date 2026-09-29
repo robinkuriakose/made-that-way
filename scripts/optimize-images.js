@@ -43,7 +43,9 @@ let before = 0;
 let after = 0;
 for (const file of files) {
   const input = path.join(SOURCE_DIR, file);
-  const name = path.parse(file).name;
+  // The question id: every image extension comes off, so a file saved as
+  // `daily-lift-mirrors.jpg.webp` still matches its question.
+  const name = file.replace(/(\.(jpe?g|png|webp|avif|gif|tiff?|heic|heif))+$/i, '');
   const outDir = placeholders.has(name) ? DEV_DIR : PUBLIC_DIR;
   await mkdir(path.join(outDir, 'thumbs'), { recursive: true });
   const output = path.join(outDir, `${name}.webp`);

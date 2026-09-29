@@ -1,9 +1,14 @@
 {
-  "note": "Pictures that ship with the site (public/images/<id>.webp, made by npm run images from images/<id>.*) for questions that already live in the database. Each time the server sees this file change, it attaches every picture listed here to its question, but only if that question has no picture yet: a picture set in the builder is never replaced.",
+  "note": "Pictures that ship with the site (public/images/<id>.webp, made by npm run images from images/<id>.*) for questions that already live in the database. Each time the server sees this file change, it attaches every picture listed here to its question if that question has no picture yet, and keeps the description and credit of pictures it attached in step with this file. A picture uploaded in the builder is never replaced.",
   "images": [
     {
       "id": "daily-kadokeshi-corners",
-      "alt": "The Kadokeshi eraser: a white eraser made of small cubes joined together, with corners all over it."
+      "alt": "The Kadokeshi eraser: a white eraser made of small cubes joined together, with corners all over it.",
+      "credit": "Photo: Kokuyo"
+    },
+    {
+      "id": "daily-lift-mirrors",
+      "alt": "Inside a lift: a woman takes a photo of herself in the big mirror on the back wall."
     }
   ]
 }

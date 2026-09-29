@@ -1,6 +1,6 @@
 # Images needed
 
-Updated 30 September 2026. **42 pictures wanted**: 35 new and 7 replacements. Hard questions are optional.
+Updated 30 September 2026. **41 pictures wanted**: 34 new and 7 replacements. Hard questions are optional.
 
 ## How to send them
 
@@ -25,7 +25,7 @@ The next two go out on 1 and 2 October. The rest have already been used and now 
 | Done | File | Tier | When | What it should show |
 |---|---|---|---|---|
 | [x] | `daily-kadokeshi-corners` | E | **1 Oct** | Done, 30 September |
-| [ ] | `daily-lift-mirrors` | M | **2 Oct** | Inside a lift, or a lift lobby, with a big mirror on the wall |
+| [x] | `daily-lift-mirrors` | M | **2 Oct** | Done, 30 September |
 | [ ] | `daily-heinz-red-border` | E | used | A Heinz squeezy bottle, the red border round the label clearly visible |
 | [ ] | `daily-liquid-glass` | M | used | An iPhone on iOS 26, the see-through glass tab bar over a photo |
 | [ ] | `daily-swiss-passport-uv` | M | used | A page of the 2022 Swiss passport under UV light, the hidden landscape glowing |
@@ -107,8 +107,9 @@ These play fine without a picture.
 **What's needed:** the photographer or source, and the licence, for each of the 39 published pictures that don't have one. Several look like brand or museum photos (Herman Miller, Knoll, Vitra), which usually aren't free to reuse, so check those first.
 
 **Already credited:**
+- `daily-kadokeshi-corners`: Kokuyo product photo (kokuyostore.com).
 - `coke-bottle`: patent drawing, public domain.
 - `winglets`: NASA, public domain.
 - `daily-ruler-zero` and `daily-progress-head-start`: drawn for this site.
 
-The 39 without a credit: daily-kadokeshi-corners, aeron-mesh, aircraft-window-corners, anglepoise-springs, atm-braille, barcelona-chair, bic-cap-hole, calculator-keypad, chandigarh-name, coin-edges, command-key-symbol, context-menu, eames-plywood, escalator-brushes, estop-mushroom, fuel-door-arrow, golf-dimples, hamburger-icon, jerrycan-handles, keyboard-bumps, keyboard-hidden-targets, mac-menu-bar, manhole-round, menu-ellipsis, paimio-back, phone-keypad, phone-zero, qr-finder, qwerty, rubber-band-scroll, shinkansen-nose, slide-to-unlock, swiss-clock-pause, thonet-14, tube-map, tulip-pedestal, wassily-steel, cursor-tilt, stop-sign-octagon.
+The 39 without a credit: daily-lift-mirrors (where is it from?), aeron-mesh, aircraft-window-corners, anglepoise-springs, atm-braille, barcelona-chair, bic-cap-hole, calculator-keypad, chandigarh-name, coin-edges, command-key-symbol, context-menu, eames-plywood, escalator-brushes, estop-mushroom, fuel-door-arrow, golf-dimples, hamburger-icon, jerrycan-handles, keyboard-bumps, keyboard-hidden-targets, mac-menu-bar, manhole-round, menu-ellipsis, paimio-back, phone-keypad, phone-zero, qr-finder, qwerty, rubber-band-scroll, shinkansen-nose, slide-to-unlock, swiss-clock-pause, thonet-14, tube-map, tulip-pedestal, wassily-steel, cursor-tilt, stop-sign-octagon.

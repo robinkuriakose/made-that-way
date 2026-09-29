@@ -307,8 +307,10 @@ async function seed() {
     ON CONFLICT (id) DO NOTHING
   `;
   // Pictures shipped with the site for questions already in the database
-  // (src/data/site-images.json). Only questions with no picture yet get one,
-  // so a picture set in the builder is never replaced.
+  // (src/data/site-images.json). A question with no picture gets one, and a
+  // picture this step attached before (same site path) takes the file's
+  // latest description and credit. A picture uploaded in the builder has a
+  // different address, so it's never touched.
   const attach = (siteImages.images ?? []).map((i) => ({
     id: i.id,
     image: { src: `/images/${i.id}.webp`, thumb: `/images/thumbs/${i.id}.webp`, alt: i.alt ?? '', ...(i.credit ? { credit: i.credit } : {}) },
@@ -317,7 +319,9 @@ async function seed() {
     await sql`
       UPDATE questions q SET data = q.data || jsonb_build_object('image', a->'image'), updated_at = now()
       FROM jsonb_array_elements(${JSON.stringify(attach)}::jsonb) AS a
-      WHERE q.id = a->>'id' AND coalesce(jsonb_typeof(q.data->'image'), 'null') = 'null'
+      WHERE q.id = a->>'id'
+        AND (coalesce(jsonb_typeof(q.data->'image'), 'null') = 'null' OR q.data->'image'->>'src' = a->'image'->>'src')
+        AND q.data->'image' IS DISTINCT FROM a->'image'
     `;
   }
 }
