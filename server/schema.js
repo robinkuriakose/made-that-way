@@ -26,9 +26,10 @@ try {
 } catch {
   // No daily questions written yet.
 }
+const siteImages = require('../src/data/site-images.json');
 
 const SCHEMA_VERSION = '10';
-const SEED_HASH = createHash('sha256').update(JSON.stringify([pending, daily, themes])).digest('hex').slice(0, 16);
+const SEED_HASH = createHash('sha256').update(JSON.stringify([pending, daily, themes, siteImages])).digest('hex').slice(0, 16);
 
 let ready = null;
 
@@ -305,6 +306,20 @@ async function seed() {
     FROM jsonb_array_elements(${JSON.stringify(daily.questions ?? [])}::jsonb) WITH ORDINALITY AS x(q, ord)
     ON CONFLICT (id) DO NOTHING
   `;
+  // Pictures shipped with the site for questions already in the database
+  // (src/data/site-images.json). Only questions with no picture yet get one,
+  // so a picture set in the builder is never replaced.
+  const attach = (siteImages.images ?? []).map((i) => ({
+    id: i.id,
+    image: { src: `/images/${i.id}.webp`, thumb: `/images/thumbs/${i.id}.webp`, alt: i.alt ?? '', ...(i.credit ? { credit: i.credit } : {}) },
+  }));
+  if (attach.length) {
+    await sql`
+      UPDATE questions q SET data = q.data || jsonb_build_object('image', a->'image'), updated_at = now()
+      FROM jsonb_array_elements(${JSON.stringify(attach)}::jsonb) AS a
+      WHERE q.id = a->>'id' AND coalesce(jsonb_typeof(q.data->'image'), 'null') = 'null'
+    `;
+  }
 }
 
 // jsonb and timestamps come back already parsed from both drivers used here,

@@ -81,12 +81,12 @@ mindmap
 |---|---|---|
 | Easy, medium and hard tags (internal) that shape the levels; my opinion on the level mix | Open: tags proposed for all 79 questions; a simulation shows the life rules decide who reaches level 15 far more than the mix does; the bank is 16 hard questions short of one full run. Waiting on answers | `docs/question-strategy.md` (difficulty tags) |
 | Level 15 as the final level, with a big reward: a trophy, a legends board signed by drawing | Open: ideas proposed, waiting on answers | |
-| Pictures for every easy and medium question, and every daily question: the list and file names | Done: 36 new and 8 replacements, most urgent first | `images/IMAGES-NEEDED.md` |
+| Pictures for every easy and medium question, and every daily question: the list and file names | Done: 35 new and 7 replacements still wanted (spoilers are fine, per the owner). The Kadokeshi picture is live for its day, through a new route that needs no upload: pictures in `images/` ship with the site and attach to their question | `images/IMAGES-NEEDED.md`, `src/data/site-images.json` |
 | Shorter questions and answers | Open: approach proposed | |
 | A more visual home page, with more space | Open | |
 | New home copy ("Answer why?", "Let's Start") | Open: a shorter version proposed | |
 | Logo; the name top right; random starting names; a profile page with run stats | Open | |
-| Builder: difficulty toggle, image upload broken, rethink for the new changes | Open: need the upload error | |
+| Builder: difficulty toggle, image upload broken, rethink for the new changes | Open. Upload: the Blob store isn't connected to the project (owner, in Vercel) | |
 | 20 more questions like the daily five | Open | |
 
 ## Round 11 (28 September 2026): the picture strip

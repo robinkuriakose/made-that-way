@@ -1,14 +1,14 @@
 # Images needed
 
-Updated 30 September 2026. **44 pictures wanted**: 36 new and 8 replacements. Hard questions are optional.
+Updated 30 September 2026. **42 pictures wanted**: 35 new and 7 replacements. Hard questions are optional.
 
 ## How to send them
 
-1. **Name each file with the question id**, e.g. `plane-ashtray.jpg`. Any format is fine: JPG, PNG, WebP, HEIC.
+1. **Name each file with the question id**, e.g. `plane-ashtray.jpg`, exactly as written in the tables below. Any format is fine: JPG, PNG, WebP, HEIC. (A file with another name, like `kadokeshi-eraser.jpg`, can't be matched to its question.)
 2. **Drop it in this folder** (`images/`).
 3. Tell me. I publish them and attach each one to its question.
 
-**The one rule: show the detail, never the answer.** The picture should make you curious about the thing the question asks about. It shouldn't hint at why: no arrows, no labels, and no before-and-after comparisons.
+**Show the detail clearly.** Close up, well lit, the thing the question asks about in plain view. A picture that hints at the answer is fine.
 
 Also good to know:
 - **Crop close:** the frame is short and wide, so a close-up of the detail beats a pretty wide shot.
@@ -24,7 +24,7 @@ The next two go out on 1 and 2 October. The rest have already been used and now 
 
 | Done | File | Tier | When | What it should show |
 |---|---|---|---|---|
-| [ ] | `daily-kadokeshi-corners` | E | **1 Oct** | The Kadokeshi eraser on a desk, close enough to count its little cubes and corners |
+| [x] | `daily-kadokeshi-corners` | E | **1 Oct** | Done, 30 September |
 | [ ] | `daily-lift-mirrors` | M | **2 Oct** | Inside a lift, or a lift lobby, with a big mirror on the wall |
 | [ ] | `daily-heinz-red-border` | E | used | A Heinz squeezy bottle, the red border round the label clearly visible |
 | [ ] | `daily-liquid-glass` | M | used | An iPhone on iOS 26, the see-through glass tab bar over a photo |
@@ -75,16 +75,15 @@ Levels 1 to 3 are made almost entirely of these, so they come next.
 | [ ] | `plane-window-hole` | An aeroplane window close up, the tiny hole in the inner pane visible |
 | [ ] | `toothpaste-marks` | The crimped end of a toothpaste tube, the small coloured square visible |
 
-## 4. Replace these (8)
+## 4. Replace these (7)
 
-These pictures are wrong, too hard to read, or give the answer away.
+These pictures show the wrong thing or are too hard to read.
 
 | Done | File | Tier | What's wrong | What it should show |
 |---|---|---|---|---|
-| [ ] | `qr-finder` | M | Labels the corner squares with the answer | A plain QR code, nothing labelled |
 | [ ] | `menu-ellipsis` | M | An icon chart, not a menu | A File menu open, with Save and Save As… |
 | [ ] | `shinkansen-nose` | M | The wrong train | The 500 series Shinkansen from the side, its long nose in view |
-| [ ] | `manhole-round` | E | A red X on a square cover hints at the answer; blurry | A round manhole cover in a street, close up |
+| [ ] | `manhole-round` | E | Blurry | A round manhole cover in a street, close up |
 | [ ] | `jerrycan-handles` | E | The handles are hard to see | A jerrycan, its three handles clearly visible |
 | [ ] | `anglepoise-springs` | M | The springs aren't visible | An Anglepoise lamp from the side, the springs at its base visible |
 | [ ] | `rubber-band-scroll` | M | Too small and blurry | An iPhone list pulled past its end, the gap showing |
@@ -92,12 +91,10 @@ These pictures are wrong, too hard to read, or give the answer away.
 
 ## 5. Hard questions: optional
 
-These play fine without a picture. Two current pictures give their answer away.
+These play fine without a picture.
 
 | File | What to do |
 |---|---|
-| `eames-plywood` | Replace: the leg splint in the picture *is* the answer. Show an Eames moulded plywood chair |
-| `hamburger-icon` | Replace: its caption names Xerox Star 1981. Show the three-line icon in a modern app |
 | `cursor-tilt` | Replace the watermarked stand-in: the mouse pointer drawn on a pixel grid |
 | `area-codes` | New: a rotary phone dial, close up |
 | `google-blue` | New: blue links in a Google search result |
@@ -107,11 +104,11 @@ These play fine without a picture. Two current pictures give their answer away.
 
 ## Still owed: credit lines
 
-**What's needed:** the photographer or source, and the licence, for each of the 38 published pictures. Several look like brand or museum photos (Herman Miller, Knoll, Vitra), which usually aren't free to reuse, so check those first.
+**What's needed:** the photographer or source, and the licence, for each of the 39 published pictures that don't have one. Several look like brand or museum photos (Herman Miller, Knoll, Vitra), which usually aren't free to reuse, so check those first.
 
 **Already credited:**
 - `coke-bottle`: patent drawing, public domain.
 - `winglets`: NASA, public domain.
 - `daily-ruler-zero` and `daily-progress-head-start`: drawn for this site.
 
-The 38 without a credit: aeron-mesh, aircraft-window-corners, anglepoise-springs, atm-braille, barcelona-chair, bic-cap-hole, calculator-keypad, chandigarh-name, coin-edges, command-key-symbol, context-menu, eames-plywood, escalator-brushes, estop-mushroom, fuel-door-arrow, golf-dimples, hamburger-icon, jerrycan-handles, keyboard-bumps, keyboard-hidden-targets, mac-menu-bar, manhole-round, menu-ellipsis, paimio-back, phone-keypad, phone-zero, qr-finder, qwerty, rubber-band-scroll, shinkansen-nose, slide-to-unlock, swiss-clock-pause, thonet-14, tube-map, tulip-pedestal, wassily-steel, cursor-tilt, stop-sign-octagon.
+The 39 without a credit: daily-kadokeshi-corners, aeron-mesh, aircraft-window-corners, anglepoise-springs, atm-braille, barcelona-chair, bic-cap-hole, calculator-keypad, chandigarh-name, coin-edges, command-key-symbol, context-menu, eames-plywood, escalator-brushes, estop-mushroom, fuel-door-arrow, golf-dimples, hamburger-icon, jerrycan-handles, keyboard-bumps, keyboard-hidden-targets, mac-menu-bar, manhole-round, menu-ellipsis, paimio-back, phone-keypad, phone-zero, qr-finder, qwerty, rubber-band-scroll, shinkansen-nose, slide-to-unlock, swiss-clock-pause, thonet-14, tube-map, tulip-pedestal, wassily-steel, cursor-tilt, stop-sign-octagon.

@@ -153,7 +153,7 @@ mindmap
 | What | Where |
 |---|---|
 | Database client (Neon in the cloud, PGlite locally), connected on first use; a missing database is a 503 with a plain reason, not a crash | `server/db.js` (`connectionString`, `NotConfigured`) |
-| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:36` (`ensureSchema`), `:58` (`createTables`), `:279` (`seed`); `question_stats` at `:226`, daily answers folded in once at `:253` |
+| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:36` (`ensureSchema`), `:58` (`createTables`), `:279` (`seed`); `question_stats` at `:226`, daily answers folded in once at `:253`; pictures from `site-images.json` attached at `:309` |
 | Builder password and tokens | `server/auth.js` |
 | Request helpers, id and day checks, the hashed network key | `server/http.js` |
 | Rate limits per network, kept in the database | `server/limits.js` (`hit`, `isBlocked`, `LIMITS`) |
@@ -177,6 +177,7 @@ mindmap
 | Live questions and tidbits (the seed, and the fallback if the database is slow) | `src/data/questions.json` |
 | New questions waiting for review | `src/data/pending-questions.json` |
 | The daily question queue (after its day, each joins the run pool) | `src/data/daily-questions.json` |
+| Pictures shipped with the site for questions already in the database: attached on the server's next start, never replacing a picture set in the builder; checked by `npm run check:content` | `src/data/site-images.json` |
 | What makes a good question: the aha recipe, the audit of live questions, ideas for the next batch | `docs/question-strategy.md` |
 | Topics players choose from | `src/data/themes.json` |
 | Content check for all of them, plus on-screen copy | `scripts/content-rules.js` (`checkContent`, `checkCopy`), run by `scripts/check-content.js` |

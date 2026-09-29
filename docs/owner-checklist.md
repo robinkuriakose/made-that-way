@@ -8,7 +8,8 @@ Last updated 20 September 2026.
 
 The site is live at https://madethatway.vercel.app (21 September 2026): database connected, builder password set, every route checked end to end.
 
-- [ ] **44 pictures** (36 new, 8 replacements), most urgent first: the Kadokeshi eraser (daily question on 1 October) and a lift mirror (2 October). File names and what each should show: `images/IMAGES-NEEDED.md`.
+- [ ] **Connect the Blob store to the project** so the builder can upload pictures: Vercel, Storage, open the Blob store, Connect Project, choose made-that-way (Production and Preview), then Deployments, the latest one, Redeploy. Settings, Environment Variables should then list `BLOB_READ_WRITE_TOKEN`.
+- [ ] **42 pictures** (35 new, 7 replacements), most urgent first: a lift mirror (daily question on 2 October). File names and what each should show: `images/IMAGES-NEEDED.md`.
 - [ ] **Try an image upload in the builder,** on any question. It's the one thing I couldn't check without signing in as you, and it proves the Blob store is connected.
 - [ ] **Optional: a custom domain,** under Settings, Domains in Vercel.
 
@@ -22,7 +23,6 @@ The site is live at https://madethatway.vercel.app (21 September 2026): database
 - [ ] **Replacements for 2 watermarked images** (cursor-tilt, stop-sign-octagon). They show only when running locally and never on the live site.
 - [ ] **Better versions of 2 images** whose subject is wrong: menu-ellipsis (an icon chart rather than a menu) and shinkansen-nose (an E4 series train, not the 500 series the question is about). They are live, with alt text that says what they really show.
 - [ ] **Sharper versions of 4 images:** qwerty, calculator-keypad, manhole-round, rubber-band-scroll.
-- [ ] **The exact error when uploading an image in the builder** (a screenshot is fine). The code looks right, so it is most likely the Blob store connection in Vercel.
 - [ ] **Answers to the round 12 questions** (difficulty plan, the level 15 finale, the copy rewrite, the home page).
 
 ## Decisions waiting on you

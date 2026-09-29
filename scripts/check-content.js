@@ -19,6 +19,20 @@ const { themes } = read('themes.json');
 const daily = readOptional('daily-questions.json', { questions: [] });
 const { errors, warnings, stats } = checkContent(data, pending, { themes, daily });
 
+// Pictures that ship with the site for questions in the database: each needs
+// its published file, its thumbnail and a description.
+const siteImages = readOptional('site-images.json', { images: [] });
+for (const img of siteImages.images ?? []) {
+  for (const file of [`public/images/${img.id}.webp`, `public/images/thumbs/${img.id}.webp`]) {
+    try {
+      statSync(path.join(ROOT, file));
+    } catch {
+      errors.push(`site-images.json: ${img.id} has no ${file} (drop images/${img.id}.jpg in and run npm run images).`);
+    }
+  }
+  if (!img.alt?.trim()) errors.push(`site-images.json: ${img.id} needs "alt", a description of the picture.`);
+}
+
 // Every source file that can put words on screen.
 function sourceFiles(dir) {
   return readdirSync(dir).flatMap((name) => {
