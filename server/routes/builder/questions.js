@@ -1,7 +1,8 @@
 // Builder: every question, of either kind and any status, plus editing and review.
 //
-// GET                              -> { questions, openFlags, themes }
-//                                     each question carries stats = { asked, right }
+// GET                              -> { questions, openFlags, themes, edits }
+//                                     each question carries stats = { asked, right };
+//                                     edits are proposed changes still open
 // POST  { data, status, kind }     -> create. Run questions: live, hidden or
 //                                     pending. Daily questions join the end of the queue.
 // PATCH { id, action, ... }        -> one of:
@@ -14,11 +15,14 @@
 //   resolveFeedback  { feedbackId, response }     mark a note as addressed
 //   setImage         { image }                    just the picture (bulk upload)
 //   setDifficulty    { difficulty }               just the tier (easy, medium, hard)
+//   applyEdit        { editId }                   use a proposed change as it is
+//   closeEdit        { editId, outcome }          accepted (after editing it in the
+//                    form) or declined; the question itself isn't touched
 //
 // Every edit keeps the version it replaced in question_history.
 import { randomUUID } from 'node:crypto';
 import { sql } from '../../db.js';
-import { ensureSchema, toQuestion, asObject, loadThemes } from '../../schema.js';
+import { ensureSchema, toQuestion, asObject, isoTime, loadThemes } from '../../schema.js';
 import { requireBuilder } from '../../auth.js';
 import { body, isText, methodNotAllowed, serverError } from '../../http.js';
 import { checkQuestion, normalizeQuestion, KINDS, DIFFICULTIES } from '../../../src/lib/questionRules.js';
@@ -38,6 +42,10 @@ const TRANSITIONS = {
   },
 };
 const NOTE_MAX = 2000;
+// What a proposed edit may change. Ids, status and the rest stay put.
+const EDITABLE = ['stem', 'options', 'correctIndex', 'hint', 'explanationRight', 'explanationWrong', 'tags', 'themes', 'topic', 'difficulty', 'confidence', 'sourceName', 'sourceUrl', 'group', 'tidbit'];
+
+const toEdit = (r) => ({ id: r.id, questionId: r.question_id, changes: asObject(r.changes), note: r.note, status: r.status, createdAt: isoTime(r.created_at) });
 
 async function load(id) {
   const { rows } = await sql`SELECT * FROM questions WHERE id = ${id}`;
@@ -75,7 +83,8 @@ export default async function handler(req, res) {
       `;
       const openFlags = Object.fromEntries(flagRows.map((r) => [r.question_id, r.n]));
       const questions = rows.map((r) => ({ ...toQuestion(r), stats: { asked: Number(r.stats_asked), right: Number(r.stats_right) } }));
-      return res.status(200).json({ questions, openFlags, themes: await loadThemes() });
+      const { rows: editRows } = await sql`SELECT * FROM question_edits WHERE status = 'open' ORDER BY created_at, id`;
+      return res.status(200).json({ questions, openFlags, themes: await loadThemes(), edits: editRows.map(toEdit) });
     }
 
     if (req.method === 'POST') {
@@ -185,6 +194,27 @@ export default async function handler(req, res) {
         await remember(current);
         await sql`UPDATE questions SET data = ${JSON.stringify(data)}::jsonb, updated_at = now() WHERE id = ${current.id}`;
         return res.status(200).json({ question: await load(current.id) });
+      }
+
+      if (b.action === 'applyEdit' || b.action === 'closeEdit') {
+        if (!isText(b.editId, 200)) return res.status(400).json({ error: 'which edit?' });
+        const { rows } = await sql`SELECT * FROM question_edits WHERE id = ${b.editId} AND question_id = ${current.id}`;
+        if (!rows[0]) return res.status(404).json({ error: 'no such edit' });
+        if (rows[0].status !== 'open') return res.status(409).json({ error: 'This change was already dealt with.' });
+        let outcome = b.outcome === 'accepted' ? 'accepted' : 'declined';
+        if (b.action === 'applyEdit') {
+          const changes = asObject(rows[0].changes) ?? {};
+          const picked = Object.fromEntries(Object.entries(changes).filter(([k]) => EDITABLE.includes(k)));
+          const { q, errors, warnings } = await validate({ ...normalizeQuestion(current), ...picked, id: current.id }, current.kind);
+          if (errors.length) return res.status(422).json({ errors, warnings });
+          await remember(current);
+          await sql`UPDATE questions SET data = ${JSON.stringify(q)}::jsonb, updated_at = now() WHERE id = ${current.id}`;
+          outcome = 'accepted';
+        }
+        const { rows: done } = await sql`
+          UPDATE question_edits SET status = ${outcome}, decided_at = now() WHERE id = ${b.editId} RETURNING *
+        `;
+        return res.status(200).json({ question: await load(current.id), edit: toEdit(done[0]) });
       }
 
       return res.status(400).json({ error: 'unknown action' });

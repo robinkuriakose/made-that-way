@@ -4985,3 +4985,155 @@ td.wrap {
     flex-wrap: wrap;
   }
 }
+
+/* Builder: proposed rewrites, now and proposed side by side */
+
+.rewrite-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rewrite-card {
+  padding: 16px 18px 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.rw-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.rw-head .qcard-thumb {
+  width: 44px;
+  height: 44px;
+}
+
+.rw-note {
+  margin: 0 0 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+  background: var(--accent-soft);
+  border-radius: 8px;
+}
+
+.rw-row {
+  margin: 0 0 14px;
+}
+
+.rw-label {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.rw-label .muted {
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.rw-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.rw-now,
+.rw-next {
+  margin: 0;
+  padding: 8px 10px;
+  font-size: 14px;
+  line-height: 1.45;
+  border-radius: 8px;
+}
+
+.rw-now {
+  color: var(--muted);
+  background: var(--bg);
+}
+
+.rw-next {
+  background: var(--accent-soft);
+  font-weight: 500;
+}
+
+.rw-next.is-same {
+  color: var(--muted);
+  background: transparent;
+  font-weight: 400;
+}
+
+.rw-cap {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.rw-options {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.rw-options li {
+  display: grid;
+  grid-template-columns: 2.4rem 1fr 1fr;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.rw-options .rw-now,
+.rw-options .rw-next {
+  font-size: 13.5px;
+}
+
+.rw-options-head .rw-cap {
+  margin: 0;
+  padding: 0 10px;
+}
+
+.rw-letter {
+  align-self: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.rw-options li.is-right .rw-letter {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 640px) {
+  .rw-pair {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+
+  .rw-options li {
+    grid-template-columns: 1.8rem 1fr;
+  }
+
+  .rw-options li .rw-next {
+    grid-column: 2;
+  }
+
+  .rw-options-head {
+    display: none !important;
+  }
+}

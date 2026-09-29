@@ -10,11 +10,13 @@ import PlayersPanel from './PlayersPanel.jsx';
 import Analytics from './Analytics.jsx';
 import SuggestionsPanel, { suggestionToPrefill } from './SuggestionsPanel.jsx';
 import FeedbackPanel from './FeedbackPanel.jsx';
+import RewritesPanel from './RewritesPanel.jsx';
 import { bundledThemes } from '../lib/themes.js';
 import { AuthError, call, clearToken, readToken } from './api.js';
 
 const TABS = [
   { id: 'review', label: 'New questions' },
+  { id: 'rewrites', label: 'Rewrites' },
   { id: 'questions', label: 'Questions' },
   { id: 'daily', label: 'Daily' },
   { id: 'flags', label: 'Flags' },
@@ -24,6 +26,9 @@ const TABS = [
   { id: 'analytics', label: 'Analytics' },
 ];
 
+// The form gets the question alone, without where the edit came from.
+const withoutMeta = ({ fromEdit, ...q }) => q;
+
 export default function BuilderApp() {
   const [token, setToken] = useState(readToken);
   const [tab, setTab] = useState('review');
@@ -31,7 +36,8 @@ export default function BuilderApp() {
   const [openFlags, setOpenFlags] = useState({});
   const [themes, setThemes] = useState(bundledThemes);
   const [flags, setFlags] = useState(null);
-  const [editing, setEditing] = useState(null); // a question, or { isNew: true, kind, prefill?, suggestionId? }
+  const [editing, setEditing] = useState(null); // a question (with fromEdit when it starts from a proposal), or { isNew: true, kind, prefill?, suggestionId? }
+  const [edits, setEdits] = useState([]);
   const [notice, setNotice] = useState(null);
   const [loadError, setLoadError] = useState(null);
 
@@ -57,6 +63,7 @@ export default function BuilderApp() {
       const [q, f] = await Promise.all([api('/api/builder/questions'), api('/api/builder/flags')]);
       setQuestions(q.questions);
       setOpenFlags(q.openFlags);
+      setEdits(q.edits ?? []);
       if (q.themes?.length) setThemes(q.themes);
       setFlags(f.flags);
       setLoadError(null);
@@ -107,15 +114,19 @@ export default function BuilderApp() {
     [api, replaceQuestion, afterAct],
   );
 
+  const dropEdit = useCallback((editId) => setEdits((list) => list.filter((e) => e.id !== editId)), []);
+
   const counts = useMemo(() => {
     const list = questions ?? [];
+    const ids = new Set(list.map((q) => q.id));
     return {
       review: list.filter((q) => q.kind !== 'daily' && q.status === 'pending').length,
+      rewrites: edits.filter((e) => ids.has(e.questionId)).length,
       questions: list.filter((q) => q.kind !== 'daily' && (q.status === 'live' || q.status === 'hidden')).length,
       daily: list.filter((q) => q.kind === 'daily' && q.status === 'queued').length,
       flags: (flags ?? []).filter((f) => f.status === 'open').length,
     };
-  }, [questions, flags]);
+  }, [questions, flags, edits]);
 
   if (!token) return <Login onLogin={setToken} />;
 
@@ -135,7 +146,7 @@ export default function BuilderApp() {
     content = (
       <QuestionForm
         key={editing.isNew ? `new-${editing.kind}-${editing.suggestionId ?? ''}` : editing.id}
-        initial={editing.isNew ? null : editing}
+        initial={editing.isNew ? null : withoutMeta(editing)}
         prefill={editing.prefill ?? null}
         draftFrom={editing.suggestionId ?? null}
         kind={editing.kind ?? 'run'}
@@ -148,6 +159,11 @@ export default function BuilderApp() {
           // A question made from a player's suggestion marks it as used.
           if (editing.suggestionId) {
             api('/api/builder/suggestions', { method: 'PATCH', body: { id: editing.suggestionId, action: 'accept', questionId: q.id } }).catch(() => {});
+          }
+          // Saved from a proposed rewrite: that proposal is done.
+          if (editing.fromEdit) {
+            api('/api/builder/questions', { method: 'PATCH', body: { id: q.id, action: 'closeEdit', editId: editing.fromEdit, outcome: 'accepted' } }).catch(() => {});
+            dropEdit(editing.fromEdit);
           }
           setEditing(null);
           setNotice(message);
@@ -179,6 +195,16 @@ export default function BuilderApp() {
         notify={setNotice}
         onEdit={setEditing}
         onAdd={() => setEditing({ isNew: true, kind: 'daily' })}
+      />
+    );
+  } else if (tab === 'rewrites') {
+    content = (
+      <RewritesPanel
+        edits={edits}
+        questions={questions}
+        act={act}
+        onDone={dropEdit}
+        onEditWith={(edit, q) => setEditing({ ...q, ...edit.changes, fromEdit: edit.id })}
       />
     );
   } else if (tab === 'suggestions') {

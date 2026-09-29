@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logo sketches</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f5f1;
+    --surface: #ffffff;
+    --ink: #16150f;
+    --muted: #77756c;
+    --line: #e5e3db;
+    --lime: #cfe957;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 40px 16px 80px;
+    font-family: 'Poppins', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  main { max-width: 60rem; margin: 0 auto; }
+  h1 { margin: 0 0 6px; font-size: 1.8rem; font-weight: 500; letter-spacing: -0.02em; }
+  .lede { margin: 0 0 36px; color: var(--muted); max-width: 38rem; line-height: 1.55; }
+  .option {
+    margin-bottom: 28px;
+    padding: 28px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+  }
+  .option-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin-bottom: 4px; }
+  .option h2 { margin: 0; font-size: 1.2rem; font-weight: 500; }
+  .tag { font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--lime); }
+  .why { margin: 0 0 22px; color: var(--muted); line-height: 1.55; max-width: 44rem; }
+  .row { display: grid; grid-template-columns: 1.6fr 1fr; gap: 14px; }
+  .tile {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 150px; padding: 20px; border-radius: 12px;
+    background: var(--bg);
+  }
+  .tile.dark { background: var(--ink); }
+  .tile svg { max-width: 100%; height: auto; }
+  .sizes { display: flex; align-items: center; gap: 22px; margin-top: 14px; flex-wrap: wrap; }
+  .sizes span { font-size: 12px; color: var(--muted); }
+  .size { display: flex; align-items: center; gap: 8px; }
+  .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-top: 14px; padding: 12px 16px;
+    border: 1px solid var(--line); border-radius: 10px; background: var(--bg);
+    font-size: 13px;
+  }
+  .bar .me { color: var(--muted); }
+  .pick { margin-top: 36px; padding: 22px 24px; border-radius: 14px; background: var(--ink); color: #fff; line-height: 1.55; }
+  .pick strong { color: var(--lime); font-weight: 500; }
+  @media (max-width: 640px) {
+    .row { grid-template-columns: 1fr; }
+    .option { padding: 18px; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Made That Way: logo sketches</h1>
+  <p class="lede">Three directions, each shown as the full logo, the small mark on light and dark, and in the top bar. Sketches, not finals: once you pick one, I draw it properly and it becomes the favicon too.</p>
+
+  <!-- 1. The bump -->
+  <section class="option">
+    <div class="option-head"><h2>1. The bump</h2><span class="tag">my pick</span></div>
+    <p class="why">A keycap with the little ridge from the F and J keys: the detail your finger finds every day and nobody notices. It is the game in one picture, and it still reads as a key at 16 pixels.</p>
+    <div class="row">
+      <div class="tile">
+        <svg width="360" height="80" viewBox="0 0 360 80" role="img" aria-label="Made That Way, keycap logo">
+          <g transform="translate(4 8)">
+            <rect x="2" y="2" width="60" height="60" rx="14" fill="#16150f"/>
+            <rect x="7" y="4" width="50" height="46" rx="10" fill="#cfe957"/>
+            <rect x="23" y="38" width="18" height="4.5" rx="2.25" fill="#16150f"/><text x="13" y="20" font-family="Poppins" font-weight="500" font-size="12" fill="#16150f">F</text>
+          </g>
+          <text x="84" y="51" font-family="Poppins" font-weight="600" font-size="30" letter-spacing="-0.6" fill="#16150f">made that way</text>
+        </svg>
+      </div>
+      <div class="tile dark">
+        <svg width="96" height="96" viewBox="0 0 64 64" role="img" aria-label="Keycap mark on dark">
+          <rect x="2" y="2" width="60" height="60" rx="14" fill="#f6f5f1"/>
+          <rect x="7" y="4" width="50" height="46" rx="10" fill="#cfe957"/>
+          <rect x="23" y="38" width="18" height="4.5" rx="2.25" fill="#16150f"/><text x="13" y="20" font-family="Poppins" font-weight="500" font-size="12" fill="#16150f">F</text>
+        </svg>
+      </div>
+    </div>
+    <div class="sizes">
+      <span>Favicon</span>
+      <div class="size"><svg width="32" height="32" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="14" fill="#16150f"/><rect x="7" y="4" width="50" height="46" rx="10" fill="#cfe957"/><rect x="23" y="38" width="18" height="4.5" rx="2.25" fill="#16150f"/><text x="13" y="20" font-family="Poppins" font-weight="500" font-size="12" fill="#16150f">F</text></svg><span>32</span></div>
+      <div class="size"><svg width="16" height="16" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="14" fill="#16150f"/><rect x="7" y="4" width="50" height="46" rx="10" fill="#cfe957"/><rect x="21" y="37" width="22" height="6" rx="3" fill="#16150f"/></svg><span>16</span></div>
+    </div>
+    <div class="bar">
+      <svg width="150" height="28" viewBox="0 0 360 80" aria-hidden="true"><g transform="translate(4 8)"><rect x="2" y="2" width="60" height="60" rx="14" fill="#16150f"/><rect x="7" y="4" width="50" height="46" rx="10" fill="#cfe957"/><rect x="23" y="38" width="18" height="4.5" rx="2.25" fill="#16150f"/><text x="13" y="20" font-family="Poppins" font-weight="500" font-size="12" fill="#16150f">F</text></g><text x="84" y="51" font-family="Poppins" font-weight="600" font-size="30" letter-spacing="-0.6" fill="#16150f">made that way</text></svg>
+      <span class="me">Call me fuzzyheron42 ✎</span>
+    </div>
+  </section>
+
+  <!-- 2. The markup -->
+  <section class="option">
+    <div class="option-head"><h2>2. The markup</h2></div>
+    <p class="why">A pen loop circling "that", the way a designer marks up a detail on a print: look here, ask why. The most personal of the three, and the loop alone works as the mark.</p>
+    <div class="row">
+      <div class="tile">
+        <svg width="360" height="96" viewBox="0 0 360 96" role="img" aria-label="Made That Way, with that circled">
+          <text x="104" y="59" text-anchor="end" font-family="Poppins" font-weight="500" font-size="32" letter-spacing="-0.6" fill="#16150f">made</text>
+          <text x="172" y="59" text-anchor="middle" font-family="Poppins" font-weight="500" font-size="32" letter-spacing="-0.6" fill="#16150f">that</text>
+          <text x="240" y="59" font-family="Poppins" font-weight="500" font-size="32" letter-spacing="-0.6" fill="#16150f">way</text>
+          <path transform="translate(172 47)" d="M 42 -25 C 18 -35, -46 -33, -56 -8 C -64 15, -27 30, 12 27 C 50 24, 66 5, 56 -14 C 49 -26, 29 -31, 12 -30" fill="none" stroke="#16150f" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="tile dark">
+        <svg width="96" height="96" viewBox="0 0 64 64" role="img" aria-label="Loop mark on dark">
+          <path transform="translate(32 33)" d="M 20 -20 C 6 -27, -24 -25, -26 -3 C -28 18, -8 26, 8 24 C 26 21, 30 2, 24 -12 C 20 -21, 10 -25, 2 -25" fill="none" stroke="#f6f5f1" stroke-width="4.5" stroke-linecap="round"/>
+          <circle cx="32" cy="33" r="8" fill="#cfe957"/>
+        </svg>
+      </div>
+    </div>
+    <div class="sizes">
+      <span>Favicon</span>
+      <div class="size"><svg width="32" height="32" viewBox="0 0 64 64"><path transform="translate(32 33)" d="M 20 -20 C 6 -27, -24 -25, -26 -3 C -28 18, -8 26, 8 24 C 26 21, 30 2, 24 -12 C 20 -21, 10 -25, 2 -25" fill="none" stroke="#16150f" stroke-width="5" stroke-linecap="round"/><circle cx="32" cy="33" r="9" fill="#cfe957" stroke="#16150f" stroke-width="2"/></svg><span>32</span></div>
+      <div class="size"><svg width="16" height="16" viewBox="0 0 64 64"><path transform="translate(32 33)" d="M 20 -20 C 6 -27, -24 -25, -26 -3 C -28 18, -8 26, 8 24 C 26 21, 30 2, 24 -12 C 20 -21, 10 -25, 2 -25" fill="none" stroke="#16150f" stroke-width="7" stroke-linecap="round"/><circle cx="32" cy="33" r="10" fill="#16150f"/></svg><span>16</span></div>
+    </div>
+    <div class="bar">
+      <svg width="150" height="40" viewBox="0 0 360 96" aria-hidden="true"><text x="104" y="59" text-anchor="end" font-family="Poppins" font-weight="500" font-size="32" letter-spacing="-0.6" fill="#16150f">made</text><text x="172" y="59" text-anchor="middle" font-family="Poppins" font-weight="500" font-size="32" letter-spacing="-0.6" fill="#16150f">that</text><text x="240" y="59" font-family="Poppins" font-weight="500" font-size="32" letter-spacing="-0.6" fill="#16150f">way</text><path transform="translate(172 47)" d="M 42 -25 C 18 -35, -46 -33, -56 -8 C -64 15, -27 30, 12 27 C 50 24, 66 5, 56 -14 C 49 -26, 29 -31, 12 -30" fill="none" stroke="#16150f" stroke-width="2.6" stroke-linecap="round"/></svg>
+      <span class="me">Call me fuzzyheron42 ✎</span>
+    </div>
+  </section>
+
+  <!-- 3. The label -->
+  <section class="option">
+    <div class="option-head"><h2>3. The label</h2></div>
+    <p class="why">A woven clothing label, the kind that says "Made in India", saying "Made That Way" instead. Every object carries a label about where it came from; ours is about why. Strong as a sticker or a badge; weaker as a tiny icon.</p>
+    <div class="row">
+      <div class="tile">
+        <svg width="340" height="96" viewBox="0 0 340 96" role="img" aria-label="Made That Way, as a woven label">
+          <path d="M 14 22 L 30 18 L 30 78 L 14 74 Z" fill="#3f3e37"/>
+          <path d="M 326 22 L 310 18 L 310 78 L 326 74 Z" fill="#3f3e37"/>
+          <rect x="30" y="18" width="280" height="60" rx="2" fill="#16150f"/>
+          <rect x="36" y="24" width="268" height="48" rx="1" fill="none" stroke="#f6f5f1" stroke-opacity="0.45" stroke-width="1.2" stroke-dasharray="4 3"/>
+          <text x="170" y="55" text-anchor="middle" font-family="Poppins" font-weight="600" font-size="20" letter-spacing="4.2" fill="#cfe957">MADE THAT WAY</text>
+        </svg>
+      </div>
+      <div class="tile dark">
+        <svg width="96" height="96" viewBox="0 0 64 64" role="img" aria-label="Label mark on dark">
+          <rect x="6" y="14" width="52" height="36" rx="3" fill="#cfe957"/>
+          <rect x="10" y="18" width="44" height="28" rx="1.5" fill="none" stroke="#16150f" stroke-opacity="0.5" stroke-width="1.4" stroke-dasharray="3 2.5"/>
+          <text x="32" y="41" text-anchor="middle" font-family="Poppins" font-weight="600" font-size="20" fill="#16150f">?</text>
+        </svg>
+      </div>
+    </div>
+    <div class="sizes">
+      <span>Favicon</span>
+      <div class="size"><svg width="32" height="32" viewBox="0 0 64 64"><rect x="4" y="12" width="56" height="40" rx="4" fill="#16150f"/><text x="32" y="43" text-anchor="middle" font-family="Poppins" font-weight="600" font-size="28" fill="#cfe957">?</text></svg><span>32</span></div>
+      <div class="size"><svg width="16" height="16" viewBox="0 0 64 64"><rect x="2" y="10" width="60" height="44" rx="5" fill="#16150f"/><text x="32" y="46" text-anchor="middle" font-family="Poppins" font-weight="600" font-size="36" fill="#cfe957">?</text></svg><span>16</span></div>
+    </div>
+    <div class="bar">
+      <svg width="150" height="42" viewBox="0 0 340 96" aria-hidden="true"><path d="M 14 22 L 30 18 L 30 78 L 14 74 Z" fill="#3f3e37"/><path d="M 326 22 L 310 18 L 310 78 L 326 74 Z" fill="#3f3e37"/><rect x="30" y="18" width="280" height="60" rx="2" fill="#16150f"/><rect x="36" y="24" width="268" height="48" rx="1" fill="none" stroke="#f6f5f1" stroke-opacity="0.45" stroke-width="1.2" stroke-dasharray="4 3"/><text x="170" y="55" text-anchor="middle" font-family="Poppins" font-weight="600" font-size="20" letter-spacing="4.2" fill="#cfe957">MADE THAT WAY</text></svg>
+      <span class="me">Call me fuzzyheron42 ✎</span>
+    </div>
+  </section>
+
+  <p class="pick"><strong>Why the bump.</strong> It says what the game is about without words, it is ours (the F and J question is the model for every question), and it survives being tiny, which the favicon and the home screen icon on a phone need. The markup is the runner up: more hand-made, but the loop alone is harder to recognise small. The label is the best pun and the weakest icon.</p>
+</main>
+</body>
+</html>

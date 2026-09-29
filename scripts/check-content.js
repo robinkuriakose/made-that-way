@@ -2,6 +2,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { checkContent, checkCopy } from './content-rules.js';
+import { checkQuestion, normalizeQuestion } from '../src/lib/questionRules.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const read = (file) => JSON.parse(readFileSync(path.join(ROOT, 'src', 'data', file), 'utf8'));
@@ -31,6 +32,30 @@ for (const img of siteImages.images ?? []) {
     }
   }
   if (!img.alt?.trim()) errors.push(`site-images.json: ${img.id} needs "alt", a description of the picture.`);
+}
+
+// Proposed edits: each for a question that exists, and the question as it
+// would read after the edit passes the same checks, length limits included.
+const questionEdits = readOptional('question-edits.json', { edits: [] });
+const themeIds = themes.map((t) => t.id);
+const byId = new Map([
+  ...data.questions.map((q) => [q.id, { q, kind: 'run' }]),
+  ...pending.questions.map((q) => [q.id, { q, kind: 'run' }]),
+  ...(daily.questions ?? []).map((q) => [q.id, { q, kind: 'daily' }]),
+]);
+const edited = new Set();
+for (const e of questionEdits.edits ?? []) {
+  const found = byId.get(e.id);
+  if (!found) {
+    errors.push(`question-edits.json: no question with the id "${e.id}".`);
+    continue;
+  }
+  if (edited.has(e.id)) errors.push(`question-edits.json: "${e.id}" has two proposals; keep one.`);
+  edited.add(e.id);
+  const after = normalizeQuestion({ ...found.q, ...e.changes });
+  const result = checkQuestion(after, { themeIds, kind: found.kind });
+  for (const err of result.errors) errors.push(`question-edits.json: "${e.id}" after the edit: ${err}`);
+  for (const w of result.warnings.filter((x) => /words/.test(x))) errors.push(`question-edits.json: "${e.id}" after the edit: ${w}`);
 }
 
 // Every source file that can put words on screen.

@@ -5,7 +5,9 @@
 // questions in src/data/pending-questions.json arrive as "pending" (for the
 // builder's review queue) and src/data/daily-questions.json feeds the daily
 // queue. Existing rows are never overwritten by any file: after launch,
-// content is edited in the builder.
+// content is edited in the builder. Changes Claude proposes to existing
+// questions (src/data/question-edits.json) wait in question_edits until the
+// owner uses or declines each one in the builder.
 //
 // Speed: a cold server checks one row (schema_version) and skips setup when
 // nothing changed, and re-reads the seed files only when their contents
@@ -27,9 +29,17 @@ try {
   // No daily questions written yet.
 }
 const siteImages = require('../src/data/site-images.json');
+const questionEdits = require('../src/data/question-edits.json');
 
-const SCHEMA_VERSION = '11';
-const SEED_HASH = createHash('sha256').update(JSON.stringify([bundled, pending, daily, themes, siteImages])).digest('hex').slice(0, 16);
+const SCHEMA_VERSION = '12';
+const SEED_HASH = createHash('sha256')
+  .update(JSON.stringify([bundled, pending, daily, themes, siteImages, questionEdits]))
+  .digest('hex')
+  .slice(0, 16);
+
+// An edit's id is its question plus a hash of what it changes, so a revised
+// proposal for the same question arrives as a new one.
+export const editKey = (e) => `${e.id}.${createHash('sha256').update(JSON.stringify(e.changes)).digest('hex').slice(0, 10)}`;
 
 let ready = null;
 
@@ -96,6 +106,22 @@ async function createTables() {
     )
   `;
   await sql`CREATE INDEX IF NOT EXISTS question_history_question_idx ON question_history (question_id, replaced_at DESC)`;
+  // Proposed changes to a question (new wording, a better option), waiting
+  // for the owner: open, then accepted, declined, or replaced by a newer
+  // proposal for the same question. Applying one keeps the old version in
+  // question_history like any other edit.
+  await sql`
+    CREATE TABLE IF NOT EXISTS question_edits (
+      id TEXT PRIMARY KEY,
+      question_id TEXT NOT NULL,
+      changes JSONB NOT NULL,
+      note TEXT,
+      status TEXT NOT NULL DEFAULT 'open',
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      decided_at TIMESTAMPTZ
+    )
+  `;
+  await sql`CREATE INDEX IF NOT EXISTS question_edits_open_idx ON question_edits (status, question_id)`;
   // A run is registered with the server the moment it starts. Saving,
   // flagging and signing all need a registered run, and the server's own
   // start time is what a finished run's timing is checked against.
@@ -362,6 +388,25 @@ async function seed() {
       UPDATE questions q SET data = q.data || jsonb_build_object('difficulty', t->>'difficulty'), updated_at = now()
       FROM jsonb_array_elements(${JSON.stringify(tagged)}::jsonb) AS t
       WHERE q.id = t->>'id' AND coalesce(q.data->>'difficulty', '') = ''
+    `;
+  }
+
+  // Proposed edits, for questions that exist. A newer proposal for the same
+  // question replaces an older one that's still open.
+  const edits = (questionEdits.edits ?? []).map((e) => ({ key: editKey(e), id: e.id, changes: e.changes, note: e.note ?? null }));
+  if (edits.length) {
+    await sql`
+      INSERT INTO question_edits (id, question_id, changes, note)
+      SELECT e->>'key', e->>'id', e->'changes', e->>'note'
+      FROM jsonb_array_elements(${JSON.stringify(edits)}::jsonb) AS e
+      WHERE EXISTS (SELECT 1 FROM questions q WHERE q.id = e->>'id')
+      ON CONFLICT (id) DO NOTHING
+    `;
+    await sql`
+      UPDATE question_edits SET status = 'replaced', decided_at = now()
+      WHERE status = 'open'
+        AND question_id IN (SELECT e->>'id' FROM jsonb_array_elements(${JSON.stringify(edits)}::jsonb) AS e)
+        AND id NOT IN (SELECT e->>'key' FROM jsonb_array_elements(${JSON.stringify(edits)}::jsonb) AS e)
     `;
   }
 

@@ -47,6 +47,7 @@ mindmap
       playerClient, feedbackForm, suggestions
     Builder at /builder
       Review queue
+      Rewrites
       Questions
       Daily
       Flags
@@ -64,6 +65,7 @@ mindmap
       questions.json
       pending-questions.json
       daily-questions.json
+      question-edits.json
       themes.json
       level-plan.json
       images
@@ -156,8 +158,9 @@ mindmap
 
 | What | Where |
 |---|---|
-| Shell: sign-in gate, tabs, toast, "Play in test mode", Lock. Making a question from a suggestion marks it used on save | `src/builder/BuilderApp.jsx:27`; tabs at `:16` |
+| Shell: sign-in gate, tabs, toast, "Play in test mode", Lock. Making a question from a suggestion, or saving one opened from a rewrite, marks that done | `src/builder/BuilderApp.jsx:32`; tabs at `:17` |
 | Review queue for new questions, oldest first | `src/builder/ReviewQueue.jsx:97`; card at `:34` |
+| Rewrites: changes Claude proposes to existing questions, now and proposed side by side (question, each option, any explanation), easy ones first; use it, edit it first, or keep it as it is | `src/builder/RewritesPanel.jsx:124`; `:15` (`changedParts`) |
 | Questions: how each tier stands against the level plan, pictures in bulk (file name = question id), Easy/Medium/Hard tabs newest first, tier switch per question, mismatch flags, search, Live/Hidden, topic filter, hide, export | `src/builder/QuestionList.jsx:124`; plan at `:44` (`PlanHealth`), bulk at `:70` (`BulkPictures`) |
 | Add or edit a question: difficulty, topics, live checks and word counts, drafts kept on the device, no overwriting someone else's edit; can start from a suggestion | `src/builder/QuestionForm.jsx:83` |
 | Image upload: WebP plus a thumbnail, alt text, credit, "only show after answering" | `src/builder/ImageField.jsx:52` |
@@ -176,7 +179,7 @@ mindmap
 | What | Where |
 |---|---|
 | Database client (Neon in the cloud, PGlite locally), connected on first use; a missing database is a 503 with a plain reason, not a crash | `server/db.js` (`connectionString`, `NotConfigured`) |
-| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:37` (`ensureSchema`), `:59` (`createTables`), `:326` (`seed`); `question_stats` at `:227`, daily answers folded in once at `:261`; `legends`, `feedback`, `suggestions` at `:274`, `:290`, `:303`; pictures from `site-images.json` attached at `:373` |
+| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:47` (`ensureSchema`), `:69` (`createTables`), `:352` (`seed`); `question_edits` at `:114`, seeded at `:394`; `question_stats` at `:253`, daily answers folded in once at `:287`; `legends`, `feedback`, `suggestions` at `:300`, `:316`, `:329`; pictures from `site-images.json` attached at `:418` |
 | Builder password and tokens | `server/auth.js` |
 | Request helpers, id and day checks, the hashed network key | `server/http.js` |
 | Rate limits per network, kept in the database | `server/limits.js` (`hit`, `isBlocked`, `LIMITS`) |
@@ -191,7 +194,7 @@ mindmap
 | `GET/POST /api/player/legends`: the Legends wall; signing it needs a checked run that cleared the plan's last level | `server/routes/player/legends.js:44` (`list`), `:57` (`add`) |
 | `GET /api/player/profile`: one device's totals, levels and last runs, worked out in the database | `server/routes/player/profile.js` |
 | `POST /api/player/feedback`, `/suggest`, `/upload`: the feedback form, a suggested question, its picture | `server/routes/player/` |
-| Builder routes | `server/routes/builder/`: `login.js`, `questions.js` (also `setImage`, `setDifficulty`), `upload.js`, `flags.js`, `daily.js`, `players.js`, `sessions.js`, `analytics.js`, `legends.js`, `feedback.js`, `suggestions.js` |
+| Builder routes | `server/routes/builder/`: `login.js`, `questions.js` (also `setImage`, `setDifficulty`, and `applyEdit` / `closeEdit` for proposed rewrites at `:199`), `upload.js`, `flags.js`, `daily.js`, `players.js`, `sessions.js`, `analytics.js`, `legends.js`, `feedback.js`, `suggestions.js` |
 | Function entry points and the two dispatchers | `api/*.js`, `api/builder.js`, `api/player.js` |
 
 **How a leaderboard entry is trusted:** a run registers itself with the server when it starts. Saving it later needs that registration, every question in it must be real, and the timing has to fit the server's own clock (and allow at least 2 seconds an answer). Only then is the run "verified". Signing replays the saved answers with the quiz's own scoring (`replay`): points, combos, lives, and every redeem checked against its real question, against the version of each question the player actually saw (`question_history`). The board shows a random public id per player; device ids never leave the server.
@@ -205,6 +208,7 @@ mindmap
 | Live questions and tidbits (the seed, and the fallback if the database is slow) | `src/data/questions.json` |
 | New questions waiting for review | `src/data/pending-questions.json` |
 | The daily question queue (after its day, each joins the run pool) | `src/data/daily-questions.json` |
+| Changes proposed to questions already in the database (only the listed fields change); they wait in the builder's Rewrites tab and are checked by `npm run check:content` as the question would read after | `src/data/question-edits.json` |
 | Pictures shipped with the site for questions already in the database: attached on the server's next start, never replacing a picture set in the builder; checked by `npm run check:content` | `src/data/site-images.json` |
 | What makes a good question: the aha recipe, the audit of live questions, ideas for the next batch | `docs/question-strategy.md` |
 | Topics players choose from | `src/data/themes.json` |
@@ -232,6 +236,7 @@ mindmap
 | V2: top bar during play, hearts, answering, the reason, level break, burst, end, home, collection, less motion | `:2656` onwards |
 | Round 12: name tag, home hero, folded daily, how it works, Legends, profile, suggest, feedback, signature pad, medal, the finale | `:3432` onwards; finale at `:4213` |
 | Builder round 12: plan health, bulk pictures, tier tabs, suggestions, feedback, legends review | `:4744` |
+| Builder rewrites: now and proposed | `:4989` |
 
 ## Tooling
 
@@ -256,5 +261,5 @@ mindmap
 | `madeThatWay.playerName.v1`, `madeThatWay.placeholderName.v1`, `madeThatWay.deviceId.v1` | This player's chosen name, the random name they start with, and their random device id |
 | `madeThatWay.builderToken.v1`, `madeThatWay.builder.draft.*` | Builder sign-in and unsaved question drafts |
 | `madeThatWay.testMode` (sessionStorage) | Test mode for this tab; every key above gets a `.test` twin |
-| Postgres | `questions`, `question_history`, `question_stats`, `themes`, `runs`, `sessions`, `events`, `players`, `signed_runs`, `flags`, `daily_schedule`, `daily_answers`, `legends`, `feedback`, `suggestions`, `rate_limits`, `meta` |
+| Postgres | `questions`, `question_history`, `question_edits`, `question_stats`, `themes`, `runs`, `sessions`, `events`, `players`, `signed_runs`, `flags`, `daily_schedule`, `daily_answers`, `legends`, `feedback`, `suggestions`, `rate_limits`, `meta` |
 | Vercel Blob (or `.localdb/uploads`) | Images uploaded in the builder (`questions/`) and pictures players send with a suggestion (`suggestions/`) |
