@@ -62,12 +62,13 @@ function signedMessage(result, boards) {
 }
 
 const HEADLINES = {
+  legend: 'Legend: every level cleared',
   lives: 'Out of lives',
   finished: 'Run saved',
   complete: "You've answered every question we have",
 };
 
-export default function EndScreen({ run, questionsById, boards, knownName, signing, signResult, starting, onSign, onExplain, onPlayAgain, onHome, onCollection }) {
+export default function EndScreen({ run, questionsById, boards, knownName, signing, signResult, starting, onSign, onExplain, onPlayAgain, onHome, onCollection, onFeedback }) {
   const summary = replay(run.results) ?? { score: 0, correct: 0, level: 1, levelsCleared: 0 };
   const signed = signResult?.ok;
   const earned = (run.badges ?? []).map((id) => BADGES.find((b) => b.id === id)).filter(Boolean);
@@ -118,6 +119,14 @@ export default function EndScreen({ run, questionsById, boards, knownName, signi
           )}
           <Leaderboard boards={boards} limit={10} titleId="end-board-title" />
         </section>
+
+        {onFeedback && (
+          <p className="end-feedback">
+            <button type="button" className="text-button" onClick={onFeedback}>
+              Tell us how it went
+            </button>
+          </p>
+        )}
 
         <section className="end-section" aria-labelledby="review-title">
           <p id="review-title" className="section-title">

@@ -1,13 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import ImageField from './ImageField.jsx';
 import { TOPIC_LABELS, CONFIDENCE_LABELS } from '../lib/labels.js';
-import { TOPICS, CONFIDENCE, checkQuestion, normalizeQuestion, slugify, wordCount } from '../lib/questionRules.js';
+import { TOPICS, CONFIDENCE, DIFFICULTIES, checkQuestion, normalizeQuestion, slugify, wordCount } from '../lib/questionRules.js';
+
+const DIFFICULTY_NOTES = {
+  easy: 'Worked out by logic alone. Plain options, nothing to know first.',
+  medium: 'Logic plus a little everyday knowledge. A bit tougher.',
+  hard: 'Needs real design sense, close options, or what a keen designer knows.',
+};
 
 const LETTERS = ['A', 'B', 'C', 'D'];
 
 // Unsaved work is kept on this device as you type, so a sign-out, a closed
 // tab or a crash never loses it. Cleared on save or cancel.
-const draftKey = (initial, kind) => `madeThatWay.builder.draft.${initial?.id ?? `new-${kind}`}`;
+const draftKey = (initial, kind, from) => `madeThatWay.builder.draft.${initial?.id ?? `new-${kind}${from ? `-${from}` : ''}`}`;
 
 function readDraft(key) {
   try {
@@ -29,6 +35,7 @@ function blank() {
   return {
     id: '',
     topic: '',
+    difficulty: '',
     tags: [],
     themes: [],
     group: '',
@@ -71,17 +78,19 @@ function Field({ label, htmlFor, note, children }) {
 }
 
 // kind: 'run' or 'daily' for a new question; an existing one keeps its own.
-export default function QuestionForm({ initial, kind: newKind = 'run', themes, existingIds, api, onCancel, onSaved }) {
+// prefill: a new question's starting content (from a player's suggestion),
+// and draftFrom: that suggestion's id, so its draft is kept apart.
+export default function QuestionForm({ initial, prefill = null, draftFrom = null, kind: newKind = 'run', themes, existingIds, api, onCancel, onSaved }) {
   const isNew = !initial;
   const kind = initial?.kind ?? newKind;
   const isDaily = kind === 'daily';
-  const key = draftKey(initial, kind);
+  const key = draftKey(initial, kind, draftFrom);
   const [draft, setDraft] = useState(() => {
     const saved = readDraft(key);
     const newer = saved && (!initial?.updatedAt || saved.savedAt > Date.parse(initial.updatedAt));
     return newer ? saved : null;
   });
-  const [form, setForm] = useState(() => (initial ? fromQuestion(initial) : blank()));
+  const [form, setForm] = useState(() => (initial ? fromQuestion(initial) : prefill ? fromQuestion({ ...blank(), ...prefill }) : blank()));
   const [idTouched, setIdTouched] = useState(false);
   const [tagsText, setTagsText] = useState(() => (initial?.tags ?? []).join(', '));
   const [dirty, setDirty] = useState(false);
@@ -206,9 +215,29 @@ export default function QuestionForm({ initial, kind: newKind = 'run', themes, e
         </div>
       )}
 
-      <Field label="Question" htmlFor="q-stem" note="Ask why something is the way it is. Someone should be able to reason their way to the answer.">
+      {form.suggestedBy && <p className="chip chip-done qform-credit">Suggested by {form.suggestedBy}</p>}
+
+      <Field
+        label="Question"
+        htmlFor="q-stem"
+        note={`Ask why something is the way it is, in under 15 words. Someone should be able to reason their way to the answer. ${wordCount(form.stem)} words now.`}
+      >
         <textarea id="q-stem" rows={2} value={form.stem} onChange={(e) => set({ stem: e.target.value })} />
       </Field>
+
+      <div className="field">
+        <p className="field-label" id="q-difficulty">
+          Difficulty
+        </p>
+        <div className="segmented" role="radiogroup" aria-labelledby="q-difficulty">
+          {DIFFICULTIES.map((d) => (
+            <button key={d} type="button" role="radio" aria-checked={form.difficulty === d} aria-pressed={form.difficulty === d} onClick={() => set({ difficulty: d })}>
+              {d[0].toUpperCase() + d.slice(1)}
+            </button>
+          ))}
+        </div>
+        <p className="muted field-note">{DIFFICULTY_NOTES[form.difficulty] ?? 'Decides which levels it can appear in. Players never see it.'}</p>
+      </div>
 
       <div className="field-row">
         <Field label="Category" htmlFor="q-topic" note="Keeps runs varied. Worth a second look marks a myth buster.">

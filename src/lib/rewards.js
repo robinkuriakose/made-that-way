@@ -18,7 +18,14 @@ export const BADGES = [
   { id: 'perfect-level', label: 'Perfect level', note: 'All five right in one level, without a hint.' },
   { id: 'streak-3', label: 'Three day streak', note: "Answer today's question three days running." },
   { id: 'whys-50', label: '50 whys', note: `Uncover the reasons behind ${WHYS_FOR_BADGE} designs.` },
+  // Milestones (src/data/level-plan.json): shown once the game has that many levels.
+  { id: 'bronze', label: 'Bronze', note: 'Clear level 5.', level: 5 },
+  { id: 'silver', label: 'Silver', note: 'Clear level 10.', level: 10 },
+  { id: 'legend', label: 'Legend', note: 'Finish every level there is.' },
 ];
+
+// The badges a player can earn today: a milestone past the last level waits.
+export const availableBadges = (lastLevel) => BADGES.filter((b) => !b.level || b.level <= lastLevel);
 
 // Badges a just-cleared level earns. slice: that level's answers.
 export function levelBadges(slice) {

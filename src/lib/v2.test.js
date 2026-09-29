@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -13,7 +14,7 @@ import {
   MAX_LIVES,
   MAX_POINTS,
 } from './scoring.js';
-import { buildLevel, replacementFor, openQuestions, easeOf, percentRight, MYTH_TOPIC } from './levels.js';
+import { buildLevel, replacementFor, openQuestions, easeOf, percentRight, mixFor, tierOf, MYTH_TOPIC } from './levels.js';
 import { pickRedeemQuestions } from './redeem.js';
 import { verifySession, sessionQuestionIds } from './verifySession.js';
 import { levelBadges, whysBadges, streakBadges, beatsBest } from './rewards.js';
@@ -194,6 +195,47 @@ test('a picked question opens level 1, with four others that suit it', () => {
   assert.equal(buildLevel({ questions, firstId: 'nope', random: seededRandom('x') }).ids.length, LEVEL_SIZE, 'an unknown pick is ignored');
 });
 
+// 60 questions, 20 of each tier, four topics each.
+function tieredPool() {
+  const tiers = ['easy', 'medium', 'hard'];
+  return Array.from({ length: 60 }, (_, i) => ({
+    id: `t${i}`,
+    topic: TOPICS[i % TOPICS.length],
+    difficulty: tiers[Math.floor(i / 20)],
+    themes: ['a'],
+    tags: ['x'],
+  }));
+}
+const PLAN = JSON.parse(readFileSync(new URL('../data/level-plan.json', import.meta.url), 'utf8'));
+
+test('each level has the mix of easy, medium and hard its band asks for', () => {
+  const questions = tieredPool();
+  const map = byId(questions);
+  const count = (ids) => ids.reduce((c, id) => ({ ...c, [map[id].difficulty]: (c[map[id].difficulty] ?? 0) + 1 }), {});
+  for (const [level, want] of [[1, { easy: 4, medium: 1 }], [5, { easy: 2, medium: 2, hard: 1 }], [9, { easy: 1, medium: 1, hard: 3 }], [14, { medium: 1, hard: 4 }]]) {
+    for (let seed = 0; seed < 10; seed++) {
+      const { ids } = buildLevel({ questions, mix: mixFor(PLAN, level), random: seededRandom(`mix-${level}-${seed}`) });
+      assert.deepEqual(count(ids), want, `level ${level}`);
+      assert.ok(ids.every((id, i) => i === 0 || map[id].topic !== map[ids[i - 1]].topic), 'neighbours differ');
+    }
+  }
+});
+
+test('a tier that runs out borrows from the nearest one, and a picked question takes its own tier', () => {
+  const questions = tieredPool().filter((q) => q.difficulty !== 'hard');
+  const map = byId(questions);
+  const { ids } = buildLevel({ questions, mix: mixFor(PLAN, 9), random: seededRandom('borrow') });
+  assert.equal(ids.length, LEVEL_SIZE, 'no hard questions left, the level still fills');
+  assert.ok(ids.filter((id) => map[id].difficulty === 'medium').length >= 3, 'hard slots borrow medium first');
+
+  const all = tieredPool();
+  const picked = buildLevel({ questions: all, firstId: 't45', mix: mixFor(PLAN, 1), random: seededRandom('pick') }).ids;
+  const tiers = picked.map((id) => all.find((q) => q.id === id).difficulty);
+  assert.equal(picked[0], 't45');
+  assert.deepEqual(tiers.slice(1).sort(), ['easy', 'easy', 'easy', 'medium'], 'the hard pick replaces an easy slot');
+  assert.equal(tierOf({}), 'medium', 'untagged counts as medium');
+});
+
 test('a swapped-in question is new to the run, shares no group, and keeps the topic when it can', () => {
   const questions = [
     { id: 'a', topic: 'ui', group: 'g' },
@@ -343,4 +385,40 @@ test('the short reason is the first sentence, or the first two when the first is
   assert.equal(firstSentence("It's the wind. Tall buildings sway. Then more."), "It's the wind. Tall buildings sway.");
   assert.equal(firstSentence('No full stop here'), 'No full stop here');
   assert.equal(firstSentence('The U.S. standard came first. Then others.'), 'The U.S. standard came first. Then others.', 'U.S. is not a sentence end');
+});
+
+test('redeems leave out hard questions while there are enough others', () => {
+  const questions = [
+    { id: 'missed', topic: 'ui', tags: ['x'] },
+    { id: 'hard-twin', topic: 'ui', tags: ['x'], difficulty: 'hard' },
+    { id: 'e1', topic: 'ui', tags: ['y'], difficulty: 'easy' },
+    { id: 'e2', topic: 'ui', tags: ['z'], difficulty: 'easy' },
+    { id: 'm1', topic: 'furniture', tags: ['q'], difficulty: 'medium' },
+  ];
+  const offered = pickRedeemQuestions({ missed: questions[0], questions, usedIds: ['missed'], random: seededRandom('fair') });
+  assert.ok(!offered.includes('hard-twin'), 'the closely related hard one stays out');
+  const few = pickRedeemQuestions({ missed: questions[0], questions: questions.slice(0, 3), usedIds: ['missed'], random: seededRandom('few') });
+  assert.ok(few.includes('hard-twin'), 'used when nothing else is left');
+});
+
+test('every starting name is allowed, and none counts as a test name', async () => {
+  const { NAME_ADJECTIVES, NAME_ANIMALS, randomName, nameProblem, isTestName, NAME_MAX_LENGTH } = await import('./names.js');
+  for (const a of NAME_ADJECTIVES) {
+    for (const b of NAME_ANIMALS) {
+      const name = `${a}${b}99`;
+      assert.equal(nameProblem(name), null, name);
+      assert.equal(isTestName(name), false, name);
+      assert.ok(name.length <= NAME_MAX_LENGTH, name);
+    }
+  }
+  assert.match(randomName(seededRandom('n')), /^[a-z]+[a-z]+\d{2}$/);
+});
+
+test('the plan says what a full run needs, and tags that play wrong are only flagged', async () => {
+  const { planNeeds, tierMismatch } = await import('./levels.js');
+  assert.deepEqual(planNeeds(PLAN, 6), { easy: 18, medium: 9, hard: 3 });
+  assert.equal(tierMismatch({ difficulty: 'easy', stats: { asked: 9, right: 0 } }), null, 'too few answers');
+  assert.match(tierMismatch({ difficulty: 'easy', stats: { asked: 20, right: 6 } }), /harder than easy: 30%/);
+  assert.match(tierMismatch({ difficulty: 'hard', stats: { asked: 20, right: 18 } }), /easier than hard/);
+  assert.equal(tierMismatch({ difficulty: 'medium', stats: { asked: 20, right: 12 } }), null);
 });

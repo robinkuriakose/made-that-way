@@ -37,3 +37,24 @@ export function nameProblem(raw) {
   if (BLOCKED.some((w) => squashed.includes(w))) return 'Please pick a different name.';
   return null;
 }
+
+// A friendly starting name, so nobody has to think of one before playing:
+// an adjective, an animal and a number, like "curiousotter35". Every
+// combination passes nameProblem and none is a test name (checked in the
+// tests), so none can trip the filters.
+export const NAME_ADJECTIVES = [
+  'curious', 'clever', 'brave', 'calm', 'cosy', 'dapper', 'eager', 'fuzzy', 'gentle', 'happy', 'jolly', 'keen',
+  'lucky', 'merry', 'nifty', 'plucky', 'quick', 'quirky', 'snappy', 'sunny', 'witty', 'zesty', 'bold', 'bright',
+  'chirpy', 'dreamy', 'giddy', 'humble', 'lively', 'mellow', 'nimble', 'peppy', 'proud', 'spry', 'swift', 'zippy',
+];
+export const NAME_ANIMALS = [
+  'otter', 'panda', 'koala', 'fox', 'owl', 'lemur', 'walrus', 'puffin', 'badger', 'heron', 'gecko', 'llama',
+  'beaver', 'bison', 'falcon', 'hippo', 'ibis', 'jaguar', 'kiwi', 'lynx', 'marmot', 'narwhal', 'ocelot', 'pelican',
+  'quokka', 'raven', 'seal', 'tapir', 'toucan', 'turtle', 'wombat', 'yak', 'zebra', 'sloth', 'moose', 'egret',
+  'ferret', 'gibbon', 'hedgehog', 'iguana', 'mongoose', 'newt', 'parrot', 'sparrow', 'tiger', 'whale',
+];
+
+export function randomName(random = Math.random) {
+  const pick = (list) => list[Math.floor(random() * list.length)];
+  return `${pick(NAME_ADJECTIVES)}${pick(NAME_ANIMALS)}${10 + Math.floor(random() * 90)}`;
+}

@@ -10,6 +10,17 @@ export const TOPICS = ['everyday-object', 'industrial', 'furniture', 'ui', 'myth
 // question of the day, and never repeat.
 export const KINDS = ['run', 'daily'];
 export const CONFIDENCE = ['accurate', 'high confidence', 'medium confidence', 'deduction'];
+// Internal only: players never see it. It decides which levels a question
+// can appear in (src/data/level-plan.json).
+//   easy: worked out by logic alone, plain options, nothing to know first.
+//   medium: logic plus a little everyday knowledge, a bit tougher.
+//   hard: real design skill, close options, or what a keen designer knows.
+export const DIFFICULTIES = ['easy', 'medium', 'hard'];
+
+// Players spend most of their time reading the question, so the question
+// and its options stay short. Explanations can be as long as they need.
+export const MAX_STEM_WORDS = 14;
+export const MAX_OPTION_WORDS = 10;
 
 // Length should say nothing about which answer is right.
 export const MAX_CORRECT_LEAD_WORDS = 2;
@@ -61,7 +72,7 @@ const trimmed = (v) => (typeof v === 'string' ? v.trim() : v);
 export function normalizeQuestion(input) {
   const q = { ...input };
   for (const k of MANAGED_FIELDS) delete q[k];
-  for (const k of ['id', 'topic', 'stem', 'hint', 'explanationRight', 'confidence', 'sourceName', 'sourceUrl']) {
+  for (const k of ['id', 'topic', 'stem', 'hint', 'explanationRight', 'confidence', 'sourceName', 'sourceUrl', 'difficulty', 'suggestedBy']) {
     q[k] = trimmed(q[k]);
   }
   if (Array.isArray(q.options)) q.options = q.options.map(trimmed);
@@ -72,6 +83,8 @@ export function normalizeQuestion(input) {
     q.tags = [...new Set(q.tags.map((t) => String(t).trim().toLowerCase()).filter(Boolean))];
   }
   if (Array.isArray(q.themes)) q.themes = [...new Set(q.themes.map((t) => String(t).trim()).filter(Boolean))];
+  if (!q.difficulty) delete q.difficulty;
+  if (!q.suggestedBy) delete q.suggestedBy;
   if (q.group == null || !String(q.group).trim()) delete q.group;
   else q.group = String(q.group).trim();
 
@@ -125,6 +138,10 @@ export function checkQuestion(q, { themeIds = null, kind = 'run' } = {}) {
     errors.push('The id should be lowercase letters, numbers and dashes, up to 64 characters.');
   }
   if (!TOPICS.includes(q.topic)) errors.push('Pick a topic.');
+  if (!DIFFICULTIES.includes(q.difficulty)) errors.push('Pick easy, medium or hard.');
+  if (wordCount(q.stem) > MAX_STEM_WORDS) {
+    warnings.push(`The question is ${wordCount(q.stem)} words. Under ${MAX_STEM_WORDS + 1} reads fastest.`);
+  }
   if (!CONFIDENCE.includes(q.confidence)) errors.push('Pick a confidence level.');
   if (isText(q.sourceUrl) && !/^https?:\/\/\S+$/.test(q.sourceUrl.trim())) errors.push('The source link should start with http:// or https://.');
   if (!Array.isArray(q.tags) || q.tags.length === 0 || !q.tags.every(isText)) {
@@ -160,6 +177,8 @@ export function checkQuestion(q, { themeIds = null, kind = 'run' } = {}) {
     if (Math.max(...words) - Math.min(...words) > MAX_SPREAD_WORDS) {
       warnings.push(`Options range from ${Math.min(...words)} to ${Math.max(...words)} words. Closer is better.`);
     }
+    const long = q.options.filter((o) => wordCount(o) > MAX_OPTION_WORDS).length;
+    if (long) warnings.push(`${long} ${long === 1 ? 'option is' : 'options are'} over ${MAX_OPTION_WORDS} words. Short options read faster.`);
     const lower = q.options.map((o) => o.trim().toLowerCase());
     if (new Set(lower).size !== 4) errors.push('Two options are the same.');
   }

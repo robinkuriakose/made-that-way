@@ -28,8 +28,8 @@ try {
 }
 const siteImages = require('../src/data/site-images.json');
 
-const SCHEMA_VERSION = '10';
-const SEED_HASH = createHash('sha256').update(JSON.stringify([pending, daily, themes, siteImages])).digest('hex').slice(0, 16);
+const SCHEMA_VERSION = '11';
+const SEED_HASH = createHash('sha256').update(JSON.stringify([bundled, pending, daily, themes, siteImages])).digest('hex').slice(0, 16);
 
 let ready = null;
 
@@ -268,6 +268,52 @@ async function createTables() {
       right_count = question_stats.right_count + EXCLUDED.right_count,
       updated_at = now()
   `;
+  // Players who finished every level, with the signature they drew. Shown on
+  // the Legends wall on the home screen; the builder can hide one.
+  await sql`
+    CREATE TABLE IF NOT EXISTS legends (
+      run_id TEXT PRIMARY KEY,
+      device_id TEXT NOT NULL,
+      name TEXT NOT NULL,
+      score INTEGER NOT NULL,
+      level INTEGER NOT NULL,
+      duration_ms BIGINT NOT NULL,
+      signature TEXT,
+      is_test BOOLEAN NOT NULL DEFAULT false,
+      hidden BOOLEAN NOT NULL DEFAULT false,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  await sql`CREATE INDEX IF NOT EXISTS legends_created_idx ON legends (created_at DESC)`;
+  // Answers to the feedback form (ratings, what to add more of, a note).
+  await sql`
+    CREATE TABLE IF NOT EXISTS feedback (
+      id BIGSERIAL PRIMARY KEY,
+      device_id TEXT NOT NULL,
+      run_id TEXT,
+      answers JSONB NOT NULL,
+      note TEXT,
+      is_test BOOLEAN NOT NULL DEFAULT false,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+    )
+  `;
+  // Questions players suggest: a one-line fact, or a full question. Reviewed
+  // in the builder; a full one can become a pending question.
+  await sql`
+    CREATE TABLE IF NOT EXISTS suggestions (
+      id TEXT PRIMARY KEY,
+      device_id TEXT NOT NULL,
+      name TEXT NOT NULL,
+      kind TEXT NOT NULL,
+      data JSONB NOT NULL,
+      status TEXT NOT NULL DEFAULT 'new',
+      question_id TEXT,
+      is_test BOOLEAN NOT NULL DEFAULT false,
+      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+      reviewed_at TIMESTAMPTZ
+    )
+  `;
+  await sql`CREATE INDEX IF NOT EXISTS suggestions_device_idx ON suggestions (device_id, created_at DESC)`;
   await sql`
     CREATE TABLE IF NOT EXISTS rate_limits (
       key TEXT PRIMARY KEY,
@@ -306,6 +352,19 @@ async function seed() {
     FROM jsonb_array_elements(${JSON.stringify(daily.questions ?? [])}::jsonb) WITH ORDINALITY AS x(q, ord)
     ON CONFLICT (id) DO NOTHING
   `;
+  // Difficulty (easy, medium, hard) for questions that don't have one yet,
+  // from the content files. One set in the builder is never replaced.
+  const tagged = [...bundled.questions, ...pending.questions, ...(daily.questions ?? [])]
+    .filter((q) => q.difficulty)
+    .map((q) => ({ id: q.id, difficulty: q.difficulty }));
+  if (tagged.length) {
+    await sql`
+      UPDATE questions q SET data = q.data || jsonb_build_object('difficulty', t->>'difficulty'), updated_at = now()
+      FROM jsonb_array_elements(${JSON.stringify(tagged)}::jsonb) AS t
+      WHERE q.id = t->>'id' AND coalesce(q.data->>'difficulty', '') = ''
+    `;
+  }
+
   // Pictures shipped with the site for questions already in the database
   // (src/data/site-images.json). A question with no picture gets one, and a
   // picture this step attached before (same site path) takes the file's

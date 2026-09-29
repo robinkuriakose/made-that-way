@@ -10,8 +10,11 @@ import daily from '../server/routes/builder/daily.js';
 import analytics from '../server/routes/builder/analytics.js';
 import players from '../server/routes/builder/players.js';
 import sessions from '../server/routes/builder/sessions.js';
+import legends from '../server/routes/builder/legends.js';
+import feedback from '../server/routes/builder/feedback.js';
+import suggestions from '../server/routes/builder/suggestions.js';
 
-const ROUTES = { login, questions, upload, flags, daily, analytics, players, sessions };
+const ROUTES = { login, questions, upload, flags, daily, analytics, players, sessions, legends, feedback, suggestions };
 
 export default async function handler(req, res) {
   const route = String(req.query?.route ?? '').replace(/\/+$/, '');

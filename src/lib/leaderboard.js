@@ -8,12 +8,16 @@
 import { flush } from './outbox.js';
 import { isTestMode, storageKey } from './testMode.js';
 import { getDeviceId } from './device.js';
-import { cleanName } from './names.js';
+import { cleanName, randomName } from './names.js';
 
 export { cleanName, NAME_MAX_LENGTH, NAME_CHANGE_LIMIT } from './names.js';
 export { rankEntries, isBetterRun } from './ranking.js';
 
 const NAME_KEY = 'madeThatWay.playerName.v1';
+// The starting name a device gets on its first visit, kept even after the
+// player picks their own: it's the name a suggestion goes out under when
+// they'd rather be mysterious.
+const PLACEHOLDER_KEY = 'madeThatWay.placeholderName.v1';
 const EMPTY = { week: { entries: [], me: null, startsAt: null }, player: null };
 
 async function parse(res) {
@@ -91,10 +95,26 @@ export function writeLocalName(name) {
   }
 }
 
-export function readLocalName() {
+export function placeholderName() {
   try {
-    return window.localStorage.getItem(storageKey(NAME_KEY)) ?? '';
+    let name = window.localStorage.getItem(storageKey(PLACEHOLDER_KEY));
+    if (!name) {
+      name = randomName();
+      window.localStorage.setItem(storageKey(PLACEHOLDER_KEY), name);
+    }
+    return name;
   } catch {
-    return '';
+    return randomName();
   }
 }
+
+// This device's name: the one it chose, or its starting name until then.
+export function readLocalName() {
+  try {
+    return window.localStorage.getItem(storageKey(NAME_KEY)) || placeholderName();
+  } catch {
+    return placeholderName();
+  }
+}
+
+export const isPlaceholderName = (name) => name === placeholderName();

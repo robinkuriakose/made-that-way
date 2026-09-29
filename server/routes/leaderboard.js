@@ -22,12 +22,12 @@
 // so analytics leave it out.
 import { randomBytes } from 'node:crypto';
 import { sql } from '../db.js';
-import { ensureSchema, asObject, isoTime } from '../schema.js';
+import { ensureSchema, isoTime } from '../schema.js';
 import { body, isId, methodNotAllowed, serverError } from '../http.js';
 import { hit, tooMany } from '../limits.js';
 import { isBetterRun } from '../../src/lib/ranking.js';
 import { cleanName, isTestName, nameProblem, NAME_CHANGE_LIMIT } from '../../src/lib/names.js';
-import { verifySession, sessionQuestionIds } from '../../src/lib/verifySession.js';
+import { checkedRun } from '../runs.js';
 import { levelOf } from '../../src/lib/scoring.js';
 import { weekStart } from '../../src/lib/week.js';
 
@@ -96,39 +96,15 @@ const publicPlayer = (p) =>
       }
     : null;
 
-// Every version of each question this run could have seen: the current one,
-// plus any replaced since the run started.
-async function versionsFor(session, startedAt) {
-  const list = JSON.stringify(sessionQuestionIds(session));
-  const { rows: current } = await sql`
-    SELECT id, data FROM questions WHERE id IN (SELECT jsonb_array_elements_text(${list}::jsonb))
-  `;
-  const { rows: older } = await sql`
-    SELECT question_id AS id, data FROM question_history
-    WHERE question_id IN (SELECT jsonb_array_elements_text(${list}::jsonb))
-      AND replaced_at >= ${startedAt}::timestamptz - interval '1 minute'
-  `;
-  const byId = {};
-  for (const r of [...current, ...older]) (byId[r.id] ??= []).push({ ...asObject(r.data), id: r.id });
-  return byId;
-}
-
 async function sign(req, res) {
   const b = body(req);
   if (!isId(b.deviceId) || !isId(b.runId)) return res.status(400).json({ error: 'invalid request' });
   if (!(await hit(req, 'sign'))) return tooMany(res);
 
-  const { rows: runRows } = await sql`SELECT device_id, is_test, started_at FROM runs WHERE id = ${b.runId}`;
-  const run = runRows[0];
-  if (!run || run.device_id !== b.deviceId) return res.status(409).json({ error: "That run isn't known here." });
-
-  const { rows: sessionRows } = await sql`SELECT data, verified, is_test FROM sessions WHERE id = ${b.runId}`;
-  if (!sessionRows.length) return res.status(404).json({ error: 'Still saving your run. Try again in a moment.' });
-  const session = sessionRows[0];
-  if (!session.verified) return res.status(422).json({ error: "This run can't go on the board: its timing didn't check out." });
-
-  const verified = verifySession(asObject(session.data), await versionsFor(asObject(session.data), isoTime(run.started_at)));
-  if (!verified) return res.status(422).json({ error: "This run can't go on the board: its answers didn't check out." });
+  const checked = await checkedRun(b.runId, b.deviceId);
+  if (checked.error) return res.status(checked.status).json({ error: checked.error });
+  const { run, verified } = checked;
+  const session = { is_test: checked.sessionIsTest };
 
   const { rows: already } = await sql`SELECT 1 FROM signed_runs WHERE run_id = ${b.runId}`;
   const player = await playerFor(b.deviceId);

@@ -1,3 +1,5 @@
+import { tierOf } from './levels.js';
+
 export const REDEEM_CHOICES = 3;
 // Questions the run's levels still need (in the quiz, the ones with a
 // picture) are offered only when they fit much better, so redeems don't use
@@ -19,13 +21,16 @@ function relatedness(missed, candidate) {
 // part of the run (usedIds: asked, queued or redeemed already), so a redeem
 // never spoils a question still to come. Questions offered earlier in the
 // run are used only if nothing else is left. keepIds are questions the
-// levels still need. The random nudge is smaller than one step of
-// relatedness, so it only shuffles questions that are equally related.
+// levels still need. Hard questions are left out while there are enough
+// others, so a second chance stays fair. The random nudge is smaller than one
+// step of relatedness, so it only shuffles questions that are equally related.
 export function pickRedeemQuestions({ missed, questions, usedIds, alreadyOffered = [], keepIds = [], random = Math.random }) {
   const blocked = new Set([...usedIds, missed.id]);
   const offered = new Set(alreadyOffered);
   const keep = new Set(keepIds);
-  const pool = questions.filter((q) => !blocked.has(q.id));
+  const open = questions.filter((q) => !blocked.has(q.id));
+  const fair = open.filter((q) => tierOf(q) !== 'hard');
+  const pool = fair.length >= REDEEM_CHOICES ? fair : open;
   const fresh = pool.filter((q) => !offered.has(q.id));
   const source = fresh.length >= REDEEM_CHOICES ? fresh : pool;
 

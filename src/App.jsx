@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { buildLevel, replacementFor } from './lib/levels.js';
+import { buildLevel, replacementFor, mixFor } from './lib/levels.js';
+import plan from './data/level-plan.json';
 import { pointsFor, replay, levelOf, comboMultiplier, isPerfectLevel, LEVEL_SIZE } from './lib/scoring.js';
 import { pickRedeemQuestions, REDEEM_CHOICES } from './lib/redeem.js';
 import { loadRun, saveRun } from './lib/runStore.js';
 import { recordSession } from './lib/storage.js';
-import { readBoards, signRun, renamePlayer, readLocalName, writeLocalName } from './lib/leaderboard.js';
+import { readBoards, signRun, renamePlayer, readLocalName, writeLocalName, placeholderName } from './lib/leaderboard.js';
+import { fetchLegends, signLegend } from './lib/playerClient.js';
 import { nameProblem, cleanName } from './lib/names.js';
 import { initialBank, fetchLiveBank } from './lib/questionBank.js';
 import { splitTidbits } from './lib/bank.js';
@@ -19,6 +21,7 @@ import { flush } from './lib/outbox.js';
 import { isTestMode, exitTestMode } from './lib/testMode.js';
 import {
   BADGES,
+  availableBadges,
   award,
   earnedBadges,
   levelBadges,
@@ -34,6 +37,11 @@ import QuestionScreen from './components/QuestionScreen.jsx';
 import LevelBreak from './components/LevelBreak.jsx';
 import EndScreen from './components/EndScreen.jsx';
 import WhysScreen from './components/WhysScreen.jsx';
+import LegendFinale from './components/LegendFinale.jsx';
+import ProfileScreen from './components/ProfileScreen.jsx';
+import SuggestScreen from './components/SuggestScreen.jsx';
+import FeedbackForm from './components/FeedbackForm.jsx';
+import { RenameModal } from './components/NameTag.jsx';
 import ExplainModal from './components/ExplainModal.jsx';
 import RedeemModal from './components/RedeemModal.jsx';
 import FlagModal from './components/FlagModal.jsx';
@@ -46,6 +54,7 @@ import { showsImage } from './components/ImageFrame.jsx';
 const RUN_VERSION = 5;
 const DONE_PHASES = ['correct', 'wrong', 'redeemed'];
 const EMPTY_BOARDS = { week: { entries: [], me: null, startsAt: null }, player: null };
+const BADGE_LIST = availableBadges(plan.lastLevel);
 
 function freshQuestionState() {
   return {
@@ -83,7 +92,7 @@ const levelSizeOf = (run, level) => Math.min(LEVEL_SIZE, run.order.length - (lev
 // at a time, at each level break (see lib/levels.js). firstId is a question
 // the player picked from the pictures on the home screen, to start with.
 function createRun(bank, themeIds, firstId = null) {
-  const { ids } = buildLevel({ questions: levelPool(bank.questions), themeIds, firstId, seen: new Set(seenIds()) });
+  const { ids } = buildLevel({ questions: levelPool(bank.questions), themeIds, firstId, mix: mixFor(plan, 1), seen: new Set(seenIds()) });
   return {
     version: RUN_VERSION,
     id: makeId(),
@@ -155,7 +164,7 @@ export default function App() {
     const saved = loadRun();
     return isUsableRun(saved) ? saved : null;
   });
-  const [screen, setScreen] = useState(() => (run?.finishedAt ? 'end' : 'home'));
+  const [screen, setScreen] = useState('home');
   const runRef = useRef(run);
   runRef.current = run;
   const screenRef = useRef(screen);
@@ -176,6 +185,9 @@ export default function App() {
   const [collection, setCollection] = useState(() => ({ uncovered: uncoveredIds(), badges: earnedBadges() }));
   const [best, setBest] = useState(readBest);
   const [streak, setStreak] = useState(0);
+  const [legends, setLegends] = useState({ legends: [], lastLevel: plan.lastLevel });
+  const [renaming, setRenaming] = useState(false);
+  const [feedbackFor, setFeedbackFor] = useState(undefined);
 
   useEffect(() => {
     saveRun(run);
@@ -183,6 +195,7 @@ export default function App() {
 
   useEffect(() => {
     readBoards().then(setBoards);
+    fetchLegends().then((r) => r.ok && setLegends(r));
     track('page_opened', { data: { device: screenKind() } });
     flush();
     // Fetch the live bank straight away, so it's usually here before Start.
@@ -231,6 +244,7 @@ export default function App() {
     setRedeemOpen(false);
     setScreen('home');
     readBoards().then(setBoards);
+    fetchLegends().then((r) => r.ok && setLegends(r));
   }, []);
 
   useEffect(() => {
@@ -464,7 +478,7 @@ export default function App() {
     if (isNewBest) setBest(readBest());
     setRun({ ...finished, isNewBest });
     recordSession(toSession(finished));
-    enter('end');
+    enter(reason === 'legend' ? 'legend' : 'end');
   }
 
   // A level is cleared: build the next one now, so its clue can be shown on
@@ -473,8 +487,16 @@ export default function App() {
   function openBreak(base, state) {
     const level = levelOf(base.results.length);
     const slice = base.results.slice(-LEVEL_SIZE);
-    const earned = grant(levelBadges(slice));
+    // Milestone levels (bronze, silver) and the last level (Legend) earn
+    // their own badge.
+    const milestone = (plan.milestones ?? []).find((m) => m.level === level)?.badge ?? null;
+    const last = level >= plan.lastLevel;
+    const earned = grant([...levelBadges(slice), ...(milestone ? [milestone] : []), ...(last ? ['legend'] : [])]);
     track('level_cleared', { runId: base.id, data: { level, position: base.results.length } });
+    if (last) {
+      finishRun({ ...base, badges: [...base.badges, ...earned] }, 'legend');
+      return;
+    }
 
     const current = bankRef.current;
     const pool = levelPool(current.questions);
@@ -485,6 +507,7 @@ export default function App() {
       tidbits,
       usedTidbitIds: base.tidbitsShown.map((t) => t.tidbitId),
       withTidbit: true,
+      mix: mixFor(plan, level + 1),
       themeIds: base.themeIds,
       seen: new Set(seenIds()),
     });
@@ -507,6 +530,7 @@ export default function App() {
         lifeGained: state.steps.at(-1).lifeGained,
         levelPoints: slice.reduce((sum, r) => sum + r.points, 0),
         badges: earned,
+        milestone,
         tidbit: tidbit && { id: tidbit.id, text: tidbit.text, questionId: tidbit.tidbitFor },
       },
       tidbitsShown: tidbit
@@ -569,6 +593,22 @@ export default function App() {
     setRun((r) => ({ ...r, signed: { isNewBest: result.isNewBest, isTest: result.isTest } }));
     setLocalName(readLocalName());
     setBoards(await readBoards());
+  }
+
+  // The Legends wall: the run goes up with the name and signature, then the
+  // wall reloads so the new card is on it.
+  async function putOnLegends(name, signature) {
+    const result = await signLegend({ runId: run.id, name, signature });
+    if (result.ok) {
+      setRun((r) => ({ ...r, legendSigned: true }));
+      if (!boards.player) {
+        writeLocalName(name);
+        setLocalName(name);
+      }
+      const wall = await fetchLegends();
+      if (wall.ok) setLegends(wall);
+    }
+    return result;
   }
 
   // A name on the board is changed on the server (3 times at most). A name
@@ -696,6 +736,42 @@ export default function App() {
         />
       );
     }
+  } else if (screen === 'legend' && run?.finishedAt && run.endReason === 'legend') {
+    const summary = progress ?? { score: 0 };
+    const pictures = run.order
+      .map((id) => run.questions[id]?.image)
+      .filter((img) => img && showsImage(img))
+      .map((img) => img.thumb ?? img.src);
+    body = (
+      <LegendFinale
+        lastLevel={plan.lastLevel}
+        score={summary.score}
+        durationMs={run.finishedAt - run.startedAt}
+        pictures={pictures}
+        name={boards.player?.name ?? localName}
+        legends={legends.legends}
+        signed={Boolean(run.legendSigned)}
+        onSign={putOnLegends}
+        onFeedback={() => setFeedbackFor(run.id)}
+        onContinue={() => enter('end')}
+      />
+    );
+  } else if (screen === 'profile') {
+    body = (
+      <ProfileScreen
+        name={boards.player?.name ?? localName}
+        badges={collection.badges}
+        badgeList={BADGE_LIST}
+        whysCount={collection.uncovered.length}
+        onRename={() => setRenaming(true)}
+        onHome={goHome}
+        onCollection={() => enter('whys')}
+        onSuggest={() => enter('suggest')}
+        onFeedback={() => setFeedbackFor(null)}
+      />
+    );
+  } else if (screen === 'suggest') {
+    body = <SuggestScreen placeholder={placeholderName()} onHome={goHome} />;
   } else if (screen === 'end' && run?.finishedAt) {
     body = (
       <EndScreen
@@ -709,6 +785,7 @@ export default function App() {
         onSign={signScore}
         onHome={goHome}
         onCollection={() => enter('whys')}
+        onFeedback={() => setFeedbackFor(run.id)}
         onExplain={(result) =>
           setExplaining({ questionId: result.id, wasCorrect: result.correct, chosenIndex: result.chosenIndex })
         }
@@ -722,6 +799,7 @@ export default function App() {
         questionsById={questionsById}
         total={bank.questions.length}
         badges={collection.badges}
+        badgeList={BADGE_LIST}
         labelFor={labelFor}
         starting={starting}
         onStart={startRun}
@@ -740,13 +818,15 @@ export default function App() {
       <HomeScreen
         resume={resume}
         boards={boards}
+        legends={legends}
         starting={starting}
         player={{ name: boards.player?.name ?? localName, changesLeft: boards.player ? boards.player.nameChangesLeft : null }}
         progress={{
           best,
           whys: collection.uncovered.length,
           streak,
-          badges: Object.keys(collection.badges).length,
+          badges: Object.keys(collection.badges).filter((id) => BADGE_LIST.some((b) => b.id === id)).length,
+          badgeTotal: BADGE_LIST.length,
         }}
         themes={bank.themes}
         chosenThemes={chosenThemes}
@@ -754,7 +834,9 @@ export default function App() {
         dailyFlagged={dailyFlagged}
         onStart={startRun}
         onResume={resumeRun}
-        onRename={rename}
+        onOpenProfile={() => enter('profile')}
+        onEditName={() => setRenaming(true)}
+        onSignLegend={run?.endReason === 'legend' && !run.legendSigned ? () => enter('legend') : null}
         onChooseThemes={() => setPickingTopics(true)}
         onFlagDaily={openFlag}
         onStreak={onStreak}
@@ -829,6 +911,15 @@ export default function App() {
           onClose={closeRedeem}
         />
       )}
+      {renaming && (
+        <RenameModal
+          name={boards.player?.name ?? localName}
+          changesLeft={boards.player ? boards.player.nameChangesLeft : null}
+          onSave={rename}
+          onClose={() => setRenaming(false)}
+        />
+      )}
+      {feedbackFor !== undefined && <FeedbackForm runId={feedbackFor} onClose={() => setFeedbackFor(undefined)} />}
       {pickingTopics && (
         <TopicPicker themes={bank.themes} chosen={chosenThemes} onSave={saveTopics} onClose={() => setPickingTopics(false)} />
       )}

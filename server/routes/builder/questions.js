@@ -1,6 +1,7 @@
 // Builder: every question, of either kind and any status, plus editing and review.
 //
 // GET                              -> { questions, openFlags, themes }
+//                                     each question carries stats = { asked, right }
 // POST  { data, status, kind }     -> create. Run questions: live, hidden or
 //                                     pending. Daily questions join the end of the queue.
 // PATCH { id, action, ... }        -> one of:
@@ -11,6 +12,8 @@
 //   move             { direction: up | down }     reorder the daily queue
 //   feedback         { text }                     add a review note to this question only
 //   resolveFeedback  { feedbackId, response }     mark a note as addressed
+//   setImage         { image }                    just the picture (bulk upload)
+//   setDifficulty    { difficulty }               just the tier (easy, medium, hard)
 //
 // Every edit keeps the version it replaced in question_history.
 import { randomUUID } from 'node:crypto';
@@ -18,7 +21,7 @@ import { sql } from '../../db.js';
 import { ensureSchema, toQuestion, asObject, loadThemes } from '../../schema.js';
 import { requireBuilder } from '../../auth.js';
 import { body, isText, methodNotAllowed, serverError } from '../../http.js';
-import { checkQuestion, normalizeQuestion, KINDS } from '../../../src/lib/questionRules.js';
+import { checkQuestion, normalizeQuestion, KINDS, DIFFICULTIES } from '../../../src/lib/questionRules.js';
 
 const CREATE_STATUSES = ['live', 'hidden', 'pending'];
 const TRANSITIONS = {
@@ -62,12 +65,17 @@ export default async function handler(req, res) {
     await ensureSchema();
 
     if (req.method === 'GET') {
-      const { rows } = await sql`SELECT * FROM questions ORDER BY kind, position NULLS LAST, created_at, id`;
+      const { rows } = await sql`
+        SELECT q.*, coalesce(s.asked, 0) AS stats_asked, coalesce(s.right_count, 0) AS stats_right
+        FROM questions q LEFT JOIN question_stats s ON s.question_id = q.id AND NOT s.is_test
+        ORDER BY q.kind, q.position NULLS LAST, q.created_at, q.id
+      `;
       const { rows: flagRows } = await sql`
         SELECT question_id, count(*)::int AS n FROM flags WHERE status = 'open' AND NOT is_test GROUP BY question_id
       `;
       const openFlags = Object.fromEntries(flagRows.map((r) => [r.question_id, r.n]));
-      return res.status(200).json({ questions: rows.map(toQuestion), openFlags, themes: await loadThemes() });
+      const questions = rows.map((r) => ({ ...toQuestion(r), stats: { asked: Number(r.stats_asked), right: Number(r.stats_right) } }));
+      return res.status(200).json({ questions, openFlags, themes: await loadThemes() });
     }
 
     if (req.method === 'POST') {
@@ -159,6 +167,23 @@ export default async function handler(req, res) {
         note.addressedAt = new Date().toISOString();
         if (isText(b.response, NOTE_MAX)) note.response = b.response.trim();
         await sql`UPDATE questions SET feedback = ${JSON.stringify(notes)}::jsonb, updated_at = now() WHERE id = ${current.id}`;
+        return res.status(200).json({ question: await load(current.id) });
+      }
+
+      // One part changes and the rest stays as it is, so these don't need the
+      // whole question or a conflict check. The old version is still kept.
+      if (b.action === 'setImage' || b.action === 'setDifficulty') {
+        let data;
+        if (b.action === 'setDifficulty') {
+          if (!DIFFICULTIES.includes(b.difficulty)) return res.status(400).json({ error: 'Pick easy, medium or hard.' });
+          data = { ...normalizeQuestion(current), difficulty: b.difficulty };
+        } else {
+          const image = normalizeQuestion({ image: b.image }).image;
+          if (!image) return res.status(400).json({ error: 'No picture sent.' });
+          data = { ...normalizeQuestion(current), image: { ...image, alt: image.alt || current.image?.alt || '' } };
+        }
+        await remember(current);
+        await sql`UPDATE questions SET data = ${JSON.stringify(data)}::jsonb, updated_at = now() WHERE id = ${current.id}`;
         return res.status(200).json({ question: await load(current.id) });
       }
 

@@ -7,7 +7,17 @@
     }
   },
   "rewrites": [
-    { "source": "/api/builder/:route", "destination": "/api/builder?route=:route" },
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    {
+      "source": "/api/builder/:route",
+      "destination": "/api/builder?route=:route"
+    },
+    {
+      "source": "/api/player/:route",
+      "destination": "/api/player?route=:route"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
   ]
 }

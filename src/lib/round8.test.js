@@ -67,6 +67,7 @@ test('questions need a known topic; daily questions need no hint', () => {
   const base = {
     id: 'daily-x',
     topic: 'ui',
+    difficulty: 'medium',
     tags: ['t'],
     themes: ['screens'],
     stem: 'Why is it so?',

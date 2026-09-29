@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import LegendsReview from './LegendsReview.jsx';
 
 // Names on the leaderboard. Links, handles and common swear words are
 // refused when a name is set; anything else unwanted can be hidden here,
@@ -68,6 +69,7 @@ export default function PlayersPanel({ api, notify }) {
           ))}
         </ul>
       )}
+      <LegendsReview api={api} notify={notify} />
     </section>
   );
 }

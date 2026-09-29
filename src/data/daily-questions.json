@@ -4,6 +4,7 @@
     {
       "id": "daily-liquid-glass",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why did Apple make the buttons and bars in iOS 26 look like see-through glass?",
       "options": [
         "Glass effects use less battery than solid colours",
@@ -34,6 +35,7 @@
     {
       "id": "daily-rapido-captains",
       "topic": "ui",
+      "difficulty": "hard",
       "stem": "While you wait for a ride, why does Rapido tell you how many captains turned your request down?",
       "options": [
         "Indian law makes ride apps publish every rejection",
@@ -66,6 +68,7 @@
     {
       "id": "daily-swiss-passport-uv",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why do the pages of Switzerland's 2022 passport reveal hidden contour lines and landmarks under ultraviolet light?",
       "options": [
         "They let border staff check it in dark booths",
@@ -97,6 +100,7 @@
     {
       "id": "daily-duolingo-energy",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "In 2025, why did Duolingo replace hearts, which you lost for every mistake, with energy?",
       "options": [
         "Players outside gaming didn't understand the idea of lives",
@@ -127,6 +131,7 @@
     {
       "id": "daily-google-icon-colours",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why did Google's 2026 icons for Docs, Drive and Meet stop using all four of its colours?",
       "options": [
         "Four colours cost too much to print on merchandise",
@@ -158,6 +163,7 @@
     {
       "id": "daily-ruler-zero",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why doesn't the 0 on most rulers sit right at the very end?",
       "options": [
         "It gives your thumb a place to hold the ruler still",
@@ -195,6 +201,7 @@
     {
       "id": "daily-heinz-red-border",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why did Heinz print a border in one exact shade of red around its ketchup labels?",
       "options": [
         "So the bottle is easier to find on a busy table",
@@ -227,6 +234,7 @@
     {
       "id": "daily-progress-head-start",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why do some sign-up progress bars start a little way full, before you've done anything?",
       "options": [
         "A sliver of colour shows people where the bar is",
@@ -264,6 +272,7 @@
     {
       "id": "daily-kadokeshi-corners",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why does the Kadokeshi eraser from Japan have 28 corners?",
       "options": [
         "Each corner is a different firmness for different pencils",
@@ -295,6 +304,7 @@
     {
       "id": "daily-lift-mirrors",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why do so many lifts have mirrors?",
       "options": [
         "Glass panels are lighter, so the lift can move faster",

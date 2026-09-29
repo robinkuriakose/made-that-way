@@ -9,7 +9,8 @@ import { levelMultiplier } from '../lib/scoring.js';
 // level earned (a life, a perfect level, badges), a clue for the level
 // ahead, and the choice to carry on or stop here.
 //
-// brk = { level, perfect, lifeGained, levelPoints, badges, tidbit }
+// brk = { level, perfect, lifeGained, levelPoints, badges, tidbit, milestone }
+// milestone: "bronze" or "silver" when this level is one (level-plan.json).
 export default function LevelBreak({ brk, score, lives, starting, onContinue, onFinish, onHome, onRestart }) {
   const next = brk.level + 1;
   const badgeLabel = (id) => BADGES.find((b) => b.id === id)?.label ?? id;
@@ -17,9 +18,15 @@ export default function LevelBreak({ brk, score, lives, starting, onContinue, on
     <div className="page">
       <TopBar play={{ level: brk.level, step: null, lives, score, combo: 1 }} onHome={onHome} onRestart={onRestart} />
       <main className="stage level-break">
-        <div className="level-hero">
+        <div className={`level-hero${brk.milestone ? " has-medal" : ""}`}>
           <Burst />
-          <p className="eyebrow">Level {brk.level} cleared</p>
+          {brk.milestone && (
+            <span className={`medal medal-${brk.milestone}`} aria-hidden="true">
+              <span className="medal-disc">{brk.level}</span>
+              <span className="medal-ribbon" />
+            </span>
+          )}
+          <p className="eyebrow">{brk.milestone ? `${badgeLabel(brk.milestone)}! Level ${brk.level} cleared` : `Level ${brk.level} cleared`}</p>
           <h1 className="level-title">On to level {next}</h1>
         </div>
 

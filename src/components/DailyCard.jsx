@@ -29,6 +29,9 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
   const [failed, setFailed] = useState(false);
   const [sending, setSending] = useState(false);
   const [sendError, setSendError] = useState(null);
+  // Answered on an earlier visit: shown as one line, open on request.
+  const [justAnswered, setJustAnswered] = useState(false);
+  const [expanded, setExpanded] = useState(false);
   const shownAt = useRef(Date.now());
 
   useEffect(() => {
@@ -74,6 +77,7 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
   async function choose(displayIndex) {
     if (sending || answer) return;
     setSending(true);
+    setJustAnswered(true);
     setSendError(null);
     try {
       setState(await answerDaily({ day, chosenIndex: toOriginal(order, displayIndex), timeMs: Date.now() - shownAt.current }));
@@ -82,6 +86,26 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
     } finally {
       setSending(false);
     }
+  }
+
+  if (answer && !justAnswered && !expanded) {
+    return (
+      <section className="daily daily-done" aria-label="Today's question">
+        <span className={`daily-done-mark${answer.correct ? ' is-right' : ''}`} aria-hidden="true">
+          {answer.correct ? '✓' : '·'}
+        </span>
+        <p className="daily-done-text">
+          <span className="daily-done-title">Today's question</span>
+          <span className="muted">
+            {answer.correct ? 'You got it' : 'Answered'}
+            {me?.streak > 0 ? ` · ${me.streak} day streak` : ''} · a new one tomorrow
+          </span>
+        </p>
+        <button type="button" className="text-button" onClick={() => setExpanded(true)}>
+          See it again
+        </button>
+      </section>
+    );
   }
 
   const chosen = answer ? toDisplay(order, answer.chosenIndex) : null;

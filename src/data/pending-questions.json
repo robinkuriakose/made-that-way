@@ -4,6 +4,7 @@
     {
       "id": "rupee-tactile-marks",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why do most Indian banknotes have a small raised shape printed near one edge?",
       "options": [
         "It proves the note is real when held up against a light",
@@ -38,6 +39,7 @@
     {
       "id": "pressure-cooker-whistle",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why does an Indian pressure cooker let out a loud whistle every so often?",
       "options": [
         "The weight on the lid lifts when pressure gets high, letting out steam",
@@ -72,6 +74,7 @@
     {
       "id": "safety-match",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why does a safety match only light when it's struck on the side of its box?",
       "options": [
         "The match head is too soft to make a spark on smoother surfaces",
@@ -105,6 +108,7 @@
     {
       "id": "plane-window-hole",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why is there a tiny hole in the middle pane of a plane's window?",
       "options": [
         "It lets fresh air circulate slowly into the cabin during the flight",
@@ -135,6 +139,7 @@
     {
       "id": "toothpaste-marks",
       "topic": "myth-buster",
+      "difficulty": "medium",
       "stem": "What do the coloured squares at the bottom end of a toothpaste tube mean?",
       "options": [
         "Green means natural ingredients and black means mostly chemicals",

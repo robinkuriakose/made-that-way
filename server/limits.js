@@ -17,6 +17,11 @@ export const LIMITS = {
   sign: { limit: 20, windowMs: HOUR },
   rename: { limit: 10, windowMs: HOUR },
   daily: { limit: 60, windowMs: HOUR },
+  profile: { limit: 120, windowMs: HOUR },
+  legend: { limit: 10, windowMs: HOUR },
+  feedback: { limit: 10, windowMs: HOUR },
+  suggest: { limit: 10, windowMs: HOUR },
+  suggestUpload: { limit: 10, windowMs: HOUR },
   loginFailure: { limit: 5, windowMs: 15 * MINUTE },
 };
 

@@ -3,6 +3,7 @@
     {
       "id": "keyboard-bumps",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why do the F and J keys have small raised bumps?",
       "options": [
         "They mark the keys that wear out first, so the plastic there is thicker",
@@ -39,6 +40,7 @@
     {
       "id": "golf-dimples",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why are golf balls covered in dimples?",
       "options": [
         "They hold extra backspin, so the ball rolls straighter and stops faster on the green",
@@ -74,6 +76,7 @@
     {
       "id": "estop-mushroom",
       "topic": "industrial",
+      "difficulty": "easy",
       "stem": "Why is a machine's emergency stop button shaped like a big mushroom?",
       "options": [
         "So it can't be pressed by accident when someone leans against the machine",
@@ -111,6 +114,7 @@
     {
       "id": "bic-cap-hole",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why does the cap of a BIC Cristal pen have a small hole in the top?",
       "options": [
         "It lets the cap breathe, so the ink in the tip doesn't dry out",
@@ -147,6 +151,7 @@
     {
       "id": "coin-edges",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why do some coins have ridges around the edge?",
       "options": [
         "So it's easy to see if someone has shaved precious metal off the edge",
@@ -182,6 +187,7 @@
     {
       "id": "aircraft-window-corners",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why do passenger planes have windows with rounded corners?",
       "options": [
         "Rounded panes are less likely to fog up or ice over at cruising altitude",
@@ -218,6 +224,7 @@
     {
       "id": "manhole-round",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why are most manhole covers round?",
       "options": [
         "A circle is the cheapest shape to cast in iron",
@@ -254,6 +261,7 @@
     {
       "id": "atm-braille",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why do drive-through cash machines have braille on the keypad?",
       "options": [
         "It's cheaper to make one keypad for every machine than two different ones",
@@ -291,6 +299,7 @@
     {
       "id": "paimio-back",
       "topic": "furniture",
+      "difficulty": "hard",
       "stem": "Why does the back of Alvar Aalto's Paimio chair sit at such a particular angle?",
       "options": [
         "To open up the sitter's chest and make breathing easier",
@@ -326,6 +335,7 @@
     {
       "id": "eames-plywood",
       "topic": "furniture",
+      "difficulty": "hard",
       "stem": "Why were Charles and Ray Eames already so good at moulding plywood by the mid 1940s?",
       "options": [
         "They had both trained as boat builders, bending wooden hulls by hand for years",
@@ -362,6 +372,7 @@
     {
       "id": "chandigarh-name",
       "topic": "furniture",
+      "difficulty": "hard",
       "stem": "Why is the teak and cane chair often credited to Pierre Jeanneret called the Chandigarh chair?",
       "options": [
         "It honours the local engineer who drew the very first version of the design",
@@ -398,6 +409,7 @@
     {
       "id": "hamburger-icon",
       "topic": "ui",
+      "difficulty": "hard",
       "stem": "Why is the menu icon drawn as three short horizontal lines?",
       "options": [
         "Three lines were the simplest shape that stayed sharp on early touchscreens",
@@ -434,6 +446,7 @@
     {
       "id": "cursor-tilt",
       "topic": "ui",
+      "difficulty": "hard",
       "stem": "Why does the mouse pointer lean to one side instead of pointing straight up?",
       "options": [
         "An upright arrow was too hard to see on early low resolution screens",
@@ -470,6 +483,7 @@
     {
       "id": "qwerty",
       "topic": "everyday-object",
+      "difficulty": "hard",
       "stem": "Why are the letters on a keyboard in the order Q W E R T Y?",
       "options": [
         "To slow typists down so the early typewriters wouldn't keep jamming",
@@ -505,6 +519,7 @@
     {
       "id": "barcelona-chair",
       "topic": "furniture",
+      "difficulty": "hard",
       "stem": "Why is Mies van der Rohe's Barcelona chair called that?",
       "options": [
         "It was made for Germany's pavilion at the 1929 Barcelona International Exposition",
@@ -540,6 +555,7 @@
     {
       "id": "wassily-steel",
       "topic": "furniture",
+      "difficulty": "hard",
       "stem": "Why did Marcel Breuer build his Wassily chair from bent steel tubes?",
       "options": [
         "Wood was hard to get in Germany in the 1920s",
@@ -575,6 +591,7 @@
     {
       "id": "jeans-rivets",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why do jeans have small copper rivets at the corners of the pockets?",
       "options": [
         "To show where the pattern pieces line up when the jeans are sewn",
@@ -605,6 +622,7 @@
     {
       "id": "shinkansen-nose",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why does Japan's 500 series bullet train have such a long, pointed nose?",
       "options": [
         "To cut through strong crosswinds on high bridges and exposed viaducts",
@@ -641,6 +659,7 @@
     {
       "id": "swiss-clock-pause",
       "topic": "industrial",
+      "difficulty": "hard",
       "stem": "Why does the red second hand on Swiss railway clocks pause at the top of each minute?",
       "options": [
         "It gives passengers a calm moment to check their watch before a train leaves",
@@ -676,6 +695,7 @@
     {
       "id": "coke-bottle",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why was the curvy Coca-Cola bottle designed in 1915?",
       "options": [
         "Its curves were modelled on the fashionable hourglass figure of the day",
@@ -712,6 +732,7 @@
     {
       "id": "jerrycan-handles",
       "topic": "industrial",
+      "difficulty": "easy",
       "stem": "Why does a jerrycan have three handles side by side?",
       "options": [
         "So one soldier can carry two cans at once, or pass them quickly down a line",
@@ -747,6 +768,7 @@
     {
       "id": "anglepoise-springs",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why does an Anglepoise lamp stay exactly where you leave it?",
       "options": [
         "Tight friction joints clamp each hinge so it can't slip out of place",
@@ -783,6 +805,7 @@
     {
       "id": "thonet-14",
       "topic": "furniture",
+      "difficulty": "medium",
       "stem": "Why was Thonet's No. 14 café chair made from just six pieces of bent wood and a few screws?",
       "options": [
         "Glued joints kept failing in the damp, steamy air of busy Viennese coffee houses",
@@ -818,6 +841,7 @@
     {
       "id": "tulip-pedestal",
       "topic": "furniture",
+      "difficulty": "hard",
       "stem": "Why does Eero Saarinen's Tulip chair stand on a single stem instead of four legs?",
       "options": [
         "One central base let the chair swivel smoothly at an office desk",
@@ -853,6 +877,7 @@
     {
       "id": "aeron-mesh",
       "topic": "furniture",
+      "difficulty": "easy",
       "stem": "Why does the Herman Miller Aeron chair use stretched mesh instead of foam cushions?",
       "options": [
         "Air and body heat pass through, so you stay cool for hours",
@@ -888,6 +913,7 @@
     {
       "id": "tube-map",
       "topic": "ui",
+      "difficulty": "easy",
       "stem": "Why does the London Underground map ignore the real distances between stations?",
       "options": [
         "The real distances between stations were kept secret for wartime security reasons",
@@ -924,6 +950,7 @@
     {
       "id": "phone-keypad",
       "topic": "ui",
+      "difficulty": "hard",
       "group": "keypads",
       "stem": "Calculators already put 7 8 9 on top. Why did phone keypads put 1 2 3 there instead?",
       "options": [
@@ -961,6 +988,7 @@
     {
       "id": "calculator-keypad",
       "topic": "ui",
+      "difficulty": "hard",
       "group": "keypads",
       "stem": "Why do calculators put 7 8 9 on the top row and 1 2 3 at the bottom?",
       "options": [
@@ -998,6 +1026,7 @@
     {
       "id": "phone-zero",
       "topic": "ui",
+      "difficulty": "medium",
       "group": "rotary",
       "stem": "Why does 0 come after 9 on a phone keypad, instead of before 1?",
       "options": [
@@ -1035,6 +1064,7 @@
     {
       "id": "area-codes",
       "topic": "everyday-object",
+      "difficulty": "hard",
       "group": "rotary",
       "stem": "Why did New York, Los Angeles and Chicago get the area codes 212, 213 and 312?",
       "options": [
@@ -1067,6 +1097,7 @@
     {
       "id": "mac-menu-bar",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why does the Mac keep its menu bar along the very top edge of the screen?",
       "options": [
         "It keeps menus out of the way of the documents you're working on",
@@ -1103,6 +1134,7 @@
     {
       "id": "context-menu",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why does a right-click menu pop up right where your pointer is?",
       "options": [
         "So the menu covers the thing you clicked and keeps your focus there",
@@ -1139,6 +1171,7 @@
     {
       "id": "command-key-symbol",
       "topic": "ui",
+      "difficulty": "hard",
       "stem": "Why did Apple stop using its apple logo on the Mac's Command key?",
       "options": [
         "Steve Jobs felt the logo was being overused, cluttering menus all over the screen",
@@ -1176,6 +1209,7 @@
     {
       "id": "slide-to-unlock",
       "topic": "ui",
+      "difficulty": "easy",
       "stem": "Why did the first iPhone make you slide a bar across the screen to unlock it?",
       "options": [
         "A slide was easier for new owners to learn than typing a passcode",
@@ -1212,6 +1246,7 @@
     {
       "id": "rubber-band-scroll",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why does a list on an iPhone stretch and bounce back when you scroll past the end?",
       "options": [
         "It shows you've hit the end, and that the phone hasn't frozen",
@@ -1248,6 +1283,7 @@
     {
       "id": "keyboard-hidden-targets",
       "topic": "ui",
+      "difficulty": "hard",
       "stem": "Why could people type on the first iPhone when its keys were narrower than a fingertip?",
       "options": [
         "It read the pressure of each tap to work out which key you meant",
@@ -1285,6 +1321,7 @@
     {
       "id": "safari-bottom-bar",
       "topic": "ui",
+      "difficulty": "easy",
       "stem": "Why did Apple move Safari's address bar to the bottom of the iPhone screen in 2021?",
       "options": [
         "To make room for the notch and camera at the top of the screen",
@@ -1315,6 +1352,7 @@
     {
       "id": "button-verbs",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why do well designed pop-up messages label the button 'Delete' or 'Save' instead of 'OK'?",
       "options": [
         "Longer words give a bigger button that's easier to hit with a mouse",
@@ -1347,6 +1385,7 @@
     {
       "id": "menu-ellipsis",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why do some menu commands end in three dots, like Save As…?",
       "options": [
         "The full name of the command was too long to fit, so it was cut short",
@@ -1383,6 +1422,7 @@
     {
       "id": "ctrl-alt-del",
       "topic": "ui",
+      "difficulty": "easy",
       "stem": "Why did the IBM PC make you press Ctrl, Alt and Delete together to restart it?",
       "options": [
         "Those were the three keys least likely to be worn out by daily typing",
@@ -1415,6 +1455,7 @@
     {
       "id": "fuel-door-arrow",
       "topic": "ui",
+      "difficulty": "easy",
       "stem": "Why is there a small arrow next to the fuel pump symbol on most car dashboards?",
       "options": [
         "It shows whether the tank is filling or emptying while the engine runs",
@@ -1451,6 +1492,7 @@
     {
       "id": "qr-finder",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why do QR codes have three big squares in their corners?",
       "options": [
         "They hold the web address, and the small dots between them are padding",
@@ -1487,6 +1529,7 @@
     {
       "id": "google-blue",
       "topic": "ui",
+      "difficulty": "hard",
       "stem": "Why are the links in Google's ads that exact shade of blue?",
       "options": [
         "It tested 41 shades on real users and kept the one clicked most",
@@ -1519,6 +1562,7 @@
     {
       "id": "plane-ashtray",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why do planes still have ashtrays by the toilet door when smoking has been banned for decades?",
       "options": [
         "The older aircraft designs were simply never updated to take the ashtrays out",
@@ -1551,6 +1595,7 @@
     {
       "id": "school-bus-yellow",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why are school buses in the US painted yellow?",
       "options": [
         "Yellow with black lettering was easiest to see in dim morning and evening light",
@@ -1584,6 +1629,7 @@
     {
       "id": "stop-sign-octagon",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why are stop signs in the US eight sided?",
       "options": [
         "Eight sides was the easiest shape to cut from a square sheet of steel",
@@ -1623,6 +1669,7 @@
     {
       "id": "golden-gate-orange",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why is the Golden Gate Bridge painted orange?",
       "options": [
         "The steel's orange primer looked so good that it was simply never painted over",
@@ -1653,6 +1700,7 @@
     {
       "id": "apple-logo-bite",
       "topic": "myth-buster",
+      "difficulty": "medium",
       "stem": "Why does the Apple logo have a bite taken out of it?",
       "options": [
         "It's a quiet tribute to Alan Turing, who died beside a bitten apple in 1954",
@@ -1683,6 +1731,7 @@
     {
       "id": "escalator-brushes",
       "topic": "myth-buster",
+      "difficulty": "easy",
       "stem": "Why do escalators have brushes running along the sides of the steps?",
       "options": [
         "To give people's shoes a quick brush and clean as they ride up",
@@ -1718,6 +1767,7 @@
     {
       "id": "crosswalk-buttons",
       "topic": "myth-buster",
+      "difficulty": "medium",
       "stem": "Why do so many pedestrian crossing buttons in big cities seem to do nothing?",
       "options": [
         "They work, but only after a set number of people have pressed them",
@@ -1750,6 +1800,7 @@
     {
       "id": "stay-on-tab",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why did drink cans switch from pull off rings to tabs that stay attached?",
       "options": [
         "Loose tabs were littering beaches and parks, and some people swallowed them",
@@ -1781,6 +1832,7 @@
     {
       "id": "power-symbol",
       "topic": "ui",
+      "difficulty": "medium",
       "stem": "Why is the power symbol a line and a circle?",
       "options": [
         "It combines the 1 for on and the 0 for off marked on switches",
@@ -1812,6 +1864,7 @@
     {
       "id": "winglets",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why do the wing tips of many airliners turn upward?",
       "options": [
         "They weaken the swirl of air off the wing tip, which saves fuel",
@@ -1847,6 +1900,7 @@
     {
       "id": "jaali-screens",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why do many old buildings in Rajasthan have windows filled with carved stone lattice, called jaali?",
       "options": [
         "It was cheaper to carve stone than to import sheets of glass",
@@ -1880,6 +1934,7 @@
     {
       "id": "fan-regulator-heat",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why did the old, bulky ceiling fan regulators in Indian homes get warm to the touch?",
       "options": [
         "The fan's motor sent its own heat back down along the wire",
@@ -1912,6 +1967,7 @@
     {
       "id": "auto-rickshaw-three-wheels",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why does an auto-rickshaw have three wheels and handlebars instead of a steering wheel?",
       "options": [
         "Three wheels were required by old Indian taxi laws for small vehicles",
@@ -1945,6 +2001,7 @@
     {
       "id": "matka-cooling",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why does water stored in a clay matka stay cooler than the room around it?",
       "options": [
         "Clay naturally holds on to the cold from the night before",
@@ -1978,6 +2035,7 @@
     {
       "id": "middle-berth",
       "topic": "furniture",
+      "difficulty": "easy",
       "stem": "On Indian Railways sleeper coaches, why does the middle berth fold flat against the wall?",
       "options": [
         "So cleaners can sweep under the lower berth between journeys",
@@ -2011,6 +2069,7 @@
     {
       "id": "indian-plug-earth-pin",
       "topic": "everyday-object",
+      "difficulty": "medium",
       "stem": "Why is the top pin on an Indian three-pin plug longer and thicker than the other two?",
       "options": [
         "It carries most of the power, so it needs more metal to stay cool",
@@ -2044,6 +2103,7 @@
     {
       "id": "lpg-smell",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why does the gas from an LPG cooking cylinder smell so strongly of rotten cabbage?",
       "options": [
         "The gas starts to break down as it's squeezed into the cylinder",
@@ -2078,6 +2138,7 @@
     {
       "id": "chips-packet-air",
       "topic": "industrial",
+      "difficulty": "medium",
       "stem": "Why is a packet of chips so puffed up with air?",
       "options": [
         "It's filled with nitrogen, which keeps chips fresh and stops them breaking",
@@ -2109,6 +2170,7 @@
     {
       "id": "hexagonal-pencil",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why are most wooden pencils made with six flat sides instead of being round?",
       "options": [
         "Six sides make the pencil much harder to snap in half",
@@ -2140,6 +2202,7 @@
     {
       "id": "padlock-hole",
       "topic": "everyday-object",
+      "difficulty": "easy",
       "stem": "Why do many padlocks have a tiny hole in the bottom of the body?",
       "options": [
         "It lets rainwater drain out so the lock doesn't rust or freeze",
@@ -2171,6 +2234,7 @@
     {
       "id": "convex-side-mirror",
       "topic": "industrial",
+      "difficulty": "easy",
       "stem": "Why do some car side mirrors warn that objects are closer than they appear?",
       "options": [
         "The mirror bulges outward to show a wider view, which shrinks things",

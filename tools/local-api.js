@@ -91,6 +91,7 @@ function resolveRoute(route) {
   if (existsSync(direct)) return { file: direct, query: {} };
   const [first, ...rest] = route.split('/');
   if (first === 'builder' && rest.length === 1) return { file: path.join(ROOT, 'api', 'builder.js'), query: { route: rest[0] } };
+  if (first === 'player' && rest.length === 1) return { file: path.join(ROOT, 'api', 'player.js'), query: { route: rest[0] } };
   return null;
 }
 

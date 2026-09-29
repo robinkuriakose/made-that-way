@@ -8,6 +8,7 @@ function goodQuestion(overrides = {}) {
   return {
     id: 'manhole-round',
     topic: 'everyday-object',
+    difficulty: 'easy',
     tags: ['geometry'],
     themes: ['everyday'],
     stem: 'Why are most manhole covers round?',

@@ -8,6 +8,8 @@ import FlagsPanel from './FlagsPanel.jsx';
 import DailyPanel from './DailyPanel.jsx';
 import PlayersPanel from './PlayersPanel.jsx';
 import Analytics from './Analytics.jsx';
+import SuggestionsPanel, { suggestionToPrefill } from './SuggestionsPanel.jsx';
+import FeedbackPanel from './FeedbackPanel.jsx';
 import { bundledThemes } from '../lib/themes.js';
 import { AuthError, call, clearToken, readToken } from './api.js';
 
@@ -16,7 +18,9 @@ const TABS = [
   { id: 'questions', label: 'Questions' },
   { id: 'daily', label: 'Daily' },
   { id: 'flags', label: 'Flags' },
+  { id: 'suggestions', label: 'Suggestions' },
   { id: 'players', label: 'Players' },
+  { id: 'feedback', label: 'Feedback' },
   { id: 'analytics', label: 'Analytics' },
 ];
 
@@ -27,7 +31,7 @@ export default function BuilderApp() {
   const [openFlags, setOpenFlags] = useState({});
   const [themes, setThemes] = useState(bundledThemes);
   const [flags, setFlags] = useState(null);
-  const [editing, setEditing] = useState(null); // a question, or { isNew: true, kind }
+  const [editing, setEditing] = useState(null); // a question, or { isNew: true, kind, prefill?, suggestionId? }
   const [notice, setNotice] = useState(null);
   const [loadError, setLoadError] = useState(null);
 
@@ -130,8 +134,10 @@ export default function BuilderApp() {
   if (editing) {
     content = (
       <QuestionForm
-        key={editing.isNew ? `new-${editing.kind}` : editing.id}
+        key={editing.isNew ? `new-${editing.kind}-${editing.suggestionId ?? ''}` : editing.id}
         initial={editing.isNew ? null : editing}
+        prefill={editing.prefill ?? null}
+        draftFrom={editing.suggestionId ?? null}
         kind={editing.kind ?? 'run'}
         themes={themes}
         existingIds={new Set((questions ?? []).map((q) => q.id))}
@@ -139,6 +145,10 @@ export default function BuilderApp() {
         onCancel={() => setEditing(null)}
         onSaved={(q, message) => {
           replaceQuestion(q);
+          // A question made from a player's suggestion marks it as used.
+          if (editing.suggestionId) {
+            api('/api/builder/suggestions', { method: 'PATCH', body: { id: editing.suggestionId, action: 'accept', questionId: q.id } }).catch(() => {});
+          }
           setEditing(null);
           setNotice(message);
         }}
@@ -155,6 +165,7 @@ export default function BuilderApp() {
         themes={themes}
         openFlags={openFlags}
         act={act}
+        api={api}
         onEdit={setEditing}
         onAdd={() => setEditing({ isNew: true, kind: 'run' })}
       />
@@ -170,6 +181,16 @@ export default function BuilderApp() {
         onAdd={() => setEditing({ isNew: true, kind: 'daily' })}
       />
     );
+  } else if (tab === 'suggestions') {
+    content = (
+      <SuggestionsPanel
+        api={api}
+        notify={setNotice}
+        onMakeQuestion={(s) => setEditing({ isNew: true, kind: 'run', prefill: suggestionToPrefill(s), suggestionId: s.id })}
+      />
+    );
+  } else if (tab === 'feedback') {
+    content = <FeedbackPanel api={api} />;
   } else if (tab === 'players') {
     content = <PlayersPanel api={api} notify={setNotice} />;
   } else if (tab === 'flags') {

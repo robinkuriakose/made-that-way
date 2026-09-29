@@ -2,18 +2,20 @@
 
 The one file a new session needs to pick up the work. Keep it short and current; the detail lives in the files it points to.
 
-Last updated 27 September 2026.
+Last updated 30 September 2026.
 
 ## The product
 
-**Made That Way**: a quiz that teaches why everyday things are designed the way they are. The home headline: "You've seen it a thousand times. Ever wondered why?" Every question should be an aha question (`docs/question-strategy.md`). The owner wants players to question design themselves, see the flaw, know the fix, and build better in the age of AI.
+**Made That Way**: a quiz that teaches why everyday things are designed the way they are. The home headline: "You've seen it a thousand times. Let's ask why." Every question should be an aha question (`docs/question-strategy.md`). The owner wants players to question design themselves, see the flaw, know the fix, and build better in the age of AI.
 - **Live:** https://madethatway.vercel.app
 - **Builder:** `/builder`, behind a password
 - **Code:** https://github.com/robinkuriakose/made-that-way (`main`). Every push redeploys.
 - **Stack:** React and Vite; Vercel functions (`api/` thin, logic in `server/`); Neon Postgres; Vercel Blob for images.
 
-**Today (V2):**
-- **Runs:** levels of 5 picture questions, no clock, 3 lives. A wrong answer costs a life; a right redeem wins it back; each level cleared adds one (5 at most). Points: 10 a right answer, times the level (x1 to x3) and the combo (x1.5 from 3 in a row, x2 from 5); a hint halves them. Easier questions first, from real answer rates.
+**Today (V2 plus round 12):**
+- **Runs:** levels of 5 picture questions, no clock, 3 lives. A wrong answer costs a life; a right redeem wins it back; each level cleared adds one (5 at most). Points: 10 a right answer, times the level (x1 to x3) and the combo (x1.5 from 3 in a row, x2 from 5); a hint halves them.
+- **Difficulty:** every question is tagged easy, medium or hard (never shown). Each level's mix comes from `src/data/level-plan.json`; the last level is 6 for now (15 once the bank allows). Clearing it is the Legend finale: a trophy, then signing the Legends wall by drawing, then a feedback form.
+- **Players:** a random starting name ("Call me fuzzyheron42 ✎"), a profile with their stats, and a way to suggest questions.
 - **Between levels:** a break with the running score, what was earned, and a clue for a question in the next level. The player can stop there and save.
 - **After each answer:** the short reason, "Read more", and how many players get it right.
 - **Rewards:** whys collection, 4 badges, a private best.
@@ -44,7 +46,8 @@ Last updated 27 September 2026.
 
 ## Current state (30 September)
 
-- **Round 12 in discussion:** difficulty tags and a 15-level plan, a level 15 finale, shorter copy, a visual home page, names and a profile page, builder changes, 20 more questions. Proposed tags are in `docs/question-strategy.md`, the pictures wanted in `images/IMAGES-NEEDED.md`. **The daily queue runs out after 2 October.**
+- **Round 12 built:** difficulty tiers and the level plan, the Legend finale at level 6, the feedback form, suggested questions, the new home page and copy, names and profiles, and the builder's tier tabs, bulk pictures, Suggestions and Feedback tabs. **Still to do:** logo sketches, shorter wording for every question (for the owner to approve in the builder), and 20 new questions (five for the daily queue, which runs out after 2 October). Status by item: `docs/brief-map.md`.
+- **The bank is short of easy pictures:** reaching level 6 needs 18 easy questions with pictures; about 10 have one. The builder's Questions tab shows this per tier. Pictures wanted: `images/IMAGES-NEEDED.md`.
 
 - **Round 11:** the home picture strip is rebuilt: swipe by hand, tap a picture to open it big with its question, "Play this one" starts a run with it first. It sits under today's question.
 

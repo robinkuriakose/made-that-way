@@ -3,15 +3,18 @@
 //
 // A run isn't picked up front any more. Each level is built when the one
 // before it is cleared, from the questions the run hasn't used yet:
-//   - questions this device hasn't seen come before ones it has, and the
-//     player's chosen topics before the rest;
-//   - within that, easier ones first, so level 1 builds momentum and later
-//     levels get harder by themselves as the easy ones are used up;
+//   - the level plan (src/data/level-plan.json) says how many easy, medium
+//     and hard questions each level has; a tier that runs out borrows from
+//     the nearest one;
+//   - within a tier, questions this device hasn't seen come before ones it
+//     has, the player's chosen topics before the rest, then the ones players
+//     get right most often;
 //   - near duplicates (the same `group`) never share a run;
 //   - neighbours differ in topic, and a level has at most one myth buster.
 // Each level after the first can carry a tidbit: a clue shown at the level
 // break, for a question in the level about to start.
 import { LEVEL_SIZE } from './scoring.js';
+import { DIFFICULTIES } from './questionRules.js';
 
 export const MYTH_TOPIC = 'myth-buster';
 // How many of the best-placed questions a level is drawn from, so levels
@@ -45,6 +48,19 @@ function shuffle(list, random) {
   return a;
 }
 
+// A question with no difficulty yet counts as medium.
+export const tierOf = (q) => (DIFFICULTIES.includes(q?.difficulty) ? q.difficulty : 'medium');
+
+// How many easy, medium and hard questions a level has, from the plan.
+export function mixFor(plan, level) {
+  const bands = plan?.bands ?? [];
+  const band = bands.find((b) => level >= b.from && level <= b.to) ?? bands.at(-1);
+  return band ? { easy: band.easy ?? 0, medium: band.medium ?? 0, hard: band.hard ?? 0 } : null;
+}
+
+// Where a tier looks when it runs out: the nearest tier first.
+const BORROW = { easy: ['medium', 'hard'], medium: ['easy', 'hard'], hard: ['medium', 'easy'] };
+
 const inThemes = (q, themeIds) => !themeIds || (q.themes ?? []).some((t) => themeIds.includes(t));
 
 // The questions still open to this run: not used, not a near duplicate of
@@ -66,21 +82,32 @@ function arrangeByTopic(chosen, random, after = null) {
   return shuffle(chosen, random);
 }
 
-// Picks up to `count` from a ranked list: distinct groups, one myth buster at
-// most, and no more than two from one topic while that's possible, so
-// neighbours can always differ. `taken` are questions already in the level
-// (a picked first question).
-function takeLevel(ranked, count, taken = []) {
+// Fills a level slot by slot. Each slot names a tier; it takes the first
+// question of that tier (in the order given) that fits, and borrows from the
+// nearest tier when its own has nothing left. Fits means: a group not already
+// in the level, one myth buster at most, and no more than two from one topic
+// while that's possible, so neighbours can always differ. `taken` are
+// questions already in the level (a picked first question).
+function fillSlots(slots, byTier, taken = []) {
   const attempt = (perTopic) => {
     const out = [];
+    const used = new Set(taken.map((q) => q.id));
     const groups = new Set(taken.map((q) => q.group).filter(Boolean));
     const topics = new Map();
     for (const q of taken) topics.set(q.topic, (topics.get(q.topic) ?? 0) + 1);
-    for (const q of ranked) {
-      if (out.length === count) break;
-      if (q.group && groups.has(q.group)) continue;
-      if (q.topic === MYTH_TOPIC && topics.get(MYTH_TOPIC)) continue;
-      if ((topics.get(q.topic) ?? 0) >= perTopic) continue;
+    const fits = (q) =>
+      !used.has(q.id) &&
+      !(q.group && groups.has(q.group)) &&
+      !(q.topic === MYTH_TOPIC && topics.get(MYTH_TOPIC)) &&
+      (topics.get(q.topic) ?? 0) < perTopic;
+    for (const slot of slots) {
+      let q = null;
+      for (const t of [slot, ...BORROW[slot]]) {
+        q = (byTier[t] ?? []).find(fits);
+        if (q) break;
+      }
+      if (!q) continue;
+      used.add(q.id);
       if (q.group) groups.add(q.group);
       topics.set(q.topic, (topics.get(q.topic) ?? 0) + 1);
       out.push(q);
@@ -88,19 +115,22 @@ function takeLevel(ranked, count, taken = []) {
     return out;
   };
   const capped = attempt(2);
-  return capped.length === count ? capped : attempt(Infinity);
+  return capped.length === slots.length ? capped : attempt(Infinity);
 }
 
 // Builds the next level. questions: the pool the run plays from (in the
 // quiz, questions with a picture). usedIds: every question the run has
 // asked, queued or used as a redeem. tidbits: [{ id, tidbitFor, text }].
 // firstId: a question the player picked to start with (from the pictures on
-// the home screen); it opens the level and the other four are built round it.
+// the home screen); it opens the level and takes one slot of its own tier.
+// mix: { easy, medium, hard } for this level (mixFor); without one, the level
+// is simply the best-placed questions, whatever their tier.
 // Returns { ids, tidbitId }; ids is empty when nothing is left.
 export function buildLevel({
   questions,
   usedIds: usedBefore = [],
   firstId = null,
+  mix = null,
   tidbits = [],
   usedTidbitIds = [],
   withTidbit = false,
@@ -110,7 +140,6 @@ export function buildLevel({
 }) {
   const first = firstId ? openQuestions(questions, usedBefore).find((q) => q.id === firstId) ?? null : null;
   const usedIds = first ? [...usedBefore, first.id] : usedBefore;
-  const size = first ? LEVEL_SIZE - 1 : LEVEL_SIZE;
   const taken = first ? [first] : [];
   const open = openQuestions(questions, usedIds);
   // Tiers first (unseen in the chosen topics, unseen elsewhere, seen in the
@@ -123,8 +152,27 @@ export function buildLevel({
     .sort((a, b) => b.p - a.p)
     .map((x) => x.q);
 
-  let chosen = takeLevel(shuffle(ranked.slice(0, WINDOW), random), size, taken);
-  if (chosen.length < size) chosen = takeLevel(ranked, size, taken);
+  // The slots to fill, one tier each. Hard and medium are placed first, so
+  // the scarcer tiers get their pick before easy fills the rest.
+  let slots = mix
+    ? ['hard', 'medium', 'easy'].flatMap((t) => Array.from({ length: mix[t] ?? 0 }, () => t))
+    : Array.from({ length: LEVEL_SIZE }, () => 'medium');
+  if (first) {
+    const own = mix ? slots.indexOf(tierOf(first)) : 0;
+    const drop = own >= 0 ? own : slots.length - 1;
+    slots = slots.filter((_, i) => i !== drop);
+  }
+  // Each tier's questions in order: a shuffled window of the best placed, so
+  // levels vary from run to run, then the rest. Without a mix, every
+  // question sits in one tier.
+  const orderOf = (list, count) => {
+    const w = Math.max(WINDOW, count * 2);
+    return [...shuffle(list.slice(0, w), random), ...list.slice(w)];
+  };
+  const byTier = mix
+    ? Object.fromEntries(DIFFICULTIES.map((t) => [t, orderOf(ranked.filter((q) => tierOf(q) === t), slots.filter((x) => x === t).length)]))
+    : { medium: orderOf(ranked, slots.length) };
+  let chosen = fillSlots(slots, byTier, taken);
 
   let tidbitId = null;
   if (withTidbit && chosen.length) {
@@ -136,15 +184,17 @@ export function buildLevel({
       // Swap in the best-placed question that has a clue, in place of the
       // last one picked, as long as it doesn't clash with the level.
       const chosenIds = new Set(chosen.map((q) => q.id));
-      const swap = ranked.find(
-        (q) =>
-          !chosenIds.has(q.id) &&
-          unused.some((t) => t.tidbitFor === q.id) &&
-          !(q.group && chosen.slice(0, -1).some((c) => c.group === q.group)) &&
-          !(q.topic === MYTH_TOPIC && chosen.slice(0, -1).some((c) => c.topic === MYTH_TOPIC)),
-      );
+      // It replaces the last question of its own tier, so the mix holds.
+      const lastOfTier = (q) => (mix ? chosen.map(tierOf).lastIndexOf(tierOf(q)) : chosen.length - 1);
+      const swap = ranked.find((q) => {
+        const at = lastOfTier(q);
+        if (chosenIds.has(q.id) || at < 0 || !unused.some((t) => t.tidbitFor === q.id)) return false;
+        const rest = [...taken, ...chosen.filter((_, i) => i !== at)];
+        return !(q.group && rest.some((c) => c.group === q.group)) && !(q.topic === MYTH_TOPIC && rest.some((c) => c.topic === MYTH_TOPIC));
+      });
       if (swap) {
-        chosen = [...chosen.slice(0, -1), swap];
+        const at = lastOfTier(swap);
+        chosen = chosen.map((q, i) => (i === at ? swap : q));
         tidbitId = unused.find((t) => t.tidbitFor === swap.id).id;
       }
     }
@@ -170,4 +220,33 @@ export function replacementFor({ replacedId, usedIds, questions, themeIds = null
     s: (inThemes(q, themeIds) ? 0 : 4) + (replaced && q.topic === replaced.topic ? 0 : 2) + (seen?.has(q.id) ? 1 : 0) - easeOf(q) - random() * 0.01,
   }));
   return scored.reduce((best, c) => (c.s < best.s ? c : best)).id;
+}
+
+// How many easy, medium and hard questions (with pictures) a run needs to
+// get through every level up to lastLevel without repeats.
+export function planNeeds(plan, lastLevel = plan?.lastLevel ?? 1) {
+  const need = { easy: 0, medium: 0, hard: 0 };
+  for (let level = 1; level <= lastLevel; level++) {
+    const mix = mixFor(plan, level);
+    if (mix) for (const t of DIFFICULTIES) need[t] += mix[t];
+  }
+  return need;
+}
+
+// Answers needed before a question's tag is worth second-guessing.
+export const MIN_ASKED_TO_FLAG = 10;
+
+// Flags a question whose answers don't match its tag, for the owner to
+// look at. Never changes anything by itself. Returns a short sentence, or
+// null when it plays as tagged (or hasn't enough answers yet).
+export function tierMismatch(question) {
+  const asked = question?.stats?.asked ?? 0;
+  if (asked < MIN_ASKED_TO_FLAG || !DIFFICULTIES.includes(question?.difficulty)) return null;
+  const pct = Math.round(((question.stats.right ?? 0) / asked) * 100);
+  const d = question.difficulty;
+  if (d === 'easy' && pct < 50) return `Plays harder than easy: ${pct}% right`;
+  if (d === 'medium' && pct < 30) return `Plays harder than medium: ${pct}% right`;
+  if (d === 'medium' && pct > 85) return `Plays easier than medium: ${pct}% right`;
+  if (d === 'hard' && pct > 75) return `Plays easier than hard: ${pct}% right`;
+  return null;
 }

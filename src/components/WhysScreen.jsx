@@ -1,11 +1,10 @@
 import TopBar from './TopBar.jsx';
 import { showsImage } from './ImageFrame.jsx';
-import { BADGES } from '../lib/rewards.js';
 
 // Everything this player has uncovered: the badges, then every question whose
 // reason they've seen, newest first. Tapping one opens its reasoning again.
 // It fills up across runs, so there's always something that grows.
-export default function WhysScreen({ uncovered, questionsById, total, badges, labelFor, onExplain, onHome, onStart, starting }) {
+export default function WhysScreen({ uncovered, questionsById, total, badges, badgeList, labelFor, onExplain, onHome, onStart, starting }) {
   const found = uncovered
     .map((id) => questionsById[id])
     .filter(Boolean)
@@ -31,7 +30,7 @@ export default function WhysScreen({ uncovered, questionsById, total, badges, la
             Badges
           </p>
           <ul className="badges">
-            {BADGES.map((b) => (
+            {badgeList.map((b) => (
               <li key={b.id} className={`badge${badges[b.id] ? ' is-earned' : ''}`}>
                 <span className="badge-mark" aria-hidden="true" />
                 <span className="badge-label">{b.label}</span>
