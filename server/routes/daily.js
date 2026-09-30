@@ -29,15 +29,17 @@ async function scheduled(day) {
   return rows[0] ?? null;
 }
 
-// Gives the day its question if it doesn't have one yet. Two days asking at
-// once can race for the same queued question; the loser simply tries again.
+// Gives the day its question if it doesn't have one yet: the first in the
+// queue that has a picture (one without waits its turn until it gets one).
+// Two days asking at once can race for the same queued question; the loser
+// simply tries again.
 async function questionFor(day) {
   let row = await scheduled(day);
   for (let attempt = 0; !row && attempt < 3; attempt++) {
     const { rows } = await sql`
       INSERT INTO daily_schedule (day, question_id)
       SELECT ${day}::date, id FROM questions
-      WHERE kind = 'daily' AND status = 'queued'
+      WHERE kind = 'daily' AND status = 'queued' AND coalesce(data->'image'->>'src', '') <> ''
       ORDER BY position NULLS LAST, created_at, id
       LIMIT 1
       ON CONFLICT DO NOTHING
@@ -46,8 +48,10 @@ async function questionFor(day) {
     if (rows[0]) await sql`UPDATE questions SET status = 'used' WHERE id = ${rows[0].question_id}`;
     row = await scheduled(day);
     if (!row && !rows[0]) {
-      const { rows: left } = await sql`SELECT 1 FROM questions WHERE kind = 'daily' AND status = 'queued' LIMIT 1`;
-      if (!left.length) break; // The queue is empty: no question today.
+      const { rows: left } = await sql`
+        SELECT 1 FROM questions WHERE kind = 'daily' AND status = 'queued' AND coalesce(data->'image'->>'src', '') <> '' LIMIT 1
+      `;
+      if (!left.length) break; // Nothing ready (the queue is empty, or nothing has a picture): no question today.
     }
   }
   return row;

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import QuestionTools from './QuestionTools.jsx';
 import QuestionPreview from './QuestionPreview.jsx';
 
 // Below this many queued questions, the tab warns you to add more.
@@ -69,6 +70,7 @@ export default function DailyPanel({ questions, api, act, onEdit, onAdd, notify 
                 <span className="daily-queue-pos">{i === 0 ? 'Next' : `${i + 1}`}</span>
                 <p className="qcard-stem">{q.stem}</p>
               </div>
+              <QuestionTools q={q} api={api} act={act} />
               <details className="daily-preview">
                 <summary>Preview</summary>
                 <QuestionPreview q={q} />

@@ -1,5 +1,5 @@
 {
-  "batch": "2026-09-30: round 12, fifteen aha questions (earlier batch: 2026-09-19, Indian and everyday objects)",
+  "batch": "2026-10-01: fifteen aha questions without pictures yet (earlier batches: 30 September, 19 September)",
   "questions": [
     {
       "id": "rupee-tactile-marks",
@@ -34,7 +34,12 @@
         "everyday",
         "india",
         "symbols"
-      ]
+      ],
+      "image": {
+        "src": "/images/rupee-tactile-marks.webp",
+        "thumb": "/images/thumbs/rupee-tactile-marks.webp",
+        "alt": "The ₹100, ₹200 and ₹500 notes, with the raised lines and marks near their edges shown close up."
+      }
     },
     {
       "id": "pressure-cooker-whistle",
@@ -69,7 +74,12 @@
         "everyday",
         "india",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/pressure-cooker-whistle.webp",
+        "thumb": "/images/thumbs/pressure-cooker-whistle.webp",
+        "alt": "An Indian pressure cooker on a gas flame, the whistle weight sitting on the vent in its lid."
+      }
     },
     {
       "id": "safety-match",
@@ -103,7 +113,12 @@
       "themes": [
         "everyday",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/safety-match.webp",
+        "thumb": "/images/thumbs/safety-match.webp",
+        "alt": "A match head held against the dark striking strip on the side of a matchbox."
+      }
     },
     {
       "id": "plane-window-hole",
@@ -134,7 +149,12 @@
       ],
       "themes": [
         "travel"
-      ]
+      ],
+      "image": {
+        "src": "/images/plane-window-hole.webp",
+        "thumb": "/images/thumbs/plane-window-hole.webp",
+        "alt": "An aeroplane window looking out over a wing and clouds, the tiny hole in the inner pane circled."
+      }
     },
     {
       "id": "toothpaste-marks",
@@ -167,7 +187,12 @@
       "themes": [
         "everyday",
         "symbols"
-      ]
+      ],
+      "image": {
+        "src": "/images/toothpaste-marks.webp",
+        "thumb": "/images/thumbs/toothpaste-marks.webp",
+        "alt": "Four toothpaste tubes, each with a small coloured square near its sealed end, circled: black, green, red and blue."
+      }
     },
     {
       "id": "tin-can-ridges",
@@ -204,8 +229,7 @@
       "image": {
         "src": "/images/tin-can-ridges.webp",
         "thumb": "/images/thumbs/tin-can-ridges.webp",
-        "alt": "A food tin with its label half peeled away, showing the ridges rolled round its metal sides.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A drawing of a food tin with its parts labelled, including the rings of beading pressed round its sides."
       }
     },
     {
@@ -244,8 +268,7 @@
       "image": {
         "src": "/images/bus-seat-patterns.webp",
         "thumb": "/images/thumbs/bus-seat-patterns.webp",
-        "alt": "Two bus seats side by side, covered in a busy, many-coloured patterned fabric.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A pair of bus seats covered in a busy navy fabric dotted with small orange and white shapes."
       }
     },
     {
@@ -283,8 +306,7 @@
       "image": {
         "src": "/images/toothbrush-indicator.webp",
         "thumb": "/images/thumbs/toothbrush-indicator.webp",
-        "alt": "Two toothbrushes: a new one with bright blue bristles, and a worn one whose blue bristles have faded halfway to white.",
-        "credit": "Illustration: Made That Way"
+        "alt": "Two toothbrushes: a new one with bright blue bristles, and a worn one whose splayed bristles have faded."
       }
     },
     {
@@ -323,8 +345,7 @@
       "image": {
         "src": "/images/platform-tactile-strip.webp",
         "thumb": "/images/thumbs/platform-tactile-strip.webp",
-        "alt": "The edge of a railway platform with a yellow strip of raised dots running along it, and the tracks below.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A railway platform with a strip of yellow raised bumps running along the edge, an arrow pointing to it."
       }
     },
     {
@@ -363,8 +384,7 @@
       "image": {
         "src": "/images/push-plate-door.webp",
         "thumb": "/images/thumbs/push-plate-door.webp",
-        "alt": "A wooden door with a flat metal plate at hand height and no handle on this side.",
-        "credit": "Illustration: Made That Way"
+        "alt": "Two metal door plates side by side: one with a pull handle, one completely flat."
       }
     },
     {
@@ -401,8 +421,7 @@
       "image": {
         "src": "/images/sink-overflow-hole.webp",
         "thumb": "/images/thumbs/sink-overflow-hole.webp",
-        "alt": "A white bathroom basin, with the small overflow hole just under the rim opposite the tap.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A white bathroom basin from above, an arrow pointing to the small overflow hole under the rim."
       }
     },
     {
@@ -440,8 +459,7 @@
       "image": {
         "src": "/images/coffee-lid-hole.webp",
         "thumb": "/images/thumbs/coffee-lid-hole.webp",
-        "alt": "The lid of a takeaway coffee cup from above: the drinking opening at the front and a tiny second hole further back.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A takeaway coffee cup from above, the tiny second hole in its white lid circled and shown close up."
       }
     },
     {
@@ -558,8 +576,7 @@
       "image": {
         "src": "/images/rear-window-lines.webp",
         "thumb": "/images/thumbs/rear-window-lines.webp",
-        "alt": "A car's rear window from behind, with thin horizontal lines running across the glass.",
-        "credit": "Illustration: Made That Way"
+        "alt": "The rear window of a white car, with thin lines running across the glass."
       }
     },
     {
@@ -598,8 +615,7 @@
       "image": {
         "src": "/images/microwave-door-mesh.webp",
         "thumb": "/images/thumbs/microwave-door-mesh.webp",
-        "alt": "A microwave oven's door, with its window covered in a fine grid of tiny dots.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A microwave oven with a plate of food inside, seen through the door's window of fine metal mesh."
       }
     },
     {
@@ -637,8 +653,7 @@
       "image": {
         "src": "/images/plane-window-shades.webp",
         "thumb": "/images/thumbs/plane-window-shades.webp",
-        "alt": "An aeroplane window with its blind pushed up, showing the wing and sky outside.",
-        "credit": "Illustration: Made That Way"
+        "alt": "An aeroplane window with its blind pushed right up, clouds and sky outside."
       }
     },
     {
@@ -678,8 +693,7 @@
       "image": {
         "src": "/images/train-last-coach-x.webp",
         "thumb": "/images/thumbs/train-last-coach-x.webp",
-        "alt": "The back of the last coach of an Indian train, with a large yellow and white X painted on it and an LV board below.",
-        "credit": "Illustration: Made That Way"
+        "alt": "The back of the last coach of an Indian train, a big yellow X painted on it and an LV board below."
       }
     },
     {
@@ -755,9 +769,511 @@
       "image": {
         "src": "/images/stapler-anvil.webp",
         "thumb": "/images/thumbs/stapler-anvil.webp",
-        "alt": "The base of a stapler, close up: the metal plate with two sets of grooves, one to curl a staple's legs in and one to bend them out.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A desk stapler beside a notepad and pencil, with small close-ups of its base."
       }
+    },
+    {
+      "id": "metro-side-seats",
+      "topic": "industrial",
+      "difficulty": "easy",
+      "stem": "Why do metro trains have seats along the walls instead of in rows?",
+      "options": [
+        "Passengers can watch the stations through the windows",
+        "It leaves a wide middle for lots of standing people",
+        "Rows of seats would block the emergency exits",
+        "Sideways seats are safer when the train brakes"
+      ],
+      "correctIndex": 1,
+      "hint": "Picture the train at 9 in the morning, packed. Where does everyone stand?",
+      "explanationRight": "A metro carries huge crowds on short rides, and at rush hour most people stand. Seats running along the walls give up a few places to sit but leave the whole middle of the carriage open for standing passengers, with room for wheelchairs, bags and people moving to the doors. Long-distance trains, where everyone sits for hours, use rows instead.",
+      "explanationWrong": [
+        "Seats along the walls actually face away from the windows. They're there to leave the middle of the carriage open, so a rush-hour crowd has room to stand.",
+        null,
+        "Exits are kept clear either way. Wall seats leave a wide open middle, which is where most metro passengers stand on short, crowded rides.",
+        "They aren't the safer choice in a hard stop. The reason is space: seats along the walls leave the middle free for standing passengers."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Wikipedia: Train seat (longitudinal seating)",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Train_seat",
+      "tags": [
+        "trains",
+        "crowds",
+        "space"
+      ],
+      "themes": [
+        "travel"
+      ],
+      "pictureBrief": "Inside a metro carriage: seats running along both walls, and passengers standing in the open middle."
+    },
+    {
+      "id": "glass-door-stickers",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do glass doors and walls have stickers or stripes at eye level?",
+      "options": [
+        "They hide fingerprints and smudges on the glass",
+        "So people see the glass and don't walk into it",
+        "They hold the pane together if it cracks",
+        "They cut glare from the sun"
+      ],
+      "correctIndex": 1,
+      "hint": "Why might a perfectly clean sheet of glass be dangerous?",
+      "explanationRight": "Clean glass is nearly invisible, especially in bright light, and people walk straight into it, sometimes hard enough to be badly hurt. Markings make it obvious. In the UK, workplace rules require see-through doors and walls to be marked where that's needed for safety, and the usual guidance is two bands: one about 850 to 1000 mm from the floor, for children and wheelchair users, and one about 1400 to 1600 mm, where adults look as they walk.",
+      "explanationWrong": [
+        "A few stickers wouldn't hide smudges on the rest of the glass. They're there to make the glass visible, so people don't walk into what looks like an open doorway.",
+        null,
+        "Stickers don't hold glass together; safety glass does that itself. The markings make the glass visible at the heights people's eyes are, so nobody walks into it.",
+        "A thin band blocks almost no sun. The markings sit where people look as they walk, so a clear pane of glass doesn't go unnoticed."
+      ],
+      "confidence": "accurate",
+      "sourceName": "UK legislation: Workplace (Health, Safety and Welfare) Regulations 1992, regulation 14",
+      "sourceUrl": "https://www.legislation.gov.uk/uksi/1992/3004/regulation/14/made",
+      "tags": [
+        "glass",
+        "safety",
+        "buildings"
+      ],
+      "themes": [
+        "safety",
+        "symbols"
+      ],
+      "pictureBrief": "A glass office door or wall with a band of stickers or frosted stripes at eye level."
+    },
+    {
+      "id": "dual-flush-buttons",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do many toilets have two flush buttons, one bigger than the other?",
+      "options": [
+        "One for adults and one for children",
+        "The small one uses less water when that's enough",
+        "The second is a spare if one gets stuck",
+        "One flushes the bowl, the other cleans the tank"
+      ],
+      "correctIndex": 1,
+      "hint": "Does every flush need a full tank of water?",
+      "explanationRight": "An old toilet used the same big flush every time, even when a little water would do. In 1980 the Australian company Caroma, in a country short of water, designed a cistern with two buttons: a full flush for solids and a half flush for liquids. Most flushes only need the small one, so a household uses far less water. Later versions came down to 6 and 3 litres.",
+      "explanationWrong": [
+        "Anyone can press either one. The small button is a half flush, for when a full tank of water isn't needed, which is most of the time.",
+        null,
+        "Both buttons work every time; neither is a backup. One gives a full flush, the other a half flush, so you only use as much water as you need.",
+        "Both empty the tank into the bowl. The difference is how much: a full flush for solids, a half flush for liquids, which saves a lot of water."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Wikipedia: Dual flush toilet",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Dual_flush_toilet",
+      "tags": [
+        "water",
+        "bathroom",
+        "saving"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "pictureBrief": "A toilet cistern's two flush buttons, one large and one small, close up."
+    },
+    {
+      "id": "sauce-bottle-upside-down",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why are so many ketchup and sauce bottles designed to stand on their lids?",
+      "options": [
+        "They fit in the fridge door more easily",
+        "The sauce is always at the opening, ready to squeeze",
+        "It stops children opening the lid",
+        "It lets air in so the bottle doesn't collapse"
+      ],
+      "correctIndex": 1,
+      "hint": "Remember shaking and tapping a nearly empty bottle, waiting for the last bit?",
+      "explanationRight": "Thick sauce is slow to move, so with an upright bottle you shake, tap and wait while it crawls to the neck, especially when it's nearly empty. Turn the bottle over and gravity does the waiting for you: the sauce is always sitting at the opening. Heinz launched its upside-down ketchup bottle in 2002 with a small silicone valve in the cap, which opens when you squeeze and closes again so the bottle doesn't drip.",
+      "explanationWrong": [
+        "Upside down or not, the bottle takes the same space. It stands on its lid so the thick sauce is always at the opening, with no shaking or tapping.",
+        null,
+        "A lid can be childproof either way up. The point is gravity: standing on its lid, the bottle keeps the sauce waiting at the opening.",
+        "A squeezy bottle springs back by itself. It stands on its lid because thick sauce is slow to move, and this way it's already at the opening when you squeeze."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Packaging Europe: Iconic packs, Heinz' ketchup bottle",
+      "sourceUrl": "https://packagingeurope.com/features/iconic-packs-heinz-ketchup-bottle/13859.article",
+      "tags": [
+        "packaging",
+        "food",
+        "gravity"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "pictureBrief": "A squeezy ketchup bottle standing upside down on its cap."
+    },
+    {
+      "id": "bottle-cap-ring",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why does a new bottle cap leave a plastic ring behind on the neck?",
+      "options": [
+        "It stops the cap being screwed on too tight",
+        "A broken ring shows the bottle has been opened",
+        "It seals the bottle so the drink stays fresh",
+        "It's left over from how the cap is moulded"
+      ],
+      "correctIndex": 1,
+      "hint": "Could you tell if someone had opened a bottle and screwed the cap back on?",
+      "explanationRight": "A drink that someone has opened and closed again can look exactly like a new one. So the cap is made with a ring joined to it by thin plastic bridges. The first time you twist the cap, the ring catches on a ledge on the neck, the bridges snap, and the ring stays behind. It can't be put back together, so a loose or broken ring tells you the bottle has already been opened.",
+      "explanationWrong": [
+        "The ring doesn't limit how tight the cap goes. It's a seal you can see: the first twist snaps it off the cap, so a broken ring means someone got there first.",
+        null,
+        "The seal is inside the cap. The ring is there to snap the first time the bottle is opened, so you can tell if anyone opened it before you.",
+        "It's designed to break off, on purpose. The thin bridges snap on the first twist and can't be rejoined, so the ring shows whether a bottle has been opened."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Wikipedia: Tamper-evident band",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tamper-evident_band",
+      "tags": [
+        "packaging",
+        "safety",
+        "drinks"
+      ],
+      "themes": [
+        "everyday",
+        "safety"
+      ],
+      "pictureBrief": "The neck of a plastic bottle just after opening, the broken plastic ring left below the cap."
+    },
+    {
+      "id": "crossing-countdown",
+      "topic": "industrial",
+      "difficulty": "easy",
+      "stem": "Why do some crossing signals count down the seconds left to walk?",
+      "options": [
+        "To tell people how long the next red will last",
+        "So you can tell if there's time to cross",
+        "To stop people pressing the button again",
+        "To show the signal isn't broken"
+      ],
+      "correctIndex": 1,
+      "hint": "You reach the kerb as the green figure is already showing. Should you start?",
+      "explanationRight": "A walking signal that's already on doesn't say how long it has left. Arrive halfway through and you have to guess, and a wrong guess leaves you in the middle of the road when the traffic starts. A countdown shows the seconds remaining, so you can decide whether to start crossing now or wait for the next one, and fewer people are caught in the road when it changes.",
+      "explanationWrong": [
+        "It counts down the time left to cross, not the time to wait. With the seconds in front of you, you can tell whether there's enough time to start or whether to wait for the next one.",
+        null,
+        "Pressing again changes nothing either way. The count tells you how much crossing time is left, so you don't start when you'd be caught in the middle of the road.",
+        "A working signal is obvious anyway. The numbers are for the person arriving at the kerb: they show whether there's still time to get across."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Safe Routes to School Guide: Traffic signals",
+      "sourceUrl": "http://guide.saferoutesinfo.org/engineering/traffic_signals.cfm",
+      "tags": [
+        "roads",
+        "walking",
+        "timing"
+      ],
+      "themes": [
+        "safety",
+        "symbols"
+      ],
+      "pictureBrief": "A pedestrian crossing signal showing the walking figure with a countdown number beside it."
+    },
+    {
+      "id": "stair-edge-stripes",
+      "topic": "industrial",
+      "difficulty": "easy",
+      "stem": "Why do the edges of steps in stations and malls have a coloured strip?",
+      "options": [
+        "They mark where to stand when it's crowded",
+        "So you can see exactly where each step ends",
+        "They mark the stairs as an emergency exit",
+        "They show which way the stairs are going"
+      ],
+      "correctIndex": 1,
+      "hint": "Going down, in dim light, what is hardest to judge?",
+      "explanationRight": "On stairs that are all one colour, the steps blur into a single surface, especially going down, in dim light, or for people who don't see well. Misjudge where a step ends and you fall. A strip of contrasting colour along each edge shows exactly where every step stops. In one study that watched people on stairways, falls and near falls were far fewer on the stairs with high-contrast edges than on matching stairs without them.",
+      "explanationWrong": [
+        "Nobody's meant to stand on the edge of a step. The strip is there so you can see where each step ends, which is easy to misjudge going down or in poor light.",
+        null,
+        "Exits are shown with signs, not step edges. The strip marks the edge of every step so it stands out from the one below, which stops people misjudging and falling.",
+        "Every step gets the same strip, up or down. It's there to show exactly where each step ends, so nobody misjudges it."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Journal study: Interstep variations of stairways and high-contrast striping and fall-related events",
+      "sourceUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11754982/",
+      "tags": [
+        "stairs",
+        "safety",
+        "contrast"
+      ],
+      "themes": [
+        "safety"
+      ],
+      "pictureBrief": "A flight of steps in a station or mall, the edge of each step marked with a bright contrasting strip."
+    },
+    {
+      "id": "theatre-seats-flip-up",
+      "topic": "furniture",
+      "difficulty": "easy",
+      "stem": "Why do cinema seats spring up by themselves when you stand?",
+      "options": [
+        "So the springs inside don't wear out",
+        "So the row stays wide enough to walk through",
+        "So staff can count the empty seats",
+        "So nobody sits in a seat they haven't paid for"
+      ],
+      "correctIndex": 1,
+      "hint": "Think about squeezing past people's knees to reach your seat, or getting out in a hurry.",
+      "explanationRight": "Rows of cinema and theatre seats are packed tight, and the only way in or out is along the narrow gap in front of them. A seat left down blocks that gap, and in an emergency everyone in the row has to get out fast. Seats that spring up on their own keep the gap clear without anyone remembering to fold them. Building codes even measure the clear width of a row with the seats raised.",
+      "explanationWrong": [
+        "Folding up doesn't spare the springs; it uses them. The seats rise so the narrow gap along the row stays clear, for getting to your seat and out quickly in an emergency.",
+        null,
+        "Tickets are counted, not seats. The seats fold up so the gap in front of them stays wide enough to walk along the row.",
+        "Anyone can pull a seat down. They spring up to keep the gap along the row clear, so people can get in and out, fast if they need to."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Irwin Seating: Auditorium design, code considerations",
+      "sourceUrl": "https://www.irwinseating.com/resources/auditorium-design/code-considerations",
+      "tags": [
+        "seating",
+        "safety",
+        "space"
+      ],
+      "themes": [
+        "furniture",
+        "safety"
+      ],
+      "pictureBrief": "A row of cinema or theatre seats, the empty ones folded up."
+    },
+    {
+      "id": "webcam-light",
+      "topic": "ui",
+      "difficulty": "easy",
+      "stem": "Why is there a small light next to a laptop's camera?",
+      "options": [
+        "It lights up your face in a dark room",
+        "It glows whenever the camera is on",
+        "It shows the laptop is charging",
+        "It blinks when you have a new message"
+      ],
+      "correctIndex": 1,
+      "hint": "When would you want to know the camera is on, even if no app told you?",
+      "explanationRight": "Any app can switch a camera on, and on a laptop nothing else shows it's watching. That's unsettling, and malicious software could use it to spy. So the light is tied to the camera itself: on a Mac, Apple says the camera can't come on without the green light coming on too. If the light is lit, the camera is running, whatever the apps say.",
+      "explanationWrong": [
+        "It's far too small to light a face. It's a warning: it glows whenever the camera is on, so the camera can't watch you without you knowing.",
+        null,
+        "Charging has its own light. This one sits by the camera and comes on with it, so you always know when the camera is running.",
+        "Messages show on the screen. The light by the camera only comes on when the camera does, so you can tell at a glance if it's in use."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Apple Support: Use the camera on Mac",
+      "sourceUrl": "https://support.apple.com/guide/mac-help/use-the-camera-mchlp2980/mac",
+      "tags": [
+        "privacy",
+        "camera",
+        "laptops"
+      ],
+      "themes": [
+        "screens"
+      ],
+      "pictureBrief": "The top edge of a laptop screen, the camera with its small green light glowing beside it."
+    },
+    {
+      "id": "change-password-old",
+      "topic": "ui",
+      "difficulty": "medium",
+      "stem": "Why must you type your old password before choosing a new one?",
+      "options": [
+        "It checks you still remember it",
+        "So someone at your unlocked device can't lock you out",
+        "It proves you're a real person, not a bot",
+        "The law says every change must be confirmed"
+      ],
+      "correctIndex": 1,
+      "hint": "You left your laptop open in a café for two minutes. What could someone do?",
+      "explanationRight": "If you stay logged in and step away, from a café laptop or a phone you've lent a friend, anyone who picks it up is already inside your account. Without a check, they could set a new password and lock you out for good. Asking for the current password first means only someone who actually knows it can change it. Security guides like OWASP's recommend it for exactly that reason.",
+      "explanationWrong": [
+        "Remembering it isn't the point. Anyone at your unlocked device is already logged in as you; asking for the current password stops them changing it and locking you out.",
+        null,
+        "Bots are stopped by other checks. The old password is asked for because whoever is using a logged-in device might not be you, and a new password would lock you out.",
+        "It's good practice, not a law. It protects you when you've left yourself logged in: someone else at your device can't change the password without knowing it."
+      ],
+      "confidence": "accurate",
+      "sourceName": "OWASP: Authentication cheat sheet",
+      "sourceUrl": "https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html",
+      "tags": [
+        "security",
+        "passwords",
+        "apps"
+      ],
+      "themes": [
+        "screens"
+      ],
+      "pictureBrief": "A 'Change password' screen with boxes for the current password and the new one."
+    },
+    {
+      "id": "cookie-banner-buttons",
+      "topic": "ui",
+      "difficulty": "medium",
+      "stem": "Why is 'Accept all' on cookie pop-ups often bright, and 'Reject' faint?",
+      "options": [
+        "Most people want to accept, so it's the default",
+        "Sites want your yes, so they make it easiest",
+        "Rules require the suggested choice to stand out",
+        "Rejecting takes longer to process, so it's hidden"
+      ],
+      "correctIndex": 1,
+      "hint": "Who gains when you tap the bright button without thinking?",
+      "explanationRight": "Websites earn more when they can track you, so many cookie pop-ups are built to steer you: a big, bright 'Accept all' next to a faint link, or a 'Reject' hidden a screen further in. It works. In one study, hiding the reject option behind a second screen roughly halved the share of people who refused. Regulators call it a trick: France's privacy regulator fined Google and Facebook in 2022 because refusing took several clicks and accepting took one.",
+      "explanationWrong": [
+        "People only look keener to accept. When refusing is as easy as accepting, far more people refuse. The bright button is there because the site profits from your yes.",
+        null,
+        "Rules in Europe ask the opposite: refusing must be as easy as accepting. The bright Accept is the site steering you, because tracking earns it money.",
+        "Either choice is instant to process. The faint Reject is a nudge: the site earns more if you accept, so it makes that the easy, obvious click."
+      ],
+      "confidence": "accurate",
+      "sourceName": "CNIL: Cookies, the CNIL fines Google a total of 150 million euros and Facebook 60 million euros",
+      "sourceUrl": "https://www.cnil.fr/en/cookies-cnil-fines-google-total-150-million-euros-and-facebook-60-million-euros-non-compliance",
+      "tags": [
+        "privacy",
+        "persuasion",
+        "apps"
+      ],
+      "themes": [
+        "screens"
+      ],
+      "pictureBrief": "A cookie pop-up with a big, bright 'Accept all' button and a small, faint 'Reject' link."
+    },
+    {
+      "id": "plane-wing-triangle",
+      "topic": "industrial",
+      "difficulty": "medium",
+      "stem": "Why is there a small triangle above a few windows inside a plane?",
+      "options": [
+        "It marks the emergency exit rows",
+        "Crew can see the wings best from that window",
+        "It shows where the fuel tanks are underneath",
+        "It marks the seats above the landing gear"
+      ],
+      "correctIndex": 1,
+      "hint": "If a pilot asked someone to check the wing, which window would they send them to?",
+      "explanationRight": "Pilots can't see their own wings from the cockpit. If something seems wrong with the flaps, slats or engines, or ice might be building up, someone in the cabin has to look. The small triangles mark the windows with the clearest view of the wing, one near its front edge and one near its back edge on each side, so crew can go straight to the right seat. For passengers, it's also the best window for wing photos.",
+      "explanationWrong": [
+        "Exit rows have their own signs and lights. The triangles mark the windows with the clearest view of the wing, so crew know exactly where to look if something needs checking.",
+        null,
+        "Fuel tanks aren't marked for passengers. The triangle points out the window where the wing is easiest to see, for crew checking the flaps, slats or ice.",
+        "The landing gear isn't marked in the cabin. The triangles show which windows give the best view of the wings, for crew who need to check them in flight."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Reader's Digest: What that tiny black triangle above airplane windows means",
+      "sourceUrl": "https://www.rd.com/article/triangle-stickers-airplane/",
+      "tags": [
+        "aviation",
+        "signs",
+        "crew"
+      ],
+      "themes": [
+        "travel",
+        "symbols"
+      ],
+      "pictureBrief": "The cabin wall of a plane, a small black triangle sticker above one window."
+    },
+    {
+      "id": "crossing-beeps",
+      "topic": "industrial",
+      "difficulty": "medium",
+      "stem": "Why do some crossing buttons tick slowly, then rattle fast when it's time?",
+      "options": [
+        "The fast ticking tells drivers to slow down",
+        "Slow helps blind people find it, fast means walk",
+        "The faster sound hurries slow walkers along",
+        "The ticks count down the seconds left to cross"
+      ],
+      "correctIndex": 1,
+      "hint": "Close your eyes at a busy crossing. How would you know when to go?",
+      "explanationRight": "A green walking figure is no use to someone who can't see it, so accessible crossings also speak in sound and touch. A slow tick from the push button, loud enough only close by, helps a blind person find the pole. When it's time to walk, the sound switches to a fast rapid tick, about eight to ten ticks a second, and a raised arrow on the button vibrates for people who can't hear it well either. The ticking is kept quiet enough that the traffic can still be heard.",
+      "explanationWrong": [
+        "Drivers have their own lights. The ticking is for people who can't see the signal: slow helps them find the button, and fast means it's time to walk.",
+        null,
+        "It doesn't speed up as time runs out. The fast tick simply means walk, for people who can't see the green figure, and the slow tick helps them find the button.",
+        "The ticks aren't counting anything. The slow tick guides a blind person to the button; the fast one tells them it's their turn to cross."
+      ],
+      "confidence": "accurate",
+      "sourceName": "American Council of the Blind: Accessible pedestrian signals",
+      "sourceUrl": "https://www.acb.org/content/accessible-pedestrian-signals-aps",
+      "tags": [
+        "accessibility",
+        "sound",
+        "roads"
+      ],
+      "themes": [
+        "safety",
+        "symbols"
+      ],
+      "pictureBrief": "A pedestrian crossing push button with a raised arrow on it, on a pole at a street corner."
+    },
+    {
+      "id": "led-traffic-snow",
+      "topic": "industrial",
+      "difficulty": "hard",
+      "stem": "Why can LED traffic lights be dangerous in snow, when old bulbs weren't?",
+      "options": [
+        "Cold weather makes LEDs much dimmer",
+        "They run too cool to melt snow off the lens",
+        "Snowflakes reflect LED light and dazzle drivers",
+        "LEDs flicker in the cold, which drivers can't see"
+      ],
+      "correctIndex": 1,
+      "hint": "What did old light bulbs give off besides light?",
+      "explanationRight": "Old signal bulbs wasted most of their power as heat, and that heat quietly melted snow and ice off the lens. LEDs use about a quarter of the energy and stay cool, which is the point of them, but it means snow can pile up and cover the light. Drivers have gone through junctions without seeing a hidden red, and crashes have been blamed on it. Cities now add heated lenses or send crews to clear the lights by hand. Saving energy took away a job nobody knew the old bulbs were doing.",
+      "explanationWrong": [
+        "LEDs actually shine well in the cold. The problem is heat: they give off so little that snow can build up on the lens, where old bulbs used to melt it.",
+        null,
+        "Glare isn't the problem. Old bulbs ran hot enough to melt snow off their lenses; LEDs stay cool, so snow can bury the signal.",
+        "LED signals don't flicker in the cold. They're simply too cool to melt the snow that settles on them, so a light can end up hidden."
+      ],
+      "confidence": "accurate",
+      "sourceName": "CBC News: LED traffic lights trouble in winter because they don't melt snow",
+      "sourceUrl": "https://www.cbc.ca/news/canada/windsor/led-traffic-lights-trouble-in-winter-because-they-don-t-melt-snow-1.3465301",
+      "tags": [
+        "roads",
+        "energy",
+        "side-effects"
+      ],
+      "themes": [
+        "safety",
+        "travel"
+      ],
+      "pictureBrief": "A traffic light with snow caked over its lenses, so the lights are hard to see."
+    },
+    {
+      "id": "speedometer-reads-high",
+      "topic": "industrial",
+      "difficulty": "hard",
+      "stem": "Why do car speedometers usually show a little more than your real speed?",
+      "options": [
+        "The needle is set for a fully loaded car",
+        "Rules forbid it ever showing less than your real speed",
+        "It makes the car feel faster and sportier",
+        "It shows the speed you'll reach a second later"
+      ],
+      "correctIndex": 1,
+      "hint": "A speedometer can never be perfectly exact. If it has to be wrong, which way is safer?",
+      "explanationRight": "A speedometer can't be perfect: it works out speed from how fast the wheels turn, and a worn or softer tyre is slightly smaller, so it covers less ground per turn. Since it has to be off somehow, the rules decide which way. Under the UN regulation used in Europe and many other countries, a speedometer must never show less than your true speed, and may show up to 10 percent plus 4 km/h more. So makers set them to read a little high: you might think you're speeding when you aren't, but never the other way round.",
+      "explanationWrong": [
+        "Load hardly changes the reading. The rule is that a speedometer must never show less than your true speed, so makers set it to err on the high side.",
+        null,
+        "It's not about the feel. A speedometer can't be exact, and the rules say it must never under-read, so makers set it to read slightly high.",
+        "It shows your speed now, not a moment later. It reads a bit high because the rules forbid it from ever showing less than your true speed."
+      ],
+      "confidence": "accurate",
+      "sourceName": "UNECE: Proposal for amendments to UN Regulation No. 39 (speedometers)",
+      "sourceUrl": "https://unece.org/fileadmin/DAM/trans/doc/2015/wp29grsg/GRSG-108-42e.pdf",
+      "tags": [
+        "cars",
+        "rules",
+        "measuring"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ],
+      "pictureBrief": "A car's speedometer needle, with a phone's GPS speed reading a little lower beside it."
     }
   ]
 }

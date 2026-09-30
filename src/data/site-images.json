@@ -1,6 +1,54 @@
 {
-  "note": "Pictures that ship with the site (public/images/<id>.webp, made by npm run images from images/<id>.*) for questions that already live in the database. Each time the server sees this file change, it attaches every picture listed here to its question if that question has no picture yet, and keeps the description and credit of pictures it attached in step with this file. A picture uploaded in the builder is never replaced.",
+  "note": "Pictures that ship with the site (public/images/<id>.webp, made by npm run images from images/<id>.*) for questions that already live in the database. Each time the server sees this file change, it attaches every picture listed here to its question if that question has no picture yet (or only a local-only placeholder), and keeps the description and credit of pictures it attached in step with this file. A picture uploaded in the builder is never replaced.",
   "images": [
+    {
+      "id": "apple-logo-bite",
+      "alt": "The Apple logo through the years, from the 1976 drawing to the rainbow apple and today's plain one, each with a bite out of its right side."
+    },
+    {
+      "id": "auto-rickshaw-three-wheels",
+      "alt": "The driver's seat of an auto-rickshaw looking forward: motorbike handlebars in front of the windscreen, and no steering wheel."
+    },
+    {
+      "id": "bus-seat-patterns",
+      "alt": "A pair of bus seats covered in a busy navy fabric dotted with small orange and white shapes."
+    },
+    {
+      "id": "button-verbs",
+      "alt": "Phone screens from a group settings page: a Delete Group pop-up whose buttons say Cancel and Delete, then a Group Deleted message."
+    },
+    {
+      "id": "chips-packet-air",
+      "alt": "A sealed packet of Lay's Classic chips, puffed up tight with air."
+    },
+    {
+      "id": "coffee-lid-hole",
+      "alt": "A takeaway coffee cup from above, the tiny second hole in its white lid circled and shown close up."
+    },
+    {
+      "id": "convex-side-mirror",
+      "alt": "A car side mirror printed with \"Objects in mirror are closer than they appear\", a car behind looking small in the glass."
+    },
+    {
+      "id": "crosswalk-buttons",
+      "alt": "A \"Push button for walk signal\" box on a pole at a city street crossing."
+    },
+    {
+      "id": "ctrl-alt-del",
+      "alt": "The original IBM PC keyboard, with a person's hands resting on it."
+    },
+    {
+      "id": "cursor-tilt",
+      "alt": "Classic computer pointers drawn in square pixels: arrows leaning to one side, pointing hands and hourglasses."
+    },
+    {
+      "id": "daily-atm-card-first",
+      "alt": "A cash machine screen saying \"Please take your card to continue with your transaction\", with a drawing of a hand taking the card."
+    },
+    {
+      "id": "daily-cracker-holes",
+      "alt": "A square golden cracker with neat rows of small holes across it."
+    },
     {
       "id": "daily-kadokeshi-corners",
       "alt": "The Kadokeshi eraser: a white eraser made of small cubes joined together, with corners all over it.",
@@ -9,6 +57,154 @@
     {
       "id": "daily-lift-mirrors",
       "alt": "Inside a lift: a woman takes a photo of herself in the big mirror on the back wall."
+    },
+    {
+      "id": "daily-mirror-night-tab",
+      "alt": "A hand reaching for the small tab on the underside of a car's rear-view mirror, circled in red."
+    },
+    {
+      "id": "daily-pizza-box-table",
+      "alt": "A small white three-legged plastic stand standing in the middle of a pizza."
+    },
+    {
+      "id": "daily-tape-measure-hook",
+      "alt": "The end of a yellow tape measure, close up: the metal hook held by two rivets in slots, loose enough to slide."
+    },
+    {
+      "id": "fan-regulator-heat",
+      "alt": "An old, bulky ceiling fan regulator: a worn cream box with a round speed knob in the middle."
+    },
+    {
+      "id": "golden-gate-orange",
+      "alt": "The Golden Gate Bridge at sunset, its orange towers standing out against the sea and sky."
+    },
+    {
+      "id": "hexagonal-pencil",
+      "alt": "A row of sharpened yellow wooden pencils, their flat sides catching the light."
+    },
+    {
+      "id": "indian-plug-earth-pin",
+      "alt": "An Indian three-pin plug: the top pin is longer and thicker than the other two."
+    },
+    {
+      "id": "jaali-screens",
+      "alt": "Carved stone lattice windows in an old Indian building, sunlight coming through them and scattering small bright shapes across the floor."
+    },
+    {
+      "id": "jeans-rivets",
+      "alt": "A copper rivet at the corner of a jeans pocket, close up."
+    },
+    {
+      "id": "jerrycan-handles",
+      "alt": "A worn metal jerrycan, close up, its handles along the top."
+    },
+    {
+      "id": "lpg-smell",
+      "alt": "A red LPG cooking gas cylinder, its orange hose running up to the gas pipe on the wall."
+    },
+    {
+      "id": "manhole-round",
+      "alt": "A round manhole cover set into a pavement, beside a square drain grate at the kerb for comparison."
+    },
+    {
+      "id": "matka-cooling",
+      "alt": "A clay matka water pot beside a small clay cup of water, on a wooden table."
+    },
+    {
+      "id": "menu-ellipsis",
+      "alt": "The File menu open in a Mac app, with Save As… highlighted and other commands like Rename… and Export… ending in three dots."
+    },
+    {
+      "id": "microwave-door-mesh",
+      "alt": "A microwave oven with a plate of food inside, seen through the door's window of fine metal mesh."
+    },
+    {
+      "id": "middle-berth",
+      "alt": "Inside an Indian Railways sleeper coach: lower, middle and upper berths on each side, labelled LB, MB and UB."
+    },
+    {
+      "id": "padlock-hole",
+      "alt": "An open brass padlock with its key, the tiny hole in the bottom of its body circled in red."
+    },
+    {
+      "id": "plane-ashtray",
+      "alt": "An aeroplane toilet door with a no-smoking sign and, right beside it, a small built-in ashtray."
+    },
+    {
+      "id": "plane-window-hole",
+      "alt": "An aeroplane window looking out over a wing and clouds, the tiny hole in the inner pane circled."
+    },
+    {
+      "id": "plane-window-shades",
+      "alt": "An aeroplane window with its blind pushed right up, clouds and sky outside."
+    },
+    {
+      "id": "platform-tactile-strip",
+      "alt": "A railway platform with a strip of yellow raised bumps running along the edge, an arrow pointing to it."
+    },
+    {
+      "id": "power-symbol",
+      "alt": "The power symbol, a circle broken at the top by a short line, on a black button."
+    },
+    {
+      "id": "pressure-cooker-whistle",
+      "alt": "An Indian pressure cooker on a gas flame, the whistle weight sitting on the vent in its lid."
+    },
+    {
+      "id": "push-plate-door",
+      "alt": "Two metal door plates side by side: one with a pull handle, one completely flat."
+    },
+    {
+      "id": "rear-window-lines",
+      "alt": "The rear window of a white car, with thin lines running across the glass."
+    },
+    {
+      "id": "rupee-tactile-marks",
+      "alt": "The ₹100, ₹200 and ₹500 notes, with the raised lines and marks near their edges shown close up."
+    },
+    {
+      "id": "safari-bottom-bar",
+      "alt": "An iPhone showing a news page in Safari, the address bar at the bottom of the screen."
+    },
+    {
+      "id": "safety-match",
+      "alt": "A match head held against the dark striking strip on the side of a matchbox."
+    },
+    {
+      "id": "school-bus-yellow",
+      "alt": "A yellow school bus parked on a street at dusk."
+    },
+    {
+      "id": "sink-overflow-hole",
+      "alt": "A white bathroom basin from above, an arrow pointing to the small overflow hole under the rim."
+    },
+    {
+      "id": "stapler-anvil",
+      "alt": "A desk stapler beside a notepad and pencil, with small close-ups of its base."
+    },
+    {
+      "id": "stay-on-tab",
+      "alt": "The top of an opened drink can, the ring pull still attached."
+    },
+    {
+      "id": "stop-sign-octagon",
+      "alt": "A red eight-sided STOP sign against a blue sky."
+    },
+    {
+      "id": "tin-can-ridges",
+      "alt": "A drawing of a food tin with its parts labelled, including the rings of beading pressed round its sides."
+    },
+    {
+      "id": "toothbrush-indicator",
+      "alt": "Two toothbrushes: a new one with bright blue bristles, and a worn one whose splayed bristles have faded."
+    },
+    {
+      "id": "toothpaste-marks",
+      "alt": "Four toothpaste tubes, each with a small coloured square near its sealed end, circled: black, green, red and blue."
+    },
+    {
+      "id": "train-last-coach-x",
+      "alt": "The back of the last coach of an Indian train, a big yellow X painted on it and an LV board below."
     }
   ]
 }

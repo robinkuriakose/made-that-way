@@ -44,10 +44,11 @@ Last updated 30 September 2026.
 | Sources for every question | `SOURCES.md` |
 | Working rules for this repo | `CLAUDE.md` |
 
-## Current state (30 September)
+## Current state (1 October)
 
+- **Round 14:** the owner's photos are published (47); the hero deck's swipe no longer hangs at the far end, and "Another one" turns the open card over to the next question on the spot; review cards and the Daily tab show each question's difficulty and picture, both changeable right there; 20 more questions (five daily for 8 to 12 October, fifteen in review), none with a picture yet, each with a note on what it should show. A daily question now waits until it has a picture. **Waiting on the owner:** pictures for those 20, the rewrites, credit lines, the logo pick, and a call on the sharing ideas.
 - **Round 12 built:** difficulty tiers and the level plan, the Legend finale at level 6, the feedback form, suggested questions, the new home page and copy, names and profiles, and the builder's tier tabs, bulk pictures, Suggestions and Feedback tabs. **Also done:** shorter wording for 77 questions, waiting for the owner in the builder's Rewrites tab; 20 new questions with drawn pictures (five in the daily queue for 3 to 7 October, fifteen in New questions); three logo sketches in `docs/logo/sketches.html`. **Waiting on the owner:** the logo pick, the rewrites, the fifteen new questions. Status by item: `docs/brief-map.md`.
-- **Easy pictures decide how far players get:** reaching level 6 needs 18 easy questions with pictures. About 10 live ones have one; the ten new easy questions in review would take it past 18. The builder's Questions tab shows this per tier. Pictures wanted: `images/IMAGES-NEEDED.md`.
+- **Easy pictures decide how far players get:** reaching level 6 needs 18 easy questions with pictures; with the owner's photos and the round 12 questions accepted, the live bank now has enough. The builder's Questions tab shows this per tier. Pictures wanted: `images/IMAGES-NEEDED.md`.
 
 - **Round 11:** the home picture strip is rebuilt: swipe by hand, tap a picture to open it big with its question, "Play this one" starts a run with it first. It sits under today's question.
 

@@ -49,6 +49,7 @@ function blank() {
     sourceName: '',
     sourceUrl: '',
     image: null,
+    pictureBrief: '',
     tidbit: null,
   };
 }
@@ -324,6 +325,10 @@ export default function QuestionForm({ initial, prefill = null, draftFrom = null
         <p className="field-label">Image</p>
         <ImageField image={form.image} onChange={(image) => set({ image })} api={api} filenameHint={effectiveId} />
       </div>
+
+      <Field label="What the picture should show" htmlFor="q-picture-brief" note="A note for whoever finds the picture. Shown in the review queue, never to players.">
+        <input id="q-picture-brief" type="text" value={form.pictureBrief ?? ''} onChange={(e) => set({ pictureBrief: e.target.value })} />
+      </Field>
 
       <div className="field-row">
         <Field label="Source name" htmlFor="q-source-name">

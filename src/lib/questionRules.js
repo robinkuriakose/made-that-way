@@ -72,7 +72,7 @@ const trimmed = (v) => (typeof v === 'string' ? v.trim() : v);
 export function normalizeQuestion(input) {
   const q = { ...input };
   for (const k of MANAGED_FIELDS) delete q[k];
-  for (const k of ['id', 'topic', 'stem', 'hint', 'explanationRight', 'confidence', 'sourceName', 'sourceUrl', 'difficulty', 'suggestedBy']) {
+  for (const k of ['id', 'topic', 'stem', 'hint', 'explanationRight', 'confidence', 'sourceName', 'sourceUrl', 'difficulty', 'suggestedBy', 'pictureBrief']) {
     q[k] = trimmed(q[k]);
   }
   if (Array.isArray(q.options)) q.options = q.options.map(trimmed);
@@ -85,6 +85,7 @@ export function normalizeQuestion(input) {
   if (Array.isArray(q.themes)) q.themes = [...new Set(q.themes.map((t) => String(t).trim()).filter(Boolean))];
   if (!q.difficulty) delete q.difficulty;
   if (!q.suggestedBy) delete q.suggestedBy;
+  if (!q.pictureBrief) delete q.pictureBrief;
   if (q.group == null || !String(q.group).trim()) delete q.group;
   else q.group = String(q.group).trim();
 

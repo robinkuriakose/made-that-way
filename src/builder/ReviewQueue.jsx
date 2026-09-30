@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import QuestionPreview from './QuestionPreview.jsx';
+import QuestionTools from './QuestionTools.jsx';
 
 const when = (iso) =>
   iso ? new Date(iso).toLocaleString(undefined, { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit' }) : '';
@@ -31,7 +32,7 @@ function FeedbackThread({ notes }) {
   );
 }
 
-function ReviewCard({ q, act, onEdit }) {
+function ReviewCard({ q, act, api, onEdit }) {
   const [writing, setWriting] = useState(false);
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(null);
@@ -55,6 +56,7 @@ function ReviewCard({ q, act, onEdit }) {
 
   return (
     <li className="review-card">
+      <QuestionTools q={q} api={api} act={act} />
       <QuestionPreview q={q} />
       <FeedbackThread notes={q.feedback ?? []} />
 
@@ -94,7 +96,7 @@ function ReviewCard({ q, act, onEdit }) {
   );
 }
 
-export default function ReviewQueue({ questions, act, onEdit }) {
+export default function ReviewQueue({ questions, act, api, onEdit }) {
   // Oldest first, so a batch reads in the order it was written.
   const pending = questions
     .filter((q) => q.kind !== 'daily' && q.status === 'pending')
@@ -115,7 +117,7 @@ export default function ReviewQueue({ questions, act, onEdit }) {
 
       <ol className="review-list-cards">
         {pending.map((q) => (
-          <ReviewCard key={q.id} q={q} act={act} onEdit={onEdit} />
+          <ReviewCard key={q.id} q={q} act={act} api={api} onEdit={onEdit} />
         ))}
       </ol>
 

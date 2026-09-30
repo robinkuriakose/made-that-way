@@ -10,7 +10,8 @@ export default function QuestionPreview({ q }) {
   return (
     <article className="qp">
       <p className="eyebrow">
-        {TOPIC_LABELS[q.topic] ?? q.topic} · {CONFIDENCE_LABELS[q.confidence]?.label ?? q.confidence}
+        {TOPIC_LABELS[q.topic] ?? q.topic}
+        {q.difficulty ? ` · ${q.difficulty[0].toUpperCase()}${q.difficulty.slice(1)}` : ''} · {CONFIDENCE_LABELS[q.confidence]?.label ?? q.confidence}
       </p>
       <h3 className="qp-stem">{q.stem}</h3>
       {q.image && <ImageFrame image={q.image} compact />}

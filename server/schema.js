@@ -413,7 +413,8 @@ async function seed() {
   // Pictures shipped with the site for questions already in the database
   // (src/data/site-images.json). A question with no picture gets one, and a
   // picture this step attached before (same site path) takes the file's
-  // latest description and credit. A picture uploaded in the builder has a
+  // latest description and credit. So does a local-only placeholder, which
+  // never shows on the live site. A picture uploaded in the builder has a
   // different address, so it's never touched.
   const attach = (siteImages.images ?? []).map((i) => ({
     id: i.id,
@@ -424,7 +425,11 @@ async function seed() {
       UPDATE questions q SET data = q.data || jsonb_build_object('image', a->'image'), updated_at = now()
       FROM jsonb_array_elements(${JSON.stringify(attach)}::jsonb) AS a
       WHERE q.id = a->>'id'
-        AND (coalesce(jsonb_typeof(q.data->'image'), 'null') = 'null' OR q.data->'image'->>'src' = a->'image'->>'src')
+        AND (
+          coalesce(jsonb_typeof(q.data->'image'), 'null') = 'null'
+          OR q.data->'image'->>'src' = a->'image'->>'src'
+          OR q.data->'image'->>'placeholder' = 'true'
+        )
         AND q.data->'image' IS DISTINCT FROM a->'image'
     `;
   }

@@ -1,6 +1,6 @@
 # Images needed
 
-Updated 30 September 2026. **41 pictures wanted**: 34 new and 7 replacements. Hard questions are optional.
+Updated 1 October 2026. Most of the earlier list is done (ticked below). **Wanted now: pictures for the 20 newest questions**, then whatever is still unticked. Hard questions are optional.
 
 ## How to send them
 
@@ -20,32 +20,39 @@ Tiers: **E** easy, **M** medium, **H** hard. These are my proposed tags, waiting
 
 ---
 
-## New in round 12: drawn, photos welcome (20)
+## New on 1 October: pictures wanted (20)
 
-The twenty new questions each come with a picture I drew, so none of them is waiting. A real photo is often better: drop one in with the same name and delete the drawing's `.png` from this folder, so the photo is the one that gets published.
+The newest questions. The five daily ones (first five below) go out from 8 October, and a daily question won't go out until it has a picture. You can add each one right from its card in the builder (New questions, or the Daily tab), or drop it in this folder as before.
 
-| File | Question | Right answer | What my drawing shows |
-|---|---|---|---|
-| `daily-pizza-box-table` | Why is there a little plastic table in the middle of a pizza? | It stops the lid sagging onto the cheese | A pizza in its open box, seen from above, with a small white three-legged plastic stand in the middle. |
-| `daily-atm-card-first` | Why do cash machines give your card back before the cash? | Once people have their cash, they forget the card | A cash machine: the screen says "Please take your card", the card sticks out of its slot, and the cash slot below is still closed. |
-| `daily-tape-measure-hook` | Why is the metal hook on a tape measure loose? | It shifts by its own thickness, so readings are exact | The end of a yellow tape measure, close up: the metal hook is held by two rivets in slots, with room to slide a little. |
-| `daily-cracker-holes` | Why do crackers have rows of small holes? | Steam escapes, so they bake flat, not puffy | A square golden cracker, close up, with neat rows of small holes punched through it. |
-| `daily-mirror-night-tab` | Why does a car's rear-view mirror have a little tab underneath? | Flicked at night, it dims dazzling headlights behind | A car's rear-view mirror seen from the driver's seat, with the small tab on its underside picked out. |
-| `tin-can-ridges` | Why do food tins have ridges running round their sides? | They stiffen thin metal so it won't buckle | A food tin with its label half peeled away, showing the ridges rolled round its metal sides. |
-| `bus-seat-patterns` | Why are bus and train seats covered in loud, busy patterns? | The pattern hides stains, dirt and wear | Two bus seats side by side, covered in a busy, many-coloured patterned fabric. |
-| `toothbrush-indicator` | Why do some toothbrushes have bristles that slowly fade in colour? | Fading shows the brush is worn and needs replacing | Two toothbrushes: a new one with bright blue bristles, and a worn one whose blue bristles have faded halfway to white. |
-| `platform-tactile-strip` | Why is there a strip of raised bumps along the platform edge? | Blind people can feel where the edge is | The edge of a railway platform with a yellow strip of raised dots running along it, and the tracks below. |
-| `push-plate-door` | Why do some doors have a flat metal plate instead of a handle? | There's nothing to pull, so everyone pushes | A wooden door with a flat metal plate at hand height and no handle on this side. |
-| `sink-overflow-hole` | Why do many basins have a small hole just under the rim? | Water drains out there instead of spilling over | A white bathroom basin, with the small overflow hole just under the rim opposite the tap. |
-| `coffee-lid-hole` | Why does a takeaway coffee lid have a second, tiny hole? | Air gets in, so the coffee flows smoothly | The lid of a takeaway coffee cup from above: the drinking opening at the front and a tiny second hole further back. |
-| `trolley-coin-lock` | Why do some supermarket trolleys need a coin to unlock? | You get the coin back only by returning it | The handle of a supermarket trolley with its coin lock: a slot for a coin and a chain clipped in from the trolley in front. |
-| `rumble-strips` | Why do some highways have grooves along the edge of the lane? | The rumble wakes drivers who drift off the road | A highway seen from above, with a row of short grooves cut into the road along the edge line. |
-| `rear-window-lines` | Why do car rear windows have thin lines running across them? | They heat up to clear frost and mist | A car's rear window from behind, with thin horizontal lines running across the glass. |
-| `microwave-door-mesh` | Why is a microwave's glass door covered in a mesh of tiny holes? | They block microwaves but let light through | A microwave oven's door, with its window covered in a fine grid of tiny dots. |
-| `plane-window-shades` | Why do crew ask for window blinds up for take-off and landing? | So everyone can see outside if something goes wrong | An aeroplane window with its blind pushed up, showing the wing and sky outside. |
-| `train-last-coach-x` | Why does the last coach of an Indian train have a big X? | It shows staff the whole train has passed | The back of the last coach of an Indian train, with a large yellow and white X painted on it and an LV board below. |
-| `runway-numbers` | Why is a runway numbered 09 at one end and 27 at the other? | They're compass directions, with the last zero dropped | A runway seen from above, with 09 painted at one end and 27 at the other, and white stripes at each threshold. |
-| `stapler-anvil` | Why does the metal plate under a stapler turn around? | To bend staples outward, so they pull out easily | The base of a stapler, close up: the metal plate with two sets of grooves, one to curl a staple's legs in and one to bend them out. |
+| Done | File | Question | Right answer | Tier | What it should show |
+|---|---|---|---|---|---|
+| [ ] | `daily-sachet-tear-notch` | Why do sachets have a tiny V-shaped cut at one edge? | It starts the tear, so you don't need scissors | E | A shampoo or ketchup sachet close up, the small V-shaped notch at its edge in view. |
+| [ ] | `daily-hotel-keycard-slot` | Why do hotel room lights only work with your key card in a slot? | So nothing's left running when you go out | E | The key card slot on the wall by a hotel room door, with a card in it. |
+| [ ] | `daily-fizzy-bottle-feet` | Why do fizzy drink bottles have bumpy feet, but water bottles flat bottoms? | Gas pressure would bulge a flat bottom so it rocks | M | The bottom of a plastic fizzy drink bottle, its five petal-shaped feet in view, beside a flat-bottomed water bottle. |
+| [ ] | `daily-gmail-undo-send` | Why can Gmail undo an email a few seconds after you hit Send? | It hasn't sent it yet: it waits a few seconds | M | Gmail's 'Message sent' notice at the bottom of the screen, with its Undo button. |
+| [ ] | `daily-door-vision-panel` | Why do many hospital and office doors have a narrow window at eye level? | So you see someone coming before you swing it open | E | A door in a corridor with a narrow vertical window at eye level, ideally with someone visible on the other side. |
+| [ ] | `metro-side-seats` | Why do metro trains have seats along the walls instead of in rows? | It leaves a wide middle for lots of standing people | E | Inside a metro carriage: seats running along both walls, and passengers standing in the open middle. |
+| [ ] | `glass-door-stickers` | Why do glass doors and walls have stickers or stripes at eye level? | So people see the glass and don't walk into it | E | A glass office door or wall with a band of stickers or frosted stripes at eye level. |
+| [ ] | `dual-flush-buttons` | Why do many toilets have two flush buttons, one bigger than the other? | The small one uses less water when that's enough | E | A toilet cistern's two flush buttons, one large and one small, close up. |
+| [ ] | `sauce-bottle-upside-down` | Why are so many ketchup and sauce bottles designed to stand on their lids? | The sauce is always at the opening, ready to squeeze | E | A squeezy ketchup bottle standing upside down on its cap. |
+| [ ] | `bottle-cap-ring` | Why does a new bottle cap leave a plastic ring behind on the neck? | A broken ring shows the bottle has been opened | E | The neck of a plastic bottle just after opening, the broken plastic ring left below the cap. |
+| [ ] | `crossing-countdown` | Why do some crossing signals count down the seconds left to walk? | So you can tell if there's time to cross | E | A pedestrian crossing signal showing the walking figure with a countdown number beside it. |
+| [ ] | `stair-edge-stripes` | Why do the edges of steps in stations and malls have a coloured strip? | So you can see exactly where each step ends | E | A flight of steps in a station or mall, the edge of each step marked with a bright contrasting strip. |
+| [ ] | `theatre-seats-flip-up` | Why do cinema seats spring up by themselves when you stand? | So the row stays wide enough to walk through | E | A row of cinema or theatre seats, the empty ones folded up. |
+| [ ] | `webcam-light` | Why is there a small light next to a laptop's camera? | It glows whenever the camera is on | E | The top edge of a laptop screen, the camera with its small green light glowing beside it. |
+| [ ] | `change-password-old` | Why must you type your old password before choosing a new one? | So someone at your unlocked device can't lock you out | M | A 'Change password' screen with boxes for the current password and the new one. |
+| [ ] | `cookie-banner-buttons` | Why is 'Accept all' on cookie pop-ups often bright, and 'Reject' faint? | Sites want your yes, so they make it easiest | M | A cookie pop-up with a big, bright 'Accept all' button and a small, faint 'Reject' link. |
+| [ ] | `plane-wing-triangle` | Why is there a small triangle above a few windows inside a plane? | Crew can see the wings best from that window | M | The cabin wall of a plane, a small black triangle sticker above one window. |
+| [ ] | `crossing-beeps` | Why do some crossing buttons tick slowly, then rattle fast when it's time? | Slow helps blind people find it, fast means walk | M | A pedestrian crossing push button with a raised arrow on it, on a pole at a street corner. |
+| [ ] | `led-traffic-snow` | Why can LED traffic lights be dangerous in snow, when old bulbs weren't? | They run too cool to melt snow off the lens | H | A traffic light with snow caked over its lenses, so the lights are hard to see. |
+| [ ] | `speedometer-reads-high` | Why do car speedometers usually show a little more than your real speed? | Rules forbid it ever showing less than your real speed | H | A car's speedometer needle, with a phone's GPS speed reading a little lower beside it. |
+
+## Round 12 pictures: done
+
+Your photos replaced my drawings for 17 of the 20. Three still show a drawing, on purpose:
+- `trolley-coin-lock`: no photo came in.
+- `rumble-strips`: the photo shows white bars painted across the road, which is a different thing from grooves cut along the edge of the lane. A photo of the edge grooves would work.
+- `runway-numbers`: the photo is a labelled diagram, and its label "Runway Designator (Heading 270)" gives the answer away. A plain photo of a runway end with its number would work.
 
 ## 1. Daily questions: first (8)
 
@@ -70,39 +77,39 @@ Levels 1 to 3 are made almost entirely of these, so they come next.
 
 | Done | File | Question | Right answer | What it should show |
 |---|---|---|---|---|
-| [ ] | `hexagonal-pencil` | Why are most wooden pencils made with six flat sides instead of being round? | Flat sides stop them rolling off a desk and give fingers a grip | A wooden pencil close up, its six flat sides visible |
-| [ ] | `padlock-hole` | Why do many padlocks have a tiny hole in the bottom of the body? | It lets rainwater drain out so the lock doesn't rust or freeze | A padlock from below, the tiny hole in its base visible |
-| [ ] | `convex-side-mirror` | Why do some car side mirrors warn that objects are closer than they appear? | The mirror bulges outward to show a wider view, which shrinks things | A car side mirror with "Objects in mirror are closer than they appear" on it |
-| [ ] | `lpg-smell` | Why does the gas from an LPG cooking cylinder smell so strongly of rotten cabbage? | A strong-smelling chemical is added so leaks can't go unnoticed | An LPG cooking cylinder with its regulator attached |
-| [ ] | `middle-berth` | On Indian Railways sleeper coaches, why does the middle berth fold flat against the wall? | So the lower berth works as a seat for three people during the day | An Indian Railways sleeper compartment, the middle berth folded up against the wall |
-| [ ] | `stay-on-tab` | Why did drink cans switch from pull off rings to tabs that stay attached? | Loose tabs were littering beaches and parks, and some people swallowed them | The top of a drink can, the stay-on tab close up |
-| [ ] | `jeans-rivets` | Why do jeans have small copper rivets at the corners of the pockets? | To stop the pockets tearing where the fabric takes the most strain | The corner of a jeans pocket, the small copper rivet close up |
-| [ ] | `school-bus-yellow` | Why are school buses in the US painted yellow? | Yellow with black lettering was easiest to see in dim morning and evening light | A yellow US school bus on a road |
-| [ ] | `safari-bottom-bar` | Why did Apple move Safari's address bar to the bottom of the iPhone screen in 2021? | So your thumb can reach it while you hold the phone one handed | An iPhone showing Safari, the address bar at the bottom of the screen |
-| [ ] | `ctrl-alt-del` | Why did the IBM PC make you press Ctrl, Alt and Delete together to restart it? | So a restart couldn't happen by accident: it needed both hands | The original IBM PC keyboard, with Ctrl, Alt and Delete in view |
-| [ ] | `pressure-cooker-whistle` | Why does an Indian pressure cooker let out a loud whistle every so often? | The weight on the lid lifts when pressure gets high, letting out steam | An Indian pressure cooker on a stove, the whistle on its lid |
-| [ ] | `rupee-tactile-marks` | Why do most Indian banknotes have a small raised shape printed near one edge? | It lets people who can't see well tell the notes apart by touch | The small raised shape near the edge of a ₹100 or ₹500 note, close up |
-| [ ] | `safety-match` | Why does a safety match only light when it's struck on the side of its box? | Half of what starts the flame is on the box's strip, not the match | A matchbox, its brown striking strip beside a match head |
+| [x] | `hexagonal-pencil` | Why are most wooden pencils made with six flat sides instead of being round? | Flat sides stop them rolling off a desk and give fingers a grip | A wooden pencil close up, its six flat sides visible |
+| [x] | `padlock-hole` | Why do many padlocks have a tiny hole in the bottom of the body? | It lets rainwater drain out so the lock doesn't rust or freeze | A padlock from below, the tiny hole in its base visible |
+| [x] | `convex-side-mirror` | Why do some car side mirrors warn that objects are closer than they appear? | The mirror bulges outward to show a wider view, which shrinks things | A car side mirror with "Objects in mirror are closer than they appear" on it |
+| [x] | `lpg-smell` | Why does the gas from an LPG cooking cylinder smell so strongly of rotten cabbage? | A strong-smelling chemical is added so leaks can't go unnoticed | An LPG cooking cylinder with its regulator attached |
+| [x] | `middle-berth` | On Indian Railways sleeper coaches, why does the middle berth fold flat against the wall? | So the lower berth works as a seat for three people during the day | An Indian Railways sleeper compartment, the middle berth folded up against the wall |
+| [x] | `stay-on-tab` | Why did drink cans switch from pull off rings to tabs that stay attached? | Loose tabs were littering beaches and parks, and some people swallowed them | The top of a drink can, the stay-on tab close up |
+| [x] | `jeans-rivets` | Why do jeans have small copper rivets at the corners of the pockets? | To stop the pockets tearing where the fabric takes the most strain | The corner of a jeans pocket, the small copper rivet close up |
+| [x] | `school-bus-yellow` | Why are school buses in the US painted yellow? | Yellow with black lettering was easiest to see in dim morning and evening light | A yellow US school bus on a road |
+| [x] | `safari-bottom-bar` | Why did Apple move Safari's address bar to the bottom of the iPhone screen in 2021? | So your thumb can reach it while you hold the phone one handed | An iPhone showing Safari, the address bar at the bottom of the screen |
+| [x] | `ctrl-alt-del` | Why did the IBM PC make you press Ctrl, Alt and Delete together to restart it? | So a restart couldn't happen by accident: it needed both hands | The original IBM PC keyboard, with Ctrl, Alt and Delete in view |
+| [x] | `pressure-cooker-whistle` | Why does an Indian pressure cooker let out a loud whistle every so often? | The weight on the lid lifts when pressure gets high, letting out steam | An Indian pressure cooker on a stove, the whistle on its lid |
+| [x] | `rupee-tactile-marks` | Why do most Indian banknotes have a small raised shape printed near one edge? | It lets people who can't see well tell the notes apart by touch | The small raised shape near the edge of a ₹100 or ₹500 note, close up |
+| [x] | `safety-match` | Why does a safety match only light when it's struck on the side of its box? | Half of what starts the flame is on the box's strip, not the match | A matchbox, its brown striking strip beside a match head |
 
 ## 3. Medium questions (15)
 
 | Done | File | Question | Right answer | What it should show |
 |---|---|---|---|---|
-| [ ] | `chips-packet-air` | Why is a packet of chips so puffed up with air? | It's filled with nitrogen, which keeps chips fresh and stops them breaking | A sealed chips packet, puffed up with air |
-| [ ] | `indian-plug-earth-pin` | Why is the top pin on an Indian three-pin plug longer and thicker than the other two? | It connects to earth first, lets go last, and won't fit a live hole | An Indian three-pin plug from the side, the longer, thicker top pin visible |
-| [ ] | `matka-cooling` | Why does water stored in a clay matka stay cooler than the room around it? | Water seeps through the clay and evaporates, taking heat with it | A clay matka water pot |
-| [ ] | `fan-regulator-heat` | Why did the old, bulky ceiling fan regulators in Indian homes get warm to the touch? | They slowed the fan by burning off extra electricity as heat | An old, bulky ceiling fan regulator on a switchboard |
-| [ ] | `jaali-screens` | Why do many old buildings in Rajasthan have windows filled with carved stone lattice, called jaali? | It lets breeze and light in while blocking harsh sun and outside eyes | A carved stone jaali window seen from inside, light coming through |
-| [ ] | `auto-rickshaw-three-wheels` | Why does an auto-rickshaw have three wheels and handlebars instead of a steering wheel? | It started life as a scooter, with two back wheels and a load bed added | An auto-rickshaw from the front, its handlebars visible |
-| [ ] | `plane-ashtray` | Why do planes still have ashtrays by the toilet door when smoking has been banned for decades? | If someone smokes anyway, the cigarette needs a safe place to go | The ashtray on an aeroplane toilet door, under the no-smoking sign |
-| [ ] | `stop-sign-octagon` | Why are stop signs in the US eight sided? | Planners gave more sides to bigger dangers, and stopping ranked near the top | A US stop sign (the current one has a watermark and only shows on your machine) |
-| [ ] | `golden-gate-orange` | Why is the Golden Gate Bridge painted orange? | Its architect thought it suited the hills and stood out against sea and sky | The Golden Gate Bridge, its orange towers against the hills and sky |
-| [ ] | `crosswalk-buttons` | Why do so many pedestrian crossing buttons in big cities seem to do nothing? | Many really do nothing, because computers now time the lights for the traffic | A worn "push button for walk signal" box on a city street pole |
-| [ ] | `button-verbs` | Why do well designed pop-up messages label the button 'Delete' or 'Save' instead of 'OK'? | People read buttons more than messages, so buttons should say what happens | Two pop-ups side by side: one with OK and Cancel, one with Delete and Cancel |
-| [ ] | `power-symbol` | Why is the power symbol a line and a circle? | It combines the 1 for on and the 0 for off marked on switches | The power symbol on a button, close up |
-| [ ] | `apple-logo-bite` | Why does the Apple logo have a bite taken out of it? | So that at small sizes it still read as an apple, not a cherry | The Apple logo |
-| [ ] | `plane-window-hole` | Why is there a tiny hole in the middle pane of a plane's window? | It lets the outer pane take the pressure and stops the window misting | An aeroplane window close up, the tiny hole in the inner pane visible |
-| [ ] | `toothpaste-marks` | What do the coloured squares at the bottom end of a toothpaste tube mean? | They tell the machine where to cut and seal each tube | The crimped end of a toothpaste tube, the small coloured square visible |
+| [x] | `chips-packet-air` | Why is a packet of chips so puffed up with air? | It's filled with nitrogen, which keeps chips fresh and stops them breaking | A sealed chips packet, puffed up with air |
+| [x] | `indian-plug-earth-pin` | Why is the top pin on an Indian three-pin plug longer and thicker than the other two? | It connects to earth first, lets go last, and won't fit a live hole | An Indian three-pin plug from the side, the longer, thicker top pin visible |
+| [x] | `matka-cooling` | Why does water stored in a clay matka stay cooler than the room around it? | Water seeps through the clay and evaporates, taking heat with it | A clay matka water pot |
+| [x] | `fan-regulator-heat` | Why did the old, bulky ceiling fan regulators in Indian homes get warm to the touch? | They slowed the fan by burning off extra electricity as heat | An old, bulky ceiling fan regulator on a switchboard |
+| [x] | `jaali-screens` | Why do many old buildings in Rajasthan have windows filled with carved stone lattice, called jaali? | It lets breeze and light in while blocking harsh sun and outside eyes | A carved stone jaali window seen from inside, light coming through |
+| [x] | `auto-rickshaw-three-wheels` | Why does an auto-rickshaw have three wheels and handlebars instead of a steering wheel? | It started life as a scooter, with two back wheels and a load bed added | An auto-rickshaw from the front, its handlebars visible |
+| [x] | `plane-ashtray` | Why do planes still have ashtrays by the toilet door when smoking has been banned for decades? | If someone smokes anyway, the cigarette needs a safe place to go | The ashtray on an aeroplane toilet door, under the no-smoking sign |
+| [x] | `stop-sign-octagon` | Why are stop signs in the US eight sided? | Planners gave more sides to bigger dangers, and stopping ranked near the top | A US stop sign (the current one has a watermark and only shows on your machine) |
+| [x] | `golden-gate-orange` | Why is the Golden Gate Bridge painted orange? | Its architect thought it suited the hills and stood out against sea and sky | The Golden Gate Bridge, its orange towers against the hills and sky |
+| [x] | `crosswalk-buttons` | Why do so many pedestrian crossing buttons in big cities seem to do nothing? | Many really do nothing, because computers now time the lights for the traffic | A worn "push button for walk signal" box on a city street pole |
+| [x] | `button-verbs` | Why do well designed pop-up messages label the button 'Delete' or 'Save' instead of 'OK'? | People read buttons more than messages, so buttons should say what happens | Two pop-ups side by side: one with OK and Cancel, one with Delete and Cancel |
+| [x] | `power-symbol` | Why is the power symbol a line and a circle? | It combines the 1 for on and the 0 for off marked on switches | The power symbol on a button, close up |
+| [x] | `apple-logo-bite` | Why does the Apple logo have a bite taken out of it? | So that at small sizes it still read as an apple, not a cherry | The Apple logo |
+| [x] | `plane-window-hole` | Why is there a tiny hole in the middle pane of a plane's window? | It lets the outer pane take the pressure and stops the window misting | An aeroplane window close up, the tiny hole in the inner pane visible |
+| [x] | `toothpaste-marks` | What do the coloured squares at the bottom end of a toothpaste tube mean? | They tell the machine where to cut and seal each tube | The crimped end of a toothpaste tube, the small coloured square visible |
 
 ## 4. Replace these (7)
 
@@ -110,10 +117,10 @@ These pictures show the wrong thing or are too hard to read.
 
 | Done | File | Question | Right answer | Tier | What's wrong | What it should show |
 |---|---|---|---|---|---|---|
-| [ ] | `menu-ellipsis` | Why do some menu commands end in three dots, like Save As…? | The command will ask you for details before it does anything | M | An icon chart, not a menu | A File menu open, with Save and Save As… |
+| [x] | `menu-ellipsis` | Why do some menu commands end in three dots, like Save As…? | The command will ask you for details before it does anything | M | An icon chart, not a menu | A File menu open, with Save and Save As… |
 | [ ] | `shinkansen-nose` | Why does Japan's 500 series bullet train have such a long, pointed nose? | To stop the loud boom it made when shooting into a tunnel at speed | M | The wrong train | The 500 series Shinkansen from the side, its long nose in view |
-| [ ] | `manhole-round` | Why are most manhole covers round? | A round cover can't fall through its own hole at any angle | E | Blurry | A round manhole cover in a street, close up |
-| [ ] | `jerrycan-handles` | Why does a jerrycan have three handles side by side? | So one soldier can carry two cans at once, or pass them quickly down a line | E | The handles are hard to see | A jerrycan, its three handles clearly visible |
+| [x] | `manhole-round` | Why are most manhole covers round? | A round cover can't fall through its own hole at any angle | E | Blurry | A round manhole cover in a street, close up |
+| [x] | `jerrycan-handles` | Why does a jerrycan have three handles side by side? | So one soldier can carry two cans at once, or pass them quickly down a line | E | The handles are hard to see | A jerrycan, its three handles clearly visible |
 | [ ] | `anglepoise-springs` | Why does an Anglepoise lamp stay exactly where you leave it? | Springs balance the weight of the arm and shade in any position | M | The springs aren't visible | An Anglepoise lamp from the side, the springs at its base visible |
 | [ ] | `rubber-band-scroll` | Why does a list on an iPhone stretch and bounce back when you scroll past the end? | It shows you've hit the end, and that the phone hasn't frozen | M | Too small and blurry | An iPhone list pulled past its end, the gap showing |
 | [ ] | `mac-menu-bar` | Why does the Mac keep its menu bar along the very top edge of the screen? | The pointer stops at the screen edge, so you can't overshoot it | M | The menu bar is hard to make out | A Mac screen, the menu bar along the top edge clear |
@@ -134,12 +141,8 @@ These play fine without a picture.
 
 ## Still owed: credit lines
 
-**What's needed:** the photographer or source, and the licence, for each of the 39 published pictures that don't have one. Several look like brand or museum photos (Herman Miller, Knoll, Vitra), which usually aren't free to reuse, so check those first.
+**What's needed:** the photographer or source, and the licence, for each published picture that doesn't have one (82 at the last count; `npm run check:content` gives the number). Several are brand, museum or stock photos (Lay's, Colgate, Herman Miller, Knoll, Vitra), which usually aren't free to reuse, so check those first. Two look AI-generated (they carry a Gemini sparkle mark): `matka-cooling` and your runway diagram; worth saying so in their credit.
 
-**Already credited:**
-- `daily-kadokeshi-corners`: Kokuyo product photo (kokuyostore.com).
-- `coke-bottle`: patent drawing, public domain.
-- `winglets`: NASA, public domain.
-- `daily-ruler-zero` and `daily-progress-head-start`: drawn for this site.
+**How:** in the builder, each card in New questions and the Daily tab now has a Credit box next to its picture. For live questions, open one from the Questions tab and use Edit.
 
-The 39 without a credit: daily-lift-mirrors (where is it from?), aeron-mesh, aircraft-window-corners, anglepoise-springs, atm-braille, barcelona-chair, bic-cap-hole, calculator-keypad, chandigarh-name, coin-edges, command-key-symbol, context-menu, eames-plywood, escalator-brushes, estop-mushroom, fuel-door-arrow, golf-dimples, hamburger-icon, jerrycan-handles, keyboard-bumps, keyboard-hidden-targets, mac-menu-bar, manhole-round, menu-ellipsis, paimio-back, phone-keypad, phone-zero, qr-finder, qwerty, rubber-band-scroll, shinkansen-nose, slide-to-unlock, swiss-clock-pause, thonet-14, tube-map, tulip-pedestal, wassily-steel, cursor-tilt, stop-sign-octagon.
+**Already credited:** `daily-kadokeshi-corners` (Kokuyo), `coke-bottle` (patent drawing, public domain), `winglets` (NASA, public domain), and the drawings made for this site (ruler, progress bar, trolley coin lock, rumble strips, runway numbers).

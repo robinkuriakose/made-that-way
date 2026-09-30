@@ -112,7 +112,7 @@ mindmap
 | End screen: score, levels, whys and badges earned, Play again, signing (one tap when the name is known), this week's board, review by level | `src/components/EndScreen.jsx:71`; sign form at `:11` |
 | Collection: badges and every why uncovered, each opening its reasoning | `src/components/WhysScreen.jsx:7` |
 | Question of the day: answer in place, then the reason, how everyone did, streak and average; on a later visit the same day it folds to one line | `src/components/DailyCard.jsx:26` |
-| The hero deck (GSAP): 24 picture cards, unseen first, piled like prints. Drag or flick the top card either way (or press the arrow keys) and it slides out, then tucks in behind the pile as the next comes forward; no counter or buttons, one hint line; a deal from below on arrival, a nudge if nobody touches it, a tilt and glare under the mouse. Tap (or Enter) flips the card in 3D and grows it into a window with the picture, its question, "Play this one" and "Another one"; it flips back into the pile on close. Less motion: no throws or flips, just quick fades | `src/components/HeroDeck.jsx:189`; the pile's places at `:20` (`SLOTS`), sending a card to the back at `:263` (`throwTop`), the drag at `:345`, the flip window at `:55` (`FlipDialog`) |
+| The hero deck (GSAP): 24 picture cards, unseen first, piled like prints. Drag or flick the top card either way (or press the arrow keys) and it slides out and flows straight back to tuck in behind the pile (no pause at the far end) as the next comes forward; no counter or buttons, one hint line; a deal from below on arrival, a nudge if nobody touches it, a tilt and glare under the mouse. Tap (or Enter) flips the card in 3D and grows it into a window with the picture, its question, "Play this one" and "Another one", which turns the window over on the spot to the next card's question (the pile moves on underneath); it flips back into the pile on close. Less motion: no throws or flips, just quick fades | `src/components/HeroDeck.jsx:282`; the pile's places at `:20` (`SLOTS`), sending a card to the back at `:359` (`throwTop`), the next card while the window is open at `:414` (`nextWhileOpen`), the drag at `:451`, the flip window at `:56` (`FlipDialog`, its turn to the next question at `:130`) |
 | "Call me <name>" top right: the name opens the profile, the pencil renames (3 changes). Everyone starts with a random name like fuzzyheron42 | `src/components/NameTag.jsx:8`, `:24` (`RenameModal`); names from `src/lib/names.js:57` (`randomName`), kept by `src/lib/leaderboard.js:98` (`placeholderName`) |
 | This week's board, with when it resets | `src/components/Leaderboard.jsx` (`Leaderboard`, `BoardList`) |
 | Topic picker: pills, at least 3 | `src/components/TopicPicker.jsx:7` |
@@ -160,11 +160,12 @@ mindmap
 |---|---|
 | Shell: sign-in gate, tabs, toast, "Play in test mode", Lock. Making a question from a suggestion, or saving one opened from a rewrite, marks that done | `src/builder/BuilderApp.jsx:32`; tabs at `:17` |
 | Review queue for new questions, oldest first | `src/builder/ReviewQueue.jsx:97`; card at `:34` |
+| On each card in review and in the daily queue: the difficulty (switch it there), the picture (add or replace by choosing a file or dropping one on), its description and credit, and the note on what the picture should show (`pictureBrief`) | `src/builder/QuestionTools.jsx:42` |
 | Rewrites: changes Claude proposes to existing questions, now and proposed side by side (question, each option, any explanation), easy ones first; use it, edit it first, or keep it as it is | `src/builder/RewritesPanel.jsx:124`; `:15` (`changedParts`) |
 | Questions: how each tier stands against the level plan, pictures in bulk (file name = question id), Easy/Medium/Hard tabs newest first, tier switch per question, mismatch flags, search, Live/Hidden, topic filter, hide, export | `src/builder/QuestionList.jsx:124`; plan at `:44` (`PlanHealth`), bulk at `:70` (`BulkPictures`) |
 | Add or edit a question: difficulty, topics, live checks and word counts, drafts kept on the device, no overwriting someone else's edit; can start from a suggestion | `src/builder/QuestionForm.jsx:83` |
 | Image upload: WebP plus a thumbnail, alt text, credit, "only show after answering" | `src/builder/ImageField.jsx:52` |
-| Daily: the queue in order, move and take out, and how each day went | `src/builder/DailyPanel.jsx:13` |
+| Daily: the queue in order, move and take out, difficulty and picture on each, and how each day went | `src/builder/DailyPanel.jsx:14` |
 | Flags from players | `src/builder/FlagsPanel.jsx:84` |
 | Players: names on the board, hide or show; the Legends wall with signatures below, hide or show | `src/builder/PlayersPanel.jsx:7`, `src/builder/LegendsReview.jsx` |
 | Suggestions from players: make one a question (the form opens filled in and credited), mark used, or not this one | `src/builder/SuggestionsPanel.jsx:29`; `:13` (`suggestionToPrefill`) |
@@ -179,7 +180,7 @@ mindmap
 | What | Where |
 |---|---|
 | Database client (Neon in the cloud, PGlite locally), connected on first use; a missing database is a 503 with a plain reason, not a crash | `server/db.js` (`connectionString`, `NotConfigured`) |
-| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:47` (`ensureSchema`), `:69` (`createTables`), `:352` (`seed`); `question_edits` at `:114`, seeded at `:394`; `question_stats` at `:253`, daily answers folded in once at `:287`; `legends`, `feedback`, `suggestions` at `:300`, `:316`, `:329`; pictures from `site-images.json` attached at `:418` |
+| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:47` (`ensureSchema`), `:69` (`createTables`), `:352` (`seed`); `question_edits` at `:114`, seeded at `:394`; `question_stats` at `:253`, daily answers folded in once at `:287`; `legends`, `feedback`, `suggestions` at `:300`, `:316`, `:329`; pictures from `site-images.json` attached at `:419` (also replacing a local-only placeholder) |
 | Builder password and tokens | `server/auth.js` |
 | Request helpers, id and day checks, the hashed network key | `server/http.js` |
 | Rate limits per network, kept in the database | `server/limits.js` (`hit`, `isBlocked`, `LIMITS`) |
@@ -189,7 +190,7 @@ mindmap
 | `POST /api/events`: page opened, run started (which registers the run), left, restarted, resumed, level cleared | `server/routes/events.js` (`record`) |
 | `POST /api/sessions`: save a finished run, checked against its registered run and the real questions; adds its answers to `question_stats` | `server/routes/sessions.js` |
 | `GET/POST/PATCH /api/leaderboard`: this week's board and the player's private best, signing, renaming | `server/routes/leaderboard.js:64` (`board`), `:99` (`sign`), `:163` (`rename`) |
-| `GET/POST /api/daily`: the question of the day, answered and marked here; a real first answer also counts in `question_stats` | `server/routes/daily.js:34` (`questionFor`), `:91` (`statsFor`) |
+| `GET/POST /api/daily`: the question of the day (the first queued one that has a picture; one without waits), answered and marked here; a real first answer also counts in `question_stats` | `server/routes/daily.js:36` (`questionFor`), `:95` (`statsFor`) |
 | `POST /api/flags`: a player flags a question | `server/routes/flags.js` |
 | `GET/POST /api/player/legends`: the Legends wall; signing it needs a checked run that cleared the plan's last level | `server/routes/player/legends.js:44` (`list`), `:57` (`add`) |
 | `GET /api/player/profile`: one device's totals, levels and last runs, worked out in the database | `server/routes/player/profile.js` |
@@ -237,7 +238,8 @@ mindmap
 | Round 12: name tag, home hero, folded daily, how it works, Legends, profile, suggest, feedback, signature pad, medal, the finale | `:3432` onwards; finale at `:4213` |
 | Builder round 12: plan health, bulk pictures, tier tabs, suggestions, feedback, legends review | `:4744` |
 | Builder rewrites: now and proposed | `:4989` |
-| The hero deck, and the card flipped open | `:4885`, `:5060` |
+| The hero deck, and the card flipped open | `:4885`, `:5002` |
+| Builder: difficulty and picture on a card | `:5145` |
 
 ## Tooling
 

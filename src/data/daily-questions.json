@@ -367,8 +367,7 @@
       "image": {
         "src": "/images/daily-pizza-box-table.webp",
         "thumb": "/images/thumbs/daily-pizza-box-table.webp",
-        "alt": "A pizza in its open box, seen from above, with a small white three-legged plastic stand in the middle.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A small white three-legged plastic stand standing in the middle of a pizza."
       }
     },
     {
@@ -407,8 +406,7 @@
       "image": {
         "src": "/images/daily-atm-card-first.webp",
         "thumb": "/images/thumbs/daily-atm-card-first.webp",
-        "alt": "A cash machine: the screen says \"Please take your card\", the card sticks out of its slot, and the cash slot below is still closed.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A cash machine screen saying \"Please take your card to continue with your transaction\", with a drawing of a hand taking the card."
       }
     },
     {
@@ -445,8 +443,7 @@
       "image": {
         "src": "/images/daily-tape-measure-hook.webp",
         "thumb": "/images/thumbs/daily-tape-measure-hook.webp",
-        "alt": "The end of a yellow tape measure, close up: the metal hook is held by two rivets in slots, with room to slide a little.",
-        "credit": "Illustration: Made That Way"
+        "alt": "The end of a yellow tape measure, close up: the metal hook held by two rivets in slots, loose enough to slide."
       }
     },
     {
@@ -483,8 +480,7 @@
       "image": {
         "src": "/images/daily-cracker-holes.webp",
         "thumb": "/images/thumbs/daily-cracker-holes.webp",
-        "alt": "A square golden cracker, close up, with neat rows of small holes punched through it.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A square golden cracker with neat rows of small holes across it."
       }
     },
     {
@@ -523,9 +519,175 @@
       "image": {
         "src": "/images/daily-mirror-night-tab.webp",
         "thumb": "/images/thumbs/daily-mirror-night-tab.webp",
-        "alt": "A car's rear-view mirror seen from the driver's seat, with the small tab on its underside picked out.",
-        "credit": "Illustration: Made That Way"
+        "alt": "A hand reaching for the small tab on the underside of a car's rear-view mirror, circled in red."
       }
+    },
+    {
+      "id": "daily-sachet-tear-notch",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do sachets have a tiny V-shaped cut at one edge?",
+      "options": [
+        "It lets air out when the sachet is sealed",
+        "It starts the tear, so you don't need scissors",
+        "It marks the batch number for the factory",
+        "It shows which end holds the most product"
+      ],
+      "correctIndex": 1,
+      "hint": "Try tearing a sachet anywhere else along its edge.",
+      "explanationRight": "Sachet film is made to be tough: it has to survive filling machines, shipping and pockets. That same toughness makes smooth plastic hard to rip open by hand, because a tear needs somewhere to start. The little V-cut is that start, made at the factory. Pull at the notch and the tear runs across in a clean line, no scissors or teeth needed.",
+      "explanationWrong": [
+        "Sachets are sealed with heat, not by pushing air out through a cut. The V is a head start for your fingers: tough film is hard to rip open, and the notch gives the tear somewhere to begin.",
+        null,
+        "Batch numbers are printed, not cut. The notch is where you open it: tough plastic film is hard to tear by hand until a tear has somewhere to start.",
+        "The contents settle anywhere. The notch is a starting point for the tear, so you can open the sachet without scissors."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Packerio: What is a tear notch and why does it matter for your packaging?",
+      "sourceUrl": "https://packerio.com/what-is-tear-notch-and-why-does-it-matter-for-your-packaging/",
+      "tags": [
+        "packaging",
+        "opening",
+        "india"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "pictureBrief": "A shampoo or ketchup sachet close up, the small V-shaped notch at its edge in view."
+    },
+    {
+      "id": "daily-hotel-keycard-slot",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do hotel room lights only work with your key card in a slot?",
+      "options": [
+        "It proves to reception that you've checked in",
+        "So nothing's left running when you go out",
+        "It charges the key card so it keeps working",
+        "It unlocks the minibar and the safe"
+      ],
+      "correctIndex": 1,
+      "hint": "What happens to the lights and air conditioning when you walk out with the card?",
+      "explanationRight": "Guests pay for the room, not the electricity, so plenty of them leave the lights, fan and air conditioning running all day while they're out. Hotels fixed it with the one thing every guest has to take with them: the key card. It sits in a slot by the door that switches the room's power on, and when you take it out to leave, the power goes off a few seconds later. Makers of these switches say they can cut a room's energy costs by up to 30 percent.",
+      "explanationWrong": [
+        "Check-in is recorded when the card is made at the desk. The slot is a power switch: take the card out to leave, and the lights and air conditioning switch off behind you.",
+        null,
+        "Hotel key cards don't need charging. The slot switches the room's power on, so the moment you take your card and go, nothing is left running in an empty room.",
+        "The minibar and safe have their own locks. The slot is the room's power switch: the card you must take with you is what turns everything off when you leave."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Ecolabel Toolbox: Key card systems that switch off electricity in rooms",
+      "sourceUrl": "https://www.ecolabeltoolbox.com/en/solutions-techniques/key-card-systems-that-switch-off-electricity-in-rooms-61",
+      "tags": [
+        "hotels",
+        "energy",
+        "behaviour"
+      ],
+      "themes": [
+        "travel",
+        "everyday"
+      ],
+      "pictureBrief": "The key card slot on the wall by a hotel room door, with a card in it."
+    },
+    {
+      "id": "daily-fizzy-bottle-feet",
+      "topic": "industrial",
+      "difficulty": "medium",
+      "stem": "Why do fizzy drink bottles have bumpy feet, but water bottles flat bottoms?",
+      "options": [
+        "The feet help the bottle grip wet surfaces",
+        "Gas pressure would bulge a flat bottom so it rocks",
+        "The bumps tell sugary drinks apart from water",
+        "The feet let cold air around it to chill it"
+      ],
+      "correctIndex": 1,
+      "hint": "Squeeze a sealed bottle of fizzy drink. Which way is the gas pushing?",
+      "explanationRight": "The gas in a fizzy drink presses outward on every part of the bottle, at two or three times the pressure in a car tyre. A flat plastic bottom would be pushed out into a dome, and the bottle would rock or tip over. The petal-shaped feet take that force into the valleys between them, while their tips give the bottle something steady to stand on. Still water has no gas pushing out, so its bottle can keep a simple flat bottom.",
+      "explanationWrong": [
+        "The feet only touch the table at their tips, so they grip no better. They're there because gas presses outward inside a fizzy drink, and a flat plastic base would bulge until the bottle rocked.",
+        null,
+        "Labels already tell drinks apart. The shape is about pressure: the gas in a fizzy drink pushes the base outward, and the petal feet stop it bulging into a rocker.",
+        "Chilling has nothing to do with it. Gas pressure inside a fizzy drink would push a flat base out into a dome; the petal shape takes that force and keeps the bottle standing."
+      ],
+      "confidence": "accurate",
+      "sourceName": "iBottler: Why do soda bottles have that 5-point base?",
+      "sourceUrl": "https://ibottler.com/why-do-soda-bottles-have-that-5-point-base-a-deep-dive-into-petaloid-design/",
+      "tags": [
+        "packaging",
+        "pressure",
+        "drinks"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "pictureBrief": "The bottom of a plastic fizzy drink bottle, its five petal-shaped feet in view, beside a flat-bottomed water bottle."
+    },
+    {
+      "id": "daily-gmail-undo-send",
+      "topic": "ui",
+      "difficulty": "medium",
+      "stem": "Why can Gmail undo an email a few seconds after you hit Send?",
+      "options": [
+        "It deletes the email from the other person's inbox",
+        "It hasn't sent it yet: it waits a few seconds",
+        "Emails take a few minutes to travel between servers",
+        "It only undoes emails nobody has opened yet"
+      ],
+      "correctIndex": 1,
+      "hint": "Could Gmail reach into someone else's inbox, or does the trick happen before that?",
+      "explanationRight": "Once an email lands in someone else's inbox, Gmail can't take it back. So Undo works by not sending it straight away. When you hit Send, Gmail holds the message for a few seconds (you choose 5, 10, 20 or 30 in settings) and only then delivers it. Press Undo during that wait and the delivery is simply cancelled, and the message goes back to your drafts. The Send button is, quietly, a countdown.",
+      "explanationWrong": [
+        "Gmail can't reach into another inbox once the email arrives. The trick is waiting: it holds your message for a few seconds after you hit Send, so Undo cancels a delivery that hasn't happened.",
+        null,
+        "Emails usually arrive in seconds. Undo works because Gmail deliberately waits a few seconds before sending, and cancels the delivery if you change your mind.",
+        "Whether anyone has read it makes no difference. The message was never sent yet: Gmail holds it for a few seconds after you press Send, and Undo cancels that."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Gmail Help: Undo sending mail",
+      "sourceUrl": "https://support.google.com/mail/answer/2819488",
+      "tags": [
+        "email",
+        "mistakes",
+        "apps"
+      ],
+      "themes": [
+        "screens"
+      ],
+      "pictureBrief": "Gmail's 'Message sent' notice at the bottom of the screen, with its Undo button."
+    },
+    {
+      "id": "daily-door-vision-panel",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do many hospital and office doors have a narrow window at eye level?",
+      "options": [
+        "It stops the door warping in damp weather",
+        "So you see someone coming before you swing it open",
+        "It makes the heavy door lighter to push",
+        "Glass lets the air conditioning reach both sides"
+      ],
+      "correctIndex": 1,
+      "hint": "Think about two people reaching the same door from opposite sides.",
+      "explanationRight": "A door that swings into a busy corridor can hit whoever is on the other side: a nurse with a tray, a child, someone in a wheelchair. A small window lets both people see each other before anyone pushes. Building rules in many countries ask for one on doors that swing both ways or cut across corridors, set low enough for children and wheelchair users to see through too. In a fire, it also lets you check what's behind a door before you open it.",
+      "explanationWrong": [
+        "Doors are built to cope with damp either way. The narrow window is there so you can see a person coming on the other side before you push the door into them.",
+        null,
+        "A small pane saves very little weight. The window is there so people on both sides can see each other before one of them swings the door into the other.",
+        "Air doesn't pass through glass. The window lets you see someone on the other side, so nobody gets hit when a door swings open into a busy corridor."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Wikipedia: Vision panel",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Vision_panel",
+      "tags": [
+        "doors",
+        "safety",
+        "buildings"
+      ],
+      "themes": [
+        "safety",
+        "everyday"
+      ],
+      "pictureBrief": "A door in a corridor with a narrow vertical window at eye level, ideally with someone visible on the other side."
     }
   ]
 }

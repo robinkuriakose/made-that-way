@@ -51,58 +51,150 @@ function Print({ question, big = false }) {
 }
 
 // The card, flipped over and grown into a window: the picture big, its
-// question, and what to do next. It flips back into the pile on close.
-function FlipDialog({ question, label, from, starting, onPlay, onClosed }) {
+// question, and what to do next. "Another one" turns it over again, on the
+// spot, to the next card's question. It flips back into the pile on close.
+function FlipDialog({ question, upNext, label, from, starting, onPlay, onNext, onClosed }) {
   const backdropRef = useRef(null);
   const flipRef = useRef(null);
   const innerRef = useRef(null);
   const backRef = useRef(null);
   const playRef = useRef(null);
-  const tl = useRef(null);
-  const closing = useRef(null);
+  const openTl = useRef(null);
+  const closing = useRef(false);
+  const turning = useRef(false);
+  const turnedIn = useRef(false);
+  const fromRef = useRef(from);
+  fromRef.current = from;
   const onClosedRef = useRef(onClosed);
   onClosedRef.current = onClosed;
+  const onNextRef = useRef(onNext);
+  onNextRef.current = onNext;
 
-  const targetRect = () => {
+  // Where the window sits for what's in it now, measured without moving it.
+  const measure = () => {
     const vw = window.innerWidth;
     const vh = window.innerHeight;
     const flip = flipRef.current;
+    const back = backRef.current;
+    const saved = { width: flip.style.width, height: flip.style.height };
     const width = Math.min(560, vw - 32);
-    gsap.set(flip, { width, height: 1 });
-    const natural = Math.ceil(backRef.current.scrollHeight);
+    flip.style.width = `${width}px`;
+    flip.style.height = '1px';
+    const natural = Math.ceil(back.scrollHeight);
+    Object.assign(flip.style, saved);
     const height = Math.min(natural, vh - 32);
-    // Only a window taller than the screen scrolls, and only once it's open.
-    backRef.current.dataset.scrolls = natural > height ? '1' : '';
+    // Only a window taller than the screen scrolls, and only once it's still.
+    back.dataset.scrolls = natural > height ? '1' : '';
     return { left: (vw - width) / 2, top: Math.max(16, (vh - height) / 2), width, height };
   };
 
-  const close = useCallback((next = null) => {
-    if (closing.current || !tl.current) return;
-    closing.current = { next };
-    backRef.current.style.overflowY = 'hidden';
-    tl.current.timeScale(calm() ? 1 : 1.35).reverse();
+  const settled = () => {
+    const back = backRef.current;
+    if (!back) return;
+    if (back.dataset.scrolls) back.style.overflowY = 'auto';
+    if (!back.contains(document.activeElement)) playRef.current?.focus({ preventScroll: true });
+  };
+
+  // Content that fades as the card turns. The buttons only fade (opacity,
+  // never hidden), so focus stays on them.
+  const fading = () => backRef.current.querySelectorAll('.flip-reveal:not(.flip-actions)');
+
+  const close = useCallback(() => {
+    if (closing.current || turning.current) return;
+    closing.current = true;
+    openTl.current?.kill();
+    const back = backRef.current;
+    const flip = flipRef.current;
+    const inner = innerRef.current;
+    back.style.overflowY = 'hidden';
+    const r = fromRef.current.getBoundingClientRect();
+    const done = () => {
+      gsap.set(fromRef.current, { autoAlpha: 1 });
+      onClosedRef.current();
+    };
+    if (calm()) {
+      gsap.to([backdropRef.current, flip], { autoAlpha: 0, duration: 0.18, onComplete: done });
+      return;
+    }
+    gsap
+      .timeline({ onComplete: done })
+      .to(back.querySelectorAll('.flip-reveal'), { autoAlpha: 0, y: 10, duration: 0.18, stagger: 0.02, ease: 'power2.in' }, 0)
+      .to(flip, { left: r.left, top: r.top, width: r.width, height: r.height, duration: 0.75, ease: 'expo.inOut' }, 0.06)
+      .to(inner, { rotationY: 0, duration: 0.75, ease: 'power3.inOut' }, 0.06)
+      .to(inner, { keyframes: [{ z: 140, duration: 0.37, ease: 'power2.out' }, { z: 0, duration: 0.38, ease: 'power2.in' }] }, 0.06)
+      .to(backdropRef.current, { autoAlpha: 0, duration: 0.45, ease: 'power2.inOut' }, 0.34);
   }, []);
+
+  // "Another one": the card turns away until it's edge on, swaps to the next
+  // question out of sight, and turns back to face you.
+  const next = () => {
+    if (closing.current || turning.current) return;
+    turning.current = true;
+    openTl.current?.progress(1);
+    backRef.current.style.overflowY = 'hidden';
+    if (calm()) {
+      turnedIn.current = true;
+      onNextRef.current();
+      return;
+    }
+    gsap
+      .timeline()
+      .to(fading(), { autoAlpha: 0, duration: 0.2, ease: 'power1.in' }, 0)
+      .to(backRef.current.querySelector('.flip-actions'), { opacity: 0, duration: 0.2, ease: 'power1.in' }, 0)
+      .to(innerRef.current, { z: 90, duration: 0.3, ease: 'power2.out' }, 0)
+      .to(innerRef.current, {
+        rotationY: 270,
+        duration: 0.3,
+        ease: 'power2.in',
+        onComplete: () => {
+          turnedIn.current = true;
+          onNextRef.current();
+        },
+      }, 0);
+  };
+
+  // The next question is in place (still edge on): size the window to it and
+  // turn it back to face you.
+  useLayoutEffect(() => {
+    if (!turnedIn.current) return;
+    turnedIn.current = false;
+    const flip = flipRef.current;
+    const inner = innerRef.current;
+    const target = measure();
+    const done = () => {
+      turning.current = false;
+      settled();
+    };
+    if (calm()) {
+      gsap.set(flip, target);
+      done();
+      return;
+    }
+    gsap.set(inner, { rotationY: 90 });
+    gsap
+      .timeline({ onComplete: done })
+      .to(flip, { ...target, duration: 0.45, ease: 'power3.out' }, 0)
+      .to(inner, { rotationY: 180, z: 0, duration: 0.45, ease: 'power2.out' }, 0)
+      .fromTo(fading(), { y: 14, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.45, stagger: 0.05, ease: 'power3.out' }, 0.12)
+      .to(backRef.current.querySelector('.flip-actions'), { opacity: 1, duration: 0.35, ease: 'power2.out' }, 0.22);
+  }, [question.id]);
+
+  // Load the next card's full picture early, so the turn never shows a gap.
+  useEffect(() => {
+    if (upNext?.image?.src) new Image().src = upNext.image.src;
+  }, [upNext?.id]);
 
   useLayoutEffect(() => {
     const flip = flipRef.current;
-    const start = from.getBoundingClientRect();
-    const target = targetRect();
+    const back = backRef.current;
+    const card = fromRef.current;
+    const start = card.getBoundingClientRect();
+    const target = measure();
     gsap.set(flip, { left: start.left, top: start.top, width: start.width, height: start.height, autoAlpha: 1 });
-    gsap.set(from, { autoAlpha: 0 });
+    gsap.set(card, { autoAlpha: 0 });
     document.body.classList.add('no-scroll');
 
-    const reveal = backRef.current.querySelectorAll('.flip-reveal');
-    const back = backRef.current;
-    const t = gsap.timeline({
-      onComplete: () => {
-        if (back.dataset.scrolls) back.style.overflowY = 'auto';
-        if (!back.contains(document.activeElement)) playRef.current?.focus({ preventScroll: true });
-      },
-      onReverseComplete: () => {
-        gsap.set(from, { autoAlpha: 1 });
-        onClosedRef.current(closing.current?.next ?? null);
-      },
-    });
+    const t = gsap.timeline({ onComplete: settled });
     if (calm()) {
       t.set(flip, target).set(innerRef.current, { rotationY: 180 }).fromTo([backdropRef.current, flip], { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.2 });
     } else {
@@ -114,10 +206,11 @@ function FlipDialog({ question, label, from, starting, onPlay, onClosed }) {
           { keyframes: [{ z: 170, duration: 0.47, ease: 'power2.out' }, { z: 0, duration: 0.48, ease: 'power2.in' }] },
           0,
         )
-        .fromTo(reveal, { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.07, ease: 'power3.out' }, 0.6);
+        .fromTo(back.querySelectorAll('.flip-reveal'), { y: 18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.6, stagger: 0.07, ease: 'power3.out' }, 0.6);
     }
-    tl.current = t;
-    closing.current = null;
+    openTl.current = t;
+    closing.current = false;
+    turning.current = false;
     // The window takes focus now; Play gets it once it has faded in.
     flip.focus({ preventScroll: true });
 
@@ -138,7 +231,7 @@ function FlipDialog({ question, label, from, starting, onPlay, onClosed }) {
     };
     // Keep it centred if the window changes size once it's open.
     const onResize = () => {
-      if (t.progress() === 1 && !closing.current) gsap.set(flip, targetRect());
+      if (t.progress() === 1 && !closing.current && !turning.current) gsap.set(flip, measure());
     };
     document.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);
@@ -147,9 +240,9 @@ function FlipDialog({ question, label, from, starting, onPlay, onClosed }) {
       document.removeEventListener('keydown', onKey);
       window.removeEventListener('resize', onResize);
       document.body.classList.remove('no-scroll');
-      gsap.set(from, { autoAlpha: 1 });
+      gsap.set(fromRef.current, { autoAlpha: 1 });
     };
-  }, [from, close]);
+  }, []);
 
   return createPortal(
     <>
@@ -161,20 +254,20 @@ function FlipDialog({ question, label, from, starting, onPlay, onClosed }) {
           </div>
           <div className="flip-face flip-back" ref={backRef}>
             <div className="flip-picture flip-reveal">
-              <img src={question.image.src} alt={question.image.alt} decoding="async" />
+              <img key={question.id} src={question.image.src} alt={question.image.alt} decoding="async" />
               <button type="button" className="flip-close" aria-label="Close" onClick={() => close()}>
                 <span aria-hidden="true">×</span>
               </button>
             </div>
             <p className="flip-label flip-reveal">{label}</p>
-            <h2 id="flip-title" className="flip-stem flip-reveal">
+            <h2 id="flip-title" className="flip-stem flip-reveal" aria-live="polite">
               {question.stem}
             </h2>
             <div className="flip-actions flip-reveal">
               <button ref={playRef} type="button" className="button button-primary button-big" onClick={onPlay} disabled={starting}>
                 {starting ? 'Loading…' : 'Play this one'}
               </button>
-              <button type="button" className="text-button" onClick={() => close('another')}>
+              <button type="button" className="text-button" onClick={next}>
                 Another one
               </button>
             </div>
@@ -228,13 +321,16 @@ export default function HeroDeck({ tiles, labelFor, starting, onPlay }) {
       return;
     }
 
+    const shown = openRef.current?.index;
     els.forEach((el, p) => {
       if (!el || drag.current?.el === el) return;
       if (!el.dataset.placed) {
         gsap.set(el, pose(VISIBLE));
         el.dataset.placed = '1';
       }
-      gsap.to(el, { ...pose(p), duration: calm() ? 0 : 0.85, ease: 'expo.out', delay: calm() ? 0 : p * 0.035, overwrite: 'auto' });
+      const to = pose(p);
+      if (deck[p] === shown) delete to.autoAlpha; // it's open in the window: stays hidden in the pile
+      gsap.to(el, { ...to, duration: calm() ? 0 : 0.85, ease: 'expo.out', delay: calm() ? 0 : p * 0.035, overwrite: 'auto' });
     });
     if (refocus.current) {
       refocus.current = false;
@@ -273,23 +369,19 @@ export default function HeroDeck({ tiles, labelFor, starting, onPlay }) {
         gsap.to(el, { autoAlpha: 0, duration: 0.15, onComplete: land });
       } else {
         const speed = Math.min(2.5, Math.abs(vx));
-        const out = dir * Math.max(Math.abs(Number(gsap.getProperty(el, 'x'))) + 24, el.offsetWidth * 0.82);
+        const out = dir * Math.max(Math.abs(Number(gsap.getProperty(el, 'x'))) + 20, el.offsetWidth * 0.78);
         const back = pose(VISIBLE - 1);
+        const OUT = 0.3 - speed * 0.03; // out to the side
+        const TURN = OUT * 0.72; // the way back starts before the way out has slowed
+        const BACK = 0.5;
         gsap
           .timeline({ onComplete: land })
-          .to(el.firstChild, { rotationX: 0, rotationY: 0, '--glare': 0, duration: 0.3 }, 0)
-          .to(el, { x: out, y: -14, rotation: dir * (12 + speed * 3), scale: 0.97, duration: 0.36 - speed * 0.04, ease: 'power2.out' }, 0)
-          .set(el, { zIndex: 1 })
-          .to(el, {
-            x: back.x,
-            y: back.y - 6,
-            scale: back.scale * 0.96,
-            rotation: back.rotation - dir * 4,
-            '--dim': back['--dim'] + 0.05,
-            duration: 0.66,
-            ease: 'power3.inOut',
-          })
-          .to(el, { autoAlpha: 0, duration: 0.24, ease: 'power1.in' }, '-=0.24');
+          .to(el.firstChild, { rotationX: 0, rotationY: 0, '--glare': 0, duration: 0.25 }, 0)
+          .to(el, { x: out, rotation: dir * (10 + speed * 3), duration: OUT, ease: 'power2.out' }, 0)
+          .to(el, { x: back.x, rotation: back.rotation - dir * 3, duration: BACK, ease: 'power1.inOut' }, TURN)
+          .to(el, { y: back.y - 6, scale: back.scale * 0.96, '--dim': back['--dim'] + 0.05, duration: TURN + BACK, ease: 'power2.inOut' }, 0)
+          .set(el, { zIndex: 1 }, TURN)
+          .to(el, { autoAlpha: 0, duration: 0.2, ease: 'power1.in' }, TURN + BACK - 0.2);
       }
       setFlying((f) => [...f, i]);
       setOrder((o) => [...o.filter((x) => x !== i), i]);
@@ -311,14 +403,25 @@ export default function HeroDeck({ tiles, labelFor, starting, onPlay }) {
     setOpen({ index: i, from: el });
   };
 
-  const onClosed = (next) => {
+  const onClosed = () => {
     const el = open?.from;
     setOpen(null);
     el?.focus({ preventScroll: true });
-    if (next === 'another') {
-      refocus.current = true;
-      requestAnimationFrame(() => throwTop(1));
-    }
+  };
+
+  // "Another one" in the window: the open card goes to the back of the pile
+  // (out of sight, under the window) and the next one becomes the open card.
+  const nextWhileOpen = () => {
+    const [current, following] = deckRef.current;
+    const nextEl = nodeOf(following);
+    if (following == null || !nextEl) return;
+    gsap.killTweensOf(nextEl, 'autoAlpha,opacity,visibility');
+    gsap.set(nextEl, { autoAlpha: 0 });
+    const currentEl = nodeOf(current);
+    if (currentEl) gsap.set(currentEl, { autoAlpha: 0 });
+    setOrder((o) => [...o.filter((x) => x !== current), current]);
+    setOpen({ index: following, from: nextEl });
+    setSent((n) => n + 1);
   };
 
   // Hover: the top card tilts towards the pointer, with a soft glare.
@@ -481,10 +584,12 @@ export default function HeroDeck({ tiles, labelFor, starting, onPlay }) {
       {open && (
         <FlipDialog
           question={tiles[open.index]}
+          upNext={tiles[deck[1]]}
           label={labelFor(tiles[open.index])}
           from={open.from}
           starting={starting}
           onPlay={() => onPlay(tiles[open.index].id)}
+          onNext={nextWhileOpen}
           onClosed={onClosed}
         />
       )}

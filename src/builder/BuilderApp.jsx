@@ -173,7 +173,7 @@ export default function BuilderApp() {
   } else if (!questions) {
     content = <p className="muted builder-empty">{loadError ? `Couldn't load: ${loadError}` : 'Loading…'}</p>;
   } else if (tab === 'review') {
-    content = <ReviewQueue questions={questions} act={act} onEdit={setEditing} />;
+    content = <ReviewQueue questions={questions} act={act} api={api} onEdit={setEditing} />;
   } else if (tab === 'questions') {
     content = (
       <QuestionList

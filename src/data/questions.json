@@ -246,8 +246,8 @@
       "sourceUrl": "https://p2sl-mistakeproofing.berkeley.edu/product/round-manhole-cover",
       "image": {
         "src": "/images/manhole-round.webp",
-        "alt": "A square manhole cover crossed out in red, beside a round manhole cover",
-        "thumb": "/images/thumbs/manhole-round.webp"
+        "thumb": "/images/thumbs/manhole-round.webp",
+        "alt": "A round manhole cover set into a pavement, beside a square drain grate at the kerb for comparison."
       },
       "tags": [
         "geometry",
@@ -474,10 +474,9 @@
         "screens"
       ],
       "image": {
-        "src": "/dev-images/cursor-tilt.webp",
-        "alt": "A mouse pointer drawn in square pixels, leaning to one side",
-        "placeholder": true,
-        "thumb": "/dev-images/thumbs/cursor-tilt.webp"
+        "src": "/images/cursor-tilt.webp",
+        "thumb": "/images/thumbs/cursor-tilt.webp",
+        "alt": "Classic computer pointers drawn in square pixels: arrows leaning to one side, pointing hands and hourglasses."
       }
     },
     {
@@ -617,7 +616,12 @@
       ],
       "themes": [
         "everyday"
-      ]
+      ],
+      "image": {
+        "src": "/images/jeans-rivets.webp",
+        "thumb": "/images/thumbs/jeans-rivets.webp",
+        "alt": "A copper rivet at the corner of a jeans pocket, close up."
+      }
     },
     {
       "id": "shinkansen-nose",
@@ -754,8 +758,8 @@
       "sourceUrl": "https://www.core77.com/posts/17788/the-wehrmachtkanister-aka-jerrycan-astonishingly-good-industrial-design-from-the-1930s-17788",
       "image": {
         "src": "/images/jerrycan-handles.webp",
-        "alt": "A row of old metal jerrycans, each with three handles side by side on top",
-        "thumb": "/images/thumbs/jerrycan-handles.webp"
+        "thumb": "/images/thumbs/jerrycan-handles.webp",
+        "alt": "A worn metal jerrycan, close up, its handles along the top."
       },
       "tags": [
         "war",
@@ -1347,7 +1351,12 @@
       ],
       "themes": [
         "screens"
-      ]
+      ],
+      "image": {
+        "src": "/images/safari-bottom-bar.webp",
+        "thumb": "/images/thumbs/safari-bottom-bar.webp",
+        "alt": "An iPhone showing a news page in Safari, the address bar at the bottom of the screen."
+      }
     },
     {
       "id": "button-verbs",
@@ -1380,7 +1389,12 @@
       "themes": [
         "screens",
         "keys"
-      ]
+      ],
+      "image": {
+        "src": "/images/button-verbs.webp",
+        "thumb": "/images/thumbs/button-verbs.webp",
+        "alt": "Phone screens from a group settings page: a Delete Group pop-up whose buttons say Cancel and Delete, then a Group Deleted message."
+      }
     },
     {
       "id": "menu-ellipsis",
@@ -1415,8 +1429,8 @@
       ],
       "image": {
         "src": "/images/menu-ellipsis.webp",
-        "alt": "A chart of menu icons: three lines, a stepped triangle, a grid of squares, and three dots stacked or in a row",
-        "thumb": "/images/thumbs/menu-ellipsis.webp"
+        "thumb": "/images/thumbs/menu-ellipsis.webp",
+        "alt": "The File menu open in a Mac app, with Save As… highlighted and other commands like Rename… and Export… ending in three dots."
       }
     },
     {
@@ -1450,7 +1464,12 @@
       "themes": [
         "keys",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/ctrl-alt-del.webp",
+        "thumb": "/images/thumbs/ctrl-alt-del.webp",
+        "alt": "The original IBM PC keyboard, with a person's hands resting on it."
+      }
     },
     {
       "id": "fuel-door-arrow",
@@ -1590,7 +1609,12 @@
       "themes": [
         "travel",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/plane-ashtray.webp",
+        "thumb": "/images/thumbs/plane-ashtray.webp",
+        "alt": "An aeroplane toilet door with a no-smoking sign and, right beside it, a small built-in ashtray."
+      }
     },
     {
       "id": "school-bus-yellow",
@@ -1624,7 +1648,12 @@
         "travel",
         "safety",
         "symbols"
-      ]
+      ],
+      "image": {
+        "src": "/images/school-bus-yellow.webp",
+        "thumb": "/images/thumbs/school-bus-yellow.webp",
+        "alt": "A yellow school bus parked on a street at dusk."
+      }
     },
     {
       "id": "stop-sign-octagon",
@@ -1660,10 +1689,9 @@
         "safety"
       ],
       "image": {
-        "src": "/dev-images/stop-sign-octagon.webp",
-        "alt": "A red, eight sided stop sign against a blue sky",
-        "placeholder": true,
-        "thumb": "/dev-images/thumbs/stop-sign-octagon.webp"
+        "src": "/images/stop-sign-octagon.webp",
+        "thumb": "/images/thumbs/stop-sign-octagon.webp",
+        "alt": "A red eight-sided STOP sign against a blue sky."
       }
     },
     {
@@ -1695,7 +1723,12 @@
       "themes": [
         "travel",
         "symbols"
-      ]
+      ],
+      "image": {
+        "src": "/images/golden-gate-orange.webp",
+        "thumb": "/images/thumbs/golden-gate-orange.webp",
+        "alt": "The Golden Gate Bridge at sunset, its orange towers standing out against the sea and sky."
+      }
     },
     {
       "id": "apple-logo-bite",
@@ -1726,7 +1759,12 @@
       ],
       "themes": [
         "symbols"
-      ]
+      ],
+      "image": {
+        "src": "/images/apple-logo-bite.webp",
+        "thumb": "/images/thumbs/apple-logo-bite.webp",
+        "alt": "The Apple logo through the years, from the 1976 drawing to the rainbow apple and today's plain one, each with a bite out of its right side."
+      }
     },
     {
       "id": "escalator-brushes",
@@ -1795,7 +1833,12 @@
       "themes": [
         "keys",
         "travel"
-      ]
+      ],
+      "image": {
+        "src": "/images/crosswalk-buttons.webp",
+        "thumb": "/images/thumbs/crosswalk-buttons.webp",
+        "alt": "A \"Push button for walk signal\" box on a pole at a city street crossing."
+      }
     },
     {
       "id": "stay-on-tab",
@@ -1827,7 +1870,12 @@
       "themes": [
         "everyday",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/stay-on-tab.webp",
+        "thumb": "/images/thumbs/stay-on-tab.webp",
+        "alt": "The top of an opened drink can, the ring pull still attached."
+      }
     },
     {
       "id": "power-symbol",
@@ -1859,7 +1907,12 @@
       "themes": [
         "keys",
         "symbols"
-      ]
+      ],
+      "image": {
+        "src": "/images/power-symbol.webp",
+        "thumb": "/images/thumbs/power-symbol.webp",
+        "alt": "The power symbol, a circle broken at the top by a short line, on a black button."
+      }
     },
     {
       "id": "winglets",
@@ -1929,7 +1982,12 @@
       ],
       "themes": [
         "india"
-      ]
+      ],
+      "image": {
+        "src": "/images/jaali-screens.webp",
+        "thumb": "/images/thumbs/jaali-screens.webp",
+        "alt": "Carved stone lattice windows in an old Indian building, sunlight coming through them and scattering small bright shapes across the floor."
+      }
     },
     {
       "id": "fan-regulator-heat",
@@ -1962,7 +2020,12 @@
       "themes": [
         "everyday",
         "india"
-      ]
+      ],
+      "image": {
+        "src": "/images/fan-regulator-heat.webp",
+        "thumb": "/images/thumbs/fan-regulator-heat.webp",
+        "alt": "An old, bulky ceiling fan regulator: a worn cream box with a round speed knob in the middle."
+      }
     },
     {
       "id": "auto-rickshaw-three-wheels",
@@ -1996,7 +2059,12 @@
       "themes": [
         "travel",
         "india"
-      ]
+      ],
+      "image": {
+        "src": "/images/auto-rickshaw-three-wheels.webp",
+        "thumb": "/images/thumbs/auto-rickshaw-three-wheels.webp",
+        "alt": "The driver's seat of an auto-rickshaw looking forward: motorbike handlebars in front of the windscreen, and no steering wheel."
+      }
     },
     {
       "id": "matka-cooling",
@@ -2030,7 +2098,12 @@
       "themes": [
         "everyday",
         "india"
-      ]
+      ],
+      "image": {
+        "src": "/images/matka-cooling.webp",
+        "thumb": "/images/thumbs/matka-cooling.webp",
+        "alt": "A clay matka water pot beside a small clay cup of water, on a wooden table."
+      }
     },
     {
       "id": "middle-berth",
@@ -2064,7 +2137,12 @@
         "travel",
         "india",
         "furniture"
-      ]
+      ],
+      "image": {
+        "src": "/images/middle-berth.webp",
+        "thumb": "/images/thumbs/middle-berth.webp",
+        "alt": "Inside an Indian Railways sleeper coach: lower, middle and upper berths on each side, labelled LB, MB and UB."
+      }
     },
     {
       "id": "indian-plug-earth-pin",
@@ -2098,7 +2176,12 @@
         "everyday",
         "india",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/indian-plug-earth-pin.webp",
+        "thumb": "/images/thumbs/indian-plug-earth-pin.webp",
+        "alt": "An Indian three-pin plug: the top pin is longer and thicker than the other two."
+      }
     },
     {
       "id": "lpg-smell",
@@ -2133,7 +2216,12 @@
         "everyday",
         "india",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/lpg-smell.webp",
+        "thumb": "/images/thumbs/lpg-smell.webp",
+        "alt": "A red LPG cooking gas cylinder, its orange hose running up to the gas pipe on the wall."
+      }
     },
     {
       "id": "chips-packet-air",
@@ -2165,7 +2253,12 @@
       ],
       "themes": [
         "everyday"
-      ]
+      ],
+      "image": {
+        "src": "/images/chips-packet-air.webp",
+        "thumb": "/images/thumbs/chips-packet-air.webp",
+        "alt": "A sealed packet of Lay's Classic chips, puffed up tight with air."
+      }
     },
     {
       "id": "hexagonal-pencil",
@@ -2197,7 +2290,12 @@
       ],
       "themes": [
         "everyday"
-      ]
+      ],
+      "image": {
+        "src": "/images/hexagonal-pencil.webp",
+        "thumb": "/images/thumbs/hexagonal-pencil.webp",
+        "alt": "A row of sharpened yellow wooden pencils, their flat sides catching the light."
+      }
     },
     {
       "id": "padlock-hole",
@@ -2229,7 +2327,12 @@
       ],
       "themes": [
         "everyday"
-      ]
+      ],
+      "image": {
+        "src": "/images/padlock-hole.webp",
+        "thumb": "/images/thumbs/padlock-hole.webp",
+        "alt": "An open brass padlock with its key, the tiny hole in the bottom of its body circled in red."
+      }
     },
     {
       "id": "convex-side-mirror",
@@ -2263,7 +2366,12 @@
       "themes": [
         "travel",
         "safety"
-      ]
+      ],
+      "image": {
+        "src": "/images/convex-side-mirror.webp",
+        "thumb": "/images/thumbs/convex-side-mirror.webp",
+        "alt": "A car side mirror printed with \"Objects in mirror are closer than they appear\", a car behind looking small in the glass."
+      }
     }
   ],
   "tidbits": [

@@ -75,6 +75,16 @@ mindmap
       Score verification
 ```
 
+## Round 14 (1 October 2026): pictures, the deck, review tools, 20 more questions
+
+| You asked for | Status | Where |
+|---|---|---|
+| Publish the images I added | Done: 47 photos published and attached, 17 of them replacing my drawings. Kept my drawings for rumble strips (the photo shows painted bars across the road, not edge grooves) and runway numbers (its label gives the answer away); trolley coin lock had no photo. Two local-only placeholders (cursor tilt, stop sign) are replaced with your photos. Credit lines are still owed | `src/data/site-images.json`, `public/images/`, `server/schema.js` (attach), `images/IMAGES-NEEDED.md` |
+| After a swipe, the card lingers at the far end | Fixed: the way back starts before the way out has slowed, and the rise and shrink run as one move, so it turns around within about 50 ms instead of hanging there | `src/components/HeroDeck.jsx` (`throwTop`) |
+| "Another one" on the open card should flip it to the next question | Done: the window turns edge on, swaps to the next card's question out of sight, and turns back; the pile moves on underneath, so closing lands on that card. Focus stays on the button | `src/components/HeroDeck.jsx` (`FlipDialog`, `nextWhileOpen`) |
+| More questions like Heinz and the eraser, tagged easy, medium or hard, and attach the picture from the review screen | Done: 20 more (12 easy, 6 medium, 2 hard), two sources each. Five join the daily queue after 7 October, fifteen wait in New questions. Each card there (and in the Daily tab) now shows its difficulty, which you can switch, and its picture, which you can add by choosing a file or dropping one on, with its description and credit, plus a note on what the picture should show. A daily question without a picture now waits instead of going out bare | `src/data/daily-questions.json`, `src/data/pending-questions.json`, `SOURCES.md` (O1 to O20), `src/builder/QuestionTools.jsx`, `server/routes/daily.js` |
+| How to make it something people love and share | Suggestions given in chat; waiting for your call on what to build first | |
+
 ## Round 13 (30 September 2026): the hero deck
 
 | You asked for | Status | Where |
