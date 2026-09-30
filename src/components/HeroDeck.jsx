@@ -257,36 +257,39 @@ export default function HeroDeck({ tiles, labelFor, starting, onPlay }) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Send the top card off to one side. The rest move up, and a new card
-  // fades in at the back.
+  // Send the top card to the back of the pile: it slides out to one side,
+  // then tucks in behind the others as they move up, and settles out of
+  // sight at the back. It never leaves the pile.
   const throwTop = useCallback(
-    (dir, { vx = 0, vy = 0 } = {}) => {
+    (dir, { vx = 0 } = {}) => {
       if (openRef.current) return;
       const i = deckRef.current[0];
       const el = nodeOf(i);
       if (!el) return;
       touched.current = true;
       const land = () => setFlying((f) => f.filter((x) => x !== i));
-      gsap.killTweensOf(el, 'x,y,rotation');
+      gsap.killTweensOf(el, 'x,y,rotation,scale');
       if (calm()) {
         gsap.to(el, { autoAlpha: 0, duration: 0.15, onComplete: land });
       } else {
         const speed = Math.min(2.5, Math.abs(vx));
+        const out = dir * Math.max(Math.abs(Number(gsap.getProperty(el, 'x'))) + 24, el.offsetWidth * 0.82);
+        const back = pose(VISIBLE - 1);
         gsap
           .timeline({ onComplete: land })
-          .to(
-            el,
-            {
-              x: dir * (window.innerWidth * 0.5 + 420),
-              y: Number(gsap.getProperty(el, 'y')) + vy * 160 + 40,
-              rotation: dir * (24 + speed * 8),
-              duration: 0.62 - speed * 0.08,
-              ease: 'power2.out',
-            },
-            0,
-          )
-          .to(el.firstChild, { rotationX: 0, rotationY: 0, duration: 0.3 }, 0)
-          .to(el, { autoAlpha: 0, duration: 0.22, ease: 'power1.in' }, 0.34);
+          .to(el.firstChild, { rotationX: 0, rotationY: 0, '--glare': 0, duration: 0.3 }, 0)
+          .to(el, { x: out, y: -14, rotation: dir * (12 + speed * 3), scale: 0.97, duration: 0.36 - speed * 0.04, ease: 'power2.out' }, 0)
+          .set(el, { zIndex: 1 })
+          .to(el, {
+            x: back.x,
+            y: back.y - 6,
+            scale: back.scale * 0.96,
+            rotation: back.rotation - dir * 4,
+            '--dim': back['--dim'] + 0.05,
+            duration: 0.66,
+            ease: 'power3.inOut',
+          })
+          .to(el, { autoAlpha: 0, duration: 0.24, ease: 'power1.in' }, '-=0.24');
       }
       setFlying((f) => [...f, i]);
       setOrder((o) => [...o.filter((x) => x !== i), i]);
@@ -436,8 +439,6 @@ export default function HeroDeck({ tiles, labelFor, starting, onPlay }) {
 
   if (tiles.length < VISIBLE + 1) return null;
   const top = tiles[deck[0]];
-  const count = (sent % tiles.length) + 1;
-  const pad = (n) => String(n).padStart(2, '0');
 
   return (
     <div className="deck-wrap">
@@ -472,26 +473,9 @@ export default function HeroDeck({ tiles, labelFor, starting, onPlay }) {
         })}
       </div>
 
-      <div className="deck-controls">
-        <button type="button" className="deck-arrow" aria-label="Another picture, sent left" onClick={() => throwTop(-1)}>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M14.5 5.5 8 12l6.5 6.5" />
-          </svg>
-        </button>
-        <p className="deck-hint">
-          <span className="deck-count" aria-hidden="true">
-            {pad(count)} / {pad(tiles.length)}
-          </span>
-          <span>Swipe for another, tap to flip</span>
-        </p>
-        <button type="button" className="deck-arrow" aria-label="Another picture, sent right" onClick={() => throwTop(1)}>
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M9.5 5.5 16 12l-6.5 6.5" />
-          </svg>
-        </button>
-      </div>
+      <p className="deck-hint">Swipe for another, tap to flip</p>
       <p className="visually-hidden" aria-live="polite">
-        {sent > 0 && top ? `Picture ${count} of ${tiles.length}: ${top.image.alt}` : ''}
+        {sent > 0 && top ? `Next picture: ${top.image.alt}` : ''}
       </p>
 
       {open && (

@@ -4992,69 +4992,11 @@ td.wrap {
   border-radius: 999px;
 }
 
-.deck-controls {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 4px;
-}
-
-.deck-arrow {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  padding: 0;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  cursor: pointer;
-  transition:
-    transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
-    background 0.2s ease,
-    border-color 0.2s ease;
-}
-
-.deck-arrow svg {
-  width: 18px;
-  height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.deck-arrow:hover {
-  background: var(--accent);
-  border-color: var(--accent);
-  transform: scale(1.08);
-}
-
-.deck-arrow:active {
-  transform: scale(0.94);
-}
-
 .deck-hint {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  min-width: 13rem;
-  margin: 0;
+  margin: 6px 0 0;
   font-size: 13px;
   color: var(--muted);
   text-align: center;
-}
-
-.deck-count {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  color: var(--ink);
-  font-variant-numeric: tabular-nums;
 }
 
 /* The card, flipped open */
@@ -5195,7 +5137,6 @@ td.wrap {
 
 @media (prefers-reduced-motion: reduce) {
   .deck-print,
-  .deck-arrow,
   .flip-close {
     transition: none;
   }
