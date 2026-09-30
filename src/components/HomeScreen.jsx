@@ -1,9 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import TopBar from './TopBar.jsx';
 import Leaderboard from './Leaderboard.jsx';
 import DailyCard from './DailyCard.jsx';
-import WallOfWhys from './WallOfWhys.jsx';
-import WhyPreview from './WhyPreview.jsx';
+import HeroDeck from './HeroDeck.jsx';
 import LegendsWall from './LegendsWall.jsx';
 import NameTag from './NameTag.jsx';
 import { Heart } from './Hearts.jsx';
@@ -12,8 +11,7 @@ import { shuffled } from '../lib/shuffle.js';
 import { questionLabel } from '../lib/themes.js';
 import { seenIds } from '../lib/seen.js';
 
-const HERO_PICTURES = 3;
-const ROW_PICTURES = 12;
+const DECK_PICTURES = 24;
 
 function TopicsLine({ themes, chosen, onChoose }) {
   const names = chosen ? themes.filter((t) => chosen.includes(t.id)).map((t) => t.label) : null;
@@ -53,24 +51,6 @@ function Progress({ best, whys, streak, badges, badgeTotal, onCollection }) {
         </button>
       )}
     </p>
-  );
-}
-
-// Three pictures fanned out like prints on a table, beside the headline on a
-// computer and above it on a phone. The first thing a visual person sees.
-function HeroStack({ tiles, onOpen }) {
-  if (tiles.length < HERO_PICTURES) return null;
-  return (
-    <div className="hero-stack">
-      {tiles.slice(0, HERO_PICTURES).map((q, i) => (
-        <button key={q.id} type="button" className={`hero-print hero-print-${i}`} aria-label={`${q.image.alt}. See its question.`} onClick={() => onOpen(i)}>
-          <img src={q.image.thumb ?? q.image.src} alt="" decoding="async" />
-          <span className="wall-why" aria-hidden="true">
-            Why?
-          </span>
-        </button>
-      ))}
-    </div>
   );
 }
 
@@ -130,8 +110,8 @@ function HowItWorks() {
   );
 }
 
-// The home screen, for people who look before they read: a stack of
-// pictures and one big button up top, then a row of pictures, today's
+// The home screen, for people who look before they read: a pile of picture
+// cards to swipe and flip, and one big button, up top; then today's
 // question, how it works in three pictures, the Legends wall and this
 // week's board, with room to breathe between them.
 export default function HomeScreen({
@@ -157,33 +137,20 @@ export default function HomeScreen({
   onSignLegend,
 }) {
   // One set of pictures for the whole visit: unseen questions first, so the
-  // stack and the row stay fresh. Picked once, so nothing reshuffles when
-  // the live bank arrives.
+  // pile stays fresh. Picked once, so nothing reshuffles when the live bank
+  // arrives.
   const tiles = useMemo(() => {
     const seen = new Set(seenIds());
     const pictures = questions.filter((q) => showsImage(q.image));
-    return [...shuffled(pictures.filter((q) => !seen.has(q.id))), ...shuffled(pictures.filter((q) => seen.has(q.id)))].slice(
-      0,
-      HERO_PICTURES + ROW_PICTURES,
-    );
+    return [...shuffled(pictures.filter((q) => !seen.has(q.id))), ...shuffled(pictures.filter((q) => seen.has(q.id)))].slice(0, DECK_PICTURES);
   }, [questions.length > 0]);
-  const [open, setOpen] = useState(null);
-  const [lastRow, setLastRow] = useState(null);
-  const heroTiles = tiles.slice(0, HERO_PICTURES);
-  const rowTiles = tiles.slice(HERO_PICTURES);
-  const question = open == null ? null : tiles[open];
-
-  const close = () => {
-    if (open >= HERO_PICTURES) setLastRow(open - HERO_PICTURES);
-    setOpen(null);
-  };
 
   return (
     <div className="page">
       <TopBar meta={<NameTag name={player.name} onOpen={onOpenProfile} onEdit={onEditName} />} />
       <main className="stage start home">
         <section className="hero">
-          <HeroStack tiles={heroTiles} onOpen={setOpen} />
+          <HeroDeck key={tiles.length} tiles={tiles} labelFor={(q) => questionLabel(q, themes)} starting={starting} onPlay={onPlayQuestion} />
           <div className="hero-text">
             <h1 className="promise">You've seen it a thousand times. Let's ask why.</h1>
             <p className="lede">Good design starts with a simple why. Slow down for a minute, look a little closer, and give your brain a treat.</p>
@@ -213,8 +180,6 @@ export default function HomeScreen({
           </div>
         </section>
 
-        <WallOfWhys tiles={rowTiles} onOpen={(i) => setOpen(i + HERO_PICTURES)} activeIndex={lastRow} />
-
         <DailyCard onFlag={onFlagDaily} flagged={dailyFlagged} onStreak={onStreak} />
 
         <HowItWorks />
@@ -229,17 +194,6 @@ export default function HomeScreen({
           <TopicsLine themes={themes} chosen={chosenThemes} onChoose={onChooseThemes} />
         </div>
       </main>
-
-      {question && (
-        <WhyPreview
-          question={question}
-          label={questionLabel(question, themes)}
-          starting={starting}
-          onPlay={() => onPlayQuestion(question.id)}
-          onAnother={() => setOpen((i) => (i + 1) % tiles.length)}
-          onClose={close}
-        />
-      )}
     </div>
   );
 }

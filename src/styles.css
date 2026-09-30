@@ -2074,181 +2074,6 @@ td.wrap {
   }
 }
 
-/* The wall of whys: a row of pictures you swipe by hand. Tapping one opens
-   it big, with its question, in a sheet (WhyPreview). */
-
-.wall {
-  margin: 0 0 48px;
-}
-
-.wall-head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-
-.wall-head .section-title {
-  margin: 0;
-}
-
-/* Arrows only where there's a mouse; fingers swipe. */
-.wall-arrows {
-  display: none;
-  gap: 6px;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .wall-arrows {
-    display: flex;
-  }
-}
-
-.wall-arrow {
-  width: 34px;
-  height: 34px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 0 2px;
-  font-size: 20px;
-  line-height: 1;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.wall-arrow:hover:not(:disabled) {
-  border-color: var(--ink);
-}
-
-.wall-arrow:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-/* Runs edge to edge, so the next picture peeks in and says "swipe". */
-.wall-row {
-  display: flex;
-  gap: 12px;
-  margin: 0 -24px;
-  padding: 4px 24px 10px;
-  list-style: none;
-  overflow-x: auto;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
-  scroll-padding: 0 24px;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-
-.wall-row::-webkit-scrollbar {
-  display: none;
-}
-
-.wall-item {
-  flex: none;
-  scroll-snap-align: start;
-}
-
-.wall-tile {
-  position: relative;
-  display: block;
-  width: 176px;
-  height: 212px;
-  padding: 0;
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  cursor: pointer;
-}
-
-.wall-tile img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.wall-tile:hover img,
-.wall-tile:focus-visible img {
-  transform: scale(1.05);
-}
-
-.wall-why {
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-  padding: 3px 11px;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.92);
-  border-radius: 999px;
-}
-
-/* The picture opened big */
-
-.modal-why {
-  max-width: 34rem;
-}
-
-.modal-why .image-frame {
-  margin-bottom: 18px;
-}
-
-.modal-why .image-frame-box {
-  height: 280px;
-}
-
-.why-label {
-  margin-bottom: 6px;
-}
-
-.why-title {
-  margin-bottom: 4px;
-  font-size: 1.3rem;
-}
-
-.why-actions {
-  margin-top: 22px;
-}
-
-@media (max-width: 520px) {
-  .wall-row {
-    margin: 0 -20px;
-    padding-left: 20px;
-    padding-right: 20px;
-    scroll-padding: 0 20px;
-  }
-
-  .wall-tile {
-    width: 42vw;
-    max-width: 176px;
-    height: 200px;
-  }
-
-  .modal-why .image-frame-box {
-    height: 230px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .wall-tile img {
-    transition: none;
-  }
-
-  .wall-tile:hover img,
-  .wall-tile:focus-visible img {
-    transform: none;
-  }
-}
-
 /* Leaderboard switch */
 
 .board-head {
@@ -3500,80 +3325,11 @@ td.wrap {
   margin-top: 88px;
 }
 
-.home .hero + .wall {
-  margin-top: 72px;
-}
-
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
   align-items: center;
   gap: 40px;
-}
-
-.hero-stack {
-  order: 2;
-  position: relative;
-  height: 300px;
-}
-
-.hero-print {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 190px;
-  height: 230px;
-  padding: 10px 10px 34px;
-  background: #fff;
-  border: 0;
-  border-radius: 6px;
-  box-shadow: 0 14px 30px rgba(22, 21, 15, 0.14), 0 2px 6px rgba(22, 21, 15, 0.08);
-  cursor: pointer;
-  transition: transform 0.35s cubic-bezier(0.2, 0.7, 0.2, 1);
-}
-
-.hero-print img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 2px;
-}
-
-.hero-print .wall-why {
-  left: auto;
-  right: 12px;
-  bottom: 8px;
-  background: var(--accent);
-}
-
-.hero-print-0 {
-  transform: translate(-95%, -52%) rotate(-9deg);
-}
-
-.hero-print-1 {
-  z-index: 2;
-  transform: translate(-50%, -46%) rotate(2deg);
-}
-
-.hero-print-2 {
-  transform: translate(-5%, -54%) rotate(10deg);
-}
-
-.hero-print:hover {
-  z-index: 3;
-}
-
-.hero-print-0:hover {
-  transform: translate(-95%, -56%) rotate(-7deg) scale(1.03);
-}
-
-.hero-print-1:hover {
-  transform: translate(-50%, -50%) rotate(1deg) scale(1.03);
-}
-
-.hero-print-2:hover {
-  transform: translate(-5%, -58%) rotate(8deg) scale(1.03);
 }
 
 .hero .promise {
@@ -4611,17 +4367,6 @@ td.wrap {
     gap: 8px;
   }
 
-  .hero-stack {
-    order: 0;
-    height: 220px;
-  }
-
-  .hero-print {
-    width: 138px;
-    height: 170px;
-    padding: 8px 8px 28px;
-  }
-
   .stats {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -4691,7 +4436,6 @@ td.wrap {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-print,
   .medal,
   .finale-levels li,
   .finale-kicker,
@@ -5135,5 +4879,324 @@ td.wrap {
 
   .rw-options-head {
     display: none !important;
+  }
+}
+
+/* The hero deck: a pile of picture cards you swipe, and flip open */
+
+.deck-wrap {
+  order: 2;
+  --card-w: 250px;
+  --card-h: 306px;
+}
+
+.deck {
+  position: relative;
+  height: 400px;
+}
+
+/* A card sent off the side never makes the page scroll sideways. */
+.page:has(.deck) {
+  overflow-x: clip;
+}
+
+.deck-card {
+  position: absolute;
+  left: calc(50% - var(--card-w) / 2);
+  top: calc(50% - var(--card-h) / 2 + 28px);
+  width: var(--card-w);
+  height: var(--card-h);
+  visibility: hidden;
+  border-radius: 8px;
+  outline: none;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  will-change: transform;
+}
+
+.deck-card.is-top {
+  cursor: grab;
+}
+
+.deck-card.is-dragging {
+  cursor: grabbing;
+}
+
+.deck-print {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 10px 10px 44px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow:
+    0 1px 2px rgba(22, 21, 15, 0.08),
+    0 18px 40px -16px rgba(22, 21, 15, 0.38);
+  transition: box-shadow 0.35s ease;
+}
+
+.deck-card.is-dragging .deck-print {
+  box-shadow:
+    0 2px 4px rgba(22, 21, 15, 0.08),
+    0 40px 70px -20px rgba(22, 21, 15, 0.5);
+}
+
+.deck-card:focus-visible .deck-print {
+  outline: 3px solid var(--ink);
+  outline-offset: 5px;
+}
+
+.deck-print img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--bg);
+  border-radius: 3px;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Cards further back sit a little in shadow. */
+.deck-print::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--ink);
+  opacity: var(--dim, 0);
+  pointer-events: none;
+}
+
+.deck-glare {
+  position: absolute;
+  inset: 10px 10px 44px;
+  border-radius: 3px;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 30%), rgba(255, 255, 255, 0.55), transparent 55%);
+  opacity: var(--glare, 0);
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+}
+
+.deck-why {
+  position: absolute;
+  right: 12px;
+  bottom: 11px;
+  padding: 3px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink);
+  background: var(--accent);
+  border-radius: 999px;
+}
+
+.deck-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.deck-arrow {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  cursor: pointer;
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.deck-arrow svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.deck-arrow:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.08);
+}
+
+.deck-arrow:active {
+  transform: scale(0.94);
+}
+
+.deck-hint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 13rem;
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.deck-count {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The card, flipped open */
+
+.flip-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  visibility: hidden;
+  opacity: 0;
+  background: rgba(22, 21, 15, 0.55);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+
+.flip {
+  position: fixed;
+  z-index: 81;
+  visibility: hidden;
+  perspective: 2000px;
+}
+
+.flip:focus {
+  outline: none;
+}
+
+.flip-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.flip-face {
+  position: absolute;
+  inset: 0;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-back {
+  display: flex;
+  flex-direction: column;
+  padding: 14px 14px 22px;
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background: #fbfaf6;
+  border-radius: 20px;
+  transform: rotateY(180deg);
+  box-shadow: 0 40px 90px -24px rgba(0, 0, 0, 0.55);
+}
+
+.flip-picture {
+  position: relative;
+  flex: none;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg);
+  border-radius: 12px;
+}
+
+.flip-picture img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.flip-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.94);
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(22, 21, 15, 0.15);
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.flip-close:hover {
+  transform: rotate(90deg) scale(1.06);
+}
+
+.flip-label {
+  margin: 20px 8px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+}
+
+.flip-stem {
+  margin: 0 8px;
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+}
+
+.flip-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 18px;
+  margin: 24px 8px 0;
+}
+
+@media (max-width: 720px) {
+  .deck-wrap {
+    order: 0;
+    margin-bottom: 20px;
+    --card-w: 206px;
+    --card-h: 252px;
+  }
+
+  .deck {
+    height: 330px;
+  }
+
+  .flip-stem {
+    font-size: 1.25rem;
+  }
+
+  .flip-actions .button-big {
+    flex: 1 1 auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck-print,
+  .deck-arrow,
+  .flip-close {
+    transition: none;
   }
 }

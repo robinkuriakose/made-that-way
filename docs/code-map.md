@@ -27,7 +27,7 @@ mindmap
       SuggestScreen
     Home parts
       DailyCard
-      WallOfWhys
+      HeroDeck
       NameTag
       LegendsWall
       Leaderboard
@@ -98,7 +98,7 @@ mindmap
 
 | What | Where |
 |---|---|
-| Home: a stack of pictures, the headline, "Let's start" (or carry on), and a progress line for returning players; then the wall of whys, today's question, how it works in pictures, the Legends wall, the board and topics | `src/components/HomeScreen.jsx:137`; pictures at `:61` (`HeroStack`), progress at `:31`, how it works at `:78` |
+| Home: the picture deck, the headline, "Let's start" (or carry on), and a progress line for returning players; then today's question, how it works in pictures, the Legends wall, the board and topics | `src/components/HomeScreen.jsx:117`; progress at `:29`, how it works at `:58` |
 | Question screen. The image sits under the stem, in the same frame every time, before the answer on purpose. After answering: the two answers that matter lead (the others shrink to a line), then the result and the short reason; the next step sits in one action bar, pinned to the bottom on a phone. The hint only shows when the question has one | `src/components/QuestionScreen.jsx:120`; result at `:32`, reason at `:63`, action bar at `:89`, scroll into view at `:147` |
 | Top bar: Home and Restart during a run, then the level, hearts, combo and score, and a segment per question in the level | `src/components/TopBar.jsx:13` |
 | Hearts that drop and refill; a number that counts up; the level-up burst | `src/components/Hearts.jsx:15`, `CountUp.jsx`, `Burst.jsx` |
@@ -112,7 +112,7 @@ mindmap
 | End screen: score, levels, whys and badges earned, Play again, signing (one tap when the name is known), this week's board, review by level | `src/components/EndScreen.jsx:71`; sign form at `:11` |
 | Collection: badges and every why uncovered, each opening its reasoning | `src/components/WhysScreen.jsx:7` |
 | Question of the day: answer in place, then the reason, how everyone did, streak and average; on a later visit the same day it folds to one line | `src/components/DailyCard.jsx:26` |
-| The wall of whys: a row of pictures swiped by hand (arrows on a computer), unseen ones first; tapping one opens it big with its question, "Another one" and "Play this one" | `src/components/WallOfWhys.jsx:10`, the sheet at `src/components/WhyPreview.jsx:9` |
+| The hero deck (GSAP): 24 picture cards, unseen first, piled like prints. Drag or flick the top card either way (or the arrows, or the arrow keys) and the next comes forward while a new one fades in at the back; a deal from below on arrival, a nudge if nobody touches it, a tilt and glare under the mouse. Tap (or Enter) flips the card in 3D and grows it into a window with the picture, its question, "Play this one" and "Another one"; it flips back into the pile on close. Less motion: no throws or flips, just quick fades | `src/components/HeroDeck.jsx:189`; the pile's places at `:20` (`SLOTS`), sending a card away at `:262` (`throwTop`), the drag at `:345`, the flip window at `:55` (`FlipDialog`) |
 | "Call me <name>" top right: the name opens the profile, the pencil renames (3 changes). Everyone starts with a random name like fuzzyheron42 | `src/components/NameTag.jsx:8`, `:24` (`RenameModal`); names from `src/lib/names.js:57` (`randomName`), kept by `src/lib/leaderboard.js:98` (`placeholderName`) |
 | This week's board, with when it resets | `src/components/Leaderboard.jsx` (`Leaderboard`, `BoardList`) |
 | Topic picker: pills, at least 3 | `src/components/TopicPicker.jsx:7` |
@@ -232,11 +232,12 @@ mindmap
 | Redeem and flag windows | `:835`, `:922` |
 | Builder shell, review queue, question list, form, flags, analytics tables | `:979`, `:1088`, `:1286`, `:1367`, `:1498`, `:1576` |
 | Phone layout | `:1697` |
-| Round 8: navigation, home, daily, wall, topics, dashboard | `:1842` onwards; the picture row and its sheet at `:2070` |
+| Round 8: navigation, home, daily, topics, dashboard | `:1842` onwards |
 | V2: top bar during play, hearts, answering, the reason, level break, burst, end, home, collection, less motion | `:2656` onwards |
 | Round 12: name tag, home hero, folded daily, how it works, Legends, profile, suggest, feedback, signature pad, medal, the finale | `:3432` onwards; finale at `:4213` |
 | Builder round 12: plan health, bulk pictures, tier tabs, suggestions, feedback, legends review | `:4744` |
 | Builder rewrites: now and proposed | `:4989` |
+| The hero deck, and the card flipped open | `:4885`, `:5060` |
 
 ## Tooling
 
