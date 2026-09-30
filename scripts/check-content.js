@@ -34,6 +34,20 @@ for (const img of siteImages.images ?? []) {
   if (!img.alt?.trim()) errors.push(`site-images.json: ${img.id} needs "alt", a description of the picture.`);
 }
 
+// A question whose picture ships with the site needs that file and its thumbnail.
+for (const q of [...data.questions, ...pending.questions, ...(daily.questions ?? [])]) {
+  const src = q.image?.src;
+  if (!src?.startsWith('/images/') || q.image.placeholder) continue;
+  const files = [src, q.image.thumb].filter(Boolean).map((p) => path.join('public', p));
+  for (const file of files) {
+    try {
+      statSync(path.join(ROOT, file));
+    } catch {
+      errors.push(`${q.id}: its picture ${file.replaceAll('\\', '/')} is missing (drop images/${q.id}.png in and run npm run images).`);
+    }
+  }
+}
+
 // Proposed edits: each for a question that exists, and the question as it
 // would read after the edit passes the same checks, length limits included.
 const questionEdits = readOptional('question-edits.json', { edits: [] });

@@ -332,6 +332,200 @@
       "themes": [
         "everyday"
       ]
+    },
+    {
+      "id": "daily-pizza-box-table",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why is there a little plastic table in the middle of a pizza?",
+      "options": [
+        "It keeps the slices from sliding around",
+        "It lets steam escape from under the lid",
+        "It stops the lid sagging onto the cheese",
+        "It marks the centre for cutting even slices"
+      ],
+      "correctIndex": 2,
+      "hint": "Think about what hot steam does to a cardboard lid on the way to your door.",
+      "explanationRight": "A hot pizza fills its box with steam, and the steam softens the cardboard, so the middle of the lid sags down onto the cheese and toppings. The little three-legged stand holds the lid up. Carmela Vitale of Dix Hills, New York, patented it in 1985 as a \"package saver\", writing that box lids tend to sag at the centre and \"damage or mark the pies\" on the way.",
+      "explanationWrong": [
+        "A stand that small can't hold the slices in place. It's there for the lid: steam from the hot pizza softens the cardboard, the lid sags onto the cheese, and the little table holds it up.",
+        "It doesn't open anything; the lid still sits on top. The steam is actually the problem: it softens the cardboard so the lid sags onto the cheese, and the little table holds it up.",
+        null,
+        "Pizzas are cut before they go in the box, and the stand isn't a guide. It holds the lid up: steam softens the cardboard, and without the stand the lid sags onto the cheese."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Gizmodo: That plastic thing inside your pizza box was invented 30 years ago",
+      "sourceUrl": "https://gizmodo.com/that-plastic-thing-inside-the-pizza-box-was-invented-30-1684099045",
+      "tags": [
+        "packaging",
+        "food",
+        "delivery"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/daily-pizza-box-table.webp",
+        "thumb": "/images/thumbs/daily-pizza-box-table.webp",
+        "alt": "A pizza in its open box, seen from above, with a small white three-legged plastic stand in the middle.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "daily-atm-card-first",
+      "topic": "ui",
+      "difficulty": "easy",
+      "stem": "Why do cash machines give your card back before the cash?",
+      "options": [
+        "So the machine can check the card isn't stolen",
+        "Once people have their cash, they forget the card",
+        "Cards come out faster than counting notes",
+        "So thieves can't grab both at once"
+      ],
+      "correctIndex": 1,
+      "hint": "What were you actually there for, and what happens once you have it?",
+      "explanationRight": "People go to a cash machine for the cash. Early machines handed out the money first, and once people had it, the job felt finished, so many walked away and left their card behind. Psychologists call this a post-completion error, the same slip as leaving the original in a photocopier. Machines now return the card first and hold the cash until it's taken, so you can't get what you came for without taking your card. In one study, the card-first order cut lost cards to zero and made withdrawals quicker.",
+      "explanationWrong": [
+        "The card is checked when you put it in, long before any cash comes out. The order is about memory: once people have their money, the job feels done, so they leave the card behind. Handing the card back first means you can't finish without it.",
+        null,
+        "Speed isn't the point; the machine could count notes while you wait either way. People used to walk off with their cash and forget their card, because the job felt done. Card first, then cash, means you can't leave without it.",
+        "Returning both together wouldn't help a thief much, and that isn't the reason. People used to take their cash and walk away without their card, because getting the money felt like the end. Card first makes taking it part of getting paid."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Quality and Innovation: Practical poka-yoke",
+      "sourceUrl": "https://qualityandinnovation.com/2018/07/28/practical-poka-yoke/",
+      "tags": [
+        "money",
+        "memory",
+        "sequence",
+        "machines"
+      ],
+      "themes": [
+        "everyday",
+        "screens"
+      ],
+      "image": {
+        "src": "/images/daily-atm-card-first.webp",
+        "thumb": "/images/thumbs/daily-atm-card-first.webp",
+        "alt": "A cash machine: the screen says \"Please take your card\", the card sticks out of its slot, and the cash slot below is still closed.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "daily-tape-measure-hook",
+      "topic": "everyday-object",
+      "difficulty": "medium",
+      "stem": "Why is the metal hook on a tape measure loose?",
+      "options": [
+        "It wobbles so it can grip rough, uneven edges",
+        "It shifts by its own thickness, so readings are exact",
+        "The rivets work loose over time as the tape wears",
+        "So it can fold flat against the case"
+      ],
+      "correctIndex": 1,
+      "hint": "Measure a box by hooking the end over its edge. Now measure inside a drawer by pushing the end against the wall.",
+      "explanationRight": "The hook has a thickness of its own, about 1/16 of an inch, and that would throw off every measurement one way or the other. Hook it over an edge and it slides out by exactly its thickness; push it against a wall and it slides in, so the thickness counts. Either way the reading starts from a true zero. The wobble people try to fix is the feature.",
+      "explanationWrong": [
+        "The hook moves along the tape, not side to side, and only by a tiny, set amount. That amount is the hook's own thickness: it slides out when you hook an edge and in when you push against a wall, so the reading is exact both ways.",
+        null,
+        "It's loose from the day it's made, on purpose. The hook slides by exactly its own thickness, out when hooked over an edge and in when pushed against a surface, so every reading starts from a true zero.",
+        "The hook doesn't fold; it moves a tiny set distance along the tape. That distance is the hook's own thickness, so the reading is right whether you hook an edge or push against a wall."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Family Handyman: Why the end of your tape measure is loose",
+      "sourceUrl": "https://www.familyhandyman.com/article/tape-measure-hook-loose-end/",
+      "tags": [
+        "tools",
+        "measuring",
+        "precision"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/daily-tape-measure-hook.webp",
+        "thumb": "/images/thumbs/daily-tape-measure-hook.webp",
+        "alt": "The end of a yellow tape measure, close up: the metal hook is held by two rivets in slots, with room to slide a little.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "daily-cracker-holes",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do crackers have rows of small holes?",
+      "options": [
+        "They make the cracker lighter to pack",
+        "Steam escapes, so they bake flat, not puffy",
+        "They help butter and toppings soak in",
+        "They're just a decorative pattern"
+      ],
+      "correctIndex": 1,
+      "hint": "What happens to a thin sheet of wet dough when it heats up fast in an oven?",
+      "explanationRight": "Cracker dough holds water, and in a hot oven that water turns to steam. Trapped steam puffs the dough into bubbles and pillows, like a pitta. So before baking, the dough passes under a roller of pins, called a docker, that punches the holes. The steam escapes through them and the cracker bakes flat and crisp. The spacing is tuned: too close and the cracker dries out hard, too far apart and bubbles rise between the holes.",
+      "explanationWrong": [
+        "The holes weigh almost nothing either way. They're there for the steam: water in the dough turns to steam in the oven, and without a way out it puffs the cracker into bubbles.",
+        null,
+        "Toppings sit on top; the holes are far too small to soak anything up. They let steam out while the cracker bakes, so it stays flat and crisp instead of puffing up.",
+        "The pattern looks deliberate because it is, but for baking, not looks. Each hole lets steam escape in the oven, and the spacing is tuned so no bubbles rise between them."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Today I Found Out: Why crackers have holes",
+      "sourceUrl": "http://www.todayifoundout.com/index.php/2010/10/why-crackers-have-holes/",
+      "tags": [
+        "food",
+        "baking",
+        "steam"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/daily-cracker-holes.webp",
+        "thumb": "/images/thumbs/daily-cracker-holes.webp",
+        "alt": "A square golden cracker, close up, with neat rows of small holes punched through it.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "daily-mirror-night-tab",
+      "topic": "industrial",
+      "difficulty": "medium",
+      "stem": "Why does a car's rear-view mirror have a little tab underneath?",
+      "options": [
+        "It locks the mirror so it can't be knocked",
+        "It turns on a light for reading maps",
+        "Flicked at night, it dims dazzling headlights behind",
+        "It releases the mirror for cleaning"
+      ],
+      "correctIndex": 2,
+      "hint": "Driving at night, what behind you could shine straight into your eyes?",
+      "explanationRight": "At night, the headlights of the car behind shine into the rear-view mirror and straight into your eyes. The mirror's glass is a wedge, thicker at one edge, with the silvered surface at the back. Normally you see that bright back surface. Flick the tab and the mirror tilts, so the bright reflection goes up to the roof and you see a much dimmer one from the plain glass at the front: enough to see the cars behind, without the glare.",
+      "explanationWrong": [
+        "It doesn't lock anything; the mirror stays as easy to move. The tab tilts a wedge of glass, so at night you see a dim reflection from its front surface instead of the bright mirror behind it, and headlights stop dazzling you.",
+        "Map lights have their own switches. The tab tilts the mirror's wedge-shaped glass, so at night the bright reflection goes up to the roof and you see a dimmer one that doesn't dazzle.",
+        null,
+        "The mirror doesn't come off there. The tab is for night driving: it tilts the wedge-shaped glass so the dazzling headlights behind you reflect away, leaving a dim image you can still use."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Science World: How does the rearview mirror antiglare work?",
+      "sourceUrl": "https://www.scienceworld.ca/stories/how-does-rearview-mirror-antiglare-work/",
+      "tags": [
+        "car",
+        "glare",
+        "night",
+        "mirror"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ],
+      "image": {
+        "src": "/images/daily-mirror-night-tab.webp",
+        "thumb": "/images/thumbs/daily-mirror-night-tab.webp",
+        "alt": "A car's rear-view mirror seen from the driver's seat, with the small tab on its underside picked out.",
+        "credit": "Illustration: Made That Way"
+      }
     }
   ]
 }

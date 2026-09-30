@@ -18,6 +18,12 @@ Tiers: **E** easy, **M** medium, **H** hard. These are my proposed tags, waiting
 
 ---
 
+## New in round 12: drawn, photos welcome (20)
+
+The twenty new questions each come with a picture I drew, so none of them is waiting. A real photo is often better: drop one in with the same name and delete the drawing's `.png` from this folder, so the photo is the one that gets published.
+
+`daily-pizza-box-table`, `daily-atm-card-first`, `daily-tape-measure-hook`, `daily-cracker-holes`, `daily-mirror-night-tab`, `tin-can-ridges`, `bus-seat-patterns`, `toothbrush-indicator`, `platform-tactile-strip`, `push-plate-door`, `sink-overflow-hole`, `coffee-lid-hole`, `trolley-coin-lock`, `rumble-strips`, `rear-window-lines`, `microwave-door-mesh`, `plane-window-shades`, `train-last-coach-x`, `runway-numbers`, `stapler-anvil`.
+
 ## 1. Daily questions: first (8)
 
 The next two go out on 1 and 2 October. The rest have already been used and now sit in the question pool.

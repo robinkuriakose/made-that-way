@@ -46,8 +46,8 @@ Last updated 30 September 2026.
 
 ## Current state (30 September)
 
-- **Round 12 built:** difficulty tiers and the level plan, the Legend finale at level 6, the feedback form, suggested questions, the new home page and copy, names and profiles, and the builder's tier tabs, bulk pictures, Suggestions and Feedback tabs. **Still to do:** logo sketches, shorter wording for every question (for the owner to approve in the builder), and 20 new questions (five for the daily queue, which runs out after 2 October). Status by item: `docs/brief-map.md`.
-- **The bank is short of easy pictures:** reaching level 6 needs 18 easy questions with pictures; about 10 have one. The builder's Questions tab shows this per tier. Pictures wanted: `images/IMAGES-NEEDED.md`.
+- **Round 12 built:** difficulty tiers and the level plan, the Legend finale at level 6, the feedback form, suggested questions, the new home page and copy, names and profiles, and the builder's tier tabs, bulk pictures, Suggestions and Feedback tabs. **Also done:** shorter wording for 77 questions, waiting for the owner in the builder's Rewrites tab; 20 new questions with drawn pictures (five in the daily queue for 3 to 7 October, fifteen in New questions); three logo sketches in `docs/logo/sketches.html`. **Waiting on the owner:** the logo pick, the rewrites, the fifteen new questions. Status by item: `docs/brief-map.md`.
+- **Easy pictures decide how far players get:** reaching level 6 needs 18 easy questions with pictures. About 10 live ones have one; the ten new easy questions in review would take it past 18. The builder's Questions tab shows this per tier. Pictures wanted: `images/IMAGES-NEEDED.md`.
 
 - **Round 11:** the home picture strip is rebuilt: swipe by hand, tap a picture to open it big with its question, "Play this one" starts a run with it first. It sits under today's question.
 

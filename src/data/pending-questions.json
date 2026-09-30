@@ -1,5 +1,5 @@
 {
-  "batch": "2026-09-19: Indian and everyday objects",
+  "batch": "2026-09-30: round 12, fifteen aha questions (earlier batch: 2026-09-19, Indian and everyday objects)",
   "questions": [
     {
       "id": "rupee-tactile-marks",
@@ -168,6 +168,596 @@
         "everyday",
         "symbols"
       ]
+    },
+    {
+      "id": "tin-can-ridges",
+      "topic": "industrial",
+      "difficulty": "easy",
+      "stem": "Why do food tins have ridges running round their sides?",
+      "options": [
+        "They give your hand a better grip",
+        "They hold the paper label in place",
+        "They stiffen thin metal so it won't buckle",
+        "They show how full the tin should be"
+      ],
+      "correctIndex": 2,
+      "hint": "Try squashing a smooth drinks can, then a ridged soup tin.",
+      "explanationRight": "A tin is made of thin metal, and it gets squeezed: cooked at high heat once it's sealed, stacked in warehouses, dropped in trolleys. Smooth thin walls would dent and buckle. Rolling ridges, called beads, into the sides works like corrugated card: each ridge is a little arch that spreads the load, so a thin, cheap wall stays stiff. Fizzy drinks cans can stay smooth because the gas inside pushes out and holds them firm.",
+      "explanationWrong": [
+        "The ridges are too shallow to help a grip, and they run under the label. They're there for strength: each one is a small arch that stops the thin metal wall denting or buckling.",
+        "Labels are glued, and they cover the ridges. The ridges stiffen the thin metal: like corrugated card, each one spreads the load so the wall doesn't buckle when the tin is heated, stacked or dropped.",
+        null,
+        "Tins are filled by machine, not by eye, and the ridges run the full height. They stiffen the thin walls so the tin doesn't dent or buckle in the heat of cooking or under a stack."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Food Republic: Why canned goods are ribbed",
+      "sourceUrl": "https://www.foodrepublic.com/1516548/why-canned-goods-ribbed/",
+      "tags": [
+        "packaging",
+        "food",
+        "strength",
+        "metal"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/tin-can-ridges.webp",
+        "thumb": "/images/thumbs/tin-can-ridges.webp",
+        "alt": "A food tin with its label half peeled away, showing the ridges rolled round its metal sides.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "bus-seat-patterns",
+      "topic": "furniture",
+      "difficulty": "easy",
+      "stem": "Why are bus and train seats covered in loud, busy patterns?",
+      "options": [
+        "Bright colours keep passengers awake and alert",
+        "The pattern hides stains, dirt and wear",
+        "Busy patterns make the seats feel softer",
+        "Leftover fabric was cheapest in wild prints"
+      ],
+      "correctIndex": 1,
+      "hint": "Picture a plain pale seat after a year of muddy shoes and spilled coffee.",
+      "explanationRight": "A bus or train seat carries thousands of people a week: rain, food, spilled drinks, shoes, scuffs. On plain fabric every mark would show within days. A busy, many-coloured pattern breaks the surface up so the eye can't pick out a stain or a worn patch, and the seats look fresh for years between deep cleans. London's transport museum says its moquette was chosen for exactly this: tough, and patterned to hide dirt and wear. The seat isn't cleaner; you just can't tell.",
+      "explanationWrong": [
+        "Colour doesn't keep anyone awake; people sleep on these seats all the time. The busy pattern is there to hide what thousands of riders leave behind: stains, dirt and worn patches that would show on plain fabric.",
+        null,
+        "The pattern changes how the fabric looks, not how it feels. It's busy so stains, dust and worn patches disappear into it, and seats used by thousands of people a week still look clean.",
+        "The fabric is designed and woven for transport, not leftover. Its busy pattern is chosen to hide stains, dirt and wear, so the seats look clean for years."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "London Transport Museum: A history of moquette",
+      "sourceUrl": "https://www.ltmuseum.co.uk/collections/stories/design/history-moquette",
+      "tags": [
+        "transport",
+        "fabric",
+        "dirt",
+        "pattern"
+      ],
+      "themes": [
+        "travel",
+        "furniture"
+      ],
+      "image": {
+        "src": "/images/bus-seat-patterns.webp",
+        "thumb": "/images/thumbs/bus-seat-patterns.webp",
+        "alt": "Two bus seats side by side, covered in a busy, many-coloured patterned fabric.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "toothbrush-indicator",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do some toothbrushes have bristles that slowly fade in colour?",
+      "options": [
+        "The colour shows which way to brush",
+        "Fading shows the brush is worn and needs replacing",
+        "The colour washes out; it means nothing",
+        "Coloured bristles are softer, so they wear first"
+      ],
+      "correctIndex": 1,
+      "hint": "When did you last buy a new toothbrush, and how did you know it was time?",
+      "explanationRight": "Toothbrushes wear out long before they look broken: the bristles fray and bend and stop cleaning well, especially at the gum line. Dentists say to replace one every three to four months, but nobody keeps count. So some brushes have indicator bristles, dyed a colour that fades with use. Oral-B's fade halfway to white when it's time for a new one: the brush tells you itself.",
+      "explanationWrong": [
+        "The coloured bristles aren't a guide to brushing. They're dyed to fade as the brush is used, so you can see when it's worn out and due for replacing, usually after about three months.",
+        null,
+        "It's deliberate. The dye is made to fade at the rate the bristles wear, so a faded brush is a worn one: time to replace it, as dentists recommend every three to four months.",
+        "The coloured bristles wear like the rest; they're just dyed to fade. When the colour has faded, the brush has done about three months of work and should be replaced."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Oral-B: How often should I change my toothbrush head?",
+      "sourceUrl": "https://oralb.com/en-us/how-often-should-i-change-my-oral-b-toothbrush-head/",
+      "tags": [
+        "health",
+        "wear",
+        "colour",
+        "reminder"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/toothbrush-indicator.webp",
+        "thumb": "/images/thumbs/toothbrush-indicator.webp",
+        "alt": "Two toothbrushes: a new one with bright blue bristles, and a worn one whose blue bristles have faded halfway to white.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "platform-tactile-strip",
+      "topic": "industrial",
+      "difficulty": "easy",
+      "stem": "Why is there a strip of raised bumps along the platform edge?",
+      "options": [
+        "They help rainwater drain off the edge",
+        "Blind people can feel where the edge is",
+        "They show where the train doors will stop",
+        "They stop luggage wheels rolling over the edge"
+      ],
+      "correctIndex": 1,
+      "hint": "Close your eyes and walk towards the platform edge. What would tell you to stop?",
+      "explanationRight": "A platform edge is a drop onto the tracks, and someone who is blind or has low vision can't see it coming. The raised dots are a warning they can feel through their shoes or with a cane: stop, the edge is here. Seiichi Miyake invented these tiles in Japan in 1965 for a friend who was losing his sight, and they were first laid in Okayama in 1967. Dots mean caution; long bars elsewhere mark a path to follow.",
+      "explanationWrong": [
+        "The bumps would trap water rather than drain it. They're there to be felt: someone who is blind can sense them through their shoes or cane and know the edge of the platform is right there.",
+        null,
+        "Door positions are shown with painted marks, if at all. The bumps run the whole length of the edge because they're a warning you can feel: people who can't see know the drop is just ahead.",
+        "The bumps are far too low to stop a wheel. They warn people who can't see that the edge is near: the dots can be felt underfoot or with a cane, and they mean stop."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Wikipedia: Tactile paving",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Tactile_paving",
+      "tags": [
+        "accessibility",
+        "touch",
+        "trains",
+        "safety"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ],
+      "image": {
+        "src": "/images/platform-tactile-strip.webp",
+        "thumb": "/images/thumbs/platform-tactile-strip.webp",
+        "alt": "The edge of a railway platform with a yellow strip of raised dots running along it, and the tracks below.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "push-plate-door",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do some doors have a flat metal plate instead of a handle?",
+      "options": [
+        "It's quieter than a handle when the door swings",
+        "There's nothing to pull, so everyone pushes",
+        "Handles break too often on busy doors",
+        "It hides the lock inside the door"
+      ],
+      "correctIndex": 1,
+      "hint": "Walk up to the door without reading any sign. What does your hand want to do?",
+      "explanationRight": "A handle invites you to grab and pull, so a push door with a handle gets pulled all day, and then needs a PUSH sign to rescue it. A flat plate can't be gripped: the only thing your hand can do is push, and the plate shows where. The designer Don Norman made this famous in The Design of Everyday Things: a door should tell you how to use it without words. Doors that need a sign are now called Norman doors.",
+      "explanationWrong": [
+        "Noise has nothing to do with it. A flat plate gives your hand nothing to grab, so the only thing you can do is push, and it shows you where. The door explains itself without a sign.",
+        null,
+        "Handles on busy doors last fine. The plate is about what your hand does: a handle says pull, a flat plate can't be pulled, so everyone pushes without needing a sign.",
+        "Locks sit in the door's edge, not behind the plate. The plate is a message: there's nothing to grab, so you push, and it shows exactly where."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "99% Invisible: Norman doors, don't know whether to push or pull? Blame design",
+      "sourceUrl": "https://99percentinvisible.org/article/norman-doors-dont-know-whether-push-pull-blame-design/",
+      "tags": [
+        "doors",
+        "push",
+        "signs",
+        "norman"
+      ],
+      "themes": [
+        "everyday",
+        "symbols"
+      ],
+      "image": {
+        "src": "/images/push-plate-door.webp",
+        "thumb": "/images/thumbs/push-plate-door.webp",
+        "alt": "A wooden door with a flat metal plate at hand height and no handle on this side.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "sink-overflow-hole",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do many basins have a small hole just under the rim?",
+      "options": [
+        "It's left over from how basins are moulded",
+        "Water drains out there instead of spilling over",
+        "It lets bad smells out of the pipes",
+        "It's where the tap's water pipe comes in"
+      ],
+      "correctIndex": 1,
+      "hint": "Imagine the plug is in and someone forgets the tap is running.",
+      "explanationRight": "Put the plug in, get distracted, and a running tap will fill the basin and flood the floor. The hole under the rim is an overflow: once the water reaches it, it runs through a hidden channel into the drain instead of over the edge. It buys time as long as the tap runs slower than the overflow can drain. It also lets air into the drain, which helps the basin empty faster.",
+      "explanationWrong": [
+        "It's made on purpose, and it connects to the drain. When the plug is in and the tap left running, water reaches the hole and runs away down a hidden channel instead of flooding the floor.",
+        null,
+        "Smells are kept back by the water trap under the basin. The hole is an overflow: once water rises to it, it flows into the drain, so a forgotten tap doesn't spill over the rim.",
+        "The tap's pipe comes up under the tap. This hole leads down to the drain: it's an overflow, so water that rises too high drains away instead of pouring onto the floor."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Signature Hardware: What is the purpose of a sink and tub overflow drain?",
+      "sourceUrl": "https://www.signaturehardware.com/ideas-buying-guide-sink-and-tub-overflow-drain.html",
+      "tags": [
+        "plumbing",
+        "water",
+        "safety"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/sink-overflow-hole.webp",
+        "thumb": "/images/thumbs/sink-overflow-hole.webp",
+        "alt": "A white bathroom basin, with the small overflow hole just under the rim opposite the tap.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "coffee-lid-hole",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why does a takeaway coffee lid have a second, tiny hole?",
+      "options": [
+        "It's where a stirrer can go in",
+        "Air gets in, so the coffee flows smoothly",
+        "It shows the barista which way to fit it",
+        "It's left from the machine that shapes it"
+      ],
+      "correctIndex": 1,
+      "hint": "Try pouring from a carton with only one hole. What does it do?",
+      "explanationRight": "When coffee leaves through the drinking hole, something has to take its place. With no way for air to get in, the pressure inside drops and the coffee comes out in glugs and splashes, like a carton opened with only one hole. The tiny hole lets air in as you drink, so the coffee flows in a smooth, steady stream. Designers keep it away from the drinking hole so the air and the coffee don't fight for the same opening. It also lets a little steam out.",
+      "explanationWrong": [
+        "It's far too small for a stirrer. It lets air in: as coffee flows out, air takes its place through the tiny hole, so you get a smooth sip instead of glugs and splashes.",
+        null,
+        "Lids are fitted by feel, and the drinking hole already shows the front. The tiny hole is an air vent: without it, coffee comes out in glugs and splashes as the cup struggles to let air in.",
+        "It's made on purpose. As you drink, air comes in through it to replace the coffee, so the flow is smooth and steady instead of glugging and splashing."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Mental Floss: Why do to-go coffee cup lids have that tiny hole?",
+      "sourceUrl": "https://www.mentalfloss.com/food/beverages/why-to-go-coffee-cup-lids-tiny-hole",
+      "tags": [
+        "packaging",
+        "drinks",
+        "air",
+        "flow"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/coffee-lid-hole.webp",
+        "thumb": "/images/thumbs/coffee-lid-hole.webp",
+        "alt": "The lid of a takeaway coffee cup from above: the drinking opening at the front and a tiny second hole further back.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "trolley-coin-lock",
+      "topic": "everyday-object",
+      "difficulty": "easy",
+      "stem": "Why do some supermarket trolleys need a coin to unlock?",
+      "options": [
+        "It's a small fee to rent the trolley",
+        "You get the coin back only by returning it",
+        "It counts how many shoppers are in the store",
+        "It stops children playing with the trolleys"
+      ],
+      "correctIndex": 1,
+      "hint": "What happens to the coin when you push the trolley back into the line?",
+      "explanationRight": "Left alone, shoppers abandon trolleys all over the car park, where they block spaces, roll into cars, and cost staff hours to round up. A coin lock makes putting it back something you want to do: the coin is only released when you chain the trolley to the next one in the bay. It isn't a fee but a deposit, and your own coin is the reward for returning it. It's common across Europe and Australia; in the US, Aldi is the best-known chain to use it.",
+      "explanationWrong": [
+        "You get the coin back, so it costs nothing. It's a deposit: the coin only comes out when you lock the trolley back into the line, so people return them instead of leaving them around the car park.",
+        null,
+        "Shops count visitors in other ways. The coin is a deposit you get back only by locking the trolley into the bay, which makes returning it worth your while.",
+        "Anyone with a coin can unlock one. The point is getting trolleys back: the coin is only released when the trolley is locked to the others, so shoppers return them instead of abandoning them."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Hackaday: Tech in plain sight, shopping cart locks",
+      "sourceUrl": "https://hackaday.com/2025/02/28/tech-in-plain-sight-shopping-cart-locks/",
+      "tags": [
+        "shopping",
+        "deposit",
+        "behaviour"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/trolley-coin-lock.webp",
+        "thumb": "/images/thumbs/trolley-coin-lock.webp",
+        "alt": "The handle of a supermarket trolley with its coin lock: a slot for a coin and a chain clipped in from the trolley in front.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "rumble-strips",
+      "topic": "industrial",
+      "difficulty": "easy",
+      "stem": "Why do some highways have grooves along the edge of the lane?",
+      "options": [
+        "They drain rainwater off the road",
+        "They grip tyres if you brake hard",
+        "The rumble wakes drivers who drift off the road",
+        "They're joints that let the road expand"
+      ],
+      "correctIndex": 2,
+      "hint": "What happens to a tired driver whose car starts to drift?",
+      "explanationRight": "A driver who is sleepy or looking at a phone can drift out of the lane without noticing, and cars leaving the road cause more than half of the deadly crashes in the US. The grooves, called rumble strips, are cheap to cut. When a tyre rolls over them, the car shakes and roars, a warning loud enough to wake a drowsy driver in time to steer back.",
+      "explanationWrong": [
+        "Rain runs off the road's slope into drains. The grooves are an alarm: tyres rolling over them make the car shake and roar, which wakes a drowsy driver drifting out of the lane.",
+        "You'd want smooth tarmac to brake on, not grooves. They're there to be noisy: when a drifting car's tyres hit them, the rumble and shaking jolt the driver back to attention.",
+        null,
+        "Expansion joints run across a road, not along its edge. These grooves warn drivers: a car drifting out of its lane rumbles and shakes, waking a sleepy or distracted driver."
+      ],
+      "confidence": "accurate",
+      "sourceName": "US Federal Highway Administration: Rumble strips",
+      "sourceUrl": "https://highways.dot.gov/safety/rwd/keep-vehicles-road/rumble-strips/general-information",
+      "tags": [
+        "roads",
+        "driving",
+        "sleep",
+        "sound"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ],
+      "image": {
+        "src": "/images/rumble-strips.webp",
+        "thumb": "/images/thumbs/rumble-strips.webp",
+        "alt": "A highway seen from above, with a row of short grooves cut into the road along the edge line.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "rear-window-lines",
+      "topic": "industrial",
+      "difficulty": "easy",
+      "stem": "Why do car rear windows have thin lines running across them?",
+      "options": [
+        "They hold the glass together if it breaks",
+        "They heat up to clear frost and mist",
+        "They block sunlight to keep the car cool",
+        "They help the driver judge distance when reversing"
+      ],
+      "correctIndex": 1,
+      "hint": "Look for a button on the dashboard showing a rectangle with wavy lines.",
+      "explanationRight": "On a cold or damp morning the rear window mists up or frosts over, you can't see behind you, and there's often no wiper to help. The thin lines are a heating element printed onto the glass. Press the rear demister button and current runs through them, warming the glass so frost melts and mist dries off.",
+      "explanationWrong": [
+        "Rear windows are toughened glass that breaks into small cubes; thin lines couldn't hold it. They're heating wires: switch on the rear demister and they warm up to melt frost and clear mist.",
+        null,
+        "They're far too thin and far apart to shade anything. They're a heater: electricity runs through them to warm the glass and clear frost and mist, so you can see out the back.",
+        "Their spacing isn't a guide. They're heating elements, switched on with the rear demister button, that warm the glass to clear frost and mist."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Wikipedia: Defogger",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Defogger",
+      "tags": [
+        "car",
+        "heat",
+        "frost",
+        "glass"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ],
+      "image": {
+        "src": "/images/rear-window-lines.webp",
+        "thumb": "/images/thumbs/rear-window-lines.webp",
+        "alt": "A car's rear window from behind, with thin horizontal lines running across the glass.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "microwave-door-mesh",
+      "topic": "everyday-object",
+      "difficulty": "medium",
+      "stem": "Why is a microwave's glass door covered in a mesh of tiny holes?",
+      "options": [
+        "The holes let steam escape from the oven",
+        "They block microwaves but let light through",
+        "The pattern stops the glass cracking from heat",
+        "They cool the door so it's safe to touch"
+      ],
+      "correctIndex": 1,
+      "hint": "The door has two jobs at once: let you watch, and keep something in.",
+      "explanationRight": "A microwave needs a window so you can watch your food, but its microwaves have to stay inside. The metal mesh does both. Microwaves are about 12 centimetres from one wave to the next, far too big to get through holes a millimetre or two wide, so the mesh bounces them back in like a solid metal wall. Light waves are hundreds of thousands of times smaller, so they pass straight through and you can see in.",
+      "explanationWrong": [
+        "Steam leaves through vents in the oven's body, not the door. The mesh is metal: its holes are much smaller than a microwave's wavelength, so the waves bounce back inside, while light, with a far smaller wavelength, passes through.",
+        null,
+        "The glass is fine without it. The metal mesh is a shield: microwaves are about 12 cm long and can't fit through the tiny holes, while visible light can, so you see in and the waves stay in.",
+        "It's the food that gets hot, not the door. The mesh keeps the microwaves inside, since they're too big for the holes, and lets light out so you can watch."
+      ],
+      "confidence": "accurate",
+      "sourceName": "The Straight Dope: What keeps microwave radiation from leaking out the oven door?",
+      "sourceUrl": "https://www.straightdope.com/21343269/what-keeps-microwave-radiation-from-leaking-out-the-oven-door",
+      "tags": [
+        "kitchen",
+        "waves",
+        "safety",
+        "light"
+      ],
+      "themes": [
+        "everyday",
+        "safety"
+      ],
+      "image": {
+        "src": "/images/microwave-door-mesh.webp",
+        "thumb": "/images/thumbs/microwave-door-mesh.webp",
+        "alt": "A microwave oven's door, with its window covered in a fine grid of tiny dots.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "plane-window-shades",
+      "topic": "industrial",
+      "difficulty": "medium",
+      "stem": "Why do crew ask for window blinds up for take-off and landing?",
+      "options": [
+        "Sunlight helps keep the cabin warm",
+        "So passengers can enjoy the view",
+        "So everyone can see outside if something goes wrong",
+        "Closed blinds can rattle loose in turbulence"
+      ],
+      "correctIndex": 2,
+      "hint": "Before opening an emergency exit, what would the crew need to know?",
+      "explanationRight": "Take-off and landing are the minutes when things are most likely to go wrong. With the blinds up, passengers and crew can spot trouble outside, like fire, smoke or debris, and before opening an emergency exit the crew can check that side is safe to use. It also keeps everyone's eyes used to the light outside, which is why cabin lights are dimmed for night landings: if you have to get out, you aren't stepping out half blind.",
+      "explanationWrong": [
+        "Cabin temperature is handled by the air system. The blinds go up so people can see outside: to spot fire or smoke, and so the crew can check an exit is safe before opening it.",
+        "The view is a bonus, not the reason. With blinds up, anyone can spot a fire or smoke outside, and the crew can check an exit is safe to open if the plane has to be evacuated.",
+        null,
+        "Blinds sit firmly in their tracks. They go up so passengers and crew can see outside during the riskiest minutes of a flight, and check a side is safe before opening an exit."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Simple Flying: Why do window blinds need to be open during takeoff and landing?",
+      "sourceUrl": "https://simpleflying.com/window-blinds-open-takeoff-landing-why/",
+      "tags": [
+        "aviation",
+        "emergency",
+        "safety"
+      ],
+      "themes": [
+        "travel",
+        "safety"
+      ],
+      "image": {
+        "src": "/images/plane-window-shades.webp",
+        "thumb": "/images/thumbs/plane-window-shades.webp",
+        "alt": "An aeroplane window with its blind pushed up, showing the wing and sky outside.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "train-last-coach-x",
+      "topic": "industrial",
+      "difficulty": "medium",
+      "stem": "Why does the last coach of an Indian train have a big X?",
+      "options": [
+        "It shows the coach is out of service",
+        "It shows staff the whole train has passed",
+        "It marks where the engine can couple on",
+        "It warns people not to cross behind it"
+      ],
+      "correctIndex": 1,
+      "hint": "A station master watches a long train go by. How can they be sure no coaches came loose on the way?",
+      "explanationRight": "A long train can lose coaches if a coupling fails, and a coach left behind on the line is a disaster waiting for the next train. So station staff, gatemen and signal crews watch each train go by for the yellow and white X painted on the last coach. If a train passes with no X at the back, they know coaches have been left behind and raise the alarm. By day there's also an LV board, for Last Vehicle, and at night a flashing red lamp.",
+      "explanationWrong": [
+        "A coach out of service wouldn't be running. The X marks the last coach, so staff watching a train pass can check it's complete: a train that goes by without an X has lost coaches somewhere behind it.",
+        null,
+        "Couplings are the same at every coach. The X is a check for staff along the line: seeing it pass means the whole train is there, and a train without it has left coaches behind.",
+        "Nobody should cross behind any train. The X marks the last coach so station and signal staff can confirm the whole train has passed, with no coaches left on the line."
+      ],
+      "confidence": "accurate",
+      "sourceName": "India.com: Indian Railways decodes the meaning of the letter X behind the last coach",
+      "sourceUrl": "https://www.india.com/news/india/indian-railways-decodes-meaning-of-letter-x-behind-last-coach-of-a-train-5930009/",
+      "tags": [
+        "trains",
+        "signs",
+        "safety",
+        "india"
+      ],
+      "themes": [
+        "travel",
+        "india",
+        "symbols"
+      ],
+      "image": {
+        "src": "/images/train-last-coach-x.webp",
+        "thumb": "/images/thumbs/train-last-coach-x.webp",
+        "alt": "The back of the last coach of an Indian train, with a large yellow and white X painted on it and an LV board below.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "runway-numbers",
+      "topic": "industrial",
+      "difficulty": "hard",
+      "stem": "Why is a runway numbered 09 at one end and 27 at the other?",
+      "options": [
+        "They're the runway's length in hundreds of metres",
+        "They're compass directions, with the last zero dropped",
+        "Runways are numbered in the order they were built",
+        "Pilots land at one end, take off from the other"
+      ],
+      "correctIndex": 1,
+      "hint": "09 and 27 are 18 apart. What else points in opposite directions, 180 apart?",
+      "explanationRight": "A pilot lining up needs to know at a glance which way the runway points. So each end is numbered by its compass heading, rounded to the nearest 10 degrees with the last zero dropped: an end pointing 270 degrees, due west, is 27. The other end points the opposite way, 180 degrees round, so the two numbers always differ by 18: 09 and 27, or 18 and 36. As magnetic north slowly drifts, some runways even get repainted with new numbers.",
+      "explanationWrong": [
+        "Length isn't painted there. The number is the direction the runway points, as a compass heading with the last zero dropped: 27 points 270 degrees, west, and the far end, 09, points 90 degrees, east.",
+        null,
+        "Build order isn't shown at all. Each end is its compass heading with the last zero dropped, so 27 points west (270 degrees) and 09 points east (90 degrees), always 18 apart.",
+        "Either end can be used for landing or take-off, depending on the wind. The numbers are compass headings: 27 means that end points 270 degrees, and the other end, 09, points the opposite way."
+      ],
+      "confidence": "accurate",
+      "sourceName": "Pilot Institute: Runway numbers, a simple guide",
+      "sourceUrl": "https://pilotinstitute.com/runway-numbers/",
+      "tags": [
+        "aviation",
+        "numbers",
+        "compass"
+      ],
+      "themes": [
+        "travel",
+        "symbols"
+      ],
+      "image": {
+        "src": "/images/runway-numbers.webp",
+        "thumb": "/images/thumbs/runway-numbers.webp",
+        "alt": "A runway seen from above, with 09 painted at one end and 27 at the other, and white stripes at each threshold.",
+        "credit": "Illustration: Made That Way"
+      }
+    },
+    {
+      "id": "stapler-anvil",
+      "topic": "everyday-object",
+      "difficulty": "hard",
+      "stem": "Why does the metal plate under a stapler turn around?",
+      "options": [
+        "To fit longer staples for thick stacks",
+        "To bend staples outward, so they pull out easily",
+        "To swap to the other side when one wears out",
+        "To lock the stapler shut for carrying"
+      ],
+      "correctIndex": 1,
+      "hint": "Look closely at the two sets of grooves on the plate. Which way would each bend a staple's legs?",
+      "explanationRight": "Sometimes papers only need holding together for a while: a draft to sort, pages to pin before copying. A normal staple's legs curl inward and grip, and pulling one out tears the paper. Turn the plate, called the anvil, and its other grooves bend the legs outward instead, flat against the back. The staple holds the pages but slides out cleanly with no remover. It's called pinning, and most people never know it's there.",
+      "explanationWrong": [
+        "Both sides take the same staples. The second groove bends the legs outward instead of in, so the staple holds pages for now and pulls out easily without tearing them.",
+        null,
+        "The two sides are different on purpose: one curls a staple's legs inward to grip, the other bends them outward, so the staple slides out cleanly when the pages only need holding for a while.",
+        "Staplers stay shut on their own. Turning the plate switches it to its other grooves, which bend the staple's legs outward, so it pulls out easily: handy for pages that only need pinning for a while."
+      ],
+      "confidence": "high confidence",
+      "sourceName": "Wikipedia: Stapler",
+      "sourceUrl": "https://en.wikipedia.org/wiki/Stapler",
+      "tags": [
+        "stationery",
+        "office",
+        "temporary"
+      ],
+      "themes": [
+        "everyday"
+      ],
+      "image": {
+        "src": "/images/stapler-anvil.webp",
+        "thumb": "/images/thumbs/stapler-anvil.webp",
+        "alt": "The base of a stapler, close up: the metal plate with two sets of grooves, one to curl a staple's legs in and one to bend them out.",
+        "credit": "Illustration: Made That Way"
+      }
     }
   ]
 }
