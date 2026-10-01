@@ -1,4 +1,5 @@
 import Hearts from './Hearts.jsx';
+import Logo from './Logo.jsx';
 import CountUp from './CountUp.jsx';
 
 // The bar along the top. Off a run it's just the name, which leads home
@@ -22,11 +23,13 @@ export default function TopBar({ play = null, meta = null, onHome = null, onRest
                   <span aria-hidden="true">‹ </span>Home
                 </>
               ) : (
-                'Made That Way'
+                <Logo />
               )}
             </button>
           ) : (
-            <span className="brand">Made That Way</span>
+            <span className="brand">
+              <Logo />
+            </span>
           )}
           {!play && meta}
           {play && onRestart && (

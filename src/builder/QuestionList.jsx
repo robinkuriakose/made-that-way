@@ -2,7 +2,8 @@ import { useMemo, useRef, useState } from 'react';
 import plan from '../data/level-plan.json';
 import { DIFFICULTIES } from '../lib/questionRules.js';
 import { planNeeds, tierMismatch } from '../lib/levels.js';
-import { prepareImage, idFromFilename } from '../lib/imagePrep.js';
+import { idFromFilename } from '../lib/imagePrep.js';
+import { uploadPicture } from './uploadPicture.js';
 
 const STATUS_FILTERS = [
   { id: 'live', label: 'Live' },
@@ -87,10 +88,8 @@ function BulkPictures({ all, api, act }) {
         continue;
       }
       try {
-        const { full, thumb } = await prepareImage(file);
-        const { url } = await api('/api/builder/upload', { method: 'POST', body: { filename: id, ...full } });
-        const { url: thumbUrl } = await api('/api/builder/upload', { method: 'POST', body: { filename: `${id}-thumb`, ...thumb } });
-        const ok = await act(id, 'setImage', { image: { src: url, thumb: thumbUrl, alt: q.image?.alt ?? '', credit: q.image?.credit ?? '' } });
+        const stored = await uploadPicture(api, id, file);
+        const ok = await act(id, 'setImage', { image: { ...stored, alt: q.image?.alt ?? '', credit: q.image?.credit ?? '' } });
         out.push({ name: file.name, ok, note: ok ? `Added to "${q.stem}"` : 'Stored, but not attached. Try again.' });
       } catch (err) {
         out.push({ name: file.name, ok: false, note: err.message });

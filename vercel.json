@@ -16,6 +16,14 @@
       "destination": "/api/player?route=:route"
     },
     {
+      "source": "/q/:id",
+      "destination": "/api/player?route=share&q=:id"
+    },
+    {
+      "source": "/daily/:day",
+      "destination": "/api/player?route=share&day=:day"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }

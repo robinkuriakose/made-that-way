@@ -32,9 +32,10 @@ function Stars({ id, label, value, onChange }) {
 
 // A short form: three ratings, what to add more of, whether you'd tell a
 // friend, and a note. Every part is optional; only what's answered is sent.
-export default function FeedbackForm({ runId = null, onClose }) {
+// initialRating: the overall stars, when the player tapped one to get here.
+export default function FeedbackForm({ runId = null, initialRating = null, onClose }) {
   const closeRef = useRef(null);
-  const [ratings, setRatings] = useState({});
+  const [ratings, setRatings] = useState(() => (initialRating ? { overall: initialRating } : {}));
   const [more, setMore] = useState([]);
   const [moreOther, setMoreOther] = useState('');
   const [recommend, setRecommend] = useState(null);

@@ -57,20 +57,41 @@ function Result({ current, streak, lives }) {
   );
 }
 
+// Most players miss it at this share or below, so getting it right is worth
+// telling someone about.
+const RARE = 50;
+
 // The reward for answering: why it's made that way, short, straight away.
 // "Read more" opens the full reasoning and its source; flagging sits here,
-// quietly, beside it.
-function Reason({ question, flagged, onExplain, onFlag }) {
+// quietly, beside it. A right answer can be sent to a friend, and when most
+// players miss that question, the moment says so.
+function Reason({ question, correct, flagged, onExplain, onFlag, onShare }) {
   const share = percentRight(question);
+  const rare = correct && share != null && share <= RARE;
   return (
     <div className="reason">
+      {rare && (
+        <div className="reason-rare">
+          <p className="reason-rare-text">
+            Only <strong>{share}%</strong> of players get this right. You did.
+          </p>
+          <button type="button" className="button button-small button-accent" onClick={onShare}>
+            Ask a friend
+          </button>
+        </div>
+      )}
       <p className="reason-label">Why it's made that way</p>
       <p className="reason-text">{firstSentence(question.explanationRight)}</p>
-      {share != null && <p className="muted reason-share">{share}% of players get this right.</p>}
+      {share != null && !rare && <p className="muted reason-share">{share}% of players get this right.</p>}
       <p className="reason-foot">
         <button type="button" className="text-button" onClick={onExplain}>
           Read more
         </button>
+        {correct && !rare && (
+          <button type="button" className="text-button" onClick={onShare}>
+            Ask a friend
+          </button>
+        )}
         {flagged ? (
           <span className="flag-done">Flagged. Thanks.</span>
         ) : (
@@ -133,6 +154,7 @@ export default function QuestionScreen({
   onNext,
   onFlag,
   onExplain,
+  onShare,
   onHome,
   onRestart,
 }) {
@@ -170,6 +192,7 @@ export default function QuestionScreen({
             height, and every image fills the same frame. Images show before
             the answer on purpose: the point is to work it out. */}
         {question.image && <ImageFrame image={question.image} compact />}
+        {question.suggestedBy && <p className="suggested-by">Suggested by {question.suggestedBy}</p>}
 
         <ol ref={optionsRef} className={`options${answered ? ' is-answered' : ''}`}>
           {question.options.map((text, i) => (
@@ -195,7 +218,7 @@ export default function QuestionScreen({
           {answered && (
             <>
               <Result current={current} streak={streak} lives={lives} />
-              <Reason question={question} flagged={flagged} onExplain={onExplain} onFlag={onFlag} />
+              <Reason question={question} correct={phase === 'correct'} flagged={flagged} onExplain={onExplain} onFlag={onFlag} onShare={onShare} />
             </>
           )}
         </div>

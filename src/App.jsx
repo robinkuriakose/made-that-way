@@ -5,7 +5,8 @@ import { pointsFor, replay, levelOf, comboMultiplier, isPerfectLevel, LEVEL_SIZE
 import { pickRedeemQuestions, REDEEM_CHOICES } from './lib/redeem.js';
 import { loadRun, saveRun } from './lib/runStore.js';
 import { recordSession } from './lib/storage.js';
-import { readBoards, signRun, renamePlayer, readLocalName, writeLocalName, placeholderName } from './lib/leaderboard.js';
+import { readBoards, signRun, renamePlayer, readLocalName, writeLocalName, placeholderName, isPlaceholderName } from './lib/leaderboard.js';
+import { share, questionLink, dailyLink, dailyText } from './lib/share.js';
 import { fetchLegends, signLegend } from './lib/playerClient.js';
 import { nameProblem, cleanName } from './lib/names.js';
 import { initialBank, fetchLiveBank } from './lib/questionBank.js';
@@ -40,6 +41,7 @@ import WhysScreen from './components/WhysScreen.jsx';
 import LegendFinale from './components/LegendFinale.jsx';
 import ProfileScreen from './components/ProfileScreen.jsx';
 import SuggestScreen from './components/SuggestScreen.jsx';
+import SharedQuestion from './components/SharedQuestion.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';
 import { RenameModal } from './components/NameTag.jsx';
 import ExplainModal from './components/ExplainModal.jsx';
@@ -153,7 +155,11 @@ function toSession(run) {
 
 const badgeWords = (ids) => ids.map((id) => BADGES.find((b) => b.id === id)?.label ?? id).join(' and ');
 
-export default function App() {
+// This device's place on this week's board, if it has one.
+const myRank = (boards) => (boards.week.entries.find((e) => e.isMe) ?? boards.week.me)?.rank ?? null;
+
+// arrival: a shared link this visit started from (src/lib/share.js).
+export default function App({ arrival = null }) {
   const testMode = useMemo(() => isTestMode(), []);
   const [bank, setBank] = useState(initialBank);
   const bankRef = useRef(bank);
@@ -164,7 +170,9 @@ export default function App() {
     const saved = loadRun();
     return isUsableRun(saved) ? saved : null;
   });
-  const [screen, setScreen] = useState('home');
+  const [screen, setScreen] = useState(arrival?.kind === 'question' ? 'shared' : 'home');
+  // A question someone shared: { id, from, chosenIndex?, correct? }.
+  const [shared, setShared] = useState(arrival?.kind === 'question' ? arrival : null);
   const runRef = useRef(run);
   runRef.current = run;
   const screenRef = useRef(screen);
@@ -187,7 +195,8 @@ export default function App() {
   const [streak, setStreak] = useState(0);
   const [legends, setLegends] = useState({ legends: [], lastLevel: plan.lastLevel });
   const [renaming, setRenaming] = useState(false);
-  const [feedbackFor, setFeedbackFor] = useState(undefined);
+  // The feedback form, when open: { runId, rating }.
+  const [feedbackFor, setFeedbackFor] = useState(null);
 
   useEffect(() => {
     saveRun(run);
@@ -197,6 +206,7 @@ export default function App() {
     readBoards().then(setBoards);
     fetchLegends().then((r) => r.ok && setLegends(r));
     track('page_opened', { data: { device: screenKind() } });
+    if (arrival) track('share_opened', { data: { kind: arrival.kind, questionId: arrival.id ?? null } });
     flush();
     // Fetch the live bank straight away, so it's usually here before Start.
     liveBank.current = fetchLiveBank().then((live) => {
@@ -309,6 +319,49 @@ export default function App() {
       setToast({ message: `New badge: ${badgeWords(fresh)}.`, duration: 5000 });
     }
   }, []);
+
+  // The name a shared link carries: the player's own, never their starting one.
+  const myName = boards.player?.name ?? (isPlaceholderName(localName) ? null : localName);
+  const namedPlayer = Boolean(myName);
+
+  function toastShareResult(result) {
+    if (result === 'copied') setToast({ message: 'Copied. Paste it to a friend.', duration: 4000 });
+    else if (result === 'failed') setToast({ message: "Couldn't share that. Try again.", duration: 4000 });
+  }
+
+  // A question's link. It carries the player's name only when they got it
+  // right: the preview then reads "<name> worked this one out. Can you?"
+  async function shareQuestion(q, correct = true) {
+    const text = correct ? 'I worked this one out. Can you?' : 'This one got me. Can you work it out?';
+    toastShareResult(await share({ text, url: questionLink(q.id, correct ? myName : null), kind: 'question', questionId: q.id }));
+  }
+
+  async function shareDaily({ day, correct, streak: days }) {
+    toastShareResult(await share({ text: dailyText({ correct, streak: days }), url: dailyLink(day), kind: 'daily' }));
+  }
+
+  // A shared question this device can't find (taken out of the game since it
+  // was shared): once the live questions are in, go home and say so.
+  const sharedQuestion = shared ? (questionsById[shared.id] ?? null) : null;
+  useEffect(() => {
+    if (screen !== 'shared' || sharedQuestion || !shared) return undefined;
+    let live = true;
+    Promise.resolve(liveBank.current).then((fresh) => {
+      if (!live || byIdOf((fresh ?? bankRef.current).questions)[shared.id]) return;
+      setScreen('home');
+      setToast({ message: "That question isn't in the game any more. Here are plenty of others.", duration: 6000 });
+    });
+    return () => {
+      live = false;
+    };
+  }, [screen, Boolean(sharedQuestion)]);
+
+  // A player with a name of their own goes on the board without asking.
+  useEffect(() => {
+    if (screen !== 'end' || !run?.finishedAt || run.signed || run.autoSigning || !namedPlayer || signing) return;
+    setRun((r) => ({ ...r, autoSigning: true }));
+    signScore(myName);
+  }, [screen, run?.id, namedPlayer]);
 
   // firstId: a question to start with (a picture tapped on the home screen).
   // Buttons call this with a click event, which is ignored.
@@ -582,17 +635,21 @@ export default function App() {
   }
 
   async function signScore(name) {
+    const runId = run.id;
+    const rankBefore = run.rankBefore ?? myRank(boards);
     setSigning(true);
     setSignError(null);
-    const result = await signRun({ runId: run.id, name });
+    setRun((r) => (r.id === runId ? { ...r, rankBefore } : r));
+    const result = await signRun({ runId, name });
     setSigning(false);
     if (!result.ok) {
       setSignError(result.error);
       return;
     }
-    setRun((r) => ({ ...r, signed: { isNewBest: result.isNewBest, isTest: result.isTest } }));
+    const fresh = await readBoards();
+    setRun((r) => (r.id === runId ? { ...r, signed: { isNewBest: result.isNewBest, isTest: result.isTest } } : r));
     setLocalName(readLocalName());
-    setBoards(await readBoards());
+    setBoards(fresh);
   }
 
   // The Legends wall: the run goes up with the name and signature, then the
@@ -714,6 +771,7 @@ export default function App() {
           canRedeem={canRedeem && c.phase !== 'redeemed'}
           flagged={flagged(question.id)}
           onHint={takeHint}
+          onShare={() => shareQuestion(question, c.phase === 'correct')}
           onAnswer={answer}
           onOpenRedeem={openRedeem}
           onNext={next}
@@ -752,7 +810,7 @@ export default function App() {
         legends={legends.legends}
         signed={Boolean(run.legendSigned)}
         onSign={putOnLegends}
-        onFeedback={() => setFeedbackFor(run.id)}
+        onFeedback={() => setFeedbackFor({ runId: run.id })}
         onContinue={() => enter('end')}
       />
     );
@@ -767,8 +825,33 @@ export default function App() {
         onHome={goHome}
         onCollection={() => enter('whys')}
         onSuggest={() => enter('suggest')}
-        onFeedback={() => setFeedbackFor(null)}
+        onFeedback={() => setFeedbackFor({ runId: null })}
       />
+    );
+  } else if (screen === 'shared' && shared) {
+    body = sharedQuestion ? (
+      <SharedQuestion
+        question={sharedQuestion}
+        label={labelFor(sharedQuestion)}
+        from={shared.from}
+        starting={starting}
+        onAnswered={(chosenIndex, correct) => {
+          setShared((x) => ({ ...x, chosenIndex, correct }));
+          markSeen([shared.id]);
+          uncovered(shared.id);
+          track('share_answered', { data: { questionId: shared.id, correct } });
+        }}
+        onExplain={(chosenIndex, correct) => setExplaining({ questionId: shared.id, wasCorrect: correct, chosenIndex })}
+        onPlay={startRun}
+        onShare={(correct) => shareQuestion(sharedQuestion, correct)}
+        onHome={goHome}
+      />
+    ) : (
+      <div className="page">
+        <main className="stage">
+          <p className="muted shared-loading">Getting the question…</p>
+        </main>
+      </div>
     );
   } else if (screen === 'suggest') {
     body = <SuggestScreen placeholder={placeholderName()} onHome={goHome} />;
@@ -785,7 +868,8 @@ export default function App() {
         onSign={signScore}
         onHome={goHome}
         onCollection={() => enter('whys')}
-        onFeedback={() => setFeedbackFor(run.id)}
+        onRate={(rating) => setFeedbackFor({ runId: run.id, rating })}
+        onSuggest={() => enter('suggest')}
         onExplain={(result) =>
           setExplaining({ questionId: result.id, wasCorrect: result.correct, chosenIndex: result.chosenIndex })
         }
@@ -842,6 +926,10 @@ export default function App() {
         onStreak={onStreak}
         onCollection={() => enter('whys')}
         onPlayQuestion={(id) => restartRun(id)}
+        onSuggest={() => enter('suggest')}
+        onRate={() => setFeedbackFor({ runId: null })}
+        onShareDaily={shareDaily}
+        focusDaily={arrival?.kind === 'daily'}
       />
     );
   }
@@ -919,7 +1007,7 @@ export default function App() {
           onClose={() => setRenaming(false)}
         />
       )}
-      {feedbackFor !== undefined && <FeedbackForm runId={feedbackFor} onClose={() => setFeedbackFor(undefined)} />}
+      {feedbackFor && <FeedbackForm runId={feedbackFor.runId} initialRating={feedbackFor.rating ?? null} onClose={() => setFeedbackFor(null)} />}
       {pickingTopics && (
         <TopicPicker themes={bank.themes} chosen={chosenThemes} onSave={saveTopics} onClose={() => setPickingTopics(false)} />
       )}

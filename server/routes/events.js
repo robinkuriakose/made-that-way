@@ -23,6 +23,9 @@ function cleanData(data) {
   if (Number.isInteger(data.level) && data.level >= 1 && data.level <= MAX_ANSWERS) out.level = data.level;
   if (typeof data.questionId === 'string' && data.questionId.length <= 64) out.questionId = data.questionId;
   if (Array.isArray(data.themes) && data.themes.length <= 30) out.themes = data.themes.filter((t) => typeof t === 'string' && t.length <= 40);
+  if (['question', 'daily'].includes(data.kind)) out.kind = data.kind;
+  if (typeof data.correct === 'boolean') out.correct = data.correct;
+  if (['shared', 'copied'].includes(data.how)) out.how = data.how;
   return out;
 }
 
@@ -56,7 +59,19 @@ async function record(e) {
   `;
 }
 
-const TYPES = new Set(['page_opened', 'run_started', 'run_left', 'run_restarted', 'run_resumed', 'level_cleared', 'daily_opened']);
+const TYPES = new Set([
+  'page_opened',
+  'run_started',
+  'run_left',
+  'run_restarted',
+  'run_resumed',
+  'level_cleared',
+  'daily_opened',
+  // Sharing: a link sent, a shared link opened, its question answered.
+  'shared',
+  'share_opened',
+  'share_answered',
+]);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return methodNotAllowed(res, ['POST']);

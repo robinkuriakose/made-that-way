@@ -110,6 +110,29 @@ function HowItWorks() {
   );
 }
 
+// Players shape what gets asked next: suggest a question, or say how it's
+// going. Its own card, not a link in the footer.
+function HelpCard({ onSuggest, onRate }) {
+  return (
+    <section className="home-help" aria-labelledby="home-help-title">
+      <div>
+        <p id="home-help-title" className="home-help-title">
+          Help make the next questions
+        </p>
+        <p className="home-help-lede">Seen a detail that makes you ask why? Send it in. If it becomes a question, it goes in with your name on it.</p>
+      </div>
+      <div className="home-help-actions">
+        <button type="button" className="button button-primary" onClick={onSuggest}>
+          Suggest a question
+        </button>
+        <button type="button" className="button" onClick={onRate}>
+          Rate the game
+        </button>
+      </div>
+    </section>
+  );
+}
+
 // The home screen, for people who look before they read: a pile of picture
 // cards to swipe and flip, and one big button, up top; then today's
 // question, how it works in three pictures, the Legends wall and this
@@ -135,6 +158,10 @@ export default function HomeScreen({
   onCollection,
   onPlayQuestion,
   onSignLegend,
+  onSuggest,
+  onRate,
+  onShareDaily,
+  focusDaily = false,
 }) {
   // One set of pictures for the whole visit: unseen questions first, so the
   // pile stays fresh. Picked once, so nothing reshuffles when the live bank
@@ -180,9 +207,11 @@ export default function HomeScreen({
           </div>
         </section>
 
-        <DailyCard onFlag={onFlagDaily} flagged={dailyFlagged} onStreak={onStreak} />
+        <DailyCard onFlag={onFlagDaily} flagged={dailyFlagged} onStreak={onStreak} onShare={onShareDaily} focus={focusDaily} />
 
         <HowItWorks />
+
+        <HelpCard onSuggest={onSuggest} onRate={onRate} />
 
         <LegendsWall legends={legends.legends} lastLevel={legends.lastLevel} titleId="home-legends" />
 

@@ -15,7 +15,7 @@ The site is live at https://madethatway.vercel.app (21 September 2026): database
 
 ## Content
 
-- [ ] **Pick a logo** from the three sketches in `docs/logo/sketches.html`.
+- [ ] **Pick the final logo.** A placeholder (the keycap) is live everywhere; the three sketches are in `docs/logo/sketches.html`. Swapping it means changing `src/components/Logo.jsx` and running `node scripts/brand-assets.js`.
 - [ ] **Review the shorter wording** in the builder's Rewrites tab (77 questions): use it, edit it first, or keep the old one.
 - [ ] **Review the 15 new questions** in New questions (1 October batch), and the 5 new daily ones in the Daily tab.
 - [ ] **Where the lift mirror photo came from,** for its credit line.
@@ -24,7 +24,7 @@ The site is live at https://madethatway.vercel.app (21 September 2026): database
 - [ ] **Credit lines for about 80 images:** photographer or source, and licence, for each. Several are brand, museum or stock photos, which usually aren't free to reuse, and two look AI-generated. There's now a Credit box on each card in the builder.
 - [ ] **A better picture for shinkansen-nose:** it shows an E4 series train, not the 500 series the question is about.
 - [ ] **Sharper versions of 3 images:** qwerty, calculator-keypad, rubber-band-scroll.
-- [ ] **Which sharing idea to build first** (in chat, 1 October).
+- [ ] **Raise the last level from 6 to 10?** The bank now has enough pictured questions for it.
 
 ## Decisions waiting on you
 

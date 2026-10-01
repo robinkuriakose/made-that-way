@@ -1,17 +1,21 @@
 // Converts every image dropped in images/ (any format: jpg, png, webp, avif,
 // gif, whatever the extension claims) into WebP, capped at MAX_WIDTH, plus a
 // small thumbnail for places like the home screen. Animated GIFs stay
-// animated. Run after adding or replacing images:  npm run images
+// animated. Each published picture also gets a share card in
+// public/images/share/<id>.jpg (scripts/share-card.js): what chat apps show
+// when someone shares that question. Run after adding or replacing images:
+// npm run images
 //
 // Where each file goes is read from the question data, not listed here:
 // - normally public/images/<id>.webp, which ships with the site;
 // - dev-images/<id>.webp when that question marks its image as a
 //   placeholder (image.placeholder: true), for example a watermarked stand-in.
 //   dev-images/ is only served by `npm run dev` and never deployed.
-import { readdir, mkdir, stat, readFile } from 'node:fs/promises';
+import { readdir, mkdir, stat, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';
+import { shareCard } from './share-card.js';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
 const SOURCE_DIR = path.join(ROOT, 'images');
@@ -60,6 +64,12 @@ for (const file of files) {
     .toFile(output);
   // Thumbnails are stills: a moving tile on the home screen would distract.
   await sharp(input).rotate().resize({ width: THUMB_WIDTH, withoutEnlargement: true }).webp({ quality: 72, effort: 5 }).toFile(thumb);
+  // The card a chat app shows when this question is shared (a JPEG, which
+  // every chat app can show). Local-only placeholders are never shared.
+  if (outDir === PUBLIC_DIR) {
+    await mkdir(path.join(PUBLIC_DIR, 'share'), { recursive: true });
+    await writeFile(path.join(PUBLIC_DIR, 'share', `${name}.jpg`), await shareCard(input));
+  }
 
   const inSize = (await stat(input)).size;
   const outSize = (await stat(output)).size;

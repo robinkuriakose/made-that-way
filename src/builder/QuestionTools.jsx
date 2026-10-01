@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { DIFFICULTIES } from '../lib/questionRules.js';
-import { prepareImage } from '../lib/imagePrep.js';
+import { uploadPicture } from './uploadPicture.js';
 
 const TIER_LABEL = { easy: 'Easy', medium: 'Medium', hard: 'Hard' };
 
@@ -55,12 +55,10 @@ export default function QuestionTools({ q, api, act }) {
     setBusy(true);
     setError(null);
     try {
-      const { full, thumb } = await prepareImage(file);
-      const { url } = await api('/api/builder/upload', { method: 'POST', body: { filename: q.id, ...full } });
-      const { url: thumbUrl } = await api('/api/builder/upload', { method: 'POST', body: { filename: `${q.id}-thumb`, ...thumb } });
+      const stored = await uploadPicture(api, q.id, file);
       // Until you describe it, the note on what it should show describes it.
       const alt = q.image?.alt || q.pictureBrief || '';
-      await act(q.id, 'setImage', { image: { src: url, thumb: thumbUrl, alt, credit: q.image?.credit ?? '' } }, has ? 'Picture replaced.' : 'Picture added.');
+      await act(q.id, 'setImage', { image: { ...stored, alt, credit: q.image?.credit ?? '' } }, has ? 'Picture replaced.' : 'Picture added.');
     } catch (err) {
       setError(err.message);
     } finally {

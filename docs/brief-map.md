@@ -75,6 +75,20 @@ mindmap
       Score verification
 ```
 
+## Round 15 (1 October 2026): sharing, the board in motion, a logo
+
+| You asked for | Status | Where |
+|---|---|---|
+| "Ask a friend" on a single question, with a preview that shows the picture and question but never the answer; the friend lands on that question, then plays | Done. Every right answer can be sent; the link carries your name only if you got it right, so the preview reads "Robin worked this one out. Can you?". In chat apps the preview is a share card (the photo in a print, "Can you work out why?", the logo) made for every picture, with the question as the title. The friend answers it on its own screen, sees why, then "Let's play" or "Send it to a friend". Only questions already out can be previewed, never a future daily one | `src/lib/share.js`, `src/components/SharedQuestion.jsx`, `server/routes/player/share.js`, `server/share.js`, `scripts/share-card.js`, `vercel.json` |
+| A Wordle-style share for the daily question | Done: "Share your result" after answering (and "Share" on the folded card). Spoiler free: "I worked out today's why on Made That Way. 4 days in a row. Can you?" with a link whose preview is that day's picture and question; it opens the home page with the daily card lit up | `src/components/DailyCard.jsx` |
+| "Only N% get this right" at the right moment | Done: on a right answer to a question 50% or fewer of players get right (once 10 have answered), a dark banner says so, with "Ask a friend" | `src/components/QuestionScreen.jsx` (`Reason`) |
+| Credit players whose questions go in | Done: "Suggested by <name>" under the picture, in a run, on a shared question and on the flipped home card | `src/components/QuestionScreen.jsx`, `SharedQuestion.jsx`, `HeroDeck.jsx` |
+| Rating and suggesting more prominent, including after a run | Done: a dark card on every end screen (tap a star to open the short form with it filled in, or "Suggest a question"), and "Help make the next questions" on the home page | `src/components/EndScreen.jsx` (`AskCard`), `src/components/HomeScreen.jsx` (`HelpCard`) |
+| A player who changed their name goes on the leaderboard by default, with an animation of them moving up or down, even the first time | Done: the run goes on the board as soon as the end screen opens. The board then plays the change: your row slides from its old place to the new one, the rank counts, others make room, and a first entry rises from below; it lands with a glow. A line says where you are and which way you moved ("Up to 3rd this week, from 6th"). Players still on their starting name keep the one-tap button | `src/App.jsx`, `src/components/Leaderboard.jsx`, `src/components/EndScreen.jsx` |
+| Space between the "Add it as" button and the board | Done | `src/styles.css` |
+| A placeholder logo | Done: the keycap with the F and J bump, in the top bar, as the favicon, the phone home screen icon and on every share card | `src/components/Logo.jsx`, `public/favicon.svg`, `scripts/brand-assets.js` |
+| (Not built, as asked) Private groups | | |
+
 ## Round 14 (1 October 2026): pictures, the deck, review tools, 20 more questions
 
 | You asked for | Status | Where |

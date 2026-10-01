@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import ImageFrame from '../components/ImageFrame.jsx';
-import { prepareImage } from '../lib/imagePrep.js';
+import { uploadPicture } from './uploadPicture.js';
 
 export default function ImageField({ image, onChange, api, filenameHint }) {
   const input = useRef(null);
@@ -12,11 +12,8 @@ export default function ImageField({ image, onChange, api, filenameHint }) {
     setBusy(true);
     setError(null);
     try {
-      const { full, thumb } = await prepareImage(file);
-      const name = filenameHint || file.name;
-      const { url } = await api('/api/builder/upload', { method: 'POST', body: { filename: name, ...full } });
-      const { url: thumbUrl } = await api('/api/builder/upload', { method: 'POST', body: { filename: `${name}-thumb`, ...thumb } });
-      onChange({ src: url, thumb: thumbUrl, alt: image?.alt ?? '', credit: image?.credit ?? '' });
+      const stored = await uploadPicture(api, filenameHint || file.name, file);
+      onChange({ ...stored, alt: image?.alt ?? '', credit: image?.credit ?? '' });
     } catch (err) {
       setError(err.message);
     } finally {

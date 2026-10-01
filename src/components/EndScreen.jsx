@@ -54,11 +54,47 @@ function SignForm({ knownName, signing, error, onSign }) {
   );
 }
 
-function signedMessage(result, boards) {
-  if (result.isTest) return 'Test run: it shows on the board for two minutes, then it goes.';
-  const weekRank = (boards.week.entries.find((e) => e.isMe) ?? boards.week.me)?.rank;
-  const where = weekRank ? ` You're ${ordinal(weekRank)} this week.` : '';
-  return `On the board.${where}`;
+// Where the run left you on this week's board, and which way you moved.
+function signedMessage(result, boards, rankBefore) {
+  const rank = (boards.week.entries.find((e) => e.isMe) ?? boards.week.me)?.rank;
+  const test = result.isTest ? ' (A test run: it goes in two minutes.)' : '';
+  if (!rank) return `On the board.${test}`;
+  if (!rankBefore) return `You're on the board: ${ordinal(rank)} this week.${test}`;
+  if (rank < rankBefore) return `Up to ${ordinal(rank)} this week, from ${ordinal(rankBefore)}.${test}`;
+  if (rank > rankBefore) return `${ordinal(rank)} this week, down from ${ordinal(rankBefore)}: others have passed you.${test}`;
+  return result.isNewBest ? `Still ${ordinal(rank)} this week, with a new best.${test}` : `Still ${ordinal(rank)} this week. Your best run counts.${test}`;
+}
+
+const STAR = 'M12 3.2l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 17l-5.4 2.9 1.1-6.1-4.5-4.2 6.1-.8z';
+
+// After every run: how was it (one tap on a star opens the short form with
+// it filled in), and a question to suggest. Loud on purpose: it's how the
+// game gets better.
+function AskCard({ onRate, onSuggest }) {
+  return (
+    <section className="end-ask" aria-label="Help make the next questions">
+      <div className="end-ask-part">
+        <p className="end-ask-title">How was that?</p>
+        <div className="end-stars" role="group" aria-label="Rate the game">
+          {[1, 2, 3, 4, 5].map((n) => (
+            <button key={n} type="button" className="end-star" aria-label={`${n} out of 5`} onClick={() => onRate(n)}>
+              <svg viewBox="0 0 24 24" width="34" height="34" aria-hidden="true" focusable="false">
+                <path d={STAR} />
+              </svg>
+            </button>
+          ))}
+        </div>
+        <p className="end-ask-note">Tap a star. A few quick questions after that, all optional.</p>
+      </div>
+      <div className="end-ask-part">
+        <p className="end-ask-title">Seen something that makes you ask why?</p>
+        <p className="end-ask-note">Send it in. If it becomes a question, it goes in with your name on it.</p>
+        <button type="button" className="button button-primary" onClick={onSuggest}>
+          Suggest a question
+        </button>
+      </div>
+    </section>
+  );
 }
 
 const HEADLINES = {
@@ -68,7 +104,22 @@ const HEADLINES = {
   complete: "You've answered every question we have",
 };
 
-export default function EndScreen({ run, questionsById, boards, knownName, signing, signResult, starting, onSign, onExplain, onPlayAgain, onHome, onCollection, onFeedback }) {
+export default function EndScreen({
+  run,
+  questionsById,
+  boards,
+  knownName,
+  signing,
+  signResult,
+  starting,
+  onSign,
+  onExplain,
+  onPlayAgain,
+  onHome,
+  onCollection,
+  onRate,
+  onSuggest,
+}) {
   const summary = replay(run.results) ?? { score: 0, correct: 0, level: 1, levelsCleared: 0 };
   const signed = signResult?.ok;
   const earned = (run.badges ?? []).map((id) => BADGES.find((b) => b.id === id)).filter(Boolean);
@@ -111,22 +162,20 @@ export default function EndScreen({ run, questionsById, boards, knownName, signi
           </button>
         </div>
 
-        <section className="end-section" aria-label="Leaderboard">
+        <section className="end-section end-board" aria-label="Leaderboard">
           {signed ? (
-            <p className="section-title sign-done">{signedMessage(signResult, boards)}</p>
+            <p className="sign-done" aria-live="polite">
+              {signedMessage(signResult, boards, run.rankBefore ?? null)}
+            </p>
+          ) : run.autoSigning && signing ? (
+            <p className="sign-done muted">Adding your run to this week's board…</p>
           ) : (
             <SignForm knownName={knownName} signing={signing} error={signResult?.error} onSign={onSign} />
           )}
-          <Leaderboard boards={boards} limit={10} titleId="end-board-title" />
+          <Leaderboard boards={boards} limit={10} titleId="end-board-title" animate />
         </section>
 
-        {onFeedback && (
-          <p className="end-feedback">
-            <button type="button" className="text-button" onClick={onFeedback}>
-              Tell us how it went
-            </button>
-          </p>
-        )}
+        <AskCard onRate={onRate} onSuggest={onSuggest} />
 
         <section className="end-section" aria-labelledby="review-title">
           <p id="review-title" className="section-title">

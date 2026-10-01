@@ -5256,3 +5256,329 @@ td.wrap {
 .qtools-wait {
   color: #9a4a10;
 }
+
+/* Round 15: the logo, sharing, rating and suggesting, the board in motion */
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.logo-mark {
+  flex: none;
+  display: block;
+}
+
+.logo-word {
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.brand-link:hover .logo-word {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.brand-link:hover {
+  text-decoration: none;
+}
+
+.suggested-by {
+  margin: 10px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+/* A right answer most players miss */
+.reason-rare {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin: -2px 0 14px;
+  padding: 12px 14px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 10px;
+  animation: rise 0.45s ease;
+}
+
+.reason-rare-text {
+  margin: 0;
+  font-size: 15px;
+}
+
+.reason-rare-text strong {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.reason-foot .text-button + .text-button {
+  margin-left: 16px;
+}
+
+/* A shared question, opened from its link */
+.shared-kicker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 18px;
+  padding: 10px 14px;
+  font-size: 14.5px;
+  font-weight: 500;
+  background: var(--accent-soft);
+  border-radius: 10px;
+}
+
+.shared-next {
+  margin-top: 28px;
+  padding: 24px;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 16px;
+  animation: rise 0.5s ease;
+}
+
+.shared-next-title {
+  margin: 0 0 6px;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.shared-next-lede {
+  margin: 0 0 18px;
+  color: #c9c7be;
+  font-size: 14.5px;
+}
+
+.shared-next-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.shared-next .button-primary {
+  color: var(--ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.shared-next .button:not(.button-primary) {
+  color: #fff;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.shared-loading {
+  margin-top: 40px;
+}
+
+/* The daily question: sharing a result, and arriving from a shared one */
+.daily-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: 16px;
+  font-size: 12.5px;
+}
+
+.daily-done-actions {
+  display: flex;
+  gap: 14px;
+}
+
+.daily {
+  transition: box-shadow 0.6s ease;
+}
+
+.daily.is-spotlit {
+  box-shadow: 0 0 0 4px var(--accent), 0 18px 40px -18px rgba(22, 21, 15, 0.35);
+}
+
+/* The end screen: room between signing and the board */
+.end-board .sign,
+.end-board .sign-done {
+  margin-bottom: 28px;
+}
+
+.end-board .sign-done {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* The board in motion */
+.board {
+  position: relative;
+}
+
+.board-row {
+  position: relative;
+  will-change: transform;
+}
+
+.board-row.is-me {
+  z-index: 2;
+  transition: box-shadow 0.5s ease;
+}
+
+.board-row.is-me.is-landed {
+  box-shadow: 0 0 0 2px var(--accent-ink), 0 12px 26px -12px rgba(22, 21, 15, 0.4);
+}
+
+/* After every run: rate it, suggest a question */
+.end-ask {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 48px;
+  overflow: hidden;
+  background: var(--ink);
+  border-radius: 18px;
+}
+
+.end-ask-part {
+  padding: 24px;
+  color: #fff;
+  background: var(--ink);
+}
+
+.end-ask-part + .end-ask-part {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.end-ask-title {
+  margin: 0 0 12px;
+  font-size: 1.15rem;
+  font-weight: 500;
+}
+
+.end-ask-note {
+  margin: 10px 0 16px;
+  font-size: 13.5px;
+  color: #c9c7be;
+}
+
+.end-stars {
+  display: flex;
+  gap: 4px;
+}
+
+.end-star {
+  padding: 2px;
+  color: rgba(255, 255, 255, 0.28);
+  background: none;
+  border: 0;
+  cursor: pointer;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.end-star svg {
+  display: block;
+  fill: currentColor;
+}
+
+.end-stars:hover .end-star,
+.end-stars:focus-within .end-star {
+  color: var(--accent);
+}
+
+.end-stars .end-star:hover ~ .end-star,
+.end-stars .end-star:focus-visible ~ .end-star {
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.end-star:hover {
+  transform: scale(1.15);
+}
+
+.end-ask .button-primary {
+  color: var(--ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* Home: help make the next questions */
+.home-help {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px 28px;
+  padding: 26px 28px;
+  color: #fff;
+  background: var(--ink);
+  border-radius: 18px;
+}
+
+.home-help-title {
+  margin: 0 0 6px;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.home-help-lede {
+  max-width: 34rem;
+  margin: 0;
+  font-size: 14.5px;
+  color: #c9c7be;
+}
+
+.home-help-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.home-help .button-primary {
+  color: var(--ink);
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.home-help .button:not(.button-primary) {
+  color: #fff;
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.flip-credit {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--muted);
+}
+
+@media (max-width: 640px) {
+  .end-ask {
+    grid-template-columns: 1fr;
+  }
+
+  .end-ask-part + .end-ask-part {
+    border-left: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .home-help {
+    padding: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reason-rare,
+  .shared-next {
+    animation: none;
+  }
+
+  .end-star,
+  .daily {
+    transition: none;
+  }
+}
+
+.daily {
+  scroll-margin-top: 72px;
+}

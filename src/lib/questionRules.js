@@ -93,10 +93,13 @@ export function normalizeQuestion(input) {
   else {
     const credit = trimmed(q.image.credit);
     const thumb = trimmed(q.image.thumb);
+    const share = trimmed(q.image.share);
     q.image = {
       src: trimmed(q.image.src),
       alt: trimmed(q.image.alt) ?? '',
       ...(thumb ? { thumb } : {}),
+      // The card chat apps show when the question is shared (a JPEG).
+      ...(share ? { share } : {}),
       ...(credit ? { credit } : {}),
       // A stand-in shown only when running locally, never on the live site.
       ...(q.image.placeholder ? { placeholder: true } : {}),

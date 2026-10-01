@@ -20,10 +20,12 @@ function Stats({ me }) {
 }
 
 // The question of the day, answered right on the home screen: no timer, no
-// points, one go. Afterwards: the reason, how everyone else did, and this
-// player's streak and average. Hidden quietly if the server can't be reached
-// and nothing is cached, so the home screen never shows a broken card.
-export default function DailyCard({ onFlag, flagged, onStreak = null }) {
+// points, one go. Afterwards: the reason, how everyone else did, this
+// player's streak and average, and their result to share (spoiler free).
+// Hidden quietly if the server can't be reached and nothing is cached, so
+// the home screen never shows a broken card. `focus`: someone arrived from a
+// shared daily link, so the card comes into view and lights up once.
+export default function DailyCard({ onFlag, flagged, onStreak = null, onShare = null, focus = false }) {
   const day = useMemo(() => localDay(), []);
   const [state, setState] = useState(() => cachedDaily(day));
   const [failed, setFailed] = useState(false);
@@ -33,6 +35,8 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
   const [justAnswered, setJustAnswered] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const shownAt = useRef(Date.now());
+  const cardRef = useRef(null);
+  const focused = useRef(false);
 
   useEffect(() => {
     let live = true;
@@ -50,13 +54,26 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
     if (streak != null) onStreak?.(streak);
   }, [streak]);
 
+  useEffect(() => {
+    if (!focus || focused.current || !state || !cardRef.current) return;
+    focused.current = true;
+    const el = cardRef.current;
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    // After the page has settled at the top (each screen starts there).
+    setTimeout(() => {
+      el.scrollIntoView({ block: 'start', behavior: reduce ? 'auto' : 'smooth' });
+      el.classList.add('is-spotlit');
+      setTimeout(() => el.classList.remove('is-spotlit'), 2600);
+    }, 350);
+  }, [focus, state]);
+
   // The same shuffle every time for this device and day.
   const order = useMemo(() => optionOrder(4, seededRandom(`${getDeviceId()}:${day}`)), [day]);
 
   if (!state) {
     if (failed) return null;
     return (
-      <section className="daily is-loading" aria-label="Today's question">
+      <section ref={cardRef} className="daily is-loading" aria-label="Today's question">
         <p className="eyebrow">Today's question</p>
         <div className="daily-skeleton" />
       </section>
@@ -66,7 +83,7 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
   const { question, answer, me } = state;
   if (!question) {
     return (
-      <section className="daily" aria-labelledby="daily-title">
+      <section ref={cardRef} className="daily" aria-labelledby="daily-title">
         <p className="eyebrow">Today's question</p>
         <p id="daily-title" className="daily-empty">No new question today. There'll be one tomorrow.</p>
         <Stats me={me} />
@@ -90,7 +107,7 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
 
   if (answer && !justAnswered && !expanded) {
     return (
-      <section className="daily daily-done" aria-label="Today's question">
+      <section ref={cardRef} className="daily daily-done" aria-label="Today's question">
         <span className={`daily-done-mark${answer.correct ? ' is-right' : ''}`} aria-hidden="true">
           {answer.correct ? '✓' : '·'}
         </span>
@@ -101,9 +118,16 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
             {me?.streak > 0 ? ` · ${me.streak} day streak` : ''} · a new one tomorrow
           </span>
         </p>
-        <button type="button" className="text-button" onClick={() => setExpanded(true)}>
-          See it again
-        </button>
+        <span className="daily-done-actions">
+          {onShare && (
+            <button type="button" className="text-button" onClick={() => onShare({ day, correct: answer.correct, streak: me?.streak ?? 0 })}>
+              Share
+            </button>
+          )}
+          <button type="button" className="text-button" onClick={() => setExpanded(true)}>
+            See it again
+          </button>
+        </span>
       </section>
     );
   }
@@ -114,7 +138,7 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
   const everyone = answer?.everyone;
 
   return (
-    <section className="daily" aria-labelledby="daily-title">
+    <section ref={cardRef} className="daily" aria-labelledby="daily-title">
       <div className="daily-head">
         <p className="eyebrow">Today's question</p>
         <p className="daily-date">{dayLabel(day)}</p>
@@ -193,6 +217,14 @@ export default function DailyCard({ onFlag, flagged, onStreak = null }) {
               </button>
             )}
           </div>
+          {onShare && (
+            <div className="daily-share">
+              <button type="button" className="button button-primary" onClick={() => onShare({ day, correct: answer.correct, streak: me?.streak ?? 0 })}>
+                Share your result
+              </button>
+              <span className="muted">No spoilers: just whether you got it, and your streak.</span>
+            </div>
+          )}
           <p className="muted daily-next">A new question comes out every day.</p>
         </div>
       )}

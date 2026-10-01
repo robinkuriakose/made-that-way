@@ -259,7 +259,10 @@ function FlipDialog({ question, upNext, label, from, starting, onPlay, onNext, o
                 <span aria-hidden="true">×</span>
               </button>
             </div>
-            <p className="flip-label flip-reveal">{label}</p>
+            <p className="flip-label flip-reveal">
+              {label}
+              {question.suggestedBy && <span className="flip-credit"> · Suggested by {question.suggestedBy}</span>}
+            </p>
             <h2 id="flip-title" className="flip-stem flip-reveal" aria-live="polite">
               {question.stem}
             </h2>

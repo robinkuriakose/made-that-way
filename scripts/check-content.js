@@ -38,7 +38,9 @@ for (const img of siteImages.images ?? []) {
 for (const q of [...data.questions, ...pending.questions, ...(daily.questions ?? [])]) {
   const src = q.image?.src;
   if (!src?.startsWith('/images/') || q.image.placeholder) continue;
-  const files = [src, q.image.thumb].filter(Boolean).map((p) => path.join('public', p));
+  // Its share card too: what chat apps show when the question is shared.
+  const card = src.replace(/^\/images\//, '/images/share/').replace(/\.\w+$/, '.jpg');
+  const files = [src, q.image.thumb, card].filter(Boolean).map((p) => path.join('public', p));
   for (const file of files) {
     try {
       statSync(path.join(ROOT, file));
