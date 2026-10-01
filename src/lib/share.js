@@ -56,6 +56,10 @@ export function readArrival() {
   } else if (d) {
     arrival = { kind: 'daily', day: d[1] };
   }
-  if (arrival) window.history.replaceState(null, '', '/');
+  if (arrival) {
+    window.history.replaceState(null, '', '/');
+    // The page came with the link preview's title; the app is the plain site.
+    document.title = 'Made That Way';
+  }
   return arrival;
 }
