@@ -1,8 +1,10 @@
 // Phones (iPhones above all) only raise the keyboard for a focus() made
-// inside the tap itself. A run ends with a tap, but the name box appears a
-// moment later, on the next screen. So the tap focuses an invisible stand-in
-// box straight away; when the real box takes the focus, the keyboard stays
-// up (it does between boxes) and the stand-in is removed.
+// inside a tap, or when focus moves from one text box to another. A run ends
+// with a tap, but the name box takes the focus a moment later, once the
+// score has counted up. So the tap focuses an invisible stand-in box at
+// once; with inputmode "none" it holds the focus without showing a
+// keyboard. When the real box takes the focus, the keyboard comes up for it,
+// and the stand-in is removed.
 let standIn = null;
 let timer = null;
 
@@ -12,6 +14,8 @@ export function holdKeyboard() {
     const input = document.createElement('input');
     input.type = 'text';
     input.tabIndex = -1;
+    input.inputMode = 'none';
+    input.dataset.keyboardStandIn = '1';
     input.setAttribute('aria-hidden', 'true');
     // 16px, or iPhones zoom the page in on focus.
     input.style.cssText =
@@ -19,8 +23,8 @@ export function holdKeyboard() {
     document.body.appendChild(input);
     input.focus({ preventScroll: true });
     standIn = input;
-    // Never left behind holding the keyboard if the real box doesn't come.
-    timer = setTimeout(releaseKeyboard, 2000);
+    // Never left behind if the real box doesn't come.
+    timer = setTimeout(releaseKeyboard, 4000);
   } catch {
     standIn = null;
   }

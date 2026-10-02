@@ -96,7 +96,7 @@ export default function RedeemModal({ offered, redeem, lastLife, labelFor, flagg
             <p className="feedback">
               {redeem.correct ? 'Right. Life won back.' : 'Not this one either. Here is why.'}
             </p>
-            <Explanation question={picked} wasCorrect={redeem.correct} chosenIndex={redeem.chosenIndex} />
+            <Explanation question={picked} wasCorrect={redeem.correct} chosenIndex={redeem.chosenIndex} showImage={false} />
           </div>
         )}
 

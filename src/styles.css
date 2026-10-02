@@ -365,7 +365,7 @@ textarea {
   width: 100%;
   min-width: 0;
   padding: 11px 16px;
-  font-size: 15px;
+  font-size: 16px; /* under 16px, iPhones zoom the page in on focus */
   line-height: 1.4;
   color: var(--ink);
   background: var(--surface);
@@ -5588,87 +5588,93 @@ td.wrap {
   scroll-margin-top: 72px;
 }
 
-/* Round 16: the name window after a run, medals on the board, gold */
+/* Round 16: the name line after a run, medals on the board, gold */
 
-.name-prompt {
-  max-width: 26rem;
-  padding: 26px 24px 18px;
-  text-align: center;
-}
-
-.name-prompt-kicker {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.name-prompt-score {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 8px;
-  margin: 2px 0 0;
-  font-size: 3rem;
-  font-weight: 600;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-}
-
-.name-prompt-score span {
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0;
-  color: var(--muted);
-}
-
-.name-prompt-medal {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin: 8px 0 0;
-  padding: 4px 12px 4px 8px;
-  font-size: 13px;
-  font-weight: 500;
-  background: var(--bg);
-  border-radius: 999px;
-}
-
-.name-prompt-title {
-  margin: 14px 0 16px;
-  font-size: 1.05rem;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.name-prompt-form {
+/* The name line: on the page itself, centred, no box. The button keeps its
+   space before it shows, so nothing below jumps when it does. */
+.name-line {
   display: grid;
-  gap: 10px;
-}
-
-/* 18px: big enough to feel like signing, and iPhones don't zoom in. */
-.name-prompt-form input[type='text'] {
-  padding: 14px 16px;
-  font-size: 18px;
+  justify-items: center;
+  gap: 4px;
+  margin: 26px 0 18px;
   text-align: center;
 }
 
-.name-prompt-form .form-error {
-  margin: 0;
+.name-line-label {
+  max-width: 22rem;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--muted);
 }
 
-.name-prompt-go {
+.name-line .name-line-input {
   width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  max-width: 24rem;
+  padding: 10px 8px 12px;
+  font-size: clamp(1.6rem, 6.4vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: var(--ink);
+  caret-color: var(--blue);
+  background: transparent;
+  border: 0;
+  border-bottom: 1.5px solid var(--line-strong);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color 0.2s ease;
 }
 
-.name-prompt-skip {
-  justify-self: center;
-  padding: 6px 12px;
+.name-line .name-line-input::placeholder {
+  color: var(--line-strong);
+  opacity: 1;
+}
+
+.name-line .name-line-input:focus {
+  outline: none;
+  border-bottom-color: var(--ink);
+}
+
+.name-line-error {
+  margin: 6px 0 0;
+}
+
+.name-line-go {
+  display: flex;
+  justify-content: center;
+  min-height: 56px;
+  padding-top: 12px;
+}
+
+.name-line-go .button {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s linear 0.25s;
+}
+
+.name-line-go .button.is-ready {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+    visibility 0s;
+}
+
+.sign-later {
+  margin: 0 0 28px;
+  font-size: 14px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .name-line-go .button {
+    transition: none;
+  }
 }
 
 .board-medal {
@@ -5711,4 +5717,13 @@ td.wrap {
 /* Scrolled to after naming a run: clear of the sticky top bar. */
 .end-board {
   scroll-margin-top: 76px;
+}
+
+/* iPhones zoom the page in on any text box under 16px, so on touch screens
+   none is smaller. */
+@media (pointer: coarse) {
+  .tier-select,
+  .qtools-field input {
+    font-size: 16px;
+  }
 }

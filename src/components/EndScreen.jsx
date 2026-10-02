@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TopBar from './TopBar.jsx';
 import Leaderboard, { ordinal } from './Leaderboard.jsx';
 import CountUp from './CountUp.jsx';
+import NameLine from './NameLine.jsx';
 import { NAME_MAX_LENGTH, cleanName } from '../lib/names.js';
 import { BADGES } from '../lib/rewards.js';
 import { levelSlices, replay } from '../lib/scoring.js';
@@ -100,6 +101,9 @@ function AskCard({ onRate, onSuggest }) {
   );
 }
 
+// How long the score takes to count up; the name line takes the focus after.
+const SCORE_COUNT_MS = 1100;
+
 const HEADLINES = {
   legend: 'Legend: every level cleared',
   lives: 'Out of lives',
@@ -113,6 +117,9 @@ export default function EndScreen({
   boards,
   knownName,
   isOwnName,
+  askName,
+  rankPreview,
+  onName,
   signing,
   signResult,
   starting,
@@ -134,7 +141,7 @@ export default function EndScreen({
       <main className="stage end">
         <p className="eyebrow">{HEADLINES[run.endReason] ?? 'Your run'}</p>
         <p className="final-score">
-          <CountUp value={summary.score} from={0} duration={1100} />
+          <CountUp value={summary.score} from={0} duration={SCORE_COUNT_MS} />
           <span className="final-unit">points</span>
         </p>
         <p className="lede">
@@ -160,8 +167,10 @@ export default function EndScreen({
           </ul>
         )}
 
+        {askName && <NameLine rank={rankPreview} focusAfter={SCORE_COUNT_MS + 100} onSubmit={onName} />}
+
         <div className="next-row next-row-start">
-          <button type="button" className="button button-primary" onClick={onPlayAgain} disabled={starting}>
+          <button type="button" className={`button ${askName ? '' : 'button-primary'}`} onClick={onPlayAgain} disabled={starting}>
             {starting ? 'Loading questions…' : 'Play again'}
           </button>
         </div>
@@ -173,6 +182,13 @@ export default function EndScreen({
             </p>
           ) : run.autoSigning && signing ? (
             <p className="sign-done muted">Adding your run to this week's board…</p>
+          ) : askName ? (
+            <p className="sign-later muted">
+              Your name above puts this run on the board.{' '}
+              <button type="button" className="link-button" onClick={() => onSign(knownName)} disabled={signing}>
+                Or use {knownName}
+              </button>
+            </p>
           ) : (
             <SignForm knownName={knownName} isOwnName={isOwnName} signing={signing} error={signResult?.error} onSign={onSign} />
           )}

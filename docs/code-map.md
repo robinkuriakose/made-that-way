@@ -89,11 +89,11 @@ mindmap
 | Answering: display order in, original order stored; points worked out from the answers so far | `src/App.jsx:464` (`answer`), `:525` (`answerRedeem`, a right one wins the life back) |
 | Hint, redeem, next, the level break, finishing | `src/App.jsx:458` (`takeHint`), `:481` (`openRedeem`), `:612` (`next`), `:557` (`openBreak`), `:646` (`continueLevel`), `:650` (`finishAtBreak`), `:540` (`finishRun`) |
 | Rewards during play: whys uncovered, badges, the streak badge from the daily card | `src/App.jsx:318` (`uncovered`), `:305` (`grant`), `:327` (`onStreak`); milestone badges (bronze at level 5) in `openBreak` |
-| Sign the leaderboard (remembering the rank before, for the board's animation), sign the Legends wall, change the name. A player with a name of their own goes on the board without asking; anyone else is asked for a name in a window over the end screen (`askName`, set in `finishRun`, which also holds the phone's keyboard), with where the run would land | `src/App.jsx:654` (`signScore`), `:372` (the automatic entry), `:674` (`nameAndSign`), `:167` (`rankPreview`), `:685` (`putOnLegends`), `:701` (`rename`) |
+| Sign the leaderboard (remembering the rank before, for the board's animation), sign the Legends wall, change the name. A player with a name of their own goes on the board without asking; anyone else gets a name line on the end screen (`askName`, set in `finishRun`, whose tap holds the focus so the phone's keyboard can come up once the score has counted), with where the run would land | `src/App.jsx:660` (`signScore`), `:377` (the automatic entry), `:680` (`nameAndSign`), `:172` (`rankPreview`), `:691` (`putOnLegends`), `:707` (`rename`) |
 | Sharing: a question's link (with the player's name only when they got it right), a day's result | `src/App.jsx:347` (`shareQuestion`), `:352` (`shareDaily`) |
 | Flag a question (runs, redeem questions and the daily question) | `src/App.jsx:719` (`openFlag`), `:725` (`submitFlag`) |
 | Choose topics (they come first in levels) | `src/App.jsx:741` (`saveTopics`), window at `src/components/TopicPicker.jsx` |
-| Which screen renders (home, play, break, legend, end, collection, profile, shared question, suggest), the name, rename and feedback windows, and the test mode banner | `src/App.jsx:758` onwards; legend at `:825`, profile at `:845`, shared question at `:859`, suggest at `:884`, the name window at `:1039` |
+| Which screen renders (home, play, break, legend, end, collection, profile, shared question, suggest), the rename and feedback windows, and the test mode banner | `src/App.jsx:764` onwards; legend at `:831`, profile at `:851`, shared question at `:865`, suggest at `:890` |
 
 ## Screens and components
 
@@ -111,10 +111,10 @@ mindmap
 | Suggest a question: a one-line idea or a whole question with a picture, then a name or "Be mysterious" | `src/components/SuggestScreen.jsx:10` |
 | Feedback form: three star ratings, what to add more of, tell a friend, a note; opens with the overall stars filled in when a star was tapped to get there | `src/components/FeedbackForm.jsx:36`; the questions as data in `src/lib/feedbackForm.js` |
 | A question someone shared, opened from its link: answer it, see why, then "Let's play" or pass it on | `src/components/SharedQuestion.jsx:14` |
-| The name window after a run: the score, the medal it earned, where it would land this week, one box already focused (so a phone's keyboard is up), "Add as <name>" (the starting name if left empty), "Not now" | `src/components/NamePrompt.jsx`; the keyboard trick in `src/lib/keyboard.js` (`holdKeyboard`, `releaseKeyboard`) |
+| The name line after a run, above Play again: where the run would land, a centred box the colour of the page, focused once the score has counted up (the phone keyboard comes up then, with Done); dragging the page puts the keyboard away; the button shows once a name is typed | `src/components/NameLine.jsx`; the keyboard trick (an invisible box with inputmode none holds the focus from the tap) in `src/lib/keyboard.js` (`holdKeyboard`, `releaseKeyboard`) |
 | Medals beside names (silver, gold, Legend), and their key under the board | `src/components/Medal.jsx` (`MedalIcon`, `medalLabel`, `medalShort`), `src/components/Leaderboard.jsx` (`MedalKey`) |
 | The logo (a placeholder keycap) | `src/components/Logo.jsx`; favicon, home screen icon and the home page's preview card from `scripts/brand-assets.js` |
-| End screen: score, levels, whys and badges earned, Play again, signing (automatic for a player with their own name; otherwise the name window, then a name box that falls back to the starting name), where it left you on the board and which way you moved, this week's board in motion, rating and suggesting, review by level | `src/components/EndScreen.jsx:107`; sign form at `:11`, the rank message at `:58`, rate and suggest at `:73` (`AskCard`) |
+| End screen: score, levels, whys and badges earned, Play again, signing (automatic for a player with their own name; otherwise the name line, or "Or use <starting name>" by the board), where it left you on the board and which way you moved, this week's board in motion, rating and suggesting, review by level | `src/components/EndScreen.jsx:114`; sign form at `:13`, the rank message at `:62`, rate and suggest at `:77` (`AskCard`) |
 | Collection: badges and every why uncovered, each opening its reasoning | `src/components/WhysScreen.jsx:7` |
 | Question of the day: answer in place, then the reason, how everyone did, streak and average, and a spoiler-free result to share; on a later visit the same day it folds to one line; arriving from a shared daily link, it scrolls into view and lights up | `src/components/DailyCard.jsx:28` |
 | The hero deck (GSAP): 24 picture cards, unseen first, piled like prints. Drag or flick the top card either way (or press the arrow keys) and it slides out and flows straight back to tuck in behind the pile (no pause at the far end) as the next comes forward; no counter or buttons, one hint line; a deal from below on arrival, a nudge if nobody touches it, a tilt and glare under the mouse. Tap (or Enter) flips the card in 3D and grows it into a window with the picture, its question, "Play this one" and "Another one", which turns the window over on the spot to the next card's question (the pile moves on underneath); it flips back into the pile on close. Less motion: no throws or flips, just quick fades | `src/components/HeroDeck.jsx:282`; the pile's places at `:20` (`SLOTS`), sending a card to the back at `:359` (`throwTop`), the next card while the window is open at `:414` (`nextWhileOpen`), the drag at `:451`, the flip window at `:56` (`FlipDialog`, its turn to the next question at `:130`) |
@@ -123,7 +123,7 @@ mindmap
 | Home: "Help make the next questions", suggest or rate | `src/components/HomeScreen.jsx:115` (`HelpCard`) |
 | Topic picker: pills, at least 3 | `src/components/TopicPicker.jsx:7` |
 | Dialog shell, explanation window, redeem window, flag window | `src/components/Modal.jsx:7`, `ExplainModal.jsx:5`, `RedeemModal.jsx:18`, `FlagModal.jsx:8` |
-| Reasoning block and the fixed-height image frame | `src/components/Explanation.jsx:6`, `ImageFrame.jsx:11`; `showsImage` at `:9` hides placeholders on the live site |
+| Reasoning block (its picture can be left off where it's already on screen, as in the redeem window) and the fixed-height image frame | `src/components/Explanation.jsx:7`, `ImageFrame.jsx:11`; `showsImage` at `:9` hides placeholders on the live site |
 | Undo and other short messages | `src/components/Toast.jsx:5` |
 
 ## Logic (`src/lib`)
@@ -249,7 +249,7 @@ mindmap
 | The hero deck, and the card flipped open | `:4885`, `:5002` |
 | Builder: difficulty and picture on a card | `:5145` |
 | Round 15: logo, rare answers, shared question, daily sharing, the board in motion, rate and suggest (blue `--blue` cards) | `:5265` |
-| Round 16: the name window, medals on the board and their key, gold, ten level lights on a phone | `:5591` |
+| Round 16: the name line, medals on the board and their key, gold, ten level lights on a phone; text boxes at 16px or more on touch screens (no zoom on focus) | `:5591`, base text boxes at `:359` |
 
 ## Tooling
 

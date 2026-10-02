@@ -44,7 +44,6 @@ import ProfileScreen from './components/ProfileScreen.jsx';
 import SuggestScreen from './components/SuggestScreen.jsx';
 import SharedQuestion from './components/SharedQuestion.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';
-import NamePrompt from './components/NamePrompt.jsx';
 import { holdKeyboard } from './lib/keyboard.js';
 import { RenameModal } from './components/NameTag.jsx';
 import ExplainModal from './components/ExplainModal.jsx';
@@ -160,6 +159,12 @@ const badgeWords = (ids) => ids.map((id) => BADGES.find((b) => b.id === id)?.lab
 
 // This device's place on this week's board, if it has one.
 const myRank = (boards) => (boards.week.entries.find((e) => e.isMe) ?? boards.week.me)?.rank ?? null;
+
+// A finished run's score and right answers, for rankPreview.
+const endScore = (run) => {
+  const r = replay(run.results);
+  return [r?.score ?? 0, r?.correct ?? 0];
+};
 
 // Where a run would land on this week's board, from the rows on show (the
 // top 10); null when it would fall below them.
@@ -542,8 +547,9 @@ export default function App({ arrival = null }) {
     const summary = replay(finished.results) ?? { score: 0, level: 1 };
     const isNewBest = recordBest({ score: summary.score, level: summary.level });
     if (isNewBest) setBest(readBest());
-    // A player still on their starting name is asked for one over the end
-    // screen. The tap that ended the run holds the phone's keyboard for it.
+    // A player still on their starting name is asked for one on the end
+    // screen. The tap that ended the run holds the focus, so the phone's
+    // keyboard can come up for the name once the score has counted.
     const askName = reason !== 'legend' && !namedPlayer && summary.score > 0;
     if (askName) holdKeyboard();
     setRun({ ...finished, isNewBest, askName });
@@ -669,8 +675,8 @@ export default function App({ arrival = null }) {
     setBoards(fresh);
   }
 
-  // From the name window: close it, bring the board into view, then sign,
-  // so the player watches their row arrive.
+  // From the name line: bring the board into view, then sign, so the player
+  // watches their row arrive.
   function nameAndSign(name) {
     setRun((r) => ({ ...r, askName: false, autoSigning: true }));
     setTimeout(() => {
@@ -891,6 +897,9 @@ export default function App({ arrival = null }) {
         boards={boards}
         knownName={boards.player?.name ?? localName}
         isOwnName={namedPlayer}
+        askName={Boolean(run.askName) && !run.signed}
+        rankPreview={run.askName ? rankPreview(boards, ...endScore(run)) : null}
+        onName={nameAndSign}
         signing={signing}
         signResult={run.signed ? { ok: true, ...run.signed } : signError ? { ok: false, error: signError } : null}
         starting={starting}
@@ -1036,20 +1045,6 @@ export default function App({ arrival = null }) {
           onClose={() => setRenaming(false)}
         />
       )}
-      {screen === 'end' && run?.finishedAt && run.askName && !run.signed && (() => {
-        const ended = replay(run.results) ?? { score: 0, correct: 0, levelsCleared: 0 };
-        return (
-          <NamePrompt
-            score={ended.score}
-            levelsCleared={ended.levelsCleared}
-            medal={boardMedal(ended.levelsCleared, plan)}
-            rank={rankPreview(boards, ended.score, ended.correct)}
-            placeholder={localName}
-            onSubmit={nameAndSign}
-            onClose={() => setRun((r) => ({ ...r, askName: false }))}
-          />
-        );
-      })()}
       {feedbackFor && <FeedbackForm runId={feedbackFor.runId} initialRating={feedbackFor.rating ?? null} onClose={() => setFeedbackFor(null)} />}
       {pickingTopics && (
         <TopicPicker themes={bank.themes} chosen={chosenThemes} onSave={saveTopics} onClose={() => setPickingTopics(false)} />

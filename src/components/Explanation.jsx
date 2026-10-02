@@ -2,14 +2,15 @@ import { CONFIDENCE_LABELS } from '../lib/labels.js';
 import ImageFrame from './ImageFrame.jsx';
 
 // The reasoning for one question: the explanation that fits the answer given,
-// then the optional image, confidence and source.
-export default function Explanation({ question, wasCorrect, chosenIndex }) {
+// then the optional image, confidence and source. showImage is off where the
+// picture is already on screen above it (the redeem window).
+export default function Explanation({ question, wasCorrect, chosenIndex, showImage = true }) {
   const body = wasCorrect ? question.explanationRight : question.explanationWrong[chosenIndex];
   const confidence = CONFIDENCE_LABELS[question.confidence];
 
   return (
     <>
-      {question.image && <ImageFrame image={question.image} />}
+      {showImage && question.image && <ImageFrame image={question.image} />}
 
       <p className="modal-body">{body}</p>
 
