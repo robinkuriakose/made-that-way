@@ -78,7 +78,7 @@ mindmap
 
 | What | Where |
 |---|---|
-| Entry point; `/builder` loads the builder lazily. Test mode is switched on here, and a shared link (`/q/<id>`, `/daily/<day>`) is read before anything renders | `src/main.jsx:9` (`initTestMode`), `:15` (`isBuilderRoute`), `:18` (`readArrival`) |
+| Entry point; `/builder` loads the builder lazily. Test mode is switched on here, and a shared link (`/q/<id>`, `/daily/<day>`) is read before anything renders. On the dev server only, `/lab` opens the lab (prototypes of new kinds of question in the gitignored `lab/` folder; a production build never contains it) | `src/main.jsx:9` (`initTestMode`), `:15` (`isBuilderRoute`), `:20` (`LabApp`), `:27` (`readArrival`) |
 | Run shape, bumped when state changes shape | `src/App.jsx:59` (`RUN_VERSION`, now 5), `:99` (`createRun`) |
 | The level plan: how many easy, medium and hard questions each level takes, the last level (10: the Legend medal), milestone medals (bronze at 4, silver at 6, gold at 8; those marked `board` show on the weekly board). Data, so changing the game's length is a file edit | `src/data/level-plan.json`; read by `src/lib/levels.js:55` (`mixFor`), `:227` (`planNeeds`) |
 | A run keeps its own copy of its questions, the topics it was built from, and the order each question's options are shown in. It starts with level 1 only; each level is added at the break before it, with that level's tier mix. Clearing the last level ends the run as a Legend | `src/App.jsx:99` (`createRun`), `:557` (`openBreak`), `:540` (`finishRun`) |
