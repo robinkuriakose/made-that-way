@@ -6,11 +6,12 @@ import { NAME_MAX_LENGTH, cleanName } from '../lib/names.js';
 import { BADGES } from '../lib/rewards.js';
 import { levelSlices, replay } from '../lib/scoring.js';
 
-// Signing. When this device already has a name it's one tap; the name is
-// changed from the home screen. Otherwise, a name box.
-function SignForm({ knownName, signing, error, onSign }) {
+// Signing. When the player has a name of their own it's one tap (and
+// usually done already); the name is changed from the home screen. Otherwise
+// a name box, with the starting name used if it's left empty.
+function SignForm({ knownName, isOwnName, signing, error, onSign }) {
   const [name, setName] = useState('');
-  if (knownName) {
+  if (knownName && isOwnName) {
     return (
       <div className="sign">
         <p className="field-label">Put this run on this week's board</p>
@@ -23,13 +24,15 @@ function SignForm({ knownName, signing, error, onSign }) {
       </div>
     );
   }
-  const ready = cleanName(name).length > 0 && !signing;
+  const clean = cleanName(name);
+  const as = clean || knownName;
+  const ready = Boolean(as) && !signing;
   return (
     <form
       className="sign"
       onSubmit={(e) => {
         e.preventDefault();
-        if (ready) onSign(name);
+        if (ready) onSign(as);
       }}
     >
       <label htmlFor="player-name" className="field-label">
@@ -46,7 +49,7 @@ function SignForm({ knownName, signing, error, onSign }) {
           onChange={(e) => setName(e.target.value)}
         />
         <button type="submit" className="button button-primary" disabled={!ready}>
-          {signing ? 'Saving…' : 'Add to the board'}
+          {signing ? 'Saving…' : as ? `Add as ${as}` : 'Add to the board'}
         </button>
       </div>
       {error && <p className="form-error">{error}</p>}
@@ -109,6 +112,7 @@ export default function EndScreen({
   questionsById,
   boards,
   knownName,
+  isOwnName,
   signing,
   signResult,
   starting,
@@ -170,7 +174,7 @@ export default function EndScreen({
           ) : run.autoSigning && signing ? (
             <p className="sign-done muted">Adding your run to this week's board…</p>
           ) : (
-            <SignForm knownName={knownName} signing={signing} error={signResult?.error} onSign={onSign} />
+            <SignForm knownName={knownName} isOwnName={isOwnName} signing={signing} error={signResult?.error} onSign={onSign} />
           )}
           <Leaderboard boards={boards} limit={10} titleId="end-board-title" animate />
         </section>

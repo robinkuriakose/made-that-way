@@ -1,6 +1,9 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { resetWords } from '../lib/week.js';
+import { MedalIcon, medalShort } from './Medal.jsx';
+
+const MEDALS = ['silver', 'gold', 'legend'];
 
 export function ordinal(n) {
   const tens = n % 100;
@@ -92,6 +95,7 @@ export function BoardList({ board, limit = 10, animate = false }) {
             <span className="board-rank">{entry.rank}</span>
             <span className="board-name">
               {entry.name}
+              {entry.medal && <MedalIcon kind={entry.medal} className="board-medal" />}
               {entry.isMe && <span className="board-you"> (you)</span>}
             </span>
             <span className="board-detail">
@@ -102,6 +106,22 @@ export function BoardList({ board, limit = 10, animate = false }) {
         ),
       )}
     </ol>
+  );
+}
+
+// What the medals beside names mean, once any is on show.
+function MedalKey({ board }) {
+  const shown = [...(board?.entries ?? []), board?.me].filter(Boolean);
+  const kinds = MEDALS.filter((k) => shown.some((e) => e.medal === k));
+  if (!kinds.length) return null;
+  return (
+    <p className="muted board-key">
+      {kinds.map((k) => (
+        <span key={k} className="board-key-item">
+          <MedalIcon kind={k} size={13} /> {medalShort(k)}
+        </span>
+      ))}
+    </p>
   );
 }
 
@@ -118,6 +138,7 @@ export default function Leaderboard({ boards, limit = 10, title = 'This week', t
         <p className="muted board-reset">{resetWords()}</p>
       </div>
       <BoardList board={boards?.week} limit={limit} animate={animate} />
+      <MedalKey board={boards?.week} />
     </div>
   );
 }

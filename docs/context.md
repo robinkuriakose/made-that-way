@@ -2,7 +2,7 @@
 
 The one file a new session needs to pick up the work. Keep it short and current; the detail lives in the files it points to.
 
-Last updated 30 September 2026.
+Last updated 2 October 2026.
 
 ## The product
 
@@ -14,7 +14,7 @@ Last updated 30 September 2026.
 
 **Today (V2 plus round 12):**
 - **Runs:** levels of 5 picture questions, no clock, 3 lives. A wrong answer costs a life; a right redeem wins it back; each level cleared adds one (5 at most). Points: 10 a right answer, times the level (x1 to x3) and the combo (x1.5 from 3 in a row, x2 from 5); a hint halves them.
-- **Difficulty:** every question is tagged easy, medium or hard (never shown). Each level's mix comes from `src/data/level-plan.json`; the last level is 6 for now (15 once the bank allows). Clearing it is the Legend finale: a trophy, then signing the Legends wall by drawing, then a feedback form.
+- **Difficulty:** every question is tagged easy, medium or hard (never shown). Each level's mix comes from `src/data/level-plan.json`; the last level is 10 (15 once the bank allows). Medals: bronze at 4, silver at 6, gold at 8 (silver and gold show beside names on the board), and clearing level 10 is the Legend finale: a trophy, then signing the Legends wall by drawing, then a feedback form.
 - **Players:** a random starting name ("Call me fuzzyheron42 ✎"), a profile with their stats, and a way to suggest questions.
 - **Between levels:** a break with the running score, what was earned, and a clue for a question in the next level. The player can stop there and save.
 - **After each answer:** the short reason, "Read more", and how many players get it right.
@@ -44,9 +44,11 @@ Last updated 30 September 2026.
 | Sources for every question | `SOURCES.md` |
 | Working rules for this repo | `CLAUDE.md` |
 
-## Current state (1 October)
+## Current state (2 October)
 
-- **Round 15:** sharing is built. A right answer can be sent to a friend (`/q/<id>`, with a preview card that never shows the answer), the daily result shares spoiler free (`/daily/<day>`), a friend lands on that exact question and then plays. "Only N% get this right" on hard right answers; "Suggested by" credits; rating and suggesting on every end screen and on home; a named player goes on the board automatically, and the end screen animates their move up or down; a placeholder logo (keycap) everywhere. Private groups were left out on purpose. **Still waiting on the owner:** whether to raise the last level from 6 to 10.
+- **Round 16 (live):** a window at the end of a run asks for a name (keyboard already up on a phone) for anyone still on their starting name; blue (#0860B6) replaces black on the cards added in round 15; hero cards pass under the top bar; 10 levels with silver, gold and Legend medals on the board. **Local only (the gitignored `lab/` folder, never pushed):** prototypes of new kinds of question at `/lab` on `npm run dev`, and the ideas behind them in `lab/question-modes.md`.
+
+- **Round 15:** sharing is built. A right answer can be sent to a friend (`/q/<id>`, with a preview card that never shows the answer), the daily result shares spoiler free (`/daily/<day>`), a friend lands on that exact question and then plays. "Only N% get this right" on hard right answers; "Suggested by" credits; rating and suggesting on every end screen and on home; a named player goes on the board automatically, and the end screen animates their move up or down; a placeholder logo (keycap) everywhere. Private groups were left out on purpose.
 - **Round 14:** the owner's photos are published (47); the hero deck's swipe no longer hangs at the far end, and "Another one" turns the open card over to the next question on the spot; review cards and the Daily tab show each question's difficulty and picture, both changeable right there; 20 more questions (five daily for 8 to 12 October, fifteen in review), none with a picture yet, each with a note on what it should show. A daily question now waits until it has a picture. **Waiting on the owner:** pictures for those 20, the rewrites, credit lines, the logo pick, and a call on the sharing ideas.
 - **Round 12 built:** difficulty tiers and the level plan, the Legend finale at level 6, the feedback form, suggested questions, the new home page and copy, names and profiles, and the builder's tier tabs, bulk pictures, Suggestions and Feedback tabs. **Also done:** shorter wording for 77 questions, waiting for the owner in the builder's Rewrites tab; 20 new questions with drawn pictures (five in the daily queue for 3 to 7 October, fifteen in New questions); three logo sketches in `docs/logo/sketches.html`. **Waiting on the owner:** the logo pick, the rewrites, the fifteen new questions. Status by item: `docs/brief-map.md`.
 - **Easy pictures decide how far players get:** reaching level 6 needs 18 easy questions with pictures; with the owner's photos and the round 12 questions accepted, the live bank now has enough. The builder's Questions tab shows this per tier. Pictures wanted: `images/IMAGES-NEEDED.md`.

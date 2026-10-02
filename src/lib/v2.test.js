@@ -17,7 +17,7 @@ import {
 import { buildLevel, replacementFor, openQuestions, easeOf, percentRight, mixFor, tierOf, MYTH_TOPIC } from './levels.js';
 import { pickRedeemQuestions } from './redeem.js';
 import { verifySession, sessionQuestionIds } from './verifySession.js';
-import { levelBadges, whysBadges, streakBadges, beatsBest } from './rewards.js';
+import { levelBadges, whysBadges, streakBadges, beatsBest, boardMedal, BADGES } from './rewards.js';
 import { weekStart, resetWords } from './week.js';
 import { firstSentence } from './text.js';
 import { seededRandom } from './shuffle.js';
@@ -421,4 +421,19 @@ test('the plan says what a full run needs, and tags that play wrong are only fla
   assert.match(tierMismatch({ difficulty: 'easy', stats: { asked: 20, right: 6 } }), /harder than easy: 30%/);
   assert.match(tierMismatch({ difficulty: 'hard', stats: { asked: 20, right: 18 } }), /easier than hard/);
   assert.equal(tierMismatch({ difficulty: 'medium', stats: { asked: 20, right: 12 } }), null);
+});
+
+test('medals: silver at 6, gold at 8, Legend for the last level, and the badges agree with the plan', () => {
+  assert.equal(PLAN.lastLevel, 10);
+  assert.equal(boardMedal(0, PLAN), null);
+  assert.equal(boardMedal(4, PLAN), null, 'bronze is a badge, not shown on the board');
+  assert.equal(boardMedal(5, PLAN), null);
+  assert.equal(boardMedal(6, PLAN), 'silver');
+  assert.equal(boardMedal(7, PLAN), 'silver');
+  assert.equal(boardMedal(8, PLAN), 'gold');
+  assert.equal(boardMedal(9, PLAN), 'gold');
+  assert.equal(boardMedal(10, PLAN), 'legend');
+  for (const m of PLAN.milestones) {
+    assert.equal(BADGES.find((b) => b.id === m.badge)?.level, m.level, `${m.badge} badge says level ${m.level}`);
+  }
 });

@@ -23,6 +23,7 @@ import { isTestMode, exitTestMode } from './lib/testMode.js';
 import {
   BADGES,
   availableBadges,
+  boardMedal,
   award,
   earnedBadges,
   levelBadges,
@@ -43,6 +44,8 @@ import ProfileScreen from './components/ProfileScreen.jsx';
 import SuggestScreen from './components/SuggestScreen.jsx';
 import SharedQuestion from './components/SharedQuestion.jsx';
 import FeedbackForm from './components/FeedbackForm.jsx';
+import NamePrompt from './components/NamePrompt.jsx';
+import { holdKeyboard } from './lib/keyboard.js';
 import { RenameModal } from './components/NameTag.jsx';
 import ExplainModal from './components/ExplainModal.jsx';
 import RedeemModal from './components/RedeemModal.jsx';
@@ -157,6 +160,16 @@ const badgeWords = (ids) => ids.map((id) => BADGES.find((b) => b.id === id)?.lab
 
 // This device's place on this week's board, if it has one.
 const myRank = (boards) => (boards.week.entries.find((e) => e.isMe) ?? boards.week.me)?.rank ?? null;
+
+// Where a run would land on this week's board, from the rows on show (the
+// top 10); null when it would fall below them.
+const BOARD_ROWS = 10;
+function rankPreview(boards, score, correct) {
+  const others = (boards.week?.entries ?? []).filter((e) => !e.isMe);
+  // A tie counts as ahead: the window never promises a place the board then misses.
+  const ahead = others.filter((e) => e.score > score || (e.score === score && e.correct >= correct)).length;
+  return ahead < others.length || others.length < BOARD_ROWS ? ahead + 1 : null;
+}
 
 // arrival: a shared link this visit started from (src/lib/share.js).
 export default function App({ arrival = null }) {
@@ -529,7 +542,11 @@ export default function App({ arrival = null }) {
     const summary = replay(finished.results) ?? { score: 0, level: 1 };
     const isNewBest = recordBest({ score: summary.score, level: summary.level });
     if (isNewBest) setBest(readBest());
-    setRun({ ...finished, isNewBest });
+    // A player still on their starting name is asked for one over the end
+    // screen. The tap that ended the run holds the phone's keyboard for it.
+    const askName = reason !== 'legend' && !namedPlayer && summary.score > 0;
+    if (askName) holdKeyboard();
+    setRun({ ...finished, isNewBest, askName });
     recordSession(toSession(finished));
     enter(reason === 'legend' ? 'legend' : 'end');
   }
@@ -540,7 +557,7 @@ export default function App({ arrival = null }) {
   function openBreak(base, state) {
     const level = levelOf(base.results.length);
     const slice = base.results.slice(-LEVEL_SIZE);
-    // Milestone levels (bronze, silver) and the last level (Legend) earn
+    // Milestone levels (bronze, silver, gold) and the last level (Legend) earn
     // their own badge.
     const milestone = (plan.milestones ?? []).find((m) => m.level === level)?.badge ?? null;
     const last = level >= plan.lastLevel;
@@ -650,6 +667,17 @@ export default function App({ arrival = null }) {
     setRun((r) => (r.id === runId ? { ...r, signed: { isNewBest: result.isNewBest, isTest: result.isTest } } : r));
     setLocalName(readLocalName());
     setBoards(fresh);
+  }
+
+  // From the name window: close it, bring the board into view, then sign,
+  // so the player watches their row arrive.
+  function nameAndSign(name) {
+    setRun((r) => ({ ...r, askName: false, autoSigning: true }));
+    setTimeout(() => {
+      const calm = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+      document.querySelector('.end-board')?.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+    }, 60);
+    signScore(name);
   }
 
   // The Legends wall: the run goes up with the name and signature, then the
@@ -862,6 +890,7 @@ export default function App({ arrival = null }) {
         questionsById={questionsById}
         boards={boards}
         knownName={boards.player?.name ?? localName}
+        isOwnName={namedPlayer}
         signing={signing}
         signResult={run.signed ? { ok: true, ...run.signed } : signError ? { ok: false, error: signError } : null}
         starting={starting}
@@ -1007,6 +1036,20 @@ export default function App({ arrival = null }) {
           onClose={() => setRenaming(false)}
         />
       )}
+      {screen === 'end' && run?.finishedAt && run.askName && !run.signed && (() => {
+        const ended = replay(run.results) ?? { score: 0, correct: 0, levelsCleared: 0 };
+        return (
+          <NamePrompt
+            score={ended.score}
+            levelsCleared={ended.levelsCleared}
+            medal={boardMedal(ended.levelsCleared, plan)}
+            rank={rankPreview(boards, ended.score, ended.correct)}
+            placeholder={localName}
+            onSubmit={nameAndSign}
+            onClose={() => setRun((r) => ({ ...r, askName: false }))}
+          />
+        );
+      })()}
       {feedbackFor && <FeedbackForm runId={feedbackFor.runId} initialRating={feedbackFor.rating ?? null} onClose={() => setFeedbackFor(null)} />}
       {pickingTopics && (
         <TopicPicker themes={bank.themes} chosen={chosenThemes} onSave={saveTopics} onClose={() => setPickingTopics(false)} />

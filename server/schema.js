@@ -17,6 +17,7 @@ import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { sql } from './db.js';
 import { mergeTidbits } from '../src/lib/bank.js';
+import { replay } from '../src/lib/scoring.js';
 
 const require = createRequire(import.meta.url);
 const bundled = require('../src/data/questions.json');
@@ -31,7 +32,7 @@ try {
 const siteImages = require('../src/data/site-images.json');
 const questionEdits = require('../src/data/question-edits.json');
 
-const SCHEMA_VERSION = '12';
+const SCHEMA_VERSION = '13';
 const SEED_HASH = createHash('sha256')
   .update(JSON.stringify([bundled, pending, daily, themes, siteImages, questionEdits]))
   .digest('hex')
@@ -202,6 +203,8 @@ async function createTables() {
     )
   `;
   await sql`CREATE INDEX IF NOT EXISTS signed_runs_created_idx ON signed_runs (created_at DESC)`;
+  // How many levels each signed run cleared, for the medals on the board.
+  await sql`ALTER TABLE signed_runs ADD COLUMN IF NOT EXISTS levels_cleared INTEGER`;
   await sql`
     CREATE TABLE IF NOT EXISTS flags (
       id TEXT PRIMARY KEY,
@@ -347,6 +350,19 @@ async function createTables() {
       count INTEGER NOT NULL
     )
   `;
+  // Runs signed before levels_cleared was kept: worked out once from their
+  // saved answers, in one statement.
+  const { rows: unset } = await sql`
+    SELECT s.run_id, x.data FROM signed_runs s JOIN sessions x ON x.id = s.run_id WHERE s.levels_cleared IS NULL
+  `;
+  if (unset.length) {
+    const cleared = unset.map((r) => ({ run_id: r.run_id, n: replay(asObject(r.data)?.questions ?? [])?.levelsCleared ?? 0 }));
+    await sql`
+      UPDATE signed_runs s SET levels_cleared = c.n
+      FROM jsonb_to_recordset(${JSON.stringify(cleared)}::jsonb) AS c(run_id TEXT, n INTEGER)
+      WHERE s.run_id = c.run_id
+    `;
+  }
 }
 
 async function seed() {

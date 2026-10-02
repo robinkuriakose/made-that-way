@@ -79,21 +79,21 @@ mindmap
 | What | Where |
 |---|---|
 | Entry point; `/builder` loads the builder lazily. Test mode is switched on here, and a shared link (`/q/<id>`, `/daily/<day>`) is read before anything renders | `src/main.jsx:9` (`initTestMode`), `:15` (`isBuilderRoute`), `:18` (`readArrival`) |
-| Run shape, bumped when state changes shape | `src/App.jsx:54` (`RUN_VERSION`, now 5), `:94` (`createRun`) |
-| The level plan: how many easy, medium and hard questions each level takes, the last level, milestone badges. Data, so changing the game's length is a file edit | `src/data/level-plan.json`; read by `src/lib/levels.js:55` (`mixFor`), `:227` (`planNeeds`) |
-| A run keeps its own copy of its questions, the topics it was built from, and the order each question's options are shown in. It starts with level 1 only; each level is added at the break before it, with that level's tier mix. Clearing the last level ends the run as a Legend | `src/App.jsx:94` (`createRun`), `:487` (`openBreak`), `:474` (`finishRun`) |
-| Levels play from picture questions only (text-only ones tired people out) | `src/App.jsx:77` (`levelPool`) |
-| Resume a saved run. Coming back to an unanswered question swaps it for a fresh one, so leaving can't be used to look the answer up | `src/App.jsx:357` (`resumeRun`), pick at `src/lib/levels.js:211` (`replacementFor`) |
-| Home, Back and Restart. Play, the end screen and the collection each get a history entry, so the phone's Back button goes home | `src/App.jsx:239` (`showHome`, which also refreshes the Legends wall), `:258` (`enter`), `:267` (`goHome`), `:338` (`restartRun`, with an Undo toast) |
-| Start a run (waits for the live bank, at most 3 s from page load), optionally with a picked first question; mid-run it offers Undo | `src/App.jsx:315` (`startRun`), `:338` (`restartRun`) |
-| Answering: display order in, original order stored; points worked out from the answers so far | `src/App.jsx:398` (`answer`), `:459` (`answerRedeem`, a right one wins the life back) |
-| Hint, redeem, next, the level break, finishing | `src/App.jsx:392` (`takeHint`), `:415` (`openRedeem`), `:542` (`next`), `:487` (`openBreak`), `:576` (`continueLevel`), `:580` (`finishAtBreak`), `:474` (`finishRun`) |
-| Rewards during play: whys uncovered, badges, the streak badge from the daily card | `src/App.jsx:295` (`uncovered`), `:282` (`grant`), `:304` (`onStreak`); milestone badges (bronze at level 5) in `openBreak` |
-| Sign the leaderboard (remembering the rank before, for the board's animation), sign the Legends wall, change the name. A player with a name of their own goes on the board without asking | `src/App.jsx:637` (`signScore`), `:359` (the automatic entry), `:657` (`putOnLegends`), `:673` (`rename`) |
-| Sharing: a question's link (with the player's name only when they got it right), a day's result | `src/App.jsx:334` (`shareQuestion`), `:339` (`shareDaily`) |
-| Flag a question (runs, redeem questions and the daily question) | `src/App.jsx:634` (`openFlag`), `:640` (`submitFlag`) |
-| Choose topics (they come first in levels) | `src/App.jsx:656` (`saveTopics`), window at `src/components/TopicPicker.jsx` |
-| Which screen renders (home, play, break, legend, end, collection, profile, shared question, suggest), the rename and feedback windows, and the test mode banner | `src/App.jsx:730` onwards; legend at `:797`, profile at `:817`, shared question at `:831`, suggest at `:856` |
+| Run shape, bumped when state changes shape | `src/App.jsx:59` (`RUN_VERSION`, now 5), `:99` (`createRun`) |
+| The level plan: how many easy, medium and hard questions each level takes, the last level (10: the Legend medal), milestone medals (bronze at 4, silver at 6, gold at 8; those marked `board` show on the weekly board). Data, so changing the game's length is a file edit | `src/data/level-plan.json`; read by `src/lib/levels.js:55` (`mixFor`), `:227` (`planNeeds`) |
+| A run keeps its own copy of its questions, the topics it was built from, and the order each question's options are shown in. It starts with level 1 only; each level is added at the break before it, with that level's tier mix. Clearing the last level ends the run as a Legend | `src/App.jsx:99` (`createRun`), `:557` (`openBreak`), `:540` (`finishRun`) |
+| Levels play from picture questions only (text-only ones tired people out) | `src/App.jsx:82` (`levelPool`) |
+| Resume a saved run. Coming back to an unanswered question swaps it for a fresh one, so leaving can't be used to look the answer up | `src/App.jsx:423` (`resumeRun`), pick at `src/lib/levels.js:211` (`replacementFor`) |
+| Home, Back and Restart. Play, the end screen and the collection each get a history entry, so the phone's Back button goes home | `src/App.jsx:262` (`showHome`, which also refreshes the Legends wall), `:281` (`enter`), `:290` (`goHome`), `:404` (`restartRun`, with an Undo toast) |
+| Start a run (waits for the live bank, at most 3 s from page load), optionally with a picked first question; mid-run it offers Undo | `src/App.jsx:381` (`startRun`), `:404` (`restartRun`) |
+| Answering: display order in, original order stored; points worked out from the answers so far | `src/App.jsx:464` (`answer`), `:525` (`answerRedeem`, a right one wins the life back) |
+| Hint, redeem, next, the level break, finishing | `src/App.jsx:458` (`takeHint`), `:481` (`openRedeem`), `:612` (`next`), `:557` (`openBreak`), `:646` (`continueLevel`), `:650` (`finishAtBreak`), `:540` (`finishRun`) |
+| Rewards during play: whys uncovered, badges, the streak badge from the daily card | `src/App.jsx:318` (`uncovered`), `:305` (`grant`), `:327` (`onStreak`); milestone badges (bronze at level 5) in `openBreak` |
+| Sign the leaderboard (remembering the rank before, for the board's animation), sign the Legends wall, change the name. A player with a name of their own goes on the board without asking; anyone else is asked for a name in a window over the end screen (`askName`, set in `finishRun`, which also holds the phone's keyboard), with where the run would land | `src/App.jsx:654` (`signScore`), `:372` (the automatic entry), `:674` (`nameAndSign`), `:167` (`rankPreview`), `:685` (`putOnLegends`), `:701` (`rename`) |
+| Sharing: a question's link (with the player's name only when they got it right), a day's result | `src/App.jsx:347` (`shareQuestion`), `:352` (`shareDaily`) |
+| Flag a question (runs, redeem questions and the daily question) | `src/App.jsx:719` (`openFlag`), `:725` (`submitFlag`) |
+| Choose topics (they come first in levels) | `src/App.jsx:741` (`saveTopics`), window at `src/components/TopicPicker.jsx` |
+| Which screen renders (home, play, break, legend, end, collection, profile, shared question, suggest), the name, rename and feedback windows, and the test mode banner | `src/App.jsx:758` onwards; legend at `:825`, profile at `:845`, shared question at `:859`, suggest at `:884`, the name window at `:1039` |
 
 ## Screens and components
 
@@ -111,8 +111,10 @@ mindmap
 | Suggest a question: a one-line idea or a whole question with a picture, then a name or "Be mysterious" | `src/components/SuggestScreen.jsx:10` |
 | Feedback form: three star ratings, what to add more of, tell a friend, a note; opens with the overall stars filled in when a star was tapped to get there | `src/components/FeedbackForm.jsx:36`; the questions as data in `src/lib/feedbackForm.js` |
 | A question someone shared, opened from its link: answer it, see why, then "Let's play" or pass it on | `src/components/SharedQuestion.jsx:14` |
+| The name window after a run: the score, the medal it earned, where it would land this week, one box already focused (so a phone's keyboard is up), "Add as <name>" (the starting name if left empty), "Not now" | `src/components/NamePrompt.jsx`; the keyboard trick in `src/lib/keyboard.js` (`holdKeyboard`, `releaseKeyboard`) |
+| Medals beside names (silver, gold, Legend), and their key under the board | `src/components/Medal.jsx` (`MedalIcon`, `medalLabel`, `medalShort`), `src/components/Leaderboard.jsx` (`MedalKey`) |
 | The logo (a placeholder keycap) | `src/components/Logo.jsx`; favicon, home screen icon and the home page's preview card from `scripts/brand-assets.js` |
-| End screen: score, levels, whys and badges earned, Play again, signing (automatic for a player with their own name, one tap otherwise), where it left you on the board and which way you moved, this week's board in motion, rating and suggesting, review by level | `src/components/EndScreen.jsx:107`; sign form at `:11`, the rank message at `:58`, rate and suggest at `:73` (`AskCard`) |
+| End screen: score, levels, whys and badges earned, Play again, signing (automatic for a player with their own name; otherwise the name window, then a name box that falls back to the starting name), where it left you on the board and which way you moved, this week's board in motion, rating and suggesting, review by level | `src/components/EndScreen.jsx:107`; sign form at `:11`, the rank message at `:58`, rate and suggest at `:73` (`AskCard`) |
 | Collection: badges and every why uncovered, each opening its reasoning | `src/components/WhysScreen.jsx:7` |
 | Question of the day: answer in place, then the reason, how everyone did, streak and average, and a spoiler-free result to share; on a later visit the same day it folds to one line; arriving from a shared daily link, it scrolls into view and lights up | `src/components/DailyCard.jsx:28` |
 | The hero deck (GSAP): 24 picture cards, unseen first, piled like prints. Drag or flick the top card either way (or press the arrow keys) and it slides out and flows straight back to tuck in behind the pile (no pause at the far end) as the next comes forward; no counter or buttons, one hint line; a deal from below on arrival, a nudge if nobody touches it, a tilt and glare under the mouse. Tap (or Enter) flips the card in 3D and grows it into a window with the picture, its question, "Play this one" and "Another one", which turns the window over on the spot to the next card's question (the pile moves on underneath); it flips back into the pile on close. Less motion: no throws or flips, just quick fades | `src/components/HeroDeck.jsx:282`; the pile's places at `:20` (`SLOTS`), sending a card to the back at `:359` (`throwTop`), the next card while the window is open at `:414` (`nextWhileOpen`), the drag at `:451`, the flip window at `:56` (`FlipDialog`, its turn to the next question at `:130`) |
@@ -134,7 +136,7 @@ mindmap
 | How easy a question has proved, and the share who get it right | `src/lib/levels.js:29` (`easeOf`), `:36` (`percentRight`); a tier that doesn't match how players do is flagged (never changed) by `:242` (`tierMismatch`) |
 | A replacement question when a player leaves and comes back | `src/lib/levels.js:211` (`replacementFor`) |
 | Redeem choices: most related first, keeping picture questions for the levels | `src/lib/redeem.js:27` (`pickRedeemQuestions`); hard ones are left out while there's enough else |
-| Rewards on this device: whys uncovered, badges, best run | `src/lib/rewards.js:16` (`BADGES`, with bronze, silver and legend), `:28` (`availableBadges`, only those the plan's last level allows), `:67` (`uncover`), `:81` (`award`) |
+| Rewards on this device: whys uncovered, badges, best run | `src/lib/rewards.js:16` (`BADGES`, with bronze, silver, gold and legend), `:32` (`boardMedal`, the medal a run shows on the board, shared with the server), `:40` (`availableBadges`, only those the plan's last level allows), `:79` (`uncover`), `:93` (`award`) |
 | The weekly board's week (Monday, India time) | `src/lib/week.js:9` (`weekStart`), `:19` (`resetWords`) |
 | The short reason after an answer | `src/lib/text.js` (`firstSentence`) |
 | Option shuffling: the view a player sees, and mapping back to the stored order | `src/lib/shuffle.js:39` (`viewOf`), `:49` (`toOriginal`), `:50` (`toDisplay`), `:10` (`seededRandom`, for the daily question) |
@@ -155,7 +157,7 @@ mindmap
 | Shrinking a picture to WebP plus a thumbnail before upload; matching a file name to a question id | `src/lib/imagePrep.js:33` (`prepareImage`), `:50` (`idFromFilename`) |
 | Times and dates in words | `src/lib/format.js:4` (`duration`), `:15` (`shortDate`) |
 | Ranking and personal bests (pure, shared with the server) | `src/lib/ranking.js` (`rankEntries`, `isBetterRun`) |
-| Score verification, version aware, redeems included | `src/lib/verifySession.js:27` (`verifySession`), `:76` (`sessionQuestionIds`) |
+| Score verification, version aware, redeems included | `src/lib/verifySession.js:27` (`verifySession`), `:77` (`sessionQuestionIds`) |
 | Saving a finished run | `src/lib/storage.js` (`recordSession`) |
 | Device id, run storage, tidbit split, CSV export | `src/lib/device.js`, `runStore.js`, `bank.js`, `analytics.js` |
 
@@ -185,7 +187,7 @@ mindmap
 | What | Where |
 |---|---|
 | Database client (Neon in the cloud, PGlite locally), connected on first use; a missing database is a 503 with a plain reason, not a crash | `server/db.js` (`connectionString`, `NotConfigured`) |
-| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:47` (`ensureSchema`), `:69` (`createTables`), `:352` (`seed`); `question_edits` at `:114`, seeded at `:394`; `question_stats` at `:253`, daily answers folded in once at `:287`; `legends`, `feedback`, `suggestions` at `:300`, `:316`, `:329`; pictures from `site-images.json` attached at `:419` (also replacing a local-only placeholder) |
+| Tables, seeding, row shapes. A cold server checks one row and skips setup when nothing changed | `server/schema.js:48` (`ensureSchema`), `:70` (`createTables`), `:368` (`seed`); `question_edits` at `:115`, seeded at `:410`; `question_stats` at `:256`, daily answers folded in once at `:286`; `legends`, `feedback`, `suggestions` at `:303`, `:319`, `:332`; `signed_runs.levels_cleared` at `:207`, worked out once from saved answers for runs signed before it existed at `:353`; pictures from `site-images.json` attached at `:435` (also replacing a local-only placeholder) |
 | Builder password and tokens | `server/auth.js` |
 | Request helpers, id and day checks, the hashed network key | `server/http.js` |
 | Rate limits per network, kept in the database | `server/limits.js` (`hit`, `isBlocked`, `LIMITS`) |
@@ -194,7 +196,7 @@ mindmap
 | `GET /api/questions`: live questions, plus daily questions whose day has passed everywhere, with how often each is answered right, and topics | `server/routes/questions.js` |
 | `POST /api/events`: page opened, run started (which registers the run), left, restarted, resumed, level cleared | `server/routes/events.js` (`record`) |
 | `POST /api/sessions`: save a finished run, checked against its registered run and the real questions; adds its answers to `question_stats` | `server/routes/sessions.js` |
-| `GET/POST/PATCH /api/leaderboard`: this week's board and the player's private best, signing, renaming | `server/routes/leaderboard.js:64` (`board`), `:99` (`sign`), `:163` (`rename`) |
+| `GET/POST/PATCH /api/leaderboard`: this week's board (with each player's medal for the furthest they got this week, from `levels_cleared`) and the player's private best, signing, renaming | `server/routes/leaderboard.js:71` (`board`), `:107` (`sign`), `:171` (`rename`) |
 | `GET/POST /api/daily`: the question of the day (the first queued one that has a picture; one without waits), answered and marked here; a real first answer also counts in `question_stats` | `server/routes/daily.js:36` (`questionFor`), `:95` (`statsFor`) |
 | `POST /api/flags`: a player flags a question | `server/routes/flags.js` |
 | `GET/POST /api/player/legends`: the Legends wall; signing it needs a checked run that cleared the plan's last level | `server/routes/player/legends.js:44` (`list`), `:57` (`add`) |
@@ -246,13 +248,14 @@ mindmap
 | Builder rewrites: now and proposed | `:4989` |
 | The hero deck, and the card flipped open | `:4885`, `:5002` |
 | Builder: difficulty and picture on a card | `:5145` |
-| Round 15: logo, rare answers, shared question, daily sharing, the board in motion, rate and suggest | `:5260` |
+| Round 15: logo, rare answers, shared question, daily sharing, the board in motion, rate and suggest (blue `--blue` cards) | `:5265` |
+| Round 16: the name window, medals on the board and their key, gold, ten level lights on a phone | `:5591` |
 
 ## Tooling
 
 | What | Where |
 |---|---|
-| Unit tests (`npm test`) | `src/lib/v2.test.js` (scoring, levels and tier mixes, verification, rewards, the week, starting names), `server/share.test.js` (link previews never show the answer), `lib.test.js`, `bank.test.js`, `round8.test.js`, `outbox.test.js`, `server/auth.test.js`, `server/db.test.js` |
+| Unit tests (`npm test`) | `src/lib/v2.test.js` (scoring, levels and tier mixes, verification, rewards, the week, starting names), `server/share.test.js` (link previews never show the answer); medals and the plan's milestones at the end of `v2.test.js`, `lib.test.js`, `bank.test.js`, `round8.test.js`, `outbox.test.js`, `server/auth.test.js`, `server/db.test.js` |
 | Runs the `api/` routes inside `npm run dev` against a local Postgres in `.localdb/`, through Vite, so any change to `api/` or `server/` applies on the next request | `tools/local-api.js`, plugged in by `vite.config.js` |
 | Local secrets (builder password) | `.env.local`, not committed |
 | Preview launch config | `.claude/launch.json` |

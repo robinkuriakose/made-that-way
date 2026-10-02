@@ -19,10 +19,22 @@ export const BADGES = [
   { id: 'streak-3', label: 'Three day streak', note: "Answer today's question three days running." },
   { id: 'whys-50', label: '50 whys', note: `Uncover the reasons behind ${WHYS_FOR_BADGE} designs.` },
   // Milestones (src/data/level-plan.json): shown once the game has that many levels.
-  { id: 'bronze', label: 'Bronze', note: 'Clear level 5.', level: 5 },
-  { id: 'silver', label: 'Silver', note: 'Clear level 10.', level: 10 },
+  { id: 'bronze', label: 'Bronze', note: 'Clear level 4.', level: 4 },
+  { id: 'silver', label: 'Silver', note: 'Clear level 6.', level: 6 },
+  { id: 'gold', label: 'Gold', note: 'Clear level 8.', level: 8 },
   { id: 'legend', label: 'Legend', note: 'Finish every level there is.' },
 ];
+
+// The medal beside a name on the weekly board: Legend for clearing the last
+// level, otherwise the highest milestone marked "board" in the level plan
+// (silver at 6, gold at 8). Shared with the server, which works it out from
+// the run's own answers.
+export function boardMedal(levelsCleared, plan) {
+  if (!levelsCleared || !plan) return null;
+  if (levelsCleared >= plan.lastLevel) return 'legend';
+  const reached = (plan.milestones ?? []).filter((m) => m.board && m.level <= levelsCleared);
+  return reached.sort((a, b) => b.level - a.level)[0]?.badge ?? null;
+}
 
 // The badges a player can earn today: a milestone past the last level waits.
 export const availableBadges = (lastLevel) => BADGES.filter((b) => !b.level || b.level <= lastLevel);

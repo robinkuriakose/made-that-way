@@ -2,7 +2,7 @@
 
 Everything here is something only you can supply or do. I keep it current; tick things off by telling me, and I'll move them to "Done".
 
-Last updated 1 October 2026.
+Last updated 2 October 2026.
 
 ## Live
 
@@ -24,7 +24,6 @@ The site is live at https://madethatway.vercel.app (21 September 2026): database
 - [ ] **Credit lines for about 80 images:** photographer or source, and licence, for each. Several are brand, museum or stock photos, which usually aren't free to reuse, and two look AI-generated. There's now a Credit box on each card in the builder.
 - [ ] **A better picture for shinkansen-nose:** it shows an E4 series train, not the 500 series the question is about.
 - [ ] **Sharper versions of 3 images:** qwerty, calculator-keypad, rubber-band-scroll.
-- [ ] **Raise the last level from 6 to 10?** The bank now has enough pictured questions for it.
 
 ## Decisions waiting on you
 
@@ -32,6 +31,7 @@ The site is live at https://madethatway.vercel.app (21 September 2026): database
 
 ## Done
 
+- [x] Levels raised to 10, with silver at 6, gold at 8 and Legend at 10 (2 October). Trolley coin lock and safety match stay out.
 - [x] 51 photos sent (1 October): 47 published, including replacements for menu-ellipsis, manhole-round, jerrycan-handles and the two watermarked stand-ins.
 - [x] The round 12 questions reviewed: 18 accepted.
 

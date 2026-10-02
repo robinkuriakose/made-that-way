@@ -13,6 +13,8 @@
   --accent: #cfe957;
   --accent-soft: #f2f9d3;
   --accent-ink: #4b5a0c;
+  --blue: #0860b6;
+  --on-blue-2: #d5e5f6;
 
   /* Lives. Warm, and only ever used for hearts. */
   --heart: #e0483a;
@@ -4893,6 +4895,9 @@ td.wrap {
 .deck {
   position: relative;
   height: 400px;
+  /* The cards' own stacking stays inside the deck, so on scroll they pass
+     under the sticky top bar instead of over it. */
+  isolation: isolate;
 }
 
 /* A card sent off the side never makes the page scroll sideways. */
@@ -5299,7 +5304,7 @@ td.wrap {
   gap: 10px 16px;
   margin: -2px 0 14px;
   padding: 12px 14px;
-  background: var(--ink);
+  background: var(--blue);
   color: #fff;
   border-radius: 10px;
   animation: rise 0.45s ease;
@@ -5335,7 +5340,7 @@ td.wrap {
 .shared-next {
   margin-top: 28px;
   padding: 24px;
-  background: var(--ink);
+  background: var(--blue);
   color: #fff;
   border-radius: 16px;
   animation: rise 0.5s ease;
@@ -5350,7 +5355,7 @@ td.wrap {
 
 .shared-next-lede {
   margin: 0 0 18px;
-  color: #c9c7be;
+  color: var(--on-blue-2);
   font-size: 14.5px;
 }
 
@@ -5436,14 +5441,14 @@ td.wrap {
   gap: 2px;
   margin-top: 48px;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--blue);
   border-radius: 18px;
 }
 
 .end-ask-part {
   padding: 24px;
   color: #fff;
-  background: var(--ink);
+  background: var(--blue);
 }
 
 .end-ask-part + .end-ask-part {
@@ -5459,7 +5464,7 @@ td.wrap {
 .end-ask-note {
   margin: 10px 0 16px;
   font-size: 13.5px;
-  color: #c9c7be;
+  color: var(--on-blue-2);
 }
 
 .end-stars {
@@ -5510,7 +5515,7 @@ td.wrap {
   gap: 18px 28px;
   padding: 26px 28px;
   color: #fff;
-  background: var(--ink);
+  background: var(--blue);
   border-radius: 18px;
 }
 
@@ -5524,7 +5529,7 @@ td.wrap {
   max-width: 34rem;
   margin: 0;
   font-size: 14.5px;
-  color: #c9c7be;
+  color: var(--on-blue-2);
 }
 
 .home-help-actions {
@@ -5581,4 +5586,129 @@ td.wrap {
 
 .daily {
   scroll-margin-top: 72px;
+}
+
+/* Round 16: the name window after a run, medals on the board, gold */
+
+.name-prompt {
+  max-width: 26rem;
+  padding: 26px 24px 18px;
+  text-align: center;
+}
+
+.name-prompt-kicker {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.name-prompt-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 8px;
+  margin: 2px 0 0;
+  font-size: 3rem;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.name-prompt-score span {
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.name-prompt-medal {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 4px 12px 4px 8px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg);
+  border-radius: 999px;
+}
+
+.name-prompt-title {
+  margin: 14px 0 16px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.name-prompt-form {
+  display: grid;
+  gap: 10px;
+}
+
+/* 18px: big enough to feel like signing, and iPhones don't zoom in. */
+.name-prompt-form input[type='text'] {
+  padding: 14px 16px;
+  font-size: 18px;
+  text-align: center;
+}
+
+.name-prompt-form .form-error {
+  margin: 0;
+}
+
+.name-prompt-go {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.name-prompt-skip {
+  justify-self: center;
+  padding: 6px 12px;
+}
+
+.board-medal {
+  flex: none;
+  margin: 0 0 0 6px;
+  vertical-align: -5px;
+}
+
+.medal-gold .medal-disc {
+  color: #5a4300;
+  background: radial-gradient(circle at 35% 30%, #fff3b0, #e8b923 60%, #a87c0a);
+}
+
+/* Ten level lights fit a phone. */
+.finale-levels {
+  flex-wrap: wrap;
+  gap: clamp(4px, 1.4vw, 8px);
+}
+
+.finale-levels li {
+  width: clamp(26px, 7.4vw, 38px);
+  height: clamp(26px, 7.4vw, 38px);
+  font-size: clamp(11px, 3vw, 14px);
+}
+
+.board-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  margin: 10px 0 0;
+  font-size: 12.5px;
+}
+
+.board-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Scrolled to after naming a run: clear of the sticky top bar. */
+.end-board {
+  scroll-margin-top: 76px;
 }

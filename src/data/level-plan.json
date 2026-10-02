@@ -1,6 +1,6 @@
 {
-  "note": "How each level is made up, by difficulty (see DIFFICULTIES in src/lib/questionRules.js). lastLevel is the final level for now: finishing it is the Legend finale. It rises towards 15 as the question bank grows. Milestones are the levels whose break is celebrated with a badge.",
-  "lastLevel": 6,
+  "note": "How each level is made up, by difficulty (see DIFFICULTIES in src/lib/questionRules.js). lastLevel is the final level for now: finishing it is the Legend finale, and the Legend medal. It rises towards 15 as the question bank grows. Milestones are the levels whose break is celebrated with a medal; those marked board also show beside the player's name on the weekly board.",
+  "lastLevel": 10,
   "bands": [
     { "from": 1, "to": 3, "easy": 4, "medium": 1, "hard": 0 },
     { "from": 4, "to": 7, "easy": 2, "medium": 2, "hard": 1 },
@@ -8,7 +8,8 @@
     { "from": 13, "to": 15, "easy": 0, "medium": 1, "hard": 4 }
   ],
   "milestones": [
-    { "level": 5, "badge": "bronze" },
-    { "level": 10, "badge": "silver" }
+    { "level": 4, "badge": "bronze" },
+    { "level": 6, "badge": "silver", "board": true },
+    { "level": 8, "badge": "gold", "board": true }
   ]
 }

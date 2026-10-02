@@ -21,6 +21,7 @@
 // touch a player's real name or best, and their session is marked as a test
 // so analytics leave it out.
 import { randomBytes } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { sql } from '../db.js';
 import { ensureSchema, isoTime } from '../schema.js';
 import { body, isId, methodNotAllowed, serverError } from '../http.js';
@@ -30,6 +31,10 @@ import { cleanName, isTestName, nameProblem, NAME_CHANGE_LIMIT } from '../../src
 import { checkedRun } from '../runs.js';
 import { levelOf } from '../../src/lib/scoring.js';
 import { weekStart } from '../../src/lib/week.js';
+import { boardMedal } from '../../src/lib/rewards.js';
+
+const require = createRequire(import.meta.url);
+const plan = require('../../src/data/level-plan.json');
 
 const DEFAULT_LIMIT = 10;
 const TEST_VISIBLE = '2 minutes';
@@ -41,6 +46,8 @@ const entryFrom = (row, deviceId) => ({
   correct: row.correct,
   total: row.total,
   level: levelOf(row.total),
+  // The furthest this player got this week, as a medal (silver, gold, legend).
+  medal: boardMedal(row.top_cleared ?? row.levels_cleared ?? 0, plan),
   durationMs: Number(row.duration_ms),
   finishedAt: isoTime(row.finished_at),
   rank: row.rank == null ? null : Number(row.rank),
@@ -65,7 +72,8 @@ async function board(deviceId, limit) {
   const since = weekStart().toISOString();
   const { rows: week } = await sql`
     WITH best AS (
-      SELECT DISTINCT ON (s.device_id) s.device_id, s.score, s.correct, s.total, s.duration_ms, s.finished_at, p.public_id, p.name
+      SELECT DISTINCT ON (s.device_id) s.device_id, s.score, s.correct, s.total, s.duration_ms, s.finished_at, p.public_id, p.name,
+        max(s.levels_cleared) OVER (PARTITION BY s.device_id) AS top_cleared
       FROM signed_runs s JOIN players p ON p.device_id = s.device_id
       WHERE NOT s.is_test AND NOT p.hidden AND s.created_at >= ${since}::timestamptz
       ORDER BY s.device_id, s.score DESC, s.correct DESC, s.duration_ms ASC
@@ -75,7 +83,7 @@ async function board(deviceId, limit) {
     SELECT * FROM ranked WHERE rank <= ${limit} OR device_id = ${deviceId ?? ''} ORDER BY rank
   `;
   const { rows: tests } = await sql`
-    SELECT run_id, device_id, test_name AS name, score, correct, total, duration_ms, finished_at
+    SELECT run_id, device_id, test_name AS name, score, correct, total, duration_ms, finished_at, levels_cleared
     FROM signed_runs WHERE is_test AND created_at > now() - ${TEST_VISIBLE}::interval
   `;
   return { ...withTests(week, tests, limit, deviceId), startsAt: since };
@@ -114,9 +122,9 @@ async function sign(req, res) {
   if (isTest) {
     if (!already.length) {
       await sql`
-        INSERT INTO signed_runs (run_id, device_id, score, correct, total, duration_ms, finished_at, is_test, test_name)
+        INSERT INTO signed_runs (run_id, device_id, score, correct, total, duration_ms, finished_at, is_test, test_name, levels_cleared)
         VALUES (${b.runId}, ${b.deviceId}, ${verified.score}, ${verified.correct}, ${verified.total}, ${verified.durationMs},
-                ${verified.finishedAt}::timestamptz, true, ${given || player?.name || 'Test'})
+                ${verified.finishedAt}::timestamptz, true, ${given || player?.name || 'Test'}, ${verified.levelsCleared})
       `;
       await sql`UPDATE sessions SET is_test = true WHERE id = ${b.runId}`;
     }
@@ -137,9 +145,9 @@ async function sign(req, res) {
   }
   if (!already.length) {
     await sql`
-      INSERT INTO signed_runs (run_id, device_id, score, correct, total, duration_ms, finished_at)
+      INSERT INTO signed_runs (run_id, device_id, score, correct, total, duration_ms, finished_at, levels_cleared)
       VALUES (${b.runId}, ${b.deviceId}, ${verified.score}, ${verified.correct}, ${verified.total}, ${verified.durationMs},
-              ${verified.finishedAt}::timestamptz)
+              ${verified.finishedAt}::timestamptz, ${verified.levelsCleared})
       ON CONFLICT (run_id) DO NOTHING
     `;
   }

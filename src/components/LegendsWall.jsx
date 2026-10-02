@@ -1,8 +1,9 @@
 import { Signature } from './SignaturePad.jsx';
 import { duration } from '../lib/format.js';
 
-// Everyone who finished every level: their signature, name, score and how
-// long it took. A row you swipe, newest first; your own card is marked.
+// Everyone who finished every level there was at the time (6 before
+// October 2026, now 10): their signature, name, score, levels and how long
+// it took. A row you swipe, newest first; your own card is marked.
 export default function LegendsWall({ legends, lastLevel, title = 'Legends', titleId = 'legends-title', note = null }) {
   const list = legends ?? [];
   return (
@@ -11,7 +12,7 @@ export default function LegendsWall({ legends, lastLevel, title = 'Legends', tit
         <p id={titleId} className="section-title">
           {title}
         </p>
-        <p className="muted legends-note">{note ?? `Finished all ${lastLevel} levels`}</p>
+        <p className="muted legends-note">{note ?? `Cleared every level. Now ${lastLevel} of them.`}</p>
       </div>
       {list.length ? (
         <ul className="legends-row">
@@ -23,7 +24,7 @@ export default function LegendsWall({ legends, lastLevel, title = 'Legends', tit
                 {l.isMe && <span className="board-you"> (you)</span>}
               </p>
               <p className="legend-meta">
-                <strong>{l.score}</strong> pts · {duration(l.durationMs)}
+                <strong>{l.score}</strong> pts · {l.level} levels · {duration(l.durationMs)}
               </p>
             </li>
           ))}

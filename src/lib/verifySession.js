@@ -67,6 +67,7 @@ export function verifySession(session, questionsById) {
     correct: result.correct,
     total: qs.length,
     level: result.level,
+    levelsCleared: result.levelsCleared,
     durationMs: session.durationMs,
     finishedAt: session.finishedAt,
   };

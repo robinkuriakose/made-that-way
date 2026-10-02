@@ -75,6 +75,16 @@ mindmap
       Score verification
 ```
 
+## Round 16 (2 October 2026): a name at the end, blue, medals
+
+| You asked for | Status | Where |
+|---|---|---|
+| When a run ends, a window over the results with the score and a name box, keyboard already up on a phone | Done, live. It opens for anyone still on their starting name (players with their own name go on the board without asking, as before), and only when the run scored. It shows the score, any medal, and where the run would land ("That's 3rd on this week's board"); the box is focused by the same tap that ended the run, so the phone keyboard comes up; Enter sends it; left empty, it signs with the starting name. Then it closes, scrolls to the board and plays the move. "Not now" leaves a name box on the end screen | `src/components/NamePrompt.jsx`, `src/lib/keyboard.js`, `src/App.jsx` (`finishRun`, `nameAndSign`, `rankPreview`) |
+| Blue (#0860B6) instead of the black sections | Done, live: the rate and suggest card, "Help make the next questions", the rare answer banner and the shared question's last card | `src/styles.css` (`--blue`) |
+| Hero cards scrolling over the top bar | Fixed, live: the deck keeps its own stacking, so cards pass under the bar | `src/styles.css` (`.deck`) |
+| Silver at level 6, gold at 8, Legend at 10, shown on the board | Done, live. The last level is now 10. Bronze moved from 5 to 4, so the medals come every two levels (4, 6, 8, 10). The board shows silver, gold or Legend beside a name for the furthest that player got this week, worked out on the server from the run's answers, with a key under the board. Legends wall cards now show how many levels each cleared (earlier ones did 6) | `src/data/level-plan.json`, `src/lib/rewards.js` (`boardMedal`), `server/routes/leaderboard.js`, `src/components/Medal.jsx` |
+| Trolley coin lock, safety match | Not going in: the coin lock isn't common in India, and the match didn't make anyone think | `src/data/pending-questions.json` (left as rejected) |
+
 ## Round 15 (1 October 2026): sharing, the board in motion, a logo
 
 | You asked for | Status | Where |

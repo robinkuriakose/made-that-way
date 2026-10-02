@@ -10,7 +10,7 @@ import { levelMultiplier } from '../lib/scoring.js';
 // ahead, and the choice to carry on or stop here.
 //
 // brk = { level, perfect, lifeGained, levelPoints, badges, tidbit, milestone }
-// milestone: "bronze" or "silver" when this level is one (level-plan.json).
+// milestone: "bronze", "silver" or "gold" when this level is one (level-plan.json).
 export default function LevelBreak({ brk, score, lives, starting, onContinue, onFinish, onHome, onRestart }) {
   const next = brk.level + 1;
   const badgeLabel = (id) => BADGES.find((b) => b.id === id)?.label ?? id;
